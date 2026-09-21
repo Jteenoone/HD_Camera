@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.HD_Camera" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/dc_accent</item>
+        <item name="colorOnPrimary">@color/dc_on_accent</item>
+        <item name="colorSecondary">@color/dc_accent</item>
+        <item name="colorOnSecondary">@color/dc_on_accent</item>
+        <item name="android:colorBackground">@color/dc_bg</item>
+        <item name="colorSurface">@color/dc_surface</item>
+        <item name="colorOnSurface">@color/dc_text</item>
+        <item name="colorOutline">@color/dc_border</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowBackground">@color/dc_bg</item>
+        <item name="android:fontFamily">@font/ibm_plex_sans_regular</item>
+        <item name="materialSwitchStyle">@style/Widget.HD.Switch</item>
+        <item name="sliderStyle">@style/Widget.HD.Slider</item>
+        <item name="android:navigationBarDividerColor" tools:targetApi="28">
+            @android:color/transparent
+        </item>
+    </style>
+</resources>

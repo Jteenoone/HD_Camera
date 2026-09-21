@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Screen 06 · Pro -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dc_bg">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dc_bg"
+        app:implementationMode="performance"
+        app:scaleType="fillCenter" />
+
+    <TextView
+        android:id="@+id/tvCameraStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAppearance="@style/TextAppearance.HD.Caption"
+        android:textColor="@color/dc_text_dim_2"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="Pro viewfinder" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_scrim_top_60"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                style="@style/Widget.HD.ViewfinderIcon"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/cd_back"
+                android:src="@drawable/ic_chevron_left" />
+
+            <TextView
+                android:id="@+id/tvProBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_badge_accent_12"
+                android:gravity="center"
+                android:letterSpacing="0.1"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="@string/pro_raw"
+                android:textAppearance="@style/TextAppearance.HD.Mono.Chip"
+                android:textColor="@color/dc_on_accent"
+                android:textSize="12sp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_histogram_card"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/histogram"
+                    android:textAppearance="@style/TextAppearance.HD.Mono.Tiny" />
+
+                <com.example.hd_camera.ui.widget.HistogramView
+                    android:id="@+id/histogram"
+                    android:layout_width="88dp"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_scrim_bottom_82"
+            android:orientation="vertical"
+            android:paddingTop="18dp"
+            android:paddingBottom="22dp">
+
+            <!-- ISO dial -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvParameterName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:letterSpacing="0.14"
+                        android:text="@string/iso"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Label"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvIsoValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/iso_value"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Value" />
+                </LinearLayout>
+
+                <com.example.hd_camera.ui.widget.TickRulerView
+                    android:id="@+id/isoDial"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_iso_track" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvIsoMin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/iso_min"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
+                        android:textColor="@color/dc_text_faint" />
+
+                    <TextView
+                        android:id="@+id/tvIsoMid"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/iso_mid"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
+                        android:textColor="@color/dc_text_faint" />
+
+                    <TextView
+                        android:id="@+id/tvIsoMax"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/iso_max"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
+                        android:textColor="@color/dc_text_faint" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Exposure parameter chips -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <LinearLayout
+                    android:id="@+id/chipIso"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pro_chip_active"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingStart="8dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/iso"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
+                        android:textColor="@color/dc_on_accent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvIsoChipValue"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/iso_value"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Chip"
+                        android:textColor="@color/dc_on_accent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/chipShutter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pro_chip"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingStart="8dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shutter"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvShutterValue"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/shutter_value"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Chip" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/chipWb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pro_chip"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingStart="8dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wb"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvWbValue"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/wb_value"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Chip" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/chipEv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pro_chip"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingStart="8dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ev"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvEvValue"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/ev_value"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Chip" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/chipFocus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pro_chip"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingStart="8dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/focus"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvFocusValue"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/focus_value"
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Chip" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Shutter row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp">
+
+                <TextView
+                    android:id="@+id/btnRaw"
+                    android:layout_width="@dimen/vf_side_button"
+                    android:layout_height="@dimen/vf_side_button"
+                    android:background="@drawable/bg_square_button_62"
+                    android:gravity="center"
+                    android:text="@string/raw"
+                    android:textAppearance="@style/TextAppearance.HD.Mono.Chip"
+                    android:textSize="12sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <FrameLayout
+                    android:id="@+id/btnShutter"
+                    android:layout_width="@dimen/shutter_size"
+                    android:layout_height="@dimen/shutter_size"
+                    android:background="@drawable/bg_shutter_ring_accent"
+                    android:contentDescription="@string/cd_shutter"
+                    android:padding="8dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_shutter_inner_accent" />
+                </FrameLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/btnFlip"
+                    android:layout_width="@dimen/vf_side_button"
+                    android:layout_height="@dimen/vf_side_button"
+                    android:background="@drawable/bg_round_scrim_62"
+                    android:contentDescription="@string/cd_switch_camera"
+                    android:padding="14dp"
+                    android:src="@drawable/ic_flip_camera"
+                    app:tint="@color/dc_text" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

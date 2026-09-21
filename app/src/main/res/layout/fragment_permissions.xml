@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Screen 04 · Permissions -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/permissionsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dc_bg"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingTop="20dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="18dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        android:background="@drawable/bg_slot_hero">
+
+        <ImageView
+            android:id="@+id/imgHero"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/onboarding_image"
+            android:textAppearance="@style/TextAppearance.HD.Caption"
+            android:textColor="@color/dc_text_dim_2" />
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bg_icon_tile_accent"
+        android:contentDescription="@null"
+        android:padding="13dp"
+        android:src="@drawable/ic_camera"
+        app:tint="@color/dc_on_accent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/permissions_title"
+        android:textAppearance="@style/TextAppearance.HD.Display.Large" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/permissions_body"
+        android:textAppearance="@style/TextAppearance.HD.Body" />
+
+    <!-- Permission 1 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bg_list_row"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="12dp">
+
+        <TextView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:background="@drawable/bg_icon_chip_accent"
+            android:gravity="center"
+            android:text="1"
+            android:textAppearance="@style/TextAppearance.HD.Mono.Chip"
+            android:textColor="@color/dc_accent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="@string/perm_camera_mic"
+            android:textAppearance="@style/TextAppearance.HD.ListTitle"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvStatusCameraMic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/perm_required"
+            android:textAppearance="@style/TextAppearance.HD.ListSub"
+            android:textColor="@color/dc_text_faint" />
+    </LinearLayout>
+
+    <!-- Permission 2 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_list_row"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="12dp">
+
+        <TextView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:background="@drawable/bg_icon_chip_accent"
+            android:gravity="center"
+            android:text="2"
+            android:textAppearance="@style/TextAppearance.HD.Mono.Chip"
+            android:textColor="@color/dc_accent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="@string/perm_photos_video"
+            android:textAppearance="@style/TextAppearance.HD.ListTitle"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvStatusPhotos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/perm_required"
+            android:textAppearance="@style/TextAppearance.HD.ListSub"
+            android:textColor="@color/dc_text_faint" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/btnAllow"
+        style="@style/Widget.HD.PrimaryButton"
+        android:text="@string/allow_and_continue" />
+
+    <TextView
+        android:id="@+id/btnNotNow"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="@string/not_now"
+        android:textColor="@color/dc_text_muted"
+        android:textSize="15sp" />
+</LinearLayout>

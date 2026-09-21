@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- linear-gradient(to top, #0B0B0F 2%, rgba(11,11,15,.55) 26%, transparent 60%) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:type="linear"
+        android:angle="90"
+        android:startColor="#FF0B0B0F"
+        android:centerColor="#A60B0B0F"
+        android:endColor="#000B0B0F" />
+</shape>

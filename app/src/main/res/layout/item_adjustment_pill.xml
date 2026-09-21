@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One adjustment pill in the edit controls of screen 11. -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.HD.Pill"
+    android:paddingStart="13dp"
+    android:paddingEnd="13dp"
+    tools:text="Contrast" />

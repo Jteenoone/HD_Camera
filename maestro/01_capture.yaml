@@ -1,0 +1,28 @@
+appId: com.example.hd_camera
+name: Shutter completes without crashing
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+
+# Onboarding, then straight to the viewfinder.
+- tapOn:
+    id: "btnSkip"
+- tapOn:
+    id: "btnNotNow"
+- assertVisible:
+    id: "btnShutter"
+
+- tapOn:
+    id: "btnShutter"
+
+# If the capture crashed the process, none of this would still be on screen.
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
+- assertVisible:
+    id: "btnLastShot"
+- assertVisible:
+    id: "modeRow"

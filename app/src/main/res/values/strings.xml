@@ -1,0 +1,212 @@
+<resources>
+    <string name="app_name">HD Camera</string>
+
+    <!-- 01–03 · Intro -->
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="get_started">Get started</string>
+    <string name="intro1_eyebrow">HD CAMERA</string>
+    <string name="intro1_title">Every shot at\nfull resolution</string>
+    <string name="intro1_body">48 MP stills, 4K video and a viewfinder that shows the whole frame — nothing cropped, nothing compressed.</string>
+    <string name="intro2_eyebrow">PRO MODE</string>
+    <string name="intro2_title">Manual control,\nonly when you want it</string>
+    <string name="intro2_body">ISO, shutter, white balance and focus on one dial. Shoot RAW, or leave everything on auto.</string>
+    <string name="intro3_eyebrow">FILTERS &amp; BEAUTY</string>
+    <string name="intro3_title">See the look\nbefore you shoot</string>
+    <string name="intro3_body">Filters and beauty retouch apply live in the viewfinder, with strength you can dial back any time.</string>
+    <string name="intro_visual_1">Intro visual 1</string>
+    <string name="intro_visual_2">Intro visual 2</string>
+    <string name="intro_visual_3">Intro visual 3</string>
+
+    <!-- 04 · Permissions -->
+    <string name="onboarding_image">Onboarding image</string>
+    <string name="permissions_title">Shoot in HD,\nright in the viewfinder</string>
+    <string name="permissions_body">HD Camera needs access to your camera, microphone and photos.</string>
+    <string name="perm_camera_mic">Camera &amp; Mic</string>
+    <string name="perm_photos_video">Photos &amp; Video</string>
+    <string name="perm_required">Required</string>
+    <string name="perm_granted">Granted</string>
+    <string name="allow_and_continue">Allow and continue</string>
+    <string name="not_now">Not now</string>
+
+    <!-- 05 · Photo -->
+    <string name="viewfinder_placeholder">Viewfinder — drop a photo</string>
+    <string name="ratio_4_3">4:3</string>
+    <string name="ratio_16_9">16:9</string>
+    <string name="megapixels">%1$d MP</string>
+    <string name="flash_off">Flash off</string>
+    <string name="flash_auto">Flash auto</string>
+    <string name="flash_on">Flash on</string>
+    <string name="flash_torch">Torch</string>
+    <string name="camera_unavailable">Camera unavailable — check permissions</string>
+    <string name="capture_failed">Could not save the photo</string>
+    <string name="mode_unavailable">This device has no such mode</string>
+    <string name="hdr">HDR</string>
+    <string name="mp_48">48 MP</string>
+    <string name="af_ae">AF · AE</string>
+    <string name="watermark_sample">21/09/2026 · 14:08 · HD CAMERA</string>
+    <string name="zoom_half">.5×</string>
+    <string name="zoom_1x">1×</string>
+    <string name="zoom_3x">3×</string>
+    <string name="mode_night">Night</string>
+    <string name="mode_portrait">Portrait</string>
+    <string name="mode_beauty">Beauty</string>
+    <string name="mode_photo">Photo</string>
+    <string name="mode_video">Video</string>
+    <string name="mode_pro">Pro</string>
+
+    <!-- 06 · Pro -->
+    <string name="pro_viewfinder">Pro viewfinder</string>
+    <string name="pro_raw">PRO · RAW</string>
+    <string name="pro_only">PRO</string>
+    <string name="manual_unsupported">This camera has no manual exposure</string>
+    <string name="raw_unsupported">This camera cannot shoot RAW</string>
+    <string name="histogram">HISTOGRAM</string>
+    <string name="iso">ISO</string>
+    <string name="iso_value">400</string>
+    <string name="iso_min">50</string>
+    <string name="iso_mid">800</string>
+    <string name="iso_max">6400</string>
+    <string name="shutter">SHUTTER</string>
+    <string name="shutter_value">1/125</string>
+    <string name="wb">WB</string>
+    <string name="wb_value">5600K</string>
+    <string name="ev">EV</string>
+    <string name="ev_value">+0.3</string>
+    <string name="focus">FOCUS</string>
+    <string name="focus_value">AF</string>
+    <string name="raw">RAW</string>
+
+    <!-- 07 · Filters -->
+    <string name="filtered_preview">Filtered preview</string>
+    <string name="live_filters">Live filters</string>
+    <string name="compare">Compare</string>
+    <string name="strength">STRENGTH</string>
+    <string name="strength_value">72%</string>
+    <string name="percent_value">%1$d%%</string>
+    <string name="signed_value">%1$+d</string>
+    <string name="filter_none">None</string>
+    <string name="filter_vivid">Vivid</string>
+    <string name="filter_fade">Fade</string>
+    <string name="filter_bw">B&amp;W</string>
+    <string name="filter_warm">Warm</string>
+    <string name="beauty_level">B1</string>
+
+    <!-- 08 · Video -->
+    <string name="recording">Recording</string>
+    <string name="rec_time">00:12</string>
+    <string name="video_4k60">4K · 60</string>
+    <string name="eis">EIS</string>
+    <string name="recording_failed">Recording failed</string>
+    <string name="eis_unsupported">This camera has no stabilization</string>
+    <string name="processing">Processing…</string>
+    <string name="slow_motion_saved">Slow motion saved</string>
+    <string name="slow_motion_saved_at">Slow motion saved · %1$.1f× slower (captured at %2$d fps)</string>
+    <string name="slow_motion_too_slow">Camera only held %1$d fps — saved at normal speed</string>
+    <string name="time_lapse_saved">Time-lapse saved</string>
+    <string name="time_lapse_rate">1 fps · 30×</string>
+    <string name="frames">%1$d frames</string>
+    <string name="filter_preview_unsupported">Live filter preview needs Android 12</string>
+    <string name="mode_photos">Photos</string>
+    <string name="mode_slow_mo">Slow-mo</string>
+    <string name="mode_time_lapse">Time-lapse</string>
+
+    <!-- 09 · Gallery -->
+    <string name="gallery">Gallery</string>
+    <string name="select">Select</string>
+    <string name="filter_all">All</string>
+    <string name="filter_photos">Photos</string>
+    <string name="filter_video">Video</string>
+    <string name="filter_raw">RAW</string>
+    <string name="gallery_section_today">TODAY · 8 PHOTOS</string>
+    <string name="gallery_section_sep19">SEP 19, 2026 · 6 PHOTOS</string>
+    <string name="settings">Settings</string>
+    <string name="gallery_empty">Nothing in DCIM/HDCamera yet — take a shot.</string>
+    <string name="search_hint">Search by name or date</string>
+    <string name="no_matches">Nothing matches that search.</string>
+    <string name="done">Done</string>
+    <string name="delete_selected">Delete %1$d</string>
+
+    <!-- 10 · Settings -->
+    <string name="section_quality">QUALITY</string>
+    <string name="photo_resolution">Photo resolution</string>
+    <string name="photo_resolution_sub">48 MP · 8000×6000</string>
+    <string name="resolution_sub">%1$d MP · %2$d×%3$d</string>
+    <string name="resolution_sub_sensor">Sensor maximum</string>
+    <string name="highest">Highest</string>
+    <string name="format">Format</string>
+    <string name="format_value">JPEG + RAW</string>
+    <string name="video">Video</string>
+    <string name="video_value">4K · 60fps</string>
+    <string name="section_viewfinder">VIEWFINDER</string>
+    <string name="grid_overlay">Grid overlay</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="timestamp_sub">Bottom right</string>
+    <string name="shutter_sound">Shutter sound</string>
+    <string name="volume_key_shutter">Volume key shutter</string>
+    <string name="section_storage">STORAGE</string>
+    <string name="save_folder">Save folder</string>
+    <string name="save_folder_value">DCIM/HDCamera</string>
+    <string name="geotagging">Geotagging</string>
+
+    <!-- 11 · Edit -->
+    <string name="cancel">Cancel</string>
+    <string name="edit">EDIT</string>
+    <string name="save">Save</string>
+    <string name="photo_being_edited">Photo being edited</string>
+    <string name="before_after">BEFORE · AFTER</string>
+    <string name="exposure">EXPOSURE</string>
+    <string name="exposure_value">+18</string>
+    <string name="tool_light">Light</string>
+    <string name="tool_crop">Crop</string>
+    <string name="tool_color">Color</string>
+    <string name="tool_beauty">Beauty</string>
+    <string name="tool_markup">Markup</string>
+    <string name="adj_exposure">Exposure</string>
+    <string name="adj_contrast">Contrast</string>
+    <string name="adj_highlights">Highlights</string>
+    <string name="adj_shadows">Shadows</string>
+    <string name="adj_contrast_label">CONTRAST</string>
+    <string name="adj_highlights_label">HIGHLIGHTS</string>
+    <string name="adj_shadows_label">SHADOWS</string>
+    <string name="adj_saturation">Saturation</string>
+    <string name="adj_saturation_label">SATURATION</string>
+    <string name="adj_warmth">Warmth</string>
+    <string name="adj_warmth_label">WARMTH</string>
+    <string name="adj_smooth">Smooth</string>
+    <string name="adj_smooth_label">SMOOTHING</string>
+    <string name="action_rotate_left">Rotate left</string>
+    <string name="action_rotate_right">Rotate right</string>
+    <string name="action_flip">Flip</string>
+    <string name="crop_free">Free</string>
+    <string name="crop_square">1:1</string>
+    <string name="crop_4_3">4:3</string>
+    <string name="crop_16_9">16:9</string>
+    <string name="action_reset">Reset</string>
+    <string name="action_undo">Undo</string>
+    <string name="action_clear">Clear</string>
+    <string name="markup_label">MARKUP</string>
+    <string name="crop_label">CROP</string>
+    <string name="stroke_label">STROKE</string>
+    <string name="saving">Saving…</string>
+    <string name="saved">Saved to DCIM/HDCamera</string>
+    <string name="save_failed">Could not save the edit</string>
+    <string name="edit_load_failed">Could not open that photo</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_flash">Flash</string>
+    <string name="cd_timer">Self timer</string>
+    <string name="cd_settings">Settings</string>
+    <string name="cd_switch_camera">Switch camera</string>
+    <string name="cd_shutter">Shutter</string>
+    <string name="cd_record">Record</string>
+    <string name="cd_last_shot">Last shot</string>
+    <string name="cd_back">Back</string>
+    <string name="cd_search">Search</string>
+    <string name="cd_gallery">Gallery</string>
+    <string name="cd_camera">Camera</string>
+    <string name="cd_add_filter">Add filter</string>
+    <string name="cd_preview">Preview</string>
+    <string name="cd_stop">Stop</string>
+    <string name="cd_mic_level">Microphone level</string>
+</resources>

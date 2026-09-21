@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Luma histogram from the Pro screen of the design document. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="88dp"
+    android:height="40dp"
+    android:viewportWidth="88"
+    android:viewportHeight="40">
+    <path
+        android:pathData="M0,40 L6,34 L12,22 L18,26 L24,12 L30,18 L36,8 L42,16 L48,10 L54,20 L60,14 L66,26 L72,22 L78,32 L84,36 L88,40 Z"
+        android:fillColor="@color/dc_accent_fill" />
+    <path
+        android:pathData="M0,40 L6,34 L12,22 L18,26 L24,12 L30,18 L36,8 L42,16 L48,10 L54,20 L60,14 L66,26 L72,22 L78,32 L84,36 L88,40"
+        android:strokeColor="@color/dc_accent"
+        android:strokeWidth="1.4" />
+</vector>

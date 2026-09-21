@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Screen 09 · Gallery -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dc_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/screen_h_padding"
+        android:paddingTop="20dp"
+        android:paddingEnd="@dimen/screen_h_padding"
+        android:paddingBottom="14dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/gallery"
+            android:textAppearance="@style/TextAppearance.HD.TitleLarge" />
+
+        <ImageView
+            android:id="@+id/btnSearch"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_surface_icon"
+            android:contentDescription="@string/cd_search"
+            android:padding="12dp"
+            android:src="@drawable/ic_search"
+            app:tint="@color/dc_text" />
+
+        <TextView
+            android:id="@+id/btnSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_surface_icon"
+            android:gravity="center"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:text="@string/select"
+            android:textColor="@color/dc_text_muted"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/searchInput"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginStart="@dimen/screen_h_padding"
+        android:layout_marginEnd="@dimen/screen_h_padding"
+        android:layout_marginBottom="14dp"
+        android:autofillHints="none"
+        android:background="@drawable/bg_surface_icon"
+        android:hint="@string/search_hint"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:textColor="@color/dc_text"
+        android:textColorHint="@color/dc_text_faint"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/screen_h_padding"
+        android:paddingEnd="@dimen/screen_h_padding"
+        android:paddingBottom="14dp">
+
+        <TextView
+            android:id="@+id/chipAll"
+            style="@style/Widget.HD.Pill.Active"
+            android:text="@string/filter_all" />
+
+        <TextView
+            android:id="@+id/chipPhotos"
+            style="@style/Widget.HD.Pill"
+            android:layout_marginStart="8dp"
+            android:text="@string/filter_photos" />
+
+        <TextView
+            android:id="@+id/chipVideo"
+            style="@style/Widget.HD.Pill"
+            android:layout_marginStart="8dp"
+            android:text="@string/filter_video" />
+
+        <TextView
+            android:id="@+id/chipRaw"
+            style="@style/Widget.HD.Pill"
+            android:layout_marginStart="8dp"
+            android:text="@string/filter_raw" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/screen_h_padding"
+        android:paddingEnd="@dimen/screen_h_padding"
+        android:paddingBottom="20dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/sectionsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:text="@string/gallery_empty"
+        android:textAppearance="@style/TextAppearance.HD.Body"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/dc_divider" />
+
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/screen_h_padding"
+        android:paddingTop="10dp"
+        android:paddingEnd="@dimen/screen_h_padding"
+        android:paddingBottom="18dp">
+
+        <LinearLayout
+            android:id="@+id/navGallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:minWidth="64dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_gallery"
+                app:tint="@color/dc_accent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/ibm_plex_sans_semibold"
+                android:text="@string/gallery"
+                android:textColor="@color/dc_accent"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/btnCamera"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_fab_accent"
+            android:contentDescription="@string/cd_camera"
+            android:padding="15dp"
+            android:src="@drawable/ic_camera"
+            app:tint="@color/dc_on_accent" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/navSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:minWidth="64dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_settings"
+                app:tint="@color/dc_text_faint" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/settings"
+                android:textColor="@color/dc_text_faint"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

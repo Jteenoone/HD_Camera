@@ -1,0 +1,33 @@
+appId: com.example.hd_camera
+name: Every screen of the design opens
+---
+- launchApp
+- tapOn:
+    id: "btnSkip"
+    optional: true
+- tapOn:
+    id: "btnNotNow"
+    optional: true
+
+- tapOn: "Pro"
+- assertVisible:
+    id: "isoDial"
+- back
+
+- tapOn: "Video"
+- assertVisible:
+    id: "btnRecord"
+- back
+
+- tapOn:
+    id: "btnSettings"
+- assertVisible: "Settings"
+- assertVisible: "Grid overlay"
+- back
+
+- tapOn:
+    id: "btnLastShot"
+- assertVisible: "Gallery"
+- tapOn:
+    id: "navSettings"
+- assertVisible: "Photo resolution"

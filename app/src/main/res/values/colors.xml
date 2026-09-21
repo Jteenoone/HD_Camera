@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Design tokens taken from "HD Camera App.dc.html" (claude.ai/design). -->
+<resources>
+    <!-- Surfaces -->
+    <color name="dc_bg">#0B0B0F</color>
+    <color name="dc_surface">#15151C</color>
+    <color name="dc_surface_2">#17171E</color>
+    <color name="dc_surface_3">#2A2A34</color>
+    <color name="dc_slot">#1B1B22</color>
+
+    <!-- Lines -->
+    <color name="dc_border">#23232C</color>
+    <color name="dc_border_2">#21212A</color>
+    <color name="dc_border_3">#3A3A47</color>
+    <color name="dc_divider">#1C1C24</color>
+
+    <!-- Accent -->
+    <color name="dc_accent">#9A7CFF</color>
+    <color name="dc_on_accent">#16101F</color>
+    <color name="dc_accent_container">#221C33</color>
+    <color name="dc_accent_container_2">#1B1628</color>
+    <color name="dc_accent_glow">#2E9A7CFF</color>
+    <color name="dc_accent_fill">#599A7CFF</color>
+
+    <!-- Text -->
+    <color name="dc_text">#FFFFFF</color>
+    <color name="dc_text_muted">#9B9BAA</color>
+    <color name="dc_text_dim">#8A8A99</color>
+    <color name="dc_text_dim_2">#7A7A8A</color>
+    <color name="dc_text_faint">#6E6E7E</color>
+    <color name="dc_text_80">#CCFFFFFF</color>
+    <color name="dc_text_70">#B3FFFFFF</color>
+
+    <!-- Status -->
+    <color name="dc_record">#EB4444</color>
+    <color name="dc_record_92">#EBEB4444</color>
+    <color name="dc_amber">#FFD166</color>
+
+    <!-- Viewfinder scrims (rgba(14,14,20,x) in the design) -->
+    <color name="dc_scrim_50">#800E0E14</color>
+    <color name="dc_scrim_55">#8C0E0E14</color>
+    <color name="dc_scrim_62">#9E0E0E14</color>
+
+    <!-- White washes -->
+    <color name="dc_white_14">#24FFFFFF</color>
+    <color name="dc_white_20">#33FFFFFF</color>
+    <color name="dc_white_22">#38FFFFFF</color>
+    <color name="dc_white_25">#40FFFFFF</color>
+    <color name="dc_white_45">#73FFFFFF</color>
+    <color name="dc_white_85">#D9FFFFFF</color>
+    <color name="dc_white_90">#E6FFFFFF</color>
+
+    <!-- Drop shadow behind text drawn over the viewfinder. -->
+    <color name="dc_shadow">#CC000000</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

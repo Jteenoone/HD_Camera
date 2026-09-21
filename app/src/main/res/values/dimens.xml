@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Screen padding used across the design -->
+    <dimen name="screen_h_padding">20dp</dimen>
+    <dimen name="intro_h_padding">26dp</dimen>
+
+    <!-- Viewfinder furniture -->
+    <dimen name="vf_icon_button">44dp</dimen>
+    <dimen name="vf_icon_radius">14dp</dimen>
+    <dimen name="vf_side_button">50dp</dimen>
+    <dimen name="shutter_size">78dp</dimen>
+    <dimen name="record_inner_idle">56dp</dimen>
+    <dimen name="record_inner_recording">32dp</dimen>
+    <dimen name="zoom_chip">44dp</dimen>
+    <dimen name="zoom_chip_active">48dp</dimen>
+
+    <!-- Common controls -->
+    <dimen name="pill_button_height">52dp</dimen>
+    <dimen name="chip_height">34dp</dimen>
+    <dimen name="filter_thumb">58dp</dimen>
+    <dimen name="tool_thumb">48dp</dimen>
+    <dimen name="card_radius">16dp</dimen>
+    <dimen name="stroke_hairline">1dp</dimen>
+    <dimen name="stroke_selected">2dp</dimen>
+</resources>

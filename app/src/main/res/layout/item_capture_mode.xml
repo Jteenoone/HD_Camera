@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One entry of the capture-mode strip (screens 05 and 08). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/modeLabel"
+        style="@style/Widget.HD.ModeLabel"
+        tools:text="Photo" />
+
+    <View
+        android:id="@+id/modeDot"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/bg_mode_dot_accent"
+        android:visibility="invisible" />
+</LinearLayout>

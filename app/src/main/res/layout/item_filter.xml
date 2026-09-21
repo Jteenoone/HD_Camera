@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One swatch in the live-filter row of screen 07. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/filterThumb"
+        android:layout_width="@dimen/filter_thumb"
+        android:layout_height="@dimen/filter_thumb"
+        android:background="@color/dc_surface_3"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.HD.FilterThumb"
+        app:strokeColor="@color/dc_border_3"
+        app:strokeWidth="1dp"
+        tools:src="@drawable/vivid" />
+
+    <TextView
+        android:id="@+id/filterLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textAppearance="@style/TextAppearance.HD.Caption.OnPreview"
+        tools:text="Vivid" />
+</LinearLayout>

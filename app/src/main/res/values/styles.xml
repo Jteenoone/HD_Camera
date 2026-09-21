@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Type scale and widget styles transcribed from the design document. -->
+<resources>
+
+    <!-- ── IBM Plex Sans ─────────────────────────────────────────────── -->
+
+    <style name="TextAppearance.HD.Display" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">@font/ibm_plex_sans_semibold</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/dc_text</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:lineSpacingMultiplier">1.15</item>
+    </style>
+
+    <style name="TextAppearance.HD.Display.Large">
+        <item name="android:textSize">29sp</item>
+    </style>
+
+    <style name="TextAppearance.HD.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">@font/ibm_plex_sans_semibold</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">@color/dc_text</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <style name="TextAppearance.HD.Title" parent="TextAppearance.HD.TitleLarge">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.HD.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/ibm_plex_sans_regular</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/dc_text_muted</item>
+        <item name="android:lineSpacingMultiplier">1.45</item>
+    </style>
+
+    <style name="TextAppearance.HD.ListTitle" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:fontFamily">@font/ibm_plex_sans_medium</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/dc_text</item>
+    </style>
+
+    <style name="TextAppearance.HD.ListValue" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/ibm_plex_sans_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/dc_accent</item>
+    </style>
+
+    <style name="TextAppearance.HD.ListSub" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:fontFamily">@font/ibm_plex_sans_regular</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/dc_text_dim</item>
+    </style>
+
+    <style name="TextAppearance.HD.Action" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:fontFamily">@font/ibm_plex_sans_semibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/dc_on_accent</item>
+    </style>
+
+    <style name="TextAppearance.HD.Caption" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:fontFamily">@font/ibm_plex_sans_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/dc_text_muted</item>
+    </style>
+
+    <!-- ── IBM Plex Mono ─────────────────────────────────────────────── -->
+
+    <style name="TextAppearance.HD.Mono.Eyebrow" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:fontFamily">@font/ibm_plex_mono_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/dc_accent</item>
+        <item name="android:letterSpacing">0.18</item>
+    </style>
+
+    <style name="TextAppearance.HD.Mono.Section" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:fontFamily">@font/ibm_plex_mono_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/dc_text_dim_2</item>
+        <item name="android:letterSpacing">0.14</item>
+    </style>
+
+    <style name="TextAppearance.HD.Mono.Label" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:fontFamily">@font/ibm_plex_mono_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/dc_text_dim</item>
+        <item name="android:letterSpacing">0.12</item>
+    </style>
+
+    <style name="TextAppearance.HD.Mono.Tiny" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:fontFamily">@font/ibm_plex_mono_regular</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/dc_text_dim</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <style name="TextAppearance.HD.Mono.Chip" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:fontFamily">@font/ibm_plex_mono_semibold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/dc_text</item>
+    </style>
+
+    <style name="TextAppearance.HD.Mono.Value" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">@font/ibm_plex_mono_semibold</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/dc_accent</item>
+    </style>
+
+    <!-- ── Reusable widgets ──────────────────────────────────────────── -->
+
+    <!--
+        Labels that sit over the viewfinder cannot rely on the scrim alone: a bright scene
+        washes them out, so they carry their own shadow.
+    -->
+    <style name="TextAppearance.HD.Caption.OnPreview">
+        <item name="android:textColor">@color/dc_text_80</item>
+        <item name="android:shadowColor">@color/dc_shadow</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+
+    <!-- Round icon button over the viewfinder -->
+    <style name="Widget.HD.ViewfinderIcon" parent="">
+        <item name="android:layout_width">@dimen/vf_icon_button</item>
+        <item name="android:layout_height">@dimen/vf_icon_button</item>
+        <item name="android:background">@drawable/bg_vf_icon</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:tint">@color/dc_text</item>
+    </style>
+
+    <!-- Mono chip over the viewfinder, e.g. "4:3" -->
+    <style name="Widget.HD.ViewfinderChip" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/vf_icon_button</item>
+        <item name="android:background">@drawable/bg_vf_icon</item>
+        <item name="android:paddingStart">14dp</item>
+        <item name="android:paddingEnd">14dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.HD.Mono.Chip</item>
+    </style>
+
+    <!-- Mode strip entry: Night / Portrait / Photo / Video / Pro -->
+    <style name="Widget.HD.ModeLabel" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/ibm_plex_sans_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/dc_text_faint</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:shadowColor">@color/dc_shadow</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+
+    <!-- Filter pill / gallery filter chip -->
+    <style name="Widget.HD.Pill" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/chip_height</item>
+        <item name="android:background">@drawable/bg_pill_inactive</item>
+        <item name="android:paddingStart">14dp</item>
+        <item name="android:paddingEnd">14dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/ibm_plex_sans_regular</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/dc_text_muted</item>
+    </style>
+
+    <style name="Widget.HD.Pill.Active">
+        <item name="android:background">@drawable/bg_pill_active</item>
+        <item name="android:fontFamily">@font/ibm_plex_sans_semibold</item>
+        <item name="android:textColor">@color/dc_on_accent</item>
+    </style>
+
+    <!-- Primary action: "Allow and continue", "Get started" -->
+    <style name="Widget.HD.PrimaryButton" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/pill_button_height</item>
+        <item name="android:background">@drawable/bg_button_primary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.HD.Action</item>
+    </style>
+
+    <!-- 16dp corners on the filter swatches, as the design draws them. -->
+    <style name="ShapeAppearance.HD.FilterThumb" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="Widget.HD.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="thumbTint">@color/switch_thumb</item>
+        <item name="trackTint">@color/switch_track</item>
+        <item name="trackDecorationTint">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.HD.Slider" parent="Widget.Material3.Slider">
+        <item name="trackHeight">4dp</item>
+        <item name="thumbColor">@color/white</item>
+        <!-- Material 1.13 defaults to a bar-shaped thumb; the design draws a 22dp knob. -->
+        <item name="thumbWidth">22dp</item>
+        <item name="thumbHeight">22dp</item>
+        <item name="thumbTrackGapSize">0dp</item>
+        <item name="trackInsideCornerSize">0dp</item>
+        <item name="trackStopIndicatorSize">0dp</item>
+        <item name="trackColorActive">@color/dc_accent</item>
+        <item name="trackColorInactive">@color/dc_white_22</item>
+        <item name="haloRadius">18dp</item>
+        <item name="haloColor">@color/dc_accent_glow</item>
+        <item name="labelBehavior">gone</item>
+        <item name="thumbElevation">2dp</item>
+        <item name="tickVisible">false</item>
+    </style>
+</resources>

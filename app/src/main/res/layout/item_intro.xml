@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Screens 01–03 of the design: one intro page, driven by IntroPagerAdapter. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dc_bg"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/imageArea"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/imgVisual"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_image_slot"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tvImagePlaceholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="@style/TextAppearance.HD.Caption"
+            android:textColor="@color/dc_text_dim_2"
+            tools:text="Intro visual 1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_intro_scrim" />
+
+        <!-- Page 2 only: exposure readout chips -->
+        <LinearLayout
+            android:id="@+id/exposureChips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="@dimen/intro_h_padding"
+            android:layout_marginBottom="96dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                style="@style/TextAppearance.HD.Mono.Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_vf_chip_12"
+                android:paddingStart="11dp"
+            android:paddingEnd="11dp"
+                android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+                android:text="ISO 400"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                style="@style/TextAppearance.HD.Mono.Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_vf_chip_12"
+                android:paddingStart="11dp"
+            android:paddingEnd="11dp"
+                android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+                android:text="@string/shutter_value"
+                android:textSize="11sp" />
+
+            <TextView
+                style="@style/TextAppearance.HD.Mono.Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_vf_chip_12"
+                android:paddingStart="11dp"
+            android:paddingEnd="11dp"
+                android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+                android:text="@string/wb_value"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Page 3 only: filter swatch row -->
+        <LinearLayout
+            android:id="@+id/filterPips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/intro_h_padding"
+            android:layout_marginEnd="@dimen/intro_h_padding"
+            android:layout_marginBottom="96dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <View
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_intro_pip_active" />
+
+            <View
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_intro_pip" />
+
+            <View
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_intro_pip" />
+
+            <View
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_intro_pip" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:text="@string/skip"
+            android:textColor="@color/dc_text_80"
+            android:textSize="14sp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/introFooter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/intro_h_padding"
+            android:paddingEnd="@dimen/intro_h_padding"
+        android:paddingBottom="@dimen/intro_h_padding">
+
+        <TextView
+            android:id="@+id/tvEyebrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.HD.Mono.Eyebrow"
+            tools:text="HD CAMERA" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAppearance="@style/TextAppearance.HD.Display"
+            tools:text="Every shot at\nfull resolution" />
+
+        <TextView
+            android:id="@+id/tvBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAppearance="@style/TextAppearance.HD.Body"
+            tools:text="48 MP stills, 4K video and a viewfinder that shows the whole frame." />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/dot0"
+                    android:layout_width="22dp"
+                    android:layout_height="6dp"
+                    android:background="@drawable/bg_dot_active" />
+
+                <View
+                    android:id="@+id/dot1"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="7dp"
+                    android:background="@drawable/bg_dot_inactive" />
+
+                <View
+                    android:id="@+id/dot2"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginStart="7dp"
+                    android:background="@drawable/bg_dot_inactive" />
+            </LinearLayout>
+
+            <Space
+                android:id="@+id/footerSpacer"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/btnNext"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/pill_button_height"
+                android:background="@drawable/bg_button_primary"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="26dp"
+            android:paddingEnd="26dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/next"
+                    android:textAppearance="@style/TextAppearance.HD.Action" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="10dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_arrow_right"
+                    app:tint="@color/dc_on_accent" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnGetStarted"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/pill_button_height"
+                android:layout_marginStart="14dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button_primary"
+                android:gravity="center"
+                android:text="@string/get_started"
+                android:textAppearance="@style/TextAppearance.HD.Action"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

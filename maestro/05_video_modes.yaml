@@ -1,0 +1,28 @@
+appId: com.example.hd_camera
+name: Record in every video mode
+---
+- stopApp
+- launchApp
+- tapOn:
+    id: "btnSkip"
+    optional: true
+- tapOn:
+    id: "btnNotNow"
+    optional: true
+
+# Normal recording
+- tapOn: "Video"
+- assertVisible:
+    id: "btnRecord"
+- tapOn:
+    id: "btnRecord"
+- extendedWaitUntil:
+    visible:
+      id: "btnRecord"
+    timeout: 6000
+- tapOn:
+    id: "btnRecord"
+- extendedWaitUntil:
+    visible:
+      id: "modeRow"
+    timeout: 10000

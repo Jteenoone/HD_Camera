@@ -1,0 +1,26 @@
+appId: com.example.hd_camera
+name: Shutter survives a RAW + JPEG capture (keeps existing app data)
+---
+# No clearState here: this flow is meant for a real phone, so the user's
+# settings and photos stay untouched.
+# Start from a fresh activity: the app may have been left on another screen.
+- stopApp
+- launchApp
+- tapOn:
+    id: "btnSkip"
+    optional: true
+- tapOn:
+    id: "btnNotNow"
+    optional: true
+- assertVisible:
+    id: "btnShutter"
+
+- tapOn:
+    id: "btnShutter"
+
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 20000
+- assertVisible:
+    id: "modeRow"

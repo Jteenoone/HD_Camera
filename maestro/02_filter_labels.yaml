@@ -1,0 +1,32 @@
+appId: com.example.hd_camera
+name: Filter swatches and their labels are readable
+---
+- launchApp
+- tapOn:
+    id: "btnSkip"
+    optional: true
+- tapOn:
+    id: "btnNotNow"
+    optional: true
+
+- tapOn: "Beauty"
+- assertVisible: "Live filters"
+
+# Every swatch label the design lists must be on screen.
+- assertVisible: "None"
+- assertVisible: "Vivid"
+- assertVisible: "Fade"
+- assertVisible: "B&W"
+- assertVisible: "Warm"
+
+# The strength readout stands in for the slider: Material's Slider only publishes
+# virtual accessibility nodes, so the view's own id never reaches the hierarchy.
+- assertVisible:
+    id: "tvStrength"
+- assertVisible:
+    id: "filterRow"
+
+- tapOn: "B&W"
+- assertVisible: "B&W"
+- assertVisible:
+    id: "btnShutter"
