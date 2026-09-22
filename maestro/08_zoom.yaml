@@ -1,0 +1,71 @@
+appId: com.example.hd_camera
+name: Both viewfinders carry the quick-zoom row and report the ratio
+---
+# No clearState: this flow is meant for a real phone, so the zoom steps on screen are the
+# ones that camera actually has.
+- stopApp
+- launchApp
+- tapOn:
+    id: "btnSkip"
+    optional: true
+- tapOn:
+    id: "btnContinue"
+    optional: true
+- tapOn:
+    id: "btnNotNow"
+    optional: true
+
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
+
+# A camera with no zoom at all has no row to show, so the assertions only run where one is.
+# Pinch itself is out of reach here: Maestro drives one finger.
+- runFlow:
+    when:
+      visible:
+        id: "zoomChips"
+    commands:
+      - tapOn: "1×"
+      - assertVisible:
+          id: "tvZoomRatio"
+      - assertVisible:
+          id: "btnShutter"
+
+- tapOn: "Video"
+- extendedWaitUntil:
+    visible:
+      id: "btnRecord"
+    timeout: 15000
+
+- runFlow:
+    when:
+      visible:
+        id: "zoomChips"
+    commands:
+      - tapOn: "1×"
+      - assertVisible:
+          id: "tvZoomRatio"
+
+# The zoom row must not break recording: the clip still starts, pauses and stops.
+- tapOn:
+    id: "btnRecord"
+- extendedWaitUntil:
+    visible:
+      id: "btnPauseResume"
+    timeout: 8000
+- runFlow:
+    when:
+      visible:
+        id: "zoomChips"
+    commands:
+      - tapOn: "1×"
+- tapOn:
+    id: "btnRecord"
+- extendedWaitUntil:
+    visible:
+      id: "btnLastShot"
+    timeout: 15000
+- assertVisible:
+    id: "modeRow"

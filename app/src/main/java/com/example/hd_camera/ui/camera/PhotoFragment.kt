@@ -4,7 +4,6 @@ import android.media.MediaActionSound
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -18,6 +17,7 @@ import coil.load
 import com.example.hd_camera.R
 import com.example.hd_camera.camera.CameraEngine
 import com.example.hd_camera.camera.PhotoCapture
+import com.example.hd_camera.camera.ZoomMath
 import com.example.hd_camera.data.ViewfinderPrefs
 import com.example.hd_camera.databinding.FragmentPhotoBinding
 import com.example.hd_camera.databinding.ItemZoomChipBinding
@@ -43,7 +43,10 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
     private var hdrOn = false
     private var capturing = false
     private var activeModeIndex = MODE_PHOTO
-    private var selectedZoom = 1f
+
+    /** The zoom as the user asked for it: 0.5x means the ultra-wide, not a sensor ratio. */
+    private var zoomRatio = 1f
+    private var zoomStops: List<Float> = emptyList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentPhotoBinding.bind(view).also { this.binding = it }
@@ -75,7 +78,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         bindModeStrip()
         bindTopBar()
         bindShutterRow()
-        bindTapToFocus()
+        bindViewfinderGestures()
     }
 
     override fun onResume() {
@@ -86,8 +89,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         val context = requireContext()
         binding.gridOverlay.visibility =
             visibility(ViewfinderPrefs.get(context, ViewfinderPrefs.KEY_GRID))
-        binding.zoomChips.visibility =
-            visibility(ViewfinderPrefs.get(context, ViewfinderPrefs.KEY_ZOOM_CHIPS))
+        applyZoomChipVisibility()
         loadLastShot()
     }
 
@@ -185,7 +187,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
     private fun updateHdrChip() {
         val binding = binding ?: return
         val available = engine?.isModeSupported(ExtensionMode.HDR) == true
-        binding.btnHdr.alpha = if (available) 1f else 0.4f
+        binding.btnHdr.alpha = if (available) 1f else DISABLED_ALPHA
         binding.btnHdr.setBackgroundResource(
             if (hdrOn && available) R.drawable.bg_vf_icon_accent else R.drawable.bg_vf_icon
         )
@@ -216,7 +218,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         val binding = binding ?: return
         val engine = engine ?: return
         val row = binding.zoomChips
-        val stops = engine.zoomStops()
+        val stops = engine.zoomStops().also { zoomStops = it }
         row.removeAllViews()
 
         val inflater = LayoutInflater.from(row.context)
@@ -224,26 +226,35 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
 
         stops.forEachIndexed { index, stop ->
             val chip = ItemZoomChipBinding.inflate(inflater, row, false).root
-            chip.text = formatZoom(stop)
-            chip.setOnClickListener {
-                selectedZoom = stop
-                engine.requestZoom(stop)
-                styleZoomChips()
-            }
+            chip.text = ZoomMath.label(stop)
+            chip.setOnClickListener { applyZoom(engine.requestZoom(stop)) }
             (chip.layoutParams as LinearLayout.LayoutParams).marginStart =
                 if (index == 0) 0 else gap
             row.addView(chip)
         }
+        applyZoomChipVisibility()
         styleZoomChips()
+    }
+
+    /**
+     * The row answers to the Settings switch and to the camera both: a single step is not a
+     * choice, so a camera that cannot zoom at all gets no chips rather than a dead 1× one.
+     */
+    private fun applyZoomChipVisibility() {
+        val binding = binding ?: return
+        val wanted = ViewfinderPrefs.get(requireContext(), ViewfinderPrefs.KEY_ZOOM_CHIPS)
+        binding.zoomChips.visibility = visibility(wanted && zoomStops.size > 1)
     }
 
     private fun styleZoomChips() {
         val binding = binding ?: return
         val engine = engine ?: return
-        val stops = engine.zoomStops()
+        val range = engine.availableZoomRange()
         for (index in 0 until binding.zoomChips.childCount) {
             val chip = binding.zoomChips.getChildAt(index) as? TextView ?: continue
-            val active = stops.getOrNull(index) == selectedZoom
+            val stop = zoomStops.getOrNull(index) ?: continue
+            val active = ZoomMath.matches(zoomRatio, stop)
+            val reachable = ZoomMath.reachable(stop, range)
             chip.setBackgroundResource(
                 if (active) R.drawable.bg_zoom_chip_active else R.drawable.bg_round_scrim_50
             )
@@ -253,22 +264,60 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
                     if (active) R.color.dc_bg else R.color.dc_text
                 )
             )
+            chip.isEnabled = reachable
+            chip.alpha = if (reachable) 1f else DISABLED_ALPHA
         }
     }
 
-    private fun formatZoom(stop: Float): String =
-        if (stop < 1f) ".5\u00d7" else stop.toInt().toString() + "\u00d7"
+    /** Puts the ratio the camera settled on into the readout and onto the chips. */
+    private fun applyZoom(ratio: Float) {
+        zoomRatio = ratio
+        showZoomReadout(ratio)
+        fadeZoomReadout()
+        styleZoomChips()
+    }
 
-    private fun bindTapToFocus() {
+    private fun pinchZoom(factor: Float) {
+        val engine = engine ?: return
+        val target = ZoomMath.pinch(zoomRatio, factor, engine.availableZoomRange())
+        zoomRatio = engine.requestZoom(target)
+        showZoomReadout(zoomRatio)
+        styleZoomChips()
+    }
+
+    private fun showZoomReadout(ratio: Float) {
+        val readout = binding?.tvZoomRatio ?: return
+        readout.removeCallbacks(hideZoomReadout)
+        readout.text = ZoomMath.label(ratio)
+        readout.visibility = View.VISIBLE
+    }
+
+    /** Leaves the last value up just long enough to read, then takes it away again. */
+    private fun fadeZoomReadout() {
+        val readout = binding?.tvZoomRatio ?: return
+        readout.removeCallbacks(hideZoomReadout)
+        readout.postDelayed(hideZoomReadout, ZOOM_READOUT_MS)
+    }
+
+    private val hideZoomReadout = Runnable { binding?.tvZoomRatio?.visibility = View.GONE }
+
+    /**
+     * Pinch zooms, a single tap focuses. Telling them apart matters: the finger that ends a
+     * pinch used to arrive as a tap and send the camera off to focus on the frame's middle.
+     */
+    private fun bindViewfinderGestures() {
         val binding = binding ?: return
-        binding.previewView.setOnTouchListener { view, event ->
-            if (event.actionMasked == MotionEvent.ACTION_UP) {
-                engine?.focusAt(event.x, event.y)
-                showFocusIndicatorAt(event.x, event.y)
-                view.performClick()
+        ViewfinderGestures(
+            view = binding.previewView,
+            // The camera is the authority on where the zoom actually is by now.
+            onZoomBegin = { zoomRatio = engine?.currentZoomRatio() ?: zoomRatio },
+            onZoom = { factor -> pinchZoom(factor) },
+            onZoomEnd = { fadeZoomReadout() },
+            onTap = { x, y ->
+                engine?.focusAt(x, y)
+                showFocusIndicatorAt(x, y)
             }
-            true
-        }
+        )
     }
 
     private fun showFocusIndicatorAt(x: Float, y: Float) {
@@ -476,6 +525,12 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         const val TORCH = -1
         const val RESOLUTION_SETTLE_MS = 400L
         const val COUNTDOWN_TICK_MS = 260L
+
+        /** How long the pinch readout stays up once the fingers have left. */
+        const val ZOOM_READOUT_MS = 900L
+
+        /** What a control that the camera cannot honour right now looks like. */
+        const val DISABLED_ALPHA = 0.4f
 
         val FLASH_MODES = intArrayOf(
             ImageCapture.FLASH_MODE_OFF,
