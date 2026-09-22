@@ -184,4 +184,15 @@
     <string name="video_resolution_unsupported">此相机无法以该分辨率录制</string>
     <string name="frame_rate_unsupported">此相机无法以该帧率录制</string>
     <string name="cd_option_selected">已选择</string>
+
+    <!-- 06 · Pro manual controls -->
+    <string name="cd_focus_peaking">对焦峰值</string>
+    <string name="cd_zebra">斑马纹高光</string>
+    <string name="cd_ae_af_lock">锁定对焦与曝光</string>
+    <string name="cd_auto_parameter">将此项恢复为自动</string>
+    <string name="cd_reset_all">将所有项恢复为自动</string>
+    <string name="ev_unsupported">此相机没有曝光补偿</string>
+    <string name="manual_focus_unsupported">此相机没有手动对焦</string>
+    <string name="wb_presets_unsupported">此相机只有自动白平衡</string>
+    <string name="ae_lock_unsupported">此相机无法锁定曝光</string>
 </resources>

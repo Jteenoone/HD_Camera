@@ -188,4 +188,15 @@
     <string name="video_resolution_unsupported">Esta cámara no puede grabar a ese tamaño</string>
     <string name="frame_rate_unsupported">Esta cámara no puede grabar a esa velocidad de fotogramas</string>
     <string name="cd_option_selected">Seleccionado</string>
+
+    <!-- 06 · Pro manual controls -->
+    <string name="cd_focus_peaking">Enfoque asistido</string>
+    <string name="cd_zebra">Cebras de luces altas</string>
+    <string name="cd_ae_af_lock">Bloquear enfoque y exposición</string>
+    <string name="cd_auto_parameter">Devolver este ajuste a automático</string>
+    <string name="cd_reset_all">Devolver todos los ajustes a automático</string>
+    <string name="ev_unsupported">Esta cámara no tiene compensación de exposición</string>
+    <string name="manual_focus_unsupported">Esta cámara no tiene enfoque manual</string>
+    <string name="wb_presets_unsupported">Esta cámara solo tiene balance de blancos automático</string>
+    <string name="ae_lock_unsupported">Esta cámara no puede bloquear la exposición</string>
 </resources>
