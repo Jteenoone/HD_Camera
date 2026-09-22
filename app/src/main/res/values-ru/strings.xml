@@ -221,4 +221,6 @@
     <string name="my_gallery_body">Всё, что вы сняли, в одном месте</string>
     <string name="camera_permission_needed">Для съёмки нужен доступ к камере</string>
     <string name="camera_permission_in_settings">Доступ к камере выключен. Нажмите, чтобы открыть настройки</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">Зум %1$s×</string>
 </resources>

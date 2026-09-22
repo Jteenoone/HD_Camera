@@ -217,4 +217,6 @@
     <string name="my_gallery_body">আপনার তোলা সব কিছু এক জায়গায়</string>
     <string name="camera_permission_needed">ছবি তুলতে ক্যামেরার অনুমতি দরকার</string>
     <string name="camera_permission_in_settings">ক্যামেরার অনুমতি বন্ধ। সেটিংস খুলতে ট্যাপ করুন</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">%1$s গুণ জুম</string>
 </resources>

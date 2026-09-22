@@ -215,4 +215,6 @@
     <string name="my_gallery_body">Semua hasil jepretanmu, di satu tempat</string>
     <string name="camera_permission_needed">Akses kamera diperlukan untuk memotret</string>
     <string name="camera_permission_in_settings">Akses kamera mati. Ketuk untuk membuka setelan</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">Zoom %1$s kali</string>
 </resources>

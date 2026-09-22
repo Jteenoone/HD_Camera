@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -305,12 +306,87 @@ class VideoFragment :
             val chip = ItemZoomChipBinding.inflate(inflater, row, false).root
             chip.text = ZoomMath.label(stop)
             chip.setOnClickListener { applyZoom(engine.requestZoom(stop)) }
+            chip.setOnLongClickListener {
+                showZoomWheel()
+                true
+            }
             (chip.layoutParams as LinearLayout.LayoutParams).marginStart =
                 if (index == 0) 0 else gap
             row.addView(chip)
         }
+        row.onSwipeUp = { showZoomWheel() }
+        bindZoomArc()
         applyZoomChipVisibility()
         styleZoomChips()
+    }
+
+    /**
+     * The wheel reads the camera through the engine and asks it for a ratio; it decides
+     * nothing about lenses itself. Every way of zooming ends up on the same [zoomRatio].
+     */
+    private fun bindZoomArc() {
+        val arc = binding?.zoomArc ?: return
+        arc.onZoomStart = { arc.removeCallbacks(hideZoomWheel) }
+        arc.onZoomChanged = { requested -> applyWheelZoom(requested) }
+        arc.onZoomEnd = { scheduleZoomWheelHide() }
+        syncZoomArc()
+    }
+
+    /** Keeps the arc showing what the camera can do and where it currently is. */
+    private fun syncZoomArc() {
+        val arc = binding?.zoomArc ?: return
+        val engine = engine ?: return
+        arc.range = engine.fullZoomRange()
+        arc.reachable = engine.availableZoomRange()
+        arc.stops = zoomStops
+        arc.zoom = zoomRatio
+    }
+
+    private fun applyWheelZoom(requested: Float) {
+        val engine = engine ?: return
+        zoomRatio = engine.requestZoom(requested)
+        binding?.zoomArc?.zoom = zoomRatio
+        showZoomReadout(zoomRatio)
+        styleZoomChips()
+    }
+
+    /** Opened by holding a chip, or by swiping up off the row. */
+    private fun showZoomWheel() {
+        val binding = binding ?: return
+        val arc = binding.zoomArc
+        if (zoomStops.size < 2) return
+        // The controls are the only thing the wheel must not cover, and their height is
+        // whatever the mode strip and the system bars made it.
+        (arc.layoutParams as? FrameLayout.LayoutParams)?.let { params ->
+            if (params.bottomMargin != binding.bottomBar.height) {
+                params.bottomMargin = binding.bottomBar.height
+                arc.layoutParams = params
+            }
+        }
+        arc.removeCallbacks(hideZoomWheel)
+        syncZoomArc()
+        if (arc.visibility == View.VISIBLE) return
+        arc.alpha = 0f
+        arc.visibility = View.VISIBLE
+        arc.animate().cancel()
+        arc.animate().alpha(1f).setDuration(WHEEL_FADE_MS).start()
+    }
+
+    /** Left up for a moment after the finger goes, so the value can be read. */
+    private fun scheduleZoomWheelHide() {
+        val arc = binding?.zoomArc ?: return
+        arc.removeCallbacks(hideZoomWheel)
+        arc.postDelayed(hideZoomWheel, WHEEL_LINGER_MS)
+    }
+
+    private val hideZoomWheel = Runnable {
+        val arc = binding?.zoomArc ?: return@Runnable
+        arc.animate().cancel()
+        arc.animate()
+            .alpha(0f)
+            .setDuration(WHEEL_FADE_MS)
+            .withEndAction { binding?.zoomArc?.visibility = View.GONE }
+            .start()
     }
 
     /**
@@ -351,11 +427,13 @@ class VideoFragment :
             chip.isEnabled = reachable
             chip.alpha = if (reachable) 1f else DISABLED_ALPHA
         }
+        binding.zoomArc.reachable = range
     }
 
     /** Puts the ratio the camera settled on into the readout and onto the chips. */
     private fun applyZoom(ratio: Float) {
         zoomRatio = ratio
+        binding?.zoomArc?.zoom = ratio
         showZoomReadout(ratio)
         fadeZoomReadout()
         styleZoomChips()
@@ -365,15 +443,24 @@ class VideoFragment :
         val engine = engine ?: return
         val target = ZoomMath.pinch(zoomRatio, factor, engine.availableZoomRange())
         zoomRatio = engine.requestZoom(target)
+        // A pinch moves the wheel too, so the two never disagree about where the zoom is.
+        binding?.zoomArc?.zoom = zoomRatio
         showZoomReadout(zoomRatio)
         styleZoomChips()
     }
 
     private fun showZoomReadout(ratio: Float) {
-        val readout = binding?.tvZoomRatio ?: return
+        val binding = binding ?: return
+        val readout = binding.tvZoomRatio
         readout.removeCallbacks(hideZoomReadout)
         readout.text = ZoomMath.label(ratio)
-        readout.visibility = View.VISIBLE
+        // The wheel carries the value in its own middle while it is up, and the same
+        // number twice, an inch apart, reads as a fault rather than as emphasis.
+        readout.visibility = if (binding.zoomArc.visibility == View.VISIBLE) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
     }
 
     /** Leaves the last value up just long enough to read, then takes it away again. */
@@ -617,6 +704,12 @@ class VideoFragment :
 
         /** How long the pinch readout stays up once the fingers have left. */
         const val ZOOM_READOUT_MS = 900L
+
+        /** Long enough to read as a movement, short enough not to hold up the shot. */
+        const val WHEEL_FADE_MS = 180L
+
+        /** How long the wheel stays after the finger leaves it. */
+        const val WHEEL_LINGER_MS = 1_200L
 
         /** What a control that the camera cannot honour right now looks like. */
         const val DISABLED_ALPHA = 0.4f

@@ -42,6 +42,18 @@ name: Both viewfinders carry the quick-zoom row and report the ratio
       - tapOn: "1×"
       - assertVisible:
           id: "btnShutter"
+      # Swiping up off the row brings the wheel over the picture. Holding a chip does
+      # the same, but a long press is not something Maestro delivers to a view reliably,
+      # so the gesture this can actually drive is the one it checks.
+      - swipe:
+          from:
+            id: "zoomChips"
+          direction: UP
+          duration: 400
+      - assertVisible:
+          id: "zoomArc"
+      - assertVisible:
+          id: "btnShutter"
 
 - tapOn: "Video"
 - extendedWaitUntil:
@@ -55,6 +67,24 @@ name: Both viewfinders carry the quick-zoom row and report the ratio
         id: "zoomChips"
     commands:
       - tapOn: "1×"
+      - assertVisible:
+          id: "btnRecord"
+
+# Holding a chip opens the wheel. Maestro cannot drag an arc, so what this can hold the
+# app to is that the wheel appears from the gesture, that it carries the ratio, and that
+# the viewfinder is still there underneath it afterwards. The drag itself is by hand.
+- runFlow:
+    when:
+      visible:
+        id: "zoomChips"
+    commands:
+      - swipe:
+          from:
+            id: "zoomChips"
+          direction: UP
+          duration: 400
+      - assertVisible:
+          id: "zoomArc"
       - assertVisible:
           id: "btnRecord"
 

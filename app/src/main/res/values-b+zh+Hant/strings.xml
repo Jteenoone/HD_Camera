@@ -215,4 +215,6 @@
     <string name="my_gallery_body">你拍下的一切，都在這裡</string>
     <string name="camera_permission_needed">拍攝需要相機權限</string>
     <string name="camera_permission_in_settings">相機權限已關閉。輕觸以開啟設定</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">變焦 %1$s 倍</string>
 </resources>

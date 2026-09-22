@@ -217,4 +217,6 @@
     <string name="my_gallery_body">Alles, was du aufgenommen hast, an einem Ort</string>
     <string name="camera_permission_needed">Zum Aufnehmen wird Kamerazugriff benötigt</string>
     <string name="camera_permission_in_settings">Kamerazugriff ist aus. Tippen, um die Einstellungen zu öffnen</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">%1$s-facher Zoom</string>
 </resources>

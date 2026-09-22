@@ -217,4 +217,6 @@
     <string name="my_gallery_body">Çektiğin her şey, tek bir yerde</string>
     <string name="camera_permission_needed">Çekim yapmak için kamera izni gerekiyor</string>
     <string name="camera_permission_in_settings">Kamera izni kapalı. Ayarları açmak için dokun</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">%1$s kat yakınlaştırma</string>
 </resources>

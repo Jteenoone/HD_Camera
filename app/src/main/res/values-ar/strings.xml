@@ -225,4 +225,6 @@
     <string name="my_gallery_body">كل ما صوّرته في مكان واحد</string>
     <string name="camera_permission_needed">يلزم الوصول إلى الكاميرا للتصوير</string>
     <string name="camera_permission_in_settings">الوصول إلى الكاميرا موقوف. اضغط لفتح الإعدادات</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">تكبير %1$s أضعاف</string>
 </resources>

@@ -217,4 +217,6 @@
     <string name="my_gallery_body">आपका खींचा हुआ सब कुछ, एक जगह</string>
     <string name="camera_permission_needed">शूट करने के लिए कैमरा अनुमति चाहिए</string>
     <string name="camera_permission_in_settings">कैमरा अनुमति बंद है। सेटिंग्स खोलने के लिए टैप करें</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">%1$s गुना ज़ूम</string>
 </resources>

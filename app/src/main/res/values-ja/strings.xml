@@ -215,4 +215,6 @@
     <string name="my_gallery_body">撮ったものすべてが、ここに</string>
     <string name="camera_permission_needed">撮影にはカメラへのアクセスが必要です</string>
     <string name="camera_permission_in_settings">カメラへのアクセスがオフです。タップして設定を開きます</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">ズーム %1$s 倍</string>
 </resources>

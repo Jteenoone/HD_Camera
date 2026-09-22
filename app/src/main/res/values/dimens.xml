@@ -14,6 +14,8 @@
     <!-- A round chip is its own touch target, so it holds the 48dp minimum. -->
     <dimen name="zoom_chip">48dp</dimen>
     <dimen name="zoom_chip_active">48dp</dimen>
+    <!-- Tall enough for a half circle a thumb can travel, short enough to clear the shutter. -->
+    <dimen name="zoom_arc_height">128dp</dimen>
     <!-- The Photo screen's black control panel. -->
     <dimen name="photo_panel_top_padding">18dp</dimen>
     <dimen name="photo_panel_bottom_padding">24dp</dimen>

@@ -219,4 +219,6 @@
     <string name="my_gallery_body">Tout ce que vous avez pris, au même endroit</string>
     <string name="camera_permission_needed">L\'accès à l\'appareil photo est nécessaire pour photographier</string>
     <string name="camera_permission_in_settings">L\'accès à l\'appareil photo est désactivé. Touchez pour ouvrir les réglages</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">Zoom %1$s fois</string>
 </resources>

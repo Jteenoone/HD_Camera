@@ -219,4 +219,6 @@
     <string name="my_gallery_body">Tudo o que você fotografou, num só lugar</string>
     <string name="camera_permission_needed">É preciso acesso à câmera para fotografar</string>
     <string name="camera_permission_in_settings">O acesso à câmera está desligado. Toque para abrir as configurações</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">Zoom de %1$s vezes</string>
 </resources>

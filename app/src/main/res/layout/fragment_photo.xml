@@ -105,6 +105,20 @@
             tools:visibility="visible" />
 
         <!--
+            The zoom wheel, over the foot of the picture and clear of the black panel. It
+            is an overlay rather than a row in the panel: taking layout space would resize
+            the preview every time it opened, and a viewfinder that jumps as you reach for
+            the zoom is worse than no wheel.
+        -->
+        <com.example.hd_camera.ui.widget.ZoomArcView
+            android:id="@+id/zoomArc"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zoom_arc_height"
+            android:layout_gravity="bottom|center_horizontal"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <!--
             The top row and the badge under it. They share a column so the badge clears the
             row whatever the status bar inset turns out to be.
         -->
@@ -227,7 +241,7 @@
         android:paddingTop="@dimen/photo_panel_top_padding"
         android:paddingBottom="@dimen/photo_panel_bottom_padding">
 
-        <LinearLayout
+        <com.example.hd_camera.ui.widget.ZoomChipRow
             android:id="@+id/zoomChips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

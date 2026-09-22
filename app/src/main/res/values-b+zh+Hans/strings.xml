@@ -215,4 +215,6 @@
     <string name="my_gallery_body">你拍下的一切，都在这里</string>
     <string name="camera_permission_needed">拍摄需要相机权限</string>
     <string name="camera_permission_in_settings">相机权限已关闭。点按以打开设置</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">变焦 %1$s 倍</string>
 </resources>
