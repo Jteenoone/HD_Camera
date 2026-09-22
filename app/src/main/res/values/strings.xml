@@ -292,4 +292,19 @@
     <string name="video_resolution_unsupported">This camera cannot record at that size</string>
     <string name="frame_rate_unsupported">This camera cannot record at that frame rate</string>
     <string name="cd_option_selected">Selected</string>
+
+    <!-- 06 · Pro manual controls -->
+    <string name="peak" translatable="false">PEAK</string>
+    <string name="zebra" translatable="false">ZEBRA</string>
+    <string name="ae_af" translatable="false">AE/AF</string>
+    <string name="reset" translatable="false">RESET</string>
+    <string name="cd_focus_peaking">Focus peaking</string>
+    <string name="cd_zebra">Zebra highlights</string>
+    <string name="cd_ae_af_lock">Lock focus and exposure</string>
+    <string name="cd_auto_parameter">Put this setting back to automatic</string>
+    <string name="cd_reset_all">Put every setting back to automatic</string>
+    <string name="ev_unsupported">This camera has no exposure compensation</string>
+    <string name="manual_focus_unsupported">This camera has no manual focus</string>
+    <string name="wb_presets_unsupported">This camera has only automatic white balance</string>
+    <string name="ae_lock_unsupported">This camera cannot lock exposure</string>
 </resources>

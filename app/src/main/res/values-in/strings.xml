@@ -184,4 +184,15 @@
     <string name="video_resolution_unsupported">Kamera ini tidak bisa merekam pada ukuran itu</string>
     <string name="frame_rate_unsupported">Kamera ini tidak bisa merekam pada laju bingkai itu</string>
     <string name="cd_option_selected">Terpilih</string>
+
+    <!-- 06 · Pro manual controls -->
+    <string name="cd_focus_peaking">Focus peaking</string>
+    <string name="cd_zebra">Sorotan zebra</string>
+    <string name="cd_ae_af_lock">Kunci fokus dan eksposur</string>
+    <string name="cd_auto_parameter">Kembalikan setelan ini ke otomatis</string>
+    <string name="cd_reset_all">Kembalikan semua setelan ke otomatis</string>
+    <string name="ev_unsupported">Kamera ini tidak punya kompensasi eksposur</string>
+    <string name="manual_focus_unsupported">Kamera ini tidak punya fokus manual</string>
+    <string name="wb_presets_unsupported">Kamera ini hanya punya white balance otomatis</string>
+    <string name="ae_lock_unsupported">Kamera ini tidak bisa mengunci eksposur</string>
 </resources>

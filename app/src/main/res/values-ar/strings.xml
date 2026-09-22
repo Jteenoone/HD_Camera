@@ -194,4 +194,15 @@
     <string name="video_resolution_unsupported">لا تستطيع هذه الكاميرا التسجيل بهذه الدقة</string>
     <string name="frame_rate_unsupported">لا تستطيع هذه الكاميرا التسجيل بهذا المعدل</string>
     <string name="cd_option_selected">محدَّد</string>
+
+    <!-- 06 · Pro manual controls -->
+    <string name="cd_focus_peaking">إبراز حواف التركيز</string>
+    <string name="cd_zebra">خطوط تحذير السطوع</string>
+    <string name="cd_ae_af_lock">تثبيت التركيز والإضاءة</string>
+    <string name="cd_auto_parameter">إعادة هذا الإعداد إلى التلقائي</string>
+    <string name="cd_reset_all">إعادة كل الإعدادات إلى التلقائي</string>
+    <string name="ev_unsupported">لا تدعم هذه الكاميرا تعويض الإضاءة</string>
+    <string name="manual_focus_unsupported">لا تدعم هذه الكاميرا التركيز اليدوي</string>
+    <string name="wb_presets_unsupported">لا تدعم هذه الكاميرا سوى توازن اللون الأبيض التلقائي</string>
+    <string name="ae_lock_unsupported">لا تستطيع هذه الكاميرا تثبيت الإضاءة</string>
 </resources>

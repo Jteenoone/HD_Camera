@@ -19,7 +19,19 @@ enum class WhiteBalance(@StringRes val label: Int, val awbMode: Int, val kelvin:
     FLUORESCENT(R.string.wb_4000k, CaptureRequest.CONTROL_AWB_MODE_FLUORESCENT, 4000),
     DAYLIGHT(R.string.wb_5600k, CaptureRequest.CONTROL_AWB_MODE_DAYLIGHT, 5600),
     CLOUDY(R.string.wb_6500k, CaptureRequest.CONTROL_AWB_MODE_CLOUDY_DAYLIGHT, 6500),
-    SHADE(R.string.wb_7500k, CaptureRequest.CONTROL_AWB_MODE_SHADE, 7500)
+    SHADE(R.string.wb_7500k, CaptureRequest.CONTROL_AWB_MODE_SHADE, 7500);
+
+    companion object {
+        /**
+         * The presets [awbModes] covers. Auto is always offered: a camera that publishes
+         * no list at all still does automatic white balance, it just will not be told
+         * which preset to hold.
+         */
+        fun availableIn(awbModes: List<Int>): List<WhiteBalance> {
+            if (awbModes.isEmpty()) return listOf(AUTO)
+            return entries.filter { it == AUTO || awbModes.contains(it.awbMode) }
+        }
+    }
 }
 
 /**
@@ -30,12 +42,19 @@ data class ManualControls(
     val iso: Int? = null,
     val exposureTimeNanos: Long? = null,
     val whiteBalance: WhiteBalance = WhiteBalance.AUTO,
-    val manualFocusDistance: Float? = null
+    val manualFocusDistance: Float? = null,
+    /**
+     * Holds the metering where it is. It lives here rather than being sent on its own
+     * because Camera2CameraControl replaces the whole set of options each time it is
+     * given one, so a lock sent separately would wipe the ISO and shutter with it.
+     */
+    val exposureLocked: Boolean = false
 ) {
 
     val isFullyAuto: Boolean
         get() = iso == null && exposureTimeNanos == null &&
-            whiteBalance == WhiteBalance.AUTO && manualFocusDistance == null
+            whiteBalance == WhiteBalance.AUTO && manualFocusDistance == null &&
+            !exposureLocked
 
     @OptIn(ExperimentalCamera2Interop::class)
     fun toCaptureRequestOptions(): CaptureRequestOptions {
@@ -57,6 +76,12 @@ data class ManualControls(
                 CaptureRequest.CONTROL_AE_MODE_ON
             )
         }
+
+        // Locking a manual exposure would be a contradiction: it is already fixed.
+        builder.setCaptureRequestOption(
+            CaptureRequest.CONTROL_AE_LOCK,
+            exposureLocked && iso == null && exposureTimeNanos == null
+        )
 
         builder.setCaptureRequestOption(
             CaptureRequest.CONTROL_AWB_MODE,
@@ -88,6 +113,12 @@ data class SensorCapabilities(
     val supportsVideoStabilization: Boolean,
     /** True when the sensor can hand back a DNG as well as a JPEG. */
     val supportsRaw: Boolean,
+    /** True when the lens can be driven to a distance rather than only focused for us. */
+    val supportsManualFocus: Boolean,
+    /** True when the metering can be held where it is. */
+    val supportsExposureLock: Boolean,
+    /** CONTROL_AWB_MODE values this camera accepts. */
+    val awbModes: List<Int>,
     val minFocusDistance: Float,
     /** CONTROL_SCENE_MODE values this camera accepts. */
     val sceneModes: List<Int>
@@ -101,6 +132,9 @@ data class SensorCapabilities(
             supportsManualExposure = false,
             supportsVideoStabilization = false,
             supportsRaw = false,
+            supportsManualFocus = false,
+            supportsExposureLock = false,
+            awbModes = emptyList(),
             minFocusDistance = 0f,
             sceneModes = emptyList()
         )
@@ -142,6 +176,21 @@ data class SensorCapabilities(
                     supportsRaw = capabilities.contains(
                         CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES_RAW
                     ),
+                    // Driving the lens by hand needs both a camera that will turn its
+                    // autofocus off and a lens that reports how close it can get. A fixed
+                    // focus camera reports zero and cannot be driven anywhere.
+                    supportsManualFocus = characteristics
+                        .get(CameraCharacteristics.CONTROL_AF_AVAILABLE_MODES)
+                        ?.contains(CameraCharacteristics.CONTROL_AF_MODE_OFF) == true &&
+                        (characteristics
+                            .get(CameraCharacteristics.LENS_INFO_MINIMUM_FOCUS_DISTANCE)
+                            ?: 0f) > 0f,
+                    supportsExposureLock = characteristics
+                        .get(CameraCharacteristics.CONTROL_AE_LOCK_AVAILABLE) ?: false,
+                    awbModes = characteristics
+                        .get(CameraCharacteristics.CONTROL_AWB_AVAILABLE_MODES)
+                        ?.toList()
+                        .orEmpty(),
                     minFocusDistance = characteristics
                         .get(CameraCharacteristics.LENS_INFO_MINIMUM_FOCUS_DISTANCE) ?: 0f,
                     sceneModes = characteristics

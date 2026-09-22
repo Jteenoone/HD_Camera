@@ -186,4 +186,15 @@
     <string name="video_resolution_unsupported">Bu kamera bu boyutta kayıt yapamaz</string>
     <string name="frame_rate_unsupported">Bu kamera bu kare hızında kayıt yapamaz</string>
     <string name="cd_option_selected">Seçili</string>
+
+    <!-- 06 · Pro manual controls -->
+    <string name="cd_focus_peaking">Odak tepesi</string>
+    <string name="cd_zebra">Zebra parlaklık uyarısı</string>
+    <string name="cd_ae_af_lock">Odağı ve pozlamayı kilitle</string>
+    <string name="cd_auto_parameter">Bu ayarı otomatiğe döndür</string>
+    <string name="cd_reset_all">Tüm ayarları otomatiğe döndür</string>
+    <string name="ev_unsupported">Bu kamerada pozlama telafisi yok</string>
+    <string name="manual_focus_unsupported">Bu kamerada manuel odak yok</string>
+    <string name="wb_presets_unsupported">Bu kamerada yalnızca otomatik beyaz dengesi var</string>
+    <string name="ae_lock_unsupported">Bu kamera pozlamayı kilitleyemez</string>
 </resources>

@@ -215,4 +215,17 @@
         <item name="thumbElevation">2dp</item>
         <item name="tickVisible">false</item>
     </style>
+
+    <!-- A Pro toggle: PEAK, ZEBRA, AE/AF, AUTO, RESET. -->
+    <style name="Widget.HD.ProToggle" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/touch_target</item>
+        <item name="android:minWidth">@dimen/touch_target</item>
+        <item name="android:background">@drawable/bg_pro_chip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.HD.Mono.Chip</item>
+        <item name="android:textSize">11sp</item>
+    </style>
 </resources>

@@ -186,4 +186,15 @@
     <string name="video_resolution_unsupported">यह कैमरा इस आकार में रिकॉर्ड नहीं कर सकता</string>
     <string name="frame_rate_unsupported">यह कैमरा इस फ़्रेम रेट पर रिकॉर्ड नहीं कर सकता</string>
     <string name="cd_option_selected">चयनित</string>
+
+    <!-- 06 · Pro manual controls -->
+    <string name="cd_focus_peaking">फ़ोकस पीकिंग</string>
+    <string name="cd_zebra">ज़ेब्रा हाइलाइट</string>
+    <string name="cd_ae_af_lock">फ़ोकस और एक्सपोज़र लॉक करें</string>
+    <string name="cd_auto_parameter">इस सेटिंग को फिर से ऑटो करें</string>
+    <string name="cd_reset_all">सभी सेटिंग्स को फिर से ऑटो करें</string>
+    <string name="ev_unsupported">इस कैमरे में एक्सपोज़र कंपंसेशन नहीं है</string>
+    <string name="manual_focus_unsupported">इस कैमरे में मैनुअल फ़ोकस नहीं है</string>
+    <string name="wb_presets_unsupported">इस कैमरे में केवल ऑटोमैटिक व्हाइट बैलेंस है</string>
+    <string name="ae_lock_unsupported">यह कैमरा एक्सपोज़र लॉक नहीं कर सकता</string>
 </resources>

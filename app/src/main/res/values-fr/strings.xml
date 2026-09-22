@@ -188,4 +188,15 @@
     <string name="video_resolution_unsupported">Cet appareil ne peut pas filmer dans cette taille</string>
     <string name="frame_rate_unsupported">Cet appareil ne peut pas filmer à cette cadence</string>
     <string name="cd_option_selected">Sélectionné</string>
+
+    <!-- 06 · Pro manual controls -->
+    <string name="cd_focus_peaking">Focus peaking</string>
+    <string name="cd_zebra">Zébrures des hautes lumières</string>
+    <string name="cd_ae_af_lock">Verrouiller la mise au point et l\'exposition</string>
+    <string name="cd_auto_parameter">Remettre ce réglage en automatique</string>
+    <string name="cd_reset_all">Remettre tous les réglages en automatique</string>
+    <string name="ev_unsupported">Cet appareil n\'a pas de correction d\'exposition</string>
+    <string name="manual_focus_unsupported">Cet appareil n\'a pas de mise au point manuelle</string>
+    <string name="wb_presets_unsupported">Cet appareil n\'a que la balance des blancs automatique</string>
+    <string name="ae_lock_unsupported">Cet appareil ne peut pas verrouiller l\'exposition</string>
 </resources>

@@ -2,11 +2,15 @@ package com.example.hd_camera.camera
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.hardware.camera2.CameraCaptureSession
 import android.hardware.camera2.CaptureRequest
+import android.hardware.camera2.CaptureResult
+import android.hardware.camera2.TotalCaptureResult
 import android.util.Log
 import android.util.Range
 import androidx.annotation.OptIn
 import androidx.camera.camera2.interop.Camera2CameraControl
+import androidx.camera.camera2.interop.Camera2Interop
 import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.camera.core.Camera
@@ -156,6 +160,33 @@ class CameraEngine(
     /** Raised when the camera cannot be opened at all: no permission, or no such device. */
     var onCameraError: ((Throwable) -> Unit)? = null
 
+    /**
+     * What the sensor used for the last frame it finished.
+     *
+     * Camera2 has no half-manual exposure: setting either the sensitivity or the exposure
+     * time by hand switches auto-exposure off for both. The Pro screen hands the other half
+     * one of these so the picture carries on from where it was, instead of the driver
+     * keeping whatever it last happened to hold and the frame going black.
+     */
+    @Volatile
+    var lastSensorIso: Int? = null
+        private set
+
+    @Volatile
+    var lastSensorExposureNanos: Long? = null
+        private set
+
+    private val sensorProbe = object : CameraCaptureSession.CaptureCallback() {
+        override fun onCaptureCompleted(
+            session: CameraCaptureSession,
+            request: CaptureRequest,
+            result: TotalCaptureResult
+        ) {
+            result.get(CaptureResult.SENSOR_SENSITIVITY)?.let { lastSensorIso = it }
+            result.get(CaptureResult.SENSOR_EXPOSURE_TIME)?.let { lastSensorExposureNanos = it }
+        }
+    }
+
     val isRecording: Boolean get() = recording != null
 
     fun start(mode: Mode, extensionMode: Int = ExtensionMode.NONE) {
@@ -243,6 +274,7 @@ class CameraEngine(
     }
 
     /** True when a camera is now open. False means the session was left closed. */
+    @OptIn(ExperimentalCamera2Interop::class)
     private fun bind(withTargetFrameRate: Boolean = true, withSnapshot: Boolean = true): Boolean {
         val provider = provider ?: return false
         provider.unbindAll()
@@ -273,12 +305,14 @@ class CameraEngine(
         }
         val aspectRatioStrategy =
             AspectRatioStrategy(aspectRatio, AspectRatioStrategy.FALLBACK_RULE_AUTO)
-        val preview = Preview.Builder()
+        val previewBuilder = Preview.Builder()
             .setResolutionSelector(
                 ResolutionSelector.Builder()
                     .setAspectRatioStrategy(aspectRatioStrategy)
                     .build()
             )
+        Camera2Interop.Extender(previewBuilder).setSessionCaptureCallback(sensorProbe)
+        val preview = previewBuilder
             .build()
             .also { it.surfaceProvider = previewView.surfaceProvider }
 
@@ -649,6 +683,35 @@ class CameraEngine(
 
     fun exposureCompensationRange(): Range<Int> =
         camera?.cameraInfo?.exposureState?.exposureCompensationRange ?: Range(0, 0)
+
+    /**
+     * True when the camera offers exposure compensation at all. A range of (0, 0) is how a
+     * camera says it has none, and a dial with one stop on it is not a dial.
+     */
+    fun supportsExposureCompensation(): Boolean {
+        val range = exposureCompensationRange()
+        return range.upper > range.lower
+    }
+
+    /**
+     * Holds focus and metering on the middle of the frame, or lets them go again. The
+     * auto-cancel that an ordinary tap-to-focus carries is switched off here: a lock that
+     * released itself after a few seconds would not be a lock.
+     */
+    fun lockFocusAndMetering(locked: Boolean) {
+        val control = camera?.cameraControl ?: return
+        if (!locked) {
+            control.cancelFocusAndMetering()
+            return
+        }
+        val point = previewView.meteringPointFactory
+            .createPoint(previewView.width / 2f, previewView.height / 2f)
+        val action = FocusMeteringAction.Builder(point, FocusMeteringAction.FLAG_AF)
+            .addPoint(point, FocusMeteringAction.FLAG_AE)
+            .disableAutoCancel()
+            .build()
+        control.startFocusAndMetering(action)
+    }
 
     fun exposureCompensationStep(): Double =
         camera?.cameraInfo?.exposureState?.exposureCompensationStep?.toDouble() ?: 0.0

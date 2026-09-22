@@ -190,4 +190,15 @@
     <string name="video_resolution_unsupported">Эта камера не снимает в таком размере</string>
     <string name="frame_rate_unsupported">Эта камера не снимает с такой частотой кадров</string>
     <string name="cd_option_selected">Выбрано</string>
+
+    <!-- 06 · Pro manual controls -->
+    <string name="cd_focus_peaking">Подсветка резкости</string>
+    <string name="cd_zebra">Зебра на светах</string>
+    <string name="cd_ae_af_lock">Зафиксировать фокус и экспозицию</string>
+    <string name="cd_auto_parameter">Вернуть эту настройку на автомат</string>
+    <string name="cd_reset_all">Вернуть все настройки на автомат</string>
+    <string name="ev_unsupported">У этой камеры нет экспокоррекции</string>
+    <string name="manual_focus_unsupported">У этой камеры нет ручной фокусировки</string>
+    <string name="wb_presets_unsupported">У этой камеры только автоматический баланс белого</string>
+    <string name="ae_lock_unsupported">Эта камера не может зафиксировать экспозицию</string>
 </resources>

@@ -15,6 +15,12 @@
         app:implementationMode="performance"
         app:scaleType="fillCenter" />
 
+    <!-- Focus peaking and zebra stripes, drawn straight over the picture. -->
+    <com.example.hd_camera.ui.widget.FocusAidOverlayView
+        android:id="@+id/focusAids"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <TextView
         android:id="@+id/tvCameraStatus"
         android:layout_width="wrap_content"
@@ -84,6 +90,40 @@
                     android:layout_width="88dp"
                     android:layout_height="40dp" />
             </LinearLayout>
+        </LinearLayout>
+
+        <!--
+            Viewfinder aids. They belong up here with the histogram: all three are ways of
+            reading the picture rather than settings that change what is captured.
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <TextView
+                android:id="@+id/btnPeaking"
+                style="@style/Widget.HD.ProToggle"
+                android:contentDescription="@string/cd_focus_peaking"
+                android:text="@string/peak" />
+
+            <TextView
+                android:id="@+id/btnZebra"
+                style="@style/Widget.HD.ProToggle"
+                android:layout_marginStart="8dp"
+                android:contentDescription="@string/cd_zebra"
+                android:text="@string/zebra" />
+
+            <TextView
+                android:id="@+id/btnLock"
+                style="@style/Widget.HD.ProToggle"
+                android:layout_marginStart="8dp"
+                android:contentDescription="@string/cd_ae_af_lock"
+                android:text="@string/ae_af" />
         </LinearLayout>
 
         <Space
@@ -173,6 +213,32 @@
                         android:text="@string/iso_max"
                         android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
                         android:textColor="@color/dc_text_faint" />
+                </LinearLayout>
+
+                <!--
+                    Returning a parameter to auto used to mean tapping its chip a second
+                    time, which nothing on screen said. It has a button now, next to one
+                    that puts the whole screen back to automatic.
+                -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btnAuto"
+                        style="@style/Widget.HD.ProToggle"
+                        android:contentDescription="@string/cd_auto_parameter"
+                        android:text="@string/wb_auto" />
+
+                    <TextView
+                        android:id="@+id/btnResetAll"
+                        style="@style/Widget.HD.ProToggle"
+                        android:layout_marginStart="8dp"
+                        android:contentDescription="@string/cd_reset_all"
+                        android:text="@string/reset" />
                 </LinearLayout>
             </LinearLayout>
 

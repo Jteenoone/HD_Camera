@@ -186,4 +186,15 @@
     <string name="video_resolution_unsupported">Diese Kamera kann in dieser Größe nicht aufnehmen</string>
     <string name="frame_rate_unsupported">Diese Kamera kann mit dieser Bildrate nicht aufnehmen</string>
     <string name="cd_option_selected">Ausgewählt</string>
+
+    <!-- 06 · Pro manual controls -->
+    <string name="cd_focus_peaking">Fokus-Peaking</string>
+    <string name="cd_zebra">Zebra-Streifen</string>
+    <string name="cd_ae_af_lock">Fokus und Belichtung sperren</string>
+    <string name="cd_auto_parameter">Diese Einstellung auf automatisch zurücksetzen</string>
+    <string name="cd_reset_all">Alle Einstellungen auf automatisch zurücksetzen</string>
+    <string name="ev_unsupported">Diese Kamera hat keine Belichtungskorrektur</string>
+    <string name="manual_focus_unsupported">Diese Kamera hat keinen manuellen Fokus</string>
+    <string name="wb_presets_unsupported">Diese Kamera hat nur automatischen Weißabgleich</string>
+    <string name="ae_lock_unsupported">Diese Kamera kann die Belichtung nicht sperren</string>
 </resources>

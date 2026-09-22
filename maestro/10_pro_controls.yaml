@@ -1,0 +1,110 @@
+appId: com.example.hd_camera
+name: The Pro screen offers every manual control and can put them all back
+---
+# No clearState: meant for a real phone, so the limits on screen are this camera's own.
+- stopApp
+- launchApp
+- tapOn:
+    id: "btnSkip"
+    optional: true
+- tapOn:
+    id: "btnContinue"
+    optional: true
+- tapOn:
+    id: "btnNotNow"
+    optional: true
+
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
+- tapOn: "PRO"
+- extendedWaitUntil:
+    visible:
+      id: "isoDial"
+    timeout: 15000
+
+# The five parameters, the dial they share, and the histogram.
+- assertVisible:
+    id: "chipIso"
+- assertVisible:
+    id: "chipShutter"
+- assertVisible:
+    id: "chipWb"
+- assertVisible:
+    id: "chipEv"
+- assertVisible:
+    id: "chipFocus"
+- assertVisible:
+    id: "histogram"
+
+# Returning a parameter to automatic is a button now, not a second tap on the chip.
+- assertVisible:
+    id: "btnAuto"
+- assertVisible:
+    id: "btnResetAll"
+
+# The viewfinder aids.
+- assertVisible:
+    id: "btnPeaking"
+- assertVisible:
+    id: "btnZebra"
+- assertVisible:
+    id: "btnLock"
+
+# Each parameter takes over the dial and its legend. A camera that lacks one says so
+# instead of selecting it, so these taps are followed by an assertion that the screen is
+# still alive rather than that the chip became active.
+- tapOn:
+    id: "chipShutter"
+- assertVisible:
+    id: "isoDial"
+- tapOn:
+    id: "chipWb"
+- assertVisible:
+    id: "isoDial"
+- tapOn:
+    id: "chipEv"
+- assertVisible:
+    id: "isoDial"
+- tapOn:
+    id: "chipFocus"
+- assertVisible:
+    id: "isoDial"
+- tapOn:
+    id: "chipIso"
+- assertVisible:
+    id: "isoDial"
+
+# Peaking and zebra draw over the preview; neither may take the screen down with it.
+- tapOn:
+    id: "btnPeaking"
+- tapOn:
+    id: "btnZebra"
+- assertVisible:
+    id: "histogram"
+- tapOn:
+    id: "btnPeaking"
+- tapOn:
+    id: "btnZebra"
+
+# Lock, then let go again.
+- tapOn:
+    id: "btnLock"
+- assertVisible:
+    id: "isoDial"
+- tapOn:
+    id: "btnLock"
+
+# Reset all, and a capture with whatever the camera settled on.
+- tapOn:
+    id: "btnResetAll"
+- assertVisible: "AUTO"
+- tapOn:
+    id: "btnShutter"
+- extendedWaitUntil:
+    visible:
+      id: "isoDial"
+    timeout: 20000
+- assertVisible:
+    id: "chipIso"
