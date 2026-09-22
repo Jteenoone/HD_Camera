@@ -19,10 +19,15 @@ import com.example.hd_camera.ui.language.LanguageFragment
 import com.example.hd_camera.ui.navigateBack
 import com.example.hd_camera.ui.navigateTo
 import com.example.hd_camera.ui.openExternalUrl
+import com.example.hd_camera.ui.options.CameraOption
+import com.example.hd_camera.ui.options.CameraOptionBottomSheet
+import com.example.hd_camera.ui.options.CaptureOptions
 import com.google.android.material.materialswitch.MaterialSwitch
 
 /** Screen 10 · Settings. Every row here changes how the next capture is made. */
-class SettingsFragment : Fragment(R.layout.fragment_settings) {
+class SettingsFragment :
+    Fragment(R.layout.fragment_settings),
+    CameraOptionBottomSheet.Host {
 
     private var binding: FragmentSettingsBinding? = null
 
@@ -67,9 +72,27 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
 
         binding.rowLanguage.setOnClickListener { navigateTo(LanguageFragment()) }
-        binding.rowResolution.setOnClickListener { cycleResolution() }
-        binding.rowFormat.setOnClickListener { cycleFormat() }
-        binding.rowVideo.setOnClickListener { cycleVideoProfile() }
+        binding.rowResolution.setOnClickListener {
+            CameraOptionBottomSheet.show(
+                this,
+                CaptureOptions.KEY_PHOTO_RESOLUTION,
+                R.string.photo_resolution
+            )
+        }
+        binding.rowFormat.setOnClickListener {
+            CameraOptionBottomSheet.show(
+                this,
+                CaptureOptions.KEY_CAPTURE_FORMAT,
+                R.string.format
+            )
+        }
+        binding.rowVideo.setOnClickListener {
+            CameraOptionBottomSheet.show(
+                this,
+                CaptureOptions.KEY_VIDEO_PROFILE,
+                R.string.video
+            )
+        }
 
         // Both documents live on the web; the app links to them rather than shipping a copy.
         binding.rowPrivacy.setOnClickListener { openExternalUrl(R.string.url_privacy_policy) }
@@ -100,30 +123,29 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
     }
 
-    private fun cycleResolution() {
-        val values = PhotoResolution.entries
-        val current = CaptureSettings.photoResolution(requireContext())
-        CaptureSettings.setPhotoResolution(
-            requireContext(),
-            values[(current.ordinal + 1) % values.size]
-        )
-        refreshValues()
+    /**
+     * This screen has no camera open, so the lists it offers come from the sensor's own
+     * characteristics where that is possible — RAW — and are otherwise complete. The
+     * viewfinder, which does have a session, narrows the video profiles further.
+     */
+    override fun cameraOptionsFor(requestKey: String): List<CameraOption> = when (requestKey) {
+        CaptureOptions.KEY_PHOTO_RESOLUTION -> CaptureOptions.photoResolutions(requireContext())
+        CaptureOptions.KEY_CAPTURE_FORMAT -> CaptureOptions.captureFormats(requireContext())
+        CaptureOptions.KEY_VIDEO_PROFILE ->
+            CaptureOptions.videoProfiles(requireContext(), engine = null)
+        else -> emptyList()
     }
 
-    private fun cycleFormat() {
-        val values = CaptureFormat.entries
-        val current = CaptureSettings.format(requireContext())
-        CaptureSettings.setFormat(requireContext(), values[(current.ordinal + 1) % values.size])
-        refreshValues()
-    }
-
-    private fun cycleVideoProfile() {
-        val values = VideoProfile.entries
-        val current = CaptureSettings.videoProfile(requireContext())
-        CaptureSettings.setVideoProfile(
-            requireContext(),
-            values[(current.ordinal + 1) % values.size]
-        )
+    override fun onCameraOptionPicked(requestKey: String, optionId: String) {
+        val context = requireContext()
+        when (requestKey) {
+            CaptureOptions.KEY_PHOTO_RESOLUTION ->
+                CaptureSettings.setPhotoResolution(context, PhotoResolution.of(optionId))
+            CaptureOptions.KEY_CAPTURE_FORMAT ->
+                CaptureSettings.setFormat(context, CaptureFormat.of(optionId))
+            CaptureOptions.KEY_VIDEO_PROFILE ->
+                CaptureSettings.setVideoProfile(context, VideoProfile.of(optionId))
+        }
         refreshValues()
     }
 

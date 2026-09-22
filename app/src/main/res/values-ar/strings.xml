@@ -187,4 +187,11 @@
     <!-- About -->
     <string name="section_about">حول التطبيق</string>
     <string name="about_version">الإصدار %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">نسبة الأبعاد</string>
+    <string name="flash_unsupported">لا تحتوي هذه الكاميرا على فلاش</string>
+    <string name="video_resolution_unsupported">لا تستطيع هذه الكاميرا التسجيل بهذه الدقة</string>
+    <string name="frame_rate_unsupported">لا تستطيع هذه الكاميرا التسجيل بهذا المعدل</string>
+    <string name="cd_option_selected">محدَّد</string>
 </resources>

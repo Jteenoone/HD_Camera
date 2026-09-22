@@ -177,4 +177,11 @@
     <!-- About -->
     <string name="section_about">앱 정보</string>
     <string name="about_version">버전 %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">화면 비율</string>
+    <string name="flash_unsupported">이 카메라에는 플래시가 없습니다</string>
+    <string name="video_resolution_unsupported">이 카메라는 해당 크기로 녹화할 수 없습니다</string>
+    <string name="frame_rate_unsupported">이 카메라는 해당 프레임 레이트로 녹화할 수 없습니다</string>
+    <string name="cd_option_selected">선택됨</string>
 </resources>

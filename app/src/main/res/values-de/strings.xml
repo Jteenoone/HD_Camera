@@ -179,4 +179,11 @@
     <!-- About -->
     <string name="section_about">ÜBER</string>
     <string name="about_version">Version %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">Seitenverhältnis</string>
+    <string name="flash_unsupported">Diese Kamera hat keinen Blitz</string>
+    <string name="video_resolution_unsupported">Diese Kamera kann in dieser Größe nicht aufnehmen</string>
+    <string name="frame_rate_unsupported">Diese Kamera kann mit dieser Bildrate nicht aufnehmen</string>
+    <string name="cd_option_selected">Ausgewählt</string>
 </resources>

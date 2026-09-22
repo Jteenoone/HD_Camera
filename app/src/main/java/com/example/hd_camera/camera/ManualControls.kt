@@ -86,6 +86,8 @@ data class SensorCapabilities(
     val exposureTimeRange: Range<Long>,
     val supportsManualExposure: Boolean,
     val supportsVideoStabilization: Boolean,
+    /** True when the sensor can hand back a DNG as well as a JPEG. */
+    val supportsRaw: Boolean,
     val minFocusDistance: Float,
     /** CONTROL_SCENE_MODE values this camera accepts. */
     val sceneModes: List<Int>
@@ -98,6 +100,7 @@ data class SensorCapabilities(
             exposureTimeRange = Range(125_000L, 1_000_000_000L),
             supportsManualExposure = false,
             supportsVideoStabilization = false,
+            supportsRaw = false,
             minFocusDistance = 0f,
             sceneModes = emptyList()
         )
@@ -136,6 +139,9 @@ data class SensorCapabilities(
                         .get(CameraCharacteristics.CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES)
                         ?.any { it != CameraCharacteristics.CONTROL_VIDEO_STABILIZATION_MODE_OFF }
                         ?: false,
+                    supportsRaw = capabilities.contains(
+                        CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES_RAW
+                    ),
                     minFocusDistance = characteristics
                         .get(CameraCharacteristics.LENS_INFO_MINIMUM_FOCUS_DISTANCE) ?: 0f,
                     sceneModes = characteristics

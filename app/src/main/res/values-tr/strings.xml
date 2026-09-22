@@ -179,4 +179,11 @@
     <!-- About -->
     <string name="section_about">HAKKINDA</string>
     <string name="about_version">Sürüm %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">En boy oranı</string>
+    <string name="flash_unsupported">Bu kamerada flaş yok</string>
+    <string name="video_resolution_unsupported">Bu kamera bu boyutta kayıt yapamaz</string>
+    <string name="frame_rate_unsupported">Bu kamera bu kare hızında kayıt yapamaz</string>
+    <string name="cd_option_selected">Seçili</string>
 </resources>

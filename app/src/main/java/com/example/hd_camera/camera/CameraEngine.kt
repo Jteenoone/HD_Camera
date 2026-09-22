@@ -12,6 +12,7 @@ import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraInfo
 import androidx.camera.core.CameraSelector
+import androidx.camera.core.DynamicRange
 import androidx.camera.core.FocusMeteringAction
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
@@ -479,6 +480,44 @@ class CameraEngine(
         camera?.cameraControl?.enableTorch(enabled)
     }
 
+    /** True when the current camera has a flash to fire. */
+    fun hasFlash(): Boolean = camera?.cameraInfo?.hasFlashUnit() == true
+
+    /** The recording qualities this camera really offers. */
+    fun supportedVideoQualities(): Set<Quality> {
+        val info = camera?.cameraInfo ?: return emptySet()
+        return try {
+            Recorder.getVideoCapabilities(info)
+                .getSupportedQualities(DynamicRange.SDR)
+                .toSet()
+        } catch (error: Exception) {
+            emptySet()
+        }
+    }
+
+    /**
+     * True when the recorder can deliver a clip this tall. An empty answer means the
+     * session is not up yet rather than that the camera refuses: greying the whole list
+     * out on the way in would be worse than offering a profile that later falls back.
+     */
+    fun isVideoHeightSupported(heightPx: Int): Boolean {
+        val qualities = supportedVideoQualities()
+        return qualities.isEmpty() || qualities.contains(qualityFor(heightPx))
+    }
+
+    /** The frame rates the camera will hold, as the ceiling of each range it publishes. */
+    fun supportedFrameRates(): Set<Int> = try {
+        camera?.cameraInfo?.supportedFrameRateRanges.orEmpty().map { it.upper }.toSet()
+    } catch (error: Exception) {
+        emptySet()
+    }
+
+    /** True when the camera publishes a range that reaches [fps]. */
+    fun isFrameRateSupported(fps: Int): Boolean {
+        val rates = supportedFrameRates()
+        return rates.isEmpty() || rates.any { it >= fps }
+    }
+
     /** What the lens that is bound can do, in its own sensor ratios. */
     fun zoomRange(): ClosedFloatingPointRange<Float> {
         val state = camera?.cameraInfo?.zoomState?.value ?: return 1f..1f
@@ -788,9 +827,12 @@ class CameraEngine(
         const val WIDE_LENS_FALLBACK_SCALE = 2f
     }
 
-    private fun VideoProfile.toQuality(): Quality = when (this) {
-        VideoProfile.UHD_60, VideoProfile.UHD_30 -> Quality.UHD
-        VideoProfile.FHD_60, VideoProfile.FHD_30 -> Quality.FHD
-        VideoProfile.HD_30 -> Quality.HD
+    private fun VideoProfile.toQuality(): Quality = qualityFor(heightPx)
+
+    private fun qualityFor(heightPx: Int): Quality = when {
+        heightPx >= 2160 -> Quality.UHD
+        heightPx >= 1080 -> Quality.FHD
+        heightPx >= 720 -> Quality.HD
+        else -> Quality.SD
     }
 }

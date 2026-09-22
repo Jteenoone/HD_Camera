@@ -22,10 +22,11 @@ import com.example.hd_camera.data.ViewfinderPrefs
 import com.example.hd_camera.databinding.FragmentPhotoBinding
 import com.example.hd_camera.databinding.ItemZoomChipBinding
 import com.example.hd_camera.media.MediaRepository
-import com.example.hd_camera.ui.OptionsPopup
 import com.example.hd_camera.ui.applySystemBarPadding
 import com.example.hd_camera.ui.gallery.GalleryFragment
 import com.example.hd_camera.ui.navigateTo
+import com.example.hd_camera.ui.options.CameraOption
+import com.example.hd_camera.ui.options.CameraOptionPopup
 import com.example.hd_camera.ui.settings.SettingsFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -110,14 +111,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         binding.btnFlash.setOnClickListener { view -> showFlashOptions(view) }
         binding.btnTimer.setOnClickListener { view -> showTimerOptions(view) }
 
-        binding.btnRatio.setOnClickListener {
-            wideRatio = !wideRatio
-            binding.btnRatio.setText(if (wideRatio) R.string.ratio_16_9 else R.string.ratio_4_3)
-            engine?.setAspectRatio(
-                if (wideRatio) AspectRatio.RATIO_16_9 else AspectRatio.RATIO_4_3
-            )
-            binding.previewView.postDelayed({ updateResolutionBadge() }, RESOLUTION_SETTLE_MS)
-        }
+        binding.btnRatio.setOnClickListener { view -> showAspectRatioOptions(view) }
 
         binding.btnHdr.setOnClickListener {
             val engine = engine ?: return@setOnClickListener
@@ -131,16 +125,66 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         updateTimerIcon()
     }
 
-    /** Flash has four settings, so it drops a list rather than cycling on every tap. */
+    /**
+     * Flash has four settings, so it drops the whole list rather than advancing one step
+     * per tap. A camera with no flash still offers Off — the setting it is already in —
+     * and says why the other three are out.
+     */
     private fun showFlashOptions(anchor: View) {
-        OptionsPopup.show(
+        CameraOptionPopup.show(
             anchor = anchor,
-            options = FLASH_LABELS.map(::getString),
-            selectedIndex = flashIndex
+            titleRes = R.string.cd_flash,
+            options = FLASH_LABELS.mapIndexed { index, label ->
+                val supported = flashAvailable() ||
+                    FLASH_MODES[index] == ImageCapture.FLASH_MODE_OFF
+                CameraOption(
+                    id = index.toString(),
+                    title = getString(label),
+                    selected = index == flashIndex,
+                    enabled = supported,
+                    disabledReason = getString(R.string.flash_unsupported).takeIf { !supported }
+                )
+            }
         ) { picked ->
-            flashIndex = picked
+            flashIndex = picked.id.toInt()
             applyFlash()
         }
+    }
+
+    /**
+     * Before the session is up the query answers "no flash", which is not the same as a
+     * camera without one, so an unopened camera is given the benefit of the doubt.
+     */
+    private fun flashAvailable(): Boolean = engine?.let { !it.isReady || it.hasFlash() } ?: true
+
+    /** Both stops on this device: 4:3 uses the whole sensor, 16:9 crops it. */
+    private fun showAspectRatioOptions(anchor: View) {
+        CameraOptionPopup.show(
+            anchor = anchor,
+            titleRes = R.string.aspect_ratio,
+            options = listOf(
+                CameraOption(
+                    id = RATIO_4_3,
+                    title = getString(R.string.ratio_4_3),
+                    selected = !wideRatio
+                ),
+                CameraOption(
+                    id = RATIO_16_9,
+                    title = getString(R.string.ratio_16_9),
+                    selected = wideRatio
+                )
+            )
+        ) { picked -> applyAspectRatio(picked.id == RATIO_16_9) }
+    }
+
+    private fun applyAspectRatio(wide: Boolean) {
+        val binding = binding ?: return
+        wideRatio = wide
+        binding.btnRatio.setText(if (wide) R.string.ratio_16_9 else R.string.ratio_4_3)
+        engine?.setAspectRatio(
+            if (wide) AspectRatio.RATIO_16_9 else AspectRatio.RATIO_4_3
+        )
+        binding.previewView.postDelayed({ updateResolutionBadge() }, RESOLUTION_SETTLE_MS)
     }
 
     private fun applyFlash() {
@@ -149,6 +193,16 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         engine.setTorch(mode == TORCH)
         if (mode != TORCH) engine.setFlashMode(mode)
         updateFlashIcon()
+    }
+
+    /**
+     * The front camera usually has no flash. Coming back from one that did, the setting
+     * would otherwise sit on Torch with nothing to light.
+     */
+    private fun syncFlashToCamera() {
+        if (flashAvailable() || flashIndex == 0) return
+        flashIndex = 0
+        applyFlash()
     }
 
     private fun updateFlashIcon() {
@@ -163,12 +217,18 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
     }
 
     private fun showTimerOptions(anchor: View) {
-        OptionsPopup.show(
+        CameraOptionPopup.show(
             anchor = anchor,
-            options = TIMER_LABELS.map(::getString),
-            selectedIndex = timerIndex
+            titleRes = R.string.cd_timer,
+            options = TIMER_LABELS.mapIndexed { index, label ->
+                CameraOption(
+                    id = index.toString(),
+                    title = getString(label),
+                    selected = index == timerIndex
+                )
+            }
         ) { picked ->
-            timerIndex = picked
+            timerIndex = picked.id.toInt()
             updateTimerIcon()
         }
     }
@@ -341,6 +401,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
             binding.previewView.postDelayed({
                 updateResolutionBadge()
                 updateHdrChip()
+                syncFlashToCamera()
             }, RESOLUTION_SETTLE_MS)
         }
         binding.btnLastShot.setOnClickListener { navigateTo(GalleryFragment()) }
@@ -523,6 +584,11 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         }
 
         const val TORCH = -1
+
+        /** Option ids for the aspect-ratio chooser. */
+        const val RATIO_4_3 = "4:3"
+        const val RATIO_16_9 = "16:9"
+
         const val RESOLUTION_SETTLE_MS = 400L
         const val COUNTDOWN_TICK_MS = 260L
 

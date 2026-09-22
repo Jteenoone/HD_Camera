@@ -177,4 +177,11 @@
     <!-- About -->
     <string name="section_about">關於</string>
     <string name="about_version">版本 %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">畫面比例</string>
+    <string name="flash_unsupported">此相機沒有閃光燈</string>
+    <string name="video_resolution_unsupported">此相機無法以該解析度錄影</string>
+    <string name="frame_rate_unsupported">此相機無法以該影格率錄影</string>
+    <string name="cd_option_selected">已選取</string>
 </resources>

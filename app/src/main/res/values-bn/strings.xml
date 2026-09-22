@@ -179,4 +179,11 @@
     <!-- About -->
     <string name="section_about">অ্যাপ সম্পর্কে</string>
     <string name="about_version">সংস্করণ %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">অ্যাসপেক্ট রেশিও</string>
+    <string name="flash_unsupported">এই ক্যামেরায় ফ্ল্যাশ নেই</string>
+    <string name="video_resolution_unsupported">এই ক্যামেরা এই রেজোলিউশনে রেকর্ড করতে পারে না</string>
+    <string name="frame_rate_unsupported">এই ক্যামেরা এই ফ্রেম রেটে রেকর্ড করতে পারে না</string>
+    <string name="cd_option_selected">নির্বাচিত</string>
 </resources>

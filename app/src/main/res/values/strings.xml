@@ -285,4 +285,11 @@
     <!-- About -->
     <string name="section_about">ABOUT</string>
     <string name="about_version">Version %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">Aspect ratio</string>
+    <string name="flash_unsupported">This camera has no flash</string>
+    <string name="video_resolution_unsupported">This camera cannot record at that size</string>
+    <string name="frame_rate_unsupported">This camera cannot record at that frame rate</string>
+    <string name="cd_option_selected">Selected</string>
 </resources>

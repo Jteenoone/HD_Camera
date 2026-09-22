@@ -1,0 +1,101 @@
+appId: com.example.hd_camera
+name: Every setting shows its whole list instead of advancing on each tap
+---
+- stopApp
+- launchApp
+- tapOn:
+    id: "btnSkip"
+    optional: true
+- tapOn:
+    id: "btnContinue"
+    optional: true
+- tapOn:
+    id: "btnNotNow"
+    optional: true
+
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
+
+# Aspect ratio used to flip on every tap. Both stops now arrive at once.
+- tapOn:
+    id: "btnRatio"
+- assertVisible: "Aspect ratio"
+- assertVisible: "4:3"
+- assertVisible: "16:9"
+- tapOn: "16:9"
+- assertVisible:
+    id: "btnRatio"
+
+# Flash offers all four settings in one list.
+- tapOn:
+    id: "btnFlash"
+- assertVisible: "Flash off"
+- assertVisible: "Flash auto"
+- assertVisible: "Flash on"
+- assertVisible: "Torch"
+- tapOn: "Flash auto"
+- assertVisible:
+    id: "btnShutter"
+
+# The self-timer, the same way.
+- tapOn:
+    id: "btnTimer"
+- assertVisible: "Timer off"
+- assertVisible: "3 seconds"
+- assertVisible: "10 seconds"
+- tapOn: "Timer off"
+- assertVisible:
+    id: "btnShutter"
+
+# Video quality is a sheet: every profile the app knows, at once.
+- tapOn: "Video"
+- extendedWaitUntil:
+    visible:
+      id: "btnRecord"
+    timeout: 15000
+- tapOn:
+    id: "btnQuality"
+- assertVisible: "4K · 60fps"
+- assertVisible: "1080p · 30fps"
+- assertVisible: "720p · 30fps"
+- tapOn: "1080p · 30fps"
+- assertVisible:
+    id: "btnRecord"
+- back
+
+# Settings: the three rows that used to cycle now open the same sheet.
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
+- tapOn:
+    id: "btnSettings"
+- assertVisible: "Settings"
+
+- tapOn: "Photo resolution"
+- assertVisible: "Highest"
+- assertVisible: "High"
+- assertVisible: "Standard"
+- tapOn: "Standard"
+- assertVisible:
+    id: "tvResolutionValue"
+
+- tapOn: "Format"
+- assertVisible: "JPEG"
+- assertVisible: "JPEG + RAW"
+- tapOn: "JPEG"
+- assertVisible:
+    id: "tvFormatValue"
+
+- scrollUntilVisible:
+    element:
+      text: "Video"
+    direction: DOWN
+- tapOn: "Video"
+- assertVisible: "4K · 30fps"
+- assertVisible: "1080p · 60fps"
+- tapOn: "1080p · 60fps"
+- assertVisible:
+    id: "tvVideoValue"

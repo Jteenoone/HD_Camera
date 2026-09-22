@@ -30,13 +30,19 @@ import com.example.hd_camera.ui.applySystemBarPadding
 import com.example.hd_camera.ui.gallery.GalleryFragment
 import com.example.hd_camera.ui.navigateTo
 import com.example.hd_camera.ui.navigateToRoot
+import com.example.hd_camera.ui.options.CameraOption
+import com.example.hd_camera.ui.options.CameraOptionBottomSheet
+import com.example.hd_camera.ui.options.CaptureOptions
 import kotlinx.coroutines.launch
 import java.util.Locale
 import kotlin.math.ceil
 import kotlin.math.log10
 
 /** Screen 08 · Video recording. */
-class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
+class VideoFragment :
+    Fragment(R.layout.fragment_video),
+    ShutterKeyHandler,
+    CameraOptionBottomSheet.Host {
 
     private var binding: FragmentVideoBinding? = null
     private var engine: CameraEngine? = null
@@ -86,7 +92,7 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
         bindModeStrip()
 
         binding.btnRecord.setOnClickListener { toggleRecording() }
-        binding.btnQuality.setOnClickListener { ifIdle { cycleProfile() } }
+        binding.btnQuality.setOnClickListener { ifIdle { showQualityOptions() } }
         binding.btnEis.setOnClickListener { ifIdle { toggleStabilization() } }
         binding.btnFlip.setOnClickListener { ifIdle { engine.switchLens() } }
         binding.btnLastShot.setOnClickListener { navigateTo(GalleryFragment()) }
@@ -507,13 +513,31 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
         Manifest.permission.RECORD_AUDIO
     ) == PackageManager.PERMISSION_GRANTED
 
-    private fun cycleProfile() {
-        val profiles = VideoProfile.entries
-        val current = CaptureSettings.videoProfile(requireContext())
-        CaptureSettings.setVideoProfile(
-            requireContext(),
-            profiles[(current.ordinal + 1) % profiles.size]
-        )
+    /**
+     * Resolution and frame rate come as one list, showing every profile the app knows and
+     * saying which of them this camera cannot deliver. Picking one rebinds the session, so
+     * the chip is only live while the recorder is idle.
+     */
+    private fun showQualityOptions() {
+        CameraOptionBottomSheet.show(this, CaptureOptions.KEY_VIDEO_PROFILE, R.string.video)
+    }
+
+    override fun cameraOptionsFor(requestKey: String): List<CameraOption> =
+        if (requestKey == CaptureOptions.KEY_VIDEO_PROFILE) {
+            CaptureOptions.videoProfiles(requireContext(), engine)
+        } else {
+            emptyList()
+        }
+
+    override fun onCameraOptionPicked(requestKey: String, optionId: String) {
+        if (requestKey != CaptureOptions.KEY_VIDEO_PROFILE) return
+        // The sheet can outlive the moment it opened in: a clip started behind it must not
+        // have the session pulled out from under it.
+        if (engine?.recordingState != CameraEngine.RecordingState.IDLE) {
+            showStatus(R.string.locked_while_recording)
+            return
+        }
+        CaptureSettings.setVideoProfile(requireContext(), VideoProfile.of(optionId))
         engine?.start(CameraEngine.Mode.VIDEO)
         updateQualityChip()
     }
