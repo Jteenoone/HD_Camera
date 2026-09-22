@@ -1,18 +1,29 @@
 appId: com.example.hd_camera
 name: Shutter completes without crashing
 ---
+# Clearing state under a process that is still shutting down makes the first screen
+# arrive late, so wait for it rather than tapping into nothing.
+- stopApp
 - launchApp:
     clearState: true
     permissions:
       all: allow
 
 # Onboarding, then straight to the viewfinder.
+- extendedWaitUntil:
+    visible:
+      id: "btnSkip"
+    timeout: 15000
 - tapOn:
     id: "btnSkip"
 - tapOn:
+    id: "btnContinue"
+- tapOn:
     id: "btnNotNow"
-- assertVisible:
-    id: "btnShutter"
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
 
 - tapOn:
     id: "btnShutter"

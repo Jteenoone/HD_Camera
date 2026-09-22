@@ -6,6 +6,9 @@ name: Every screen of the design opens
     id: "btnSkip"
     optional: true
 - tapOn:
+    id: "btnContinue"
+    optional: true
+- tapOn:
     id: "btnNotNow"
     optional: true
 

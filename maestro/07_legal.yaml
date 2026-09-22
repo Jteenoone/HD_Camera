@@ -1,0 +1,54 @@
+appId: com.example.hd_camera
+name: The legal documents are reachable from onboarding and from Settings
+---
+# A previous flow may still be tearing its process down; clearing state under it makes the
+# first screen arrive late, so wait for it rather than tapping into nothing.
+- stopApp
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+
+# Onboarding asks for the camera alone now; the storage row belongs to Android 9 and below.
+- extendedWaitUntil:
+    visible:
+      id: "btnSkip"
+    timeout: 15000
+- tapOn:
+    id: "btnSkip"
+- tapOn:
+    id: "btnContinue"
+- assertVisible: "Camera"
+- assertNotVisible: "Photos & Video"
+
+# Both links sit above the navigation bar and are separately tappable.
+- assertVisible:
+    id: "linkPrivacy"
+- assertVisible:
+    id: "linkTerms"
+- assertVisible: "Privacy Policy"
+- assertVisible: "Terms & Conditions"
+
+# Nothing here gates the camera: the links are optional.
+- tapOn:
+    id: "btnNotNow"
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
+
+# The same two documents have a Legal section at the foot of Settings.
+- tapOn:
+    id: "btnSettings"
+- extendedWaitUntil:
+    visible: "Settings"
+    timeout: 10000
+- scrollUntilVisible:
+    element:
+      text: "Terms & Conditions"
+    direction: DOWN
+- assertVisible: "Privacy Policy"
+- assertVisible:
+    id: "rowPrivacy"
+- assertVisible:
+    id: "rowTerms"

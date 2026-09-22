@@ -1,5 +1,5 @@
 appId: com.example.hd_camera
-name: Record in every video mode
+name: Video screen keeps the shared mode strip and swaps its side buttons
 ---
 - stopApp
 - launchApp
@@ -7,22 +7,70 @@ name: Record in every video mode
     id: "btnSkip"
     optional: true
 - tapOn:
+    id: "btnContinue"
+    optional: true
+- tapOn:
     id: "btnNotNow"
     optional: true
 
-# Normal recording
 - tapOn: "Video"
 - assertVisible:
     id: "btnRecord"
+
+# The strip is the same one the rest of the app uses.
+- assertVisible: "Night"
+- assertVisible: "Portrait"
+- assertVisible: "Beauty"
+- assertVisible: "Photo"
+- assertVisible: "Pro"
+
+# The two removed modes must be gone.
+- assertNotVisible: "Slow-mo"
+- assertNotVisible: "Time-lapse"
+- assertNotVisible: "Photos"
+
+# Idle: the last shot on the left, flip camera on the right.
+- assertVisible:
+    id: "btnLastShot"
+- assertVisible:
+    id: "btnFlip"
+- assertNotVisible:
+    id: "btnPauseResume"
+- assertNotVisible:
+    id: "btnSnapshot"
+
+# Recording: the same two slots become pause and a still capture.
 - tapOn:
     id: "btnRecord"
 - extendedWaitUntil:
     visible:
-      id: "btnRecord"
-    timeout: 6000
+      id: "btnPauseResume"
+    timeout: 8000
+- assertVisible:
+    id: "btnSnapshot"
+- assertNotVisible:
+    id: "btnLastShot"
+- assertNotVisible:
+    id: "btnFlip"
+
+# Pause, resume, then a still without stopping the clip.
+- tapOn:
+    id: "btnPauseResume"
+- tapOn:
+    id: "btnPauseResume"
+- tapOn:
+    id: "btnSnapshot"
+- assertVisible:
+    id: "btnRecord"
+
+# Stopping puts the idle row back.
 - tapOn:
     id: "btnRecord"
 - extendedWaitUntil:
     visible:
-      id: "modeRow"
-    timeout: 10000
+      id: "btnLastShot"
+    timeout: 15000
+- assertVisible:
+    id: "btnFlip"
+- assertVisible:
+    id: "modeRow"

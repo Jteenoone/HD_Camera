@@ -6,6 +6,9 @@ name: Filter swatches and their labels are readable
     id: "btnSkip"
     optional: true
 - tapOn:
+    id: "btnContinue"
+    optional: true
+- tapOn:
     id: "btnNotNow"
     optional: true
 

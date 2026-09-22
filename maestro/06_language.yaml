@@ -1,0 +1,71 @@
+appId: com.example.hd_camera
+name: The language picker changes the app language and survives a restart
+---
+# Clearing state under a process that is still shutting down makes the first screen
+# arrive late, so wait for it rather than tapping into nothing.
+- stopApp
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+
+# Onboarding reaches the picker from both exits; this one takes Skip.
+- extendedWaitUntil:
+    visible:
+      id: "btnSkip"
+    timeout: 15000
+- tapOn:
+    id: "btnSkip"
+- assertVisible: "Language"
+- assertVisible: "English"
+- assertVisible: "Français (French)"
+# The list scrolls: the far end of it is off screen on a phone.
+- scrollUntilVisible:
+    element:
+      text: "日本語 (Japanese)"
+    direction: DOWN
+- scrollUntilVisible:
+    element:
+      text: "Français (French)"
+    direction: UP
+
+- tapOn: "Français (French)"
+# Applying a locale recreates the activity; the picker comes back translated.
+- extendedWaitUntil:
+    visible: "Langue"
+    timeout: 8000
+- tapOn:
+    id: "btnContinue"
+- tapOn:
+    id: "btnNotNow"
+    optional: true
+
+# The viewfinder is French too, not just the picker. Opening the camera can take a moment
+# on a loaded emulator, so this waits instead of asserting on the first frame.
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
+- tapOn:
+    id: "btnSettings"
+- assertVisible: "Réglages"
+- assertVisible: "Langue"
+- assertVisible: "Grille"
+
+# The choice survives a cold start.
+- stopApp
+- launchApp
+- tapOn:
+    id: "btnSettings"
+- assertVisible: "Réglages"
+
+# And Settings can put it back.
+- tapOn: "Langue"
+- assertVisible: "English"
+- tapOn: "English"
+- extendedWaitUntil:
+    visible: "Language"
+    timeout: 8000
+- back
+- assertVisible: "Settings"
+- assertVisible: "Grid overlay"
