@@ -35,6 +35,8 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        // The About row reads the version name from here.
+        buildConfig = true
     }
 }
 

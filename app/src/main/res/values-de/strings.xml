@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">HD Camera</string>
-
     <string name="skip">Überspringen</string>
     <string name="next">Weiter</string>
     <string name="get_started">Loslegen</string>
-    <string name="intro1_eyebrow">HD CAMERA</string>
     <string name="intro1_title">Jede Aufnahme in\nvoller Auflösung</string>
     <string name="intro1_body">48-MP-Fotos, 4K-Video und ein Sucher, der das ganze Bild zeigt — nichts beschnitten, nichts komprimiert.</string>
     <string name="intro2_eyebrow">PRO-MODUS</string>
@@ -18,12 +15,12 @@
     <string name="intro_visual_3">Intro-Bild 3</string>
 
     <string name="language">Sprache</string>
-    <string name="language_body">Wähle die Sprache von HD Camera. Du kannst sie später in den Einstellungen ändern.</string>
+    <string name="language_body">Wähle die Sprache von Pro Cam 4K. Du kannst sie später in den Einstellungen ändern.</string>
     <string name="continue_action">Weiter</string>
 
     <string name="onboarding_image">Begrüßungsbild</string>
     <string name="permissions_title">In HD aufnehmen,\ndirekt im Sucher</string>
-    <string name="permissions_body">HD Camera benötigt Zugriff auf deine Kamera, um Fotos und Videos aufzunehmen.</string>
+    <string name="permissions_body">Pro Cam 4K benötigt Zugriff auf deine Kamera, um Fotos und Videos aufzunehmen.</string>
     <string name="perm_camera">Kamera</string>
     <string name="perm_photos_video">Fotos &amp; Video</string>
     <string name="perm_required">Erforderlich</string>
@@ -178,4 +175,8 @@
     <string name="terms_conditions">Nutzungsbedingungen</string>
     <string name="link_open_failed">Keine App auf diesem Gerät kann diesen Link öffnen</string>
     <string name="cd_opens_in_browser">Wird im Browser geöffnet</string>
+
+    <!-- About -->
+    <string name="section_about">ÜBER</string>
+    <string name="about_version">Version %1$s</string>
 </resources>

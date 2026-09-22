@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">HD Camera</string>
-
     <string name="skip">略過</string>
     <string name="next">下一步</string>
     <string name="get_started">開始使用</string>
-    <string name="intro1_eyebrow">HD CAMERA</string>
     <string name="intro1_title">每一張\n都是完整解析度</string>
     <string name="intro1_body">4800 萬畫素相片、4K 影片，觀景窗完整呈現整個畫面——不裁切，不壓縮。</string>
     <string name="intro2_eyebrow">專業模式</string>
@@ -18,12 +15,12 @@
     <string name="intro_visual_3">導覽圖 3</string>
 
     <string name="language">語言</string>
-    <string name="language_body">選擇 HD Camera 使用的語言。之後可以在設定中變更。</string>
+    <string name="language_body">選擇 Pro Cam 4K 使用的語言。之後可以在設定中變更。</string>
     <string name="continue_action">繼續</string>
 
     <string name="onboarding_image">導覽頁圖片</string>
     <string name="permissions_title">在觀景窗裡\n直接拍高畫質</string>
-    <string name="permissions_body">HD Camera 需要存取你的相機來拍攝相片和影片。</string>
+    <string name="permissions_body">Pro Cam 4K 需要存取你的相機來拍攝相片和影片。</string>
     <string name="perm_camera">相機</string>
     <string name="perm_photos_video">相片與影片</string>
     <string name="perm_required">必要</string>
@@ -176,4 +173,8 @@
     <string name="terms_conditions">服務條款</string>
     <string name="link_open_failed">此裝置上沒有應用程式可以開啟該連結</string>
     <string name="cd_opens_in_browser">在瀏覽器中開啟</string>
+
+    <!-- About -->
+    <string name="section_about">關於</string>
+    <string name="about_version">版本 %1$s</string>
 </resources>

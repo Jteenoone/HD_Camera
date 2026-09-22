@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">HD Camera</string>
+    <!-- The product name is a brand: it stays in Latin script in every locale. -->
+    <string name="app_name" translatable="false">Pro Cam 4K</string>
 
     <!-- 01–03 · Intro -->
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="get_started">Get started</string>
-    <string name="intro1_eyebrow">HD CAMERA</string>
+    <string name="intro1_eyebrow" translatable="false">PRO CAM 4K</string>
     <string name="intro1_title">Every shot at\nfull resolution</string>
     <string name="intro1_body">48 MP stills, 4K video and a viewfinder that shows the whole frame — nothing cropped, nothing compressed.</string>
     <string name="intro2_eyebrow">PRO MODE</string>
@@ -20,7 +21,7 @@
 
     <!-- 03b · Language -->
     <string name="language">Language</string>
-    <string name="language_body">Pick the language HD Camera speaks. You can change it later in Settings.</string>
+    <string name="language_body">Pick the language Pro Cam 4K speaks. You can change it later in Settings.</string>
     <string name="continue_action">Continue</string>
 
     <!--
@@ -47,7 +48,7 @@
     <!-- 04 · Permissions -->
     <string name="onboarding_image">Onboarding image</string>
     <string name="permissions_title">Shoot in HD,\nright in the viewfinder</string>
-    <string name="permissions_body">HD Camera needs access to your camera to shoot photos and video.</string>
+    <string name="permissions_body">Pro Cam 4K needs access to your camera to shoot photos and video.</string>
     <string name="perm_camera">Camera</string>
     <string name="perm_photos_video">Photos &amp; Video</string>
     <string name="perm_required">Required</string>
@@ -280,4 +281,8 @@
     <string name="terms_conditions">Terms &amp; Conditions</string>
     <string name="link_open_failed">No app on this device can open that link</string>
     <string name="cd_opens_in_browser">Opens in your browser</string>
+
+    <!-- About -->
+    <string name="section_about">ABOUT</string>
+    <string name="about_version">Version %1$s</string>
 </resources>

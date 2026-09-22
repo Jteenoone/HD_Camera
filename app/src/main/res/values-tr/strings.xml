@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">HD Camera</string>
-
     <string name="skip">Atla</string>
     <string name="next">İleri</string>
     <string name="get_started">Başla</string>
-    <string name="intro1_eyebrow">HD CAMERA</string>
     <string name="intro1_title">Her kare\ntam çözünürlükte</string>
     <string name="intro1_body">48 MP fotoğraf, 4K video ve kadrajın tamamını gösteren bir vizör — hiçbir şey kırpılmaz, hiçbir şey sıkıştırılmaz.</string>
     <string name="intro2_eyebrow">PRO MODU</string>
@@ -18,12 +15,12 @@
     <string name="intro_visual_3">Tanıtım görseli 3</string>
 
     <string name="language">Dil</string>
-    <string name="language_body">HD Camera\'nın konuştuğu dili seç. Daha sonra Ayarlar\'dan değiştirebilirsin.</string>
+    <string name="language_body">Pro Cam 4K\'nın konuştuğu dili seç. Daha sonra Ayarlar\'dan değiştirebilirsin.</string>
     <string name="continue_action">Devam</string>
 
     <string name="onboarding_image">Karşılama görseli</string>
     <string name="permissions_title">HD çek,\ndoğrudan vizörde</string>
-    <string name="permissions_body">HD Camera\'nın fotoğraf ve video çekmek için kameraya erişmesi gerekiyor.</string>
+    <string name="permissions_body">Pro Cam 4K\'nın fotoğraf ve video çekmek için kameraya erişmesi gerekiyor.</string>
     <string name="perm_camera">Kamera</string>
     <string name="perm_photos_video">Fotoğraf ve video</string>
     <string name="perm_required">Gerekli</string>
@@ -178,4 +175,8 @@
     <string name="terms_conditions">Şartlar ve Koşullar</string>
     <string name="link_open_failed">Bu cihazda o bağlantıyı açabilecek bir uygulama yok</string>
     <string name="cd_opens_in_browser">Tarayıcınızda açılır</string>
+
+    <!-- About -->
+    <string name="section_about">HAKKINDA</string>
+    <string name="about_version">Sürüm %1$s</string>
 </resources>

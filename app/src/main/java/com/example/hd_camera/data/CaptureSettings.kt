@@ -54,7 +54,15 @@ object CaptureSettings {
     private const val KEY_FORMAT = "capture_format"
     private const val KEY_VIDEO_PROFILE = "video_profile"
 
-    /** Everything this app writes goes here, under the shared DCIM tree. */
+    /**
+     * Everything this app writes goes here, under the shared DCIM tree.
+     *
+     * The folder keeps its old name through the rebrand on purpose: renaming it would
+     * strand every photo already taken in a folder the Gallery no longer reads. Moving to
+     * DCIM/ProCam4K is its own piece of work — write new captures to the new folder, read
+     * both while the old one still has anything in it, and offer to move what is there —
+     * and is left for a later phase.
+     */
     const val RELATIVE_PATH = "DCIM/HDCamera"
 
     private fun prefs(context: Context): SharedPreferences =
