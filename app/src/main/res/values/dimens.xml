@@ -11,8 +11,14 @@
     <dimen name="shutter_size">78dp</dimen>
     <dimen name="record_inner_idle">56dp</dimen>
     <dimen name="record_inner_recording">32dp</dimen>
-    <dimen name="zoom_chip">44dp</dimen>
+    <!-- A round chip is its own touch target, so it holds the 48dp minimum. -->
+    <dimen name="zoom_chip">48dp</dimen>
     <dimen name="zoom_chip_active">48dp</dimen>
+    <!-- The Photo screen's black control panel. -->
+    <dimen name="photo_panel_top_padding">18dp</dimen>
+    <dimen name="photo_panel_bottom_padding">24dp</dimen>
+    <dimen name="photo_panel_gap">18dp</dimen>
+
     <!-- Sits below the resolution badge rather than over the middle of the frame. -->
     <dimen name="countdown_size">140dp</dimen>
     <dimen name="countdown_top_margin">56dp</dimen>

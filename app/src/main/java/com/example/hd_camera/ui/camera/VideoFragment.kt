@@ -335,6 +335,8 @@ class VideoFragment :
             val stop = zoomStops.getOrNull(index) ?: continue
             val active = ZoomMath.matches(zoomRatio, stop)
             val reachable = ZoomMath.reachable(stop, range)
+            // This screen has no black panel behind it, so its chips keep the scrim
+            // they need to stay readable over a live picture.
             chip.setBackgroundResource(
                 if (active) R.drawable.bg_zoom_chip_active else R.drawable.bg_round_scrim_50
             )

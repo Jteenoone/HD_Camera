@@ -1,274 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Screen 05 · Photo viewfinder -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    Screen 05 · Photo viewfinder.
+
+    Two bands, not one. The viewfinder is its own box and the reticle sits directly inside
+    it, so a tap at (x, y) on the preview is the same (x, y) in the view that draws the
+    focus box. Underneath, the controls get a solid black panel rather than a scrim
+    floating over the picture: on a bright scene the scrim left white buttons on white,
+    and the shutter is not something to go hunting for.
+
+    The Video screen deliberately does not do this. It stays edge to edge with its controls
+    over the image, because a clip is framed right up to the edge of what is recorded.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dc_bg">
+    android:background="@color/black"
+    android:orientation="vertical">
 
-    <androidx.camera.view.PreviewView
-        android:id="@+id/previewView"
+    <!-- The viewfinder, and everything drawn over it. -->
+    <FrameLayout
+        android:id="@+id/viewfinder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/dc_bg"
-        app:implementationMode="performance"
-        app:scaleType="fillCenter" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/tvCameraStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAppearance="@style/TextAppearance.HD.Caption"
-        android:textColor="@color/dc_text_dim_2"
-        android:visibility="gone"
-        tools:visibility="visible"
-        tools:text="Viewfinder" />
+        <!--
+            fillCenter, so the picture covers the whole box. The grid and the focus reticle
+            are laid over the box, not over the picture, so letterboxing the preview inside
+            it would leave grid lines ruled across bare black. Framing the full sensor
+            output instead needs the overlays clipped to the picture's own rect, which is
+            its own piece of work.
+        -->
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            app:implementationMode="performance"
+            app:scaleType="fillCenter" />
 
-    <com.example.hd_camera.ui.widget.GridOverlayView
-        android:id="@+id/gridOverlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <com.example.hd_camera.ui.widget.GridOverlayView
+            android:id="@+id/gridOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvCameraStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="@style/TextAppearance.HD.Caption"
+            android:textColor="@color/dc_text_dim_2"
+            android:visibility="gone"
+            tools:text="Viewfinder"
+            tools:visibility="visible" />
 
-        <!-- Top control row -->
+        <!--
+            The reticle is a direct child of the viewfinder so it shares the preview's
+            bounds exactly; the fragment positions it from the touch point.
+        -->
         <LinearLayout
-            android:id="@+id/topBar"
+            android:id="@+id/focusIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="@string/af_ae"
+                android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
+                android:textColor="@color/dc_amber"
+                android:textSize="11sp" />
+
+            <View
+                android:layout_width="84dp"
+                android:layout_height="84dp"
+                android:background="@drawable/bg_focus_box" />
+        </LinearLayout>
+
+        <!--
+            The ratio a pinch is landing on. It belongs over the picture, where the fingers
+            are, not down in a panel they are nowhere near.
+        -->
+        <TextView
+            android:id="@+id/tvZoomRatio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_round_scrim_62"
+            android:paddingStart="14dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="6dp"
+            android:textAppearance="@style/TextAppearance.HD.Mono.Chip"
+            android:visibility="gone"
+            tools:text="2.4×"
+            tools:visibility="visible" />
+
+        <!--
+            The top row and the badge under it. They share a column so the badge clears the
+            row whatever the status bar inset turns out to be.
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/topBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_scrim_top_55"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="14dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/btnFlash"
+                    style="@style/Widget.HD.ViewfinderIcon"
+                    android:contentDescription="@string/cd_flash"
+                    android:src="@drawable/ic_bolt"
+                    app:tint="@color/dc_amber" />
+
+                <ImageView
+                    android:id="@+id/btnTimer"
+                    style="@style/Widget.HD.ViewfinderIcon"
+                    android:layout_marginStart="8dp"
+                    android:contentDescription="@string/cd_timer"
+                    android:src="@drawable/ic_timer" />
+
+                <TextView
+                    android:id="@+id/btnRatio"
+                    style="@style/Widget.HD.ViewfinderChip"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/ratio_4_3" />
+
+                <TextView
+                    android:id="@+id/btnHdr"
+                    style="@style/Widget.HD.ViewfinderChip"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_vf_icon_accent"
+                    android:text="@string/hdr"
+                    android:textColor="@color/dc_on_accent" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/btnSettings"
+                    style="@style/Widget.HD.ViewfinderIcon"
+                    android:contentDescription="@string/cd_settings"
+                    android:src="@drawable/ic_settings" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp">
+
+                <TextView
+                    android:id="@+id/tvResolutionBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:background="@drawable/bg_vf_chip_9"
+                    android:paddingStart="10dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="6dp"
+                    android:text="@string/mp_48"
+                    android:textAppearance="@style/TextAppearance.HD.Mono.Chip"
+                    android:textSize="12sp" />
+
+                <!--
+                    The self-timer used to count down in the resolution badge, which is far
+                    too small to read at arm's length. It gets its own scrim near the top of
+                    the frame: big enough to read, and clear of the middle so it never
+                    covers the subject being framed.
+                -->
+                <TextView
+                    android:id="@+id/tvCountdown"
+                    android:layout_width="@dimen/countdown_size"
+                    android:layout_height="@dimen/countdown_size"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_marginTop="@dimen/countdown_top_margin"
+                    android:background="@drawable/bg_round_scrim_55"
+                    android:contentDescription="@string/cd_countdown"
+                    android:fontFamily="@font/ibm_plex_sans_semibold"
+                    android:gravity="center"
+                    android:shadowColor="@color/dc_shadow"
+                    android:shadowDx="0"
+                    android:shadowDy="2"
+                    android:shadowRadius="8"
+                    android:text="@string/countdown_sample"
+                    android:textColor="@color/dc_text"
+                    android:textSize="64sp"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- The control panel: solid black, so nothing in it competes with the picture. -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/photo_panel_top_padding"
+        android:paddingBottom="@dimen/photo_panel_bottom_padding">
+
+        <LinearLayout
+            android:id="@+id/zoomChips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" />
+
+        <!-- Capture mode strip -->
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_scrim_top_55"
+            android:layout_marginTop="@dimen/photo_panel_gap"
+            android:clipToPadding="false"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/modeRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <!-- Shutter row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/photo_panel_gap"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="14dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="14dp"
-            android:paddingBottom="16dp">
+            android:paddingStart="28dp"
+            android:paddingEnd="28dp">
 
             <ImageView
-                android:id="@+id/btnFlash"
-                style="@style/Widget.HD.ViewfinderIcon"
-                android:contentDescription="@string/cd_flash"
-                android:src="@drawable/ic_bolt"
-                app:tint="@color/dc_amber" />
-
-            <ImageView
-                android:id="@+id/btnTimer"
-                style="@style/Widget.HD.ViewfinderIcon"
-                android:layout_marginStart="8dp"
-                android:contentDescription="@string/cd_timer"
-                android:src="@drawable/ic_timer" />
-
-            <TextView
-                android:id="@+id/btnRatio"
-                style="@style/Widget.HD.ViewfinderChip"
-                android:layout_marginStart="8dp"
-                android:text="@string/ratio_4_3" />
-
-            <TextView
-                android:id="@+id/btnHdr"
-                style="@style/Widget.HD.ViewfinderChip"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/bg_vf_icon_accent"
-                android:text="@string/hdr"
-                android:textColor="@color/dc_on_accent" />
+                android:id="@+id/btnLastShot"
+                android:layout_width="@dimen/vf_side_button"
+                android:layout_height="@dimen/vf_side_button"
+                android:background="@drawable/bg_thumb_border"
+                android:contentDescription="@string/cd_last_shot"
+                android:scaleType="centerCrop" />
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1" />
 
-            <ImageView
-                android:id="@+id/btnSettings"
-                style="@style/Widget.HD.ViewfinderIcon"
-                android:contentDescription="@string/cd_settings"
-                android:src="@drawable/ic_settings" />
-        </LinearLayout>
-
-        <!-- Frame area: resolution badge, focus reticle, self-timer countdown -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingStart="16dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="12dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|end"
-                android:background="@drawable/bg_vf_chip_9"
-                android:paddingStart="10dp"
-                android:paddingTop="6dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="6dp"
-                android:id="@+id/tvResolutionBadge"
-                android:text="@string/mp_48"
-                android:textAppearance="@style/TextAppearance.HD.Mono.Chip"
-                android:textSize="12sp" />
-
-            <LinearLayout
-                android:id="@+id/focusIndicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="6dp"
-                    android:text="@string/af_ae"
-                    android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
-                    android:textColor="@color/dc_amber"
-                    android:textSize="11sp" />
+            <FrameLayout
+                android:id="@+id/btnShutter"
+                android:layout_width="@dimen/shutter_size"
+                android:layout_height="@dimen/shutter_size"
+                android:background="@drawable/bg_shutter_ring_white"
+                android:contentDescription="@string/cd_shutter"
+                android:padding="8dp">
 
                 <View
-                    android:layout_width="84dp"
-                    android:layout_height="84dp"
-                    android:background="@drawable/bg_focus_box" />
-            </LinearLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_shutter_inner_white" />
+            </FrameLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
 
             <!--
-                The self-timer used to count down in the resolution badge, which is far too
-                small to read at arm's length. It gets its own scrim near the top of the
-                frame: big enough to read at arm's length, and clear of the middle so it
-                never covers the subject being framed.
+                On the black panel the old translucent scrim was invisible, so the switch
+                button gets the same solid surface the Settings icons use.
             -->
-            <TextView
-                android:id="@+id/tvCountdown"
-                android:layout_width="@dimen/countdown_size"
-                android:layout_height="@dimen/countdown_size"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_marginTop="@dimen/countdown_top_margin"
-                android:background="@drawable/bg_round_scrim_55"
-                android:contentDescription="@string/cd_countdown"
-                android:fontFamily="@font/ibm_plex_sans_semibold"
-                android:gravity="center"
-                android:shadowColor="@color/dc_shadow"
-                android:shadowDx="0"
-                android:shadowDy="2"
-                android:shadowRadius="8"
-                android:text="@string/countdown_sample"
-                android:textColor="@color/dc_text"
-                android:textSize="64sp"
-                android:visibility="gone"
-                tools:visibility="visible" />
-        </FrameLayout>
-
-        <!-- Bottom controls -->
-        <LinearLayout
-            android:id="@+id/bottomBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_scrim_bottom_72"
-            android:orientation="vertical"
-            android:paddingTop="14dp"
-            android:paddingBottom="22dp">
-
-            <!-- The ratio a pinch is landing on; gone again once the fingers leave. -->
-            <TextView
-                android:id="@+id/tvZoomRatio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/bg_vf_chip_9"
-                android:paddingStart="12dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="12dp"
-                android:paddingBottom="5dp"
-                android:textAppearance="@style/TextAppearance.HD.Mono.Chip"
-                android:visibility="gone"
-                tools:text="2.4×"
-                tools:visibility="visible" />
-
-            <LinearLayout
-                android:id="@+id/zoomChips"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" />
-
-            <!-- Capture mode strip -->
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:clipToPadding="false"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:id="@+id/modeRow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="bottom"
-                    android:orientation="horizontal" />
-            </HorizontalScrollView>
-
-            <!-- Shutter row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="28dp"
-                android:paddingEnd="28dp">
-
-                <ImageView
-                    android:id="@+id/btnLastShot"
-                    android:layout_width="@dimen/vf_side_button"
-                    android:layout_height="@dimen/vf_side_button"
-                    android:background="@drawable/bg_thumb_border"
-                    android:contentDescription="@string/cd_last_shot"
-                    android:scaleType="centerCrop" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
-                <FrameLayout
-                    android:id="@+id/btnShutter"
-                    android:layout_width="@dimen/shutter_size"
-                    android:layout_height="@dimen/shutter_size"
-                    android:background="@drawable/bg_shutter_ring_white"
-                    android:contentDescription="@string/cd_shutter"
-                    android:padding="8dp">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_shutter_inner_white" />
-                </FrameLayout>
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
-                <ImageView
-                    android:id="@+id/btnFlip"
-                    android:layout_width="@dimen/vf_side_button"
-                    android:layout_height="@dimen/vf_side_button"
-                    android:background="@drawable/bg_round_scrim_55"
-                    android:contentDescription="@string/cd_switch_camera"
-                    android:padding="14dp"
-                    android:src="@drawable/ic_flip_camera"
-                    app:tint="@color/dc_text"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/btnFlip"
+                android:layout_width="@dimen/vf_side_button"
+                android:layout_height="@dimen/vf_side_button"
+                android:background="@drawable/bg_surface_icon"
+                android:contentDescription="@string/cd_switch_camera"
+                android:padding="14dp"
+                android:src="@drawable/ic_flip_camera"
+                app:tint="@color/dc_text" />
         </LinearLayout>
     </LinearLayout>
-</FrameLayout>
+</LinearLayout>

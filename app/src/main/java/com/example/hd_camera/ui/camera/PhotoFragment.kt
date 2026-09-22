@@ -315,8 +315,10 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
             val stop = zoomStops.getOrNull(index) ?: continue
             val active = ZoomMath.matches(zoomRatio, stop)
             val reachable = ZoomMath.reachable(stop, range)
+            // On the black panel a translucent scrim reads as nothing at all, so an
+            // unselected chip gets a solid surface of its own.
             chip.setBackgroundResource(
-                if (active) R.drawable.bg_zoom_chip_active else R.drawable.bg_round_scrim_50
+                if (active) R.drawable.bg_zoom_chip_active else R.drawable.bg_zoom_chip
             )
             chip.setTextColor(
                 ContextCompat.getColor(
@@ -380,12 +382,17 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         )
     }
 
+    /**
+     * [x] and [y] are where the finger landed on the preview. The reticle is centred in the
+     * viewfinder, which is the preview's own box, so the offset from the middle is all it
+     * takes to put the box under the fingertip.
+     */
     private fun showFocusIndicatorAt(x: Float, y: Float) {
         val binding = binding ?: return
         val indicator = binding.focusIndicator
-        val parent = indicator.parent as? View ?: return
-        indicator.translationX = x - parent.width / 2f
-        indicator.translationY = y - parent.height / 2f - indicator.height / 2f
+        val frame = binding.viewfinder
+        indicator.translationX = x - frame.width / 2f
+        indicator.translationY = y - frame.height / 2f
         indicator.alpha = 1f
         indicator.animate().cancel()
         indicator.animate().alpha(0.35f).setStartDelay(1_200).setDuration(400).start()
@@ -525,8 +532,8 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
                 CaptureMode(R.string.mode_pro) { navigateTo(ProFragment()) }
             ),
             activeIndex = activeModeIndex,
-            gapDp = 15,
-            textSizeSp = 12f,
+            gapDp = MODE_STRIP_GAP_DP,
+            textSizeSp = MODE_STRIP_TEXT_SP,
             letterSpacing = 0.08f
         )
     }
@@ -594,6 +601,10 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
 
         /** How long the pinch readout stays up once the fingers have left. */
         const val ZOOM_READOUT_MS = 900L
+
+        /** The strip sits on its own panel now, so it is no longer squeezed for room. */
+        const val MODE_STRIP_GAP_DP = 18
+        const val MODE_STRIP_TEXT_SP = 13f
 
         /** What a control that the camera cannot honour right now looks like. */
         const val DISABLED_ALPHA = 0.4f
