@@ -20,18 +20,19 @@
 
         <ImageView
             android:id="@+id/imgHero"
+            android:src="@drawable/permission_camera_access"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@null"
             android:scaleType="centerCrop" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/onboarding_image"
-            android:textAppearance="@style/TextAppearance.HD.Caption"
-            android:textColor="@color/dc_text_dim_2" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:text="@string/onboarding_image"-->
+<!--            android:textAppearance="@style/TextAppearance.HD.Caption"-->
+<!--            android:textColor="@color/dc_text_dim_2" />-->
     </FrameLayout>
 
     <ImageView
