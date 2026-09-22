@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">HD Camera</string>
-
     <string name="skip">تخطٍّ</string>
     <string name="next">التالي</string>
     <string name="get_started">ابدأ الآن</string>
-    <string name="intro1_eyebrow">HD CAMERA</string>
     <string name="intro1_title">كل لقطة\nبدقة كاملة</string>
     <string name="intro1_body">صور بدقة 48 ميجابكسل، وفيديو 4K، ومعاين يعرض الإطار كاملاً — بلا اقتطاع ولا ضغط.</string>
     <string name="intro2_eyebrow">الوضع الاحترافي</string>
@@ -18,12 +15,12 @@
     <string name="intro_visual_3">صورة تمهيدية 3</string>
 
     <string name="language">اللغة</string>
-    <string name="language_body">اختر اللغة التي يخاطبك بها HD Camera. يمكنك تغييرها لاحقًا من الإعدادات.</string>
+    <string name="language_body">اختر اللغة التي يخاطبك بها Pro Cam 4K. يمكنك تغييرها لاحقًا من الإعدادات.</string>
     <string name="continue_action">متابعة</string>
 
     <string name="onboarding_image">صورة ترحيبية</string>
     <string name="permissions_title">صوّر بدقة عالية،\nمن المعاين مباشرةً</string>
-    <string name="permissions_body">يحتاج HD Camera إلى الوصول إلى الكاميرا لالتقاط الصور وتسجيل الفيديو.</string>
+    <string name="permissions_body">يحتاج Pro Cam 4K إلى الوصول إلى الكاميرا لالتقاط الصور وتسجيل الفيديو.</string>
     <string name="perm_camera">الكاميرا</string>
     <string name="perm_photos_video">الصور والفيديو</string>
     <string name="perm_required">مطلوب</string>
@@ -186,4 +183,8 @@
     <string name="terms_conditions">الشروط والأحكام</string>
     <string name="link_open_failed">لا يوجد تطبيق على هذا الجهاز يمكنه فتح هذا الرابط</string>
     <string name="cd_opens_in_browser">يُفتح في متصفحك</string>
+
+    <!-- About -->
+    <string name="section_about">حول التطبيق</string>
+    <string name="about_version">الإصدار %1$s</string>
 </resources>

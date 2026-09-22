@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HD_Camera"
+rootProject.name = "ProCam4K"
 include(":app")
  

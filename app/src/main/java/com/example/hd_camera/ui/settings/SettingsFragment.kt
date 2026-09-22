@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.example.hd_camera.BuildConfig
 import com.example.hd_camera.R
 import com.example.hd_camera.data.CaptureFormat
 import com.example.hd_camera.data.CaptureSettings
@@ -73,6 +74,10 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         // Both documents live on the web; the app links to them rather than shipping a copy.
         binding.rowPrivacy.setOnClickListener { openExternalUrl(R.string.url_privacy_policy) }
         binding.rowTerms.setOnClickListener { openExternalUrl(R.string.url_terms_conditions) }
+
+        // The one row that never changes while the screen is open.
+        binding.tvVersionValue.text =
+            getString(R.string.about_version, BuildConfig.VERSION_NAME)
 
         refreshValues()
     }

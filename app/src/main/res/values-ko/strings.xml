@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">HD Camera</string>
-
     <string name="skip">건너뛰기</string>
     <string name="next">다음</string>
     <string name="get_started">시작하기</string>
-    <string name="intro1_eyebrow">HD CAMERA</string>
     <string name="intro1_title">모든 사진을\n최대 해상도로</string>
     <string name="intro1_body">48 MP 사진, 4K 영상, 그리고 화면 전체를 그대로 보여 주는 뷰파인더. 잘리지도, 압축되지도 않습니다.</string>
     <string name="intro2_eyebrow">프로 모드</string>
@@ -18,12 +15,12 @@
     <string name="intro_visual_3">인트로 이미지 3</string>
 
     <string name="language">언어</string>
-    <string name="language_body">HD Camera가 사용할 언어를 고르세요. 나중에 설정에서 바꿀 수 있습니다.</string>
+    <string name="language_body">Pro Cam 4K가 사용할 언어를 고르세요. 나중에 설정에서 바꿀 수 있습니다.</string>
     <string name="continue_action">계속</string>
 
     <string name="onboarding_image">온보딩 이미지</string>
     <string name="permissions_title">뷰파인더에서 바로\nHD로 촬영하세요</string>
-    <string name="permissions_body">사진과 동영상을 촬영하려면 HD Camera에 카메라 접근 권한이 필요합니다.</string>
+    <string name="permissions_body">사진과 동영상을 촬영하려면 Pro Cam 4K에 카메라 접근 권한이 필요합니다.</string>
     <string name="perm_camera">카메라</string>
     <string name="perm_photos_video">사진 및 동영상</string>
     <string name="perm_required">필수</string>
@@ -176,4 +173,8 @@
     <string name="terms_conditions">이용약관</string>
     <string name="link_open_failed">이 기기에서 해당 링크를 열 수 있는 앱이 없습니다</string>
     <string name="cd_opens_in_browser">브라우저에서 열립니다</string>
+
+    <!-- About -->
+    <string name="section_about">앱 정보</string>
+    <string name="about_version">버전 %1$s</string>
 </resources>

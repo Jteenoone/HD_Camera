@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">HD Camera</string>
-
     <string name="skip">スキップ</string>
     <string name="next">次へ</string>
     <string name="get_started">はじめる</string>
-    <string name="intro1_eyebrow">HD CAMERA</string>
     <string name="intro1_title">すべての一枚を\nフル解像度で</string>
     <string name="intro1_body">48 MP の静止画、4K 動画、そして画面いっぱいの画角を映すファインダー。切り取りも圧縮もありません。</string>
     <string name="intro2_eyebrow">プロモード</string>
@@ -18,12 +15,12 @@
     <string name="intro_visual_3">イントロ画像 3</string>
 
     <string name="language">言語</string>
-    <string name="language_body">HD Camera の表示言語を選んでください。あとから設定で変更できます。</string>
+    <string name="language_body">Pro Cam 4K の表示言語を選んでください。あとから設定で変更できます。</string>
     <string name="continue_action">続ける</string>
 
     <string name="onboarding_image">オンボーディング画像</string>
     <string name="permissions_title">ファインダーから\nそのまま HD 撮影</string>
-    <string name="permissions_body">写真と動画を撮影するため、HD Camera はカメラへのアクセスを必要とします。</string>
+    <string name="permissions_body">写真と動画を撮影するため、Pro Cam 4K はカメラへのアクセスを必要とします。</string>
     <string name="perm_camera">カメラ</string>
     <string name="perm_photos_video">写真と動画</string>
     <string name="perm_required">必須</string>
@@ -176,4 +173,8 @@
     <string name="terms_conditions">利用規約</string>
     <string name="link_open_failed">この端末にはそのリンクを開けるアプリがありません</string>
     <string name="cd_opens_in_browser">ブラウザで開きます</string>
+
+    <!-- About -->
+    <string name="section_about">アプリについて</string>
+    <string name="about_version">バージョン %1$s</string>
 </resources>

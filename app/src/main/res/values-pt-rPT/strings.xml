@@ -1,10 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name" tools:ignore="Typos">HD Camera</string>
-
     <string name="skip">Ignorar</string>
     <string name="next">Seguinte</string>
     <string name="get_started">Começar</string>
-    <string name="intro1_eyebrow">HD CAMERA</string>
     <string name="intro1_title">Cada fotografia em\nresolução total</string>
     <string name="intro1_body">Fotografias de 48 MP, vídeo 4K e um visor que mostra o enquadramento inteiro — nada cortado, nada comprimido.</string>
     <string name="intro2_eyebrow">MODO PRO</string>
@@ -18,12 +15,12 @@
     <string name="intro_visual_3">Imagem de introdução 3</string>
 
     <string name="language">Idioma</string>
-    <string name="language_body" tools:ignore="Typos">Escolha o idioma em que a HD Camera lhe fala. Pode alterá-lo depois nas Definições.</string>
+    <string name="language_body" tools:ignore="Typos">Escolha o idioma em que a Pro Cam 4K lhe fala. Pode alterá-lo depois nas Definições.</string>
     <string name="continue_action">Continuar</string>
 
     <string name="onboarding_image">Imagem de boas-vindas</string>
     <string name="permissions_title">Grave em HD,\ndireto no visor</string>
-    <string name="permissions_body" tools:ignore="Typos">A HD Camera precisa de aceder à sua câmara para tirar fotografias e gravar vídeo.</string>
+    <string name="permissions_body" tools:ignore="Typos">A Pro Cam 4K precisa de aceder à sua câmara para tirar fotografias e gravar vídeo.</string>
     <string name="perm_camera">Câmara</string>
     <string name="perm_photos_video">Fotografias e vídeo</string>
     <string name="perm_required">Obrigatório</string>
@@ -180,4 +177,8 @@
     <string name="terms_conditions">Termos e Condições</string>
     <string name="link_open_failed">Nenhuma app deste dispositivo consegue abrir essa ligação</string>
     <string name="cd_opens_in_browser">Abre no seu navegador</string>
+
+    <!-- About -->
+    <string name="section_about">SOBRE</string>
+    <string name="about_version">Versão %1$s</string>
 </resources>

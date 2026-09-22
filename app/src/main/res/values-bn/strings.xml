@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">HD Camera</string>
-
     <string name="skip">এড়িয়ে যান</string>
     <string name="next">পরবর্তী</string>
     <string name="get_started">শুরু করুন</string>
-    <string name="intro1_eyebrow">এইচডি ক্যামেরা</string>
     <string name="intro1_title">প্রতিটি ছবি\nপূর্ণ রেজোলিউশনে</string>
     <string name="intro1_body">48 MP স্থিরচিত্র, 4K ভিডিও আর এমন একটি ভিউফাইন্ডার যা পুরো ফ্রেম দেখায় — কিছুই কাটা নয়, কিছুই সংকুচিত নয়।</string>
     <string name="intro2_eyebrow">প্রো মোড</string>
@@ -18,12 +15,12 @@
     <string name="intro_visual_3">ইন্ট্রো ছবি ৩</string>
 
     <string name="language">ভাষা</string>
-    <string name="language_body">HD Camera যে ভাষায় কথা বলবে তা বেছে নিন। পরে সেটিংস থেকে বদলানো যাবে।</string>
+    <string name="language_body">Pro Cam 4K যে ভাষায় কথা বলবে তা বেছে নিন। পরে সেটিংস থেকে বদলানো যাবে।</string>
     <string name="continue_action">চালিয়ে যান</string>
 
     <string name="onboarding_image">সূচনার ছবি</string>
     <string name="permissions_title">এইচডিতে তুলুন,\nভিউফাইন্ডারেই</string>
-    <string name="permissions_body">ছবি ও ভিডিও তোলার জন্য HD Camera-র আপনার ক্যামেরায় প্রবেশাধিকার প্রয়োজন।</string>
+    <string name="permissions_body">ছবি ও ভিডিও তোলার জন্য Pro Cam 4K-র আপনার ক্যামেরায় প্রবেশাধিকার প্রয়োজন।</string>
     <string name="perm_camera">ক্যামেরা</string>
     <string name="perm_photos_video">ছবি ও ভিডিও</string>
     <string name="perm_required">আবশ্যক</string>
@@ -178,4 +175,8 @@
     <string name="terms_conditions">শর্তাবলি</string>
     <string name="link_open_failed">এই ডিভাইসের কোনো অ্যাপ সেই লিঙ্কটি খুলতে পারে না</string>
     <string name="cd_opens_in_browser">আপনার ব্রাউজারে খুলবে</string>
+
+    <!-- About -->
+    <string name="section_about">অ্যাপ সম্পর্কে</string>
+    <string name="about_version">সংস্করণ %1$s</string>
 </resources>

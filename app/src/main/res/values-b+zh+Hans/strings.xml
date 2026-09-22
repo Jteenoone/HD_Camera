@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">HD Camera</string>
-
     <string name="skip">跳过</string>
     <string name="next">下一步</string>
     <string name="get_started">开始使用</string>
-    <string name="intro1_eyebrow">HD CAMERA</string>
     <string name="intro1_title">每一张\n都是完整分辨率</string>
     <string name="intro1_body">4800 万像素照片、4K 视频，取景器完整呈现整个画面——不裁切，不压缩。</string>
     <string name="intro2_eyebrow">专业模式</string>
@@ -18,12 +15,12 @@
     <string name="intro_visual_3">引导图 3</string>
 
     <string name="language">语言</string>
-    <string name="language_body">选择 HD Camera 使用的语言。之后可以在设置中更改。</string>
+    <string name="language_body">选择 Pro Cam 4K 使用的语言。之后可以在设置中更改。</string>
     <string name="continue_action">继续</string>
 
     <string name="onboarding_image">引导页图片</string>
     <string name="permissions_title">在取景器里\n直接拍高清</string>
-    <string name="permissions_body">HD Camera 需要访问你的相机来拍摄照片和视频。</string>
+    <string name="permissions_body">Pro Cam 4K 需要访问你的相机来拍摄照片和视频。</string>
     <string name="perm_camera">相机</string>
     <string name="perm_photos_video">照片与视频</string>
     <string name="perm_required">必需</string>
@@ -176,4 +173,8 @@
     <string name="terms_conditions">服务条款</string>
     <string name="link_open_failed">此设备上没有应用可以打开该链接</string>
     <string name="cd_opens_in_browser">在浏览器中打开</string>
+
+    <!-- About -->
+    <string name="section_about">关于</string>
+    <string name="about_version">版本 %1$s</string>
 </resources>

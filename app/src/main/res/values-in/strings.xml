@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">HD Camera</string>
-
     <string name="skip">Lewati</string>
     <string name="next">Lanjut</string>
     <string name="get_started">Mulai</string>
-    <string name="intro1_eyebrow">HD CAMERA</string>
     <string name="intro1_title">Setiap bidikan\ndalam resolusi penuh</string>
     <string name="intro1_body">Foto 48 MP, video 4K, dan jendela bidik yang menampilkan seluruh bingkai — tidak ada yang dipangkas atau dikompresi.</string>
     <string name="intro2_eyebrow">MODE PRO</string>
@@ -18,12 +15,12 @@
     <string name="intro_visual_3">Gambar intro 3</string>
 
     <string name="language">Bahasa</string>
-    <string name="language_body">Pilih bahasa yang dipakai HD Camera. Kamu bisa menggantinya nanti di Setelan.</string>
+    <string name="language_body">Pilih bahasa yang dipakai Pro Cam 4K. Kamu bisa menggantinya nanti di Setelan.</string>
     <string name="continue_action">Lanjutkan</string>
 
     <string name="onboarding_image">Gambar sambutan</string>
     <string name="permissions_title">Rekam dalam HD,\nlangsung di jendela bidik</string>
-    <string name="permissions_body">HD Camera perlu akses ke kamera untuk memotret dan merekam video.</string>
+    <string name="permissions_body">Pro Cam 4K perlu akses ke kamera untuk memotret dan merekam video.</string>
     <string name="perm_camera">Kamera</string>
     <string name="perm_photos_video">Foto &amp; video</string>
     <string name="perm_required">Diperlukan</string>
@@ -176,4 +173,8 @@
     <string name="terms_conditions">Syarat &amp; Ketentuan</string>
     <string name="link_open_failed">Tidak ada aplikasi di perangkat ini yang bisa membuka tautan itu</string>
     <string name="cd_opens_in_browser">Dibuka di peramban Anda</string>
+
+    <!-- About -->
+    <string name="section_about">TENTANG</string>
+    <string name="about_version">Versi %1$s</string>
 </resources>

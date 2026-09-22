@@ -1,10 +1,7 @@
 <resources>
-    <string name="app_name">HD Camera</string>
-
     <string name="skip">Пропустить</string>
     <string name="next">Далее</string>
     <string name="get_started">Начать</string>
-    <string name="intro1_eyebrow">HD CAMERA</string>
     <string name="intro1_title">Каждый снимок —\nв полном разрешении</string>
     <string name="intro1_body">Фото 48 Мп, видео 4K и видоискатель, показывающий весь кадр: ничего не обрезано и не сжато.</string>
     <string name="intro2_eyebrow">РЕЖИМ PRO</string>
@@ -18,12 +15,12 @@
     <string name="intro_visual_3">Вступительная иллюстрация 3</string>
 
     <string name="language">Язык</string>
-    <string name="language_body">Выберите язык, на котором говорит HD Camera. Его можно сменить позже в настройках.</string>
+    <string name="language_body">Выберите язык, на котором говорит Pro Cam 4K. Его можно сменить позже в настройках.</string>
     <string name="continue_action">Продолжить</string>
 
     <string name="onboarding_image">Приветственная иллюстрация</string>
     <string name="permissions_title">Снимайте в HD\nпрямо в видоискателе</string>
-    <string name="permissions_body">HD Camera нужен доступ к камере, чтобы снимать фото и видео.</string>
+    <string name="permissions_body">Pro Cam 4K нужен доступ к камере, чтобы снимать фото и видео.</string>
     <string name="perm_camera">Камера</string>
     <string name="perm_photos_video">Фото и видео</string>
     <string name="perm_required">Требуется</string>
@@ -182,4 +179,8 @@
     <string name="terms_conditions">Условия использования</string>
     <string name="link_open_failed">На этом устройстве нет приложения, способного открыть эту ссылку</string>
     <string name="cd_opens_in_browser">Откроется в браузере</string>
+
+    <!-- About -->
+    <string name="section_about">О ПРИЛОЖЕНИИ</string>
+    <string name="about_version">Версия %1$s</string>
 </resources>
