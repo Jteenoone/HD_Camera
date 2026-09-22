@@ -181,4 +181,11 @@
     <!-- About -->
     <string name="section_about">SOBRE</string>
     <string name="about_version">Versão %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">Proporção</string>
+    <string name="flash_unsupported">Esta câmera não tem flash</string>
+    <string name="video_resolution_unsupported">Esta câmera não consegue gravar nesse tamanho</string>
+    <string name="frame_rate_unsupported">Esta câmera não consegue gravar nessa taxa de quadros</string>
+    <string name="cd_option_selected">Selecionado</string>
 </resources>

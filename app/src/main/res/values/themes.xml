@@ -21,4 +21,18 @@
             @android:color/transparent
         </item>
     </style>
+
+    <!--
+        The sheet layout draws its own rounded surface, so Material's own background is
+        taken away rather than fought with.
+    -->
+    <style name="ThemeOverlay.HD.BottomSheet" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.HD.BottomSheet</item>
+        <item name="android:navigationBarColor">@color/dc_surface</item>
+    </style>
+
+    <style name="Widget.HD.BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>

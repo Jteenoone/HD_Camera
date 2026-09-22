@@ -179,4 +179,11 @@
     <!-- About -->
     <string name="section_about">ऐप के बारे में</string>
     <string name="about_version">संस्करण %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">आस्पेक्ट रेशियो</string>
+    <string name="flash_unsupported">इस कैमरे में फ़्लैश नहीं है</string>
+    <string name="video_resolution_unsupported">यह कैमरा इस आकार में रिकॉर्ड नहीं कर सकता</string>
+    <string name="frame_rate_unsupported">यह कैमरा इस फ़्रेम रेट पर रिकॉर्ड नहीं कर सकता</string>
+    <string name="cd_option_selected">चयनित</string>
 </resources>

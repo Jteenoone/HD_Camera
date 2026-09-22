@@ -181,4 +181,11 @@
     <!-- About -->
     <string name="section_about">ACERCA DE</string>
     <string name="about_version">Versión %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">Relación de aspecto</string>
+    <string name="flash_unsupported">Esta cámara no tiene flash</string>
+    <string name="video_resolution_unsupported">Esta cámara no puede grabar a ese tamaño</string>
+    <string name="frame_rate_unsupported">Esta cámara no puede grabar a esa velocidad de fotogramas</string>
+    <string name="cd_option_selected">Seleccionado</string>
 </resources>

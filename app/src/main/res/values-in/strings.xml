@@ -177,4 +177,11 @@
     <!-- About -->
     <string name="section_about">TENTANG</string>
     <string name="about_version">Versi %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">Rasio aspek</string>
+    <string name="flash_unsupported">Kamera ini tidak punya lampu kilat</string>
+    <string name="video_resolution_unsupported">Kamera ini tidak bisa merekam pada ukuran itu</string>
+    <string name="frame_rate_unsupported">Kamera ini tidak bisa merekam pada laju bingkai itu</string>
+    <string name="cd_option_selected">Terpilih</string>
 </resources>

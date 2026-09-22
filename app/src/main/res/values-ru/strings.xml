@@ -183,4 +183,11 @@
     <!-- About -->
     <string name="section_about">О ПРИЛОЖЕНИИ</string>
     <string name="about_version">Версия %1$s</string>
+
+    <!-- Option pickers -->
+    <string name="aspect_ratio">Соотношение сторон</string>
+    <string name="flash_unsupported">У этой камеры нет вспышки</string>
+    <string name="video_resolution_unsupported">Эта камера не снимает в таком размере</string>
+    <string name="frame_rate_unsupported">Эта камера не снимает с такой частотой кадров</string>
+    <string name="cd_option_selected">Выбрано</string>
 </resources>
