@@ -145,9 +145,9 @@
     <style name="Widget.HD.ModeLabel" parent="">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:fontFamily">@font/ibm_plex_sans_regular</item>
+        <item name="android:fontFamily">@font/ibm_plex_sans_medium</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/dc_text_faint</item>
+        <item name="android:textColor">@color/dc_text_80</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:letterSpacing">0.08</item>
         <item name="android:singleLine">true</item>

@@ -29,9 +29,9 @@ import kotlin.coroutines.resume
 /**
  * Takes the picture and puts it on disk.
  *
- * Two paths: when the frame has to be altered — a live filter, or the timestamp the Settings
- * screen switches on — the app decodes it, draws on it and writes the JPEG itself. Otherwise
- * CameraX writes the file directly, which keeps the full EXIF and the RAW sidecar.
+ * Two paths: when the frame has to be altered — a live filter, or the beauty pass — the app
+ * decodes it, draws on it and writes the JPEG itself. Otherwise CameraX writes the file
+ * directly, which keeps the full EXIF and the RAW sidecar.
  */
 object PhotoCapture {
 
@@ -47,18 +47,12 @@ object PhotoCapture {
         strength: Float = 1f,
         smoothing: Float = 0f
     ): Result {
-        val watermark = ViewfinderPrefs.get(context, ViewfinderPrefs.KEY_WATERMARK)
-        val rawEnabled = engine.rawCaptureActive
-
         // A chosen filter or beauty pass has to reach the file, so those always take the
         // processing path even when RAW is on — the DNG is dropped for that shot.
-        // The timestamp alone yields to RAW, which callers who shoot RAW expect untouched.
-        val needsProcessing = filter != PhotoFilter.NONE ||
-            smoothing > 0f ||
-            (watermark && !rawEnabled)
+        val needsProcessing = filter != PhotoFilter.NONE || smoothing > 0f
 
         return if (needsProcessing) {
-            captureProcessed(context, engine, filter, strength, smoothing, watermark)
+            captureProcessed(context, engine, filter, strength, smoothing)
         } else {
             captureDirect(context, engine)
         }
@@ -102,8 +96,7 @@ object PhotoCapture {
         engine: CameraEngine,
         filter: PhotoFilter,
         strength: Float,
-        smoothing: Float,
-        watermark: Boolean
+        smoothing: Float
     ): Result {
         val captured = suspendCancellableCoroutine<Bitmap?> { continuation ->
             engine.takePhoto(object : ImageCapture.OnImageCapturedCallback() {
@@ -131,9 +124,6 @@ object PhotoCapture {
             }
             if (filter != PhotoFilter.NONE && strength > 0f) {
                 bitmap = bitmap.withColorMatrix(filter.matrixAt(strength))
-            }
-            if (watermark) {
-                bitmap = MediaOutput.drawWatermark(bitmap, MediaOutput.watermarkText())
             }
             val uri = MediaOutput.writeJpeg(context, bitmap)
             if (uri != null) {
@@ -175,10 +165,14 @@ object PhotoCapture {
     /** Geotagging is off by default; when it is on we attach the last fix we are allowed to read. */
     private fun lastKnownLocation(context: Context): Location? {
         if (!ViewfinderPrefs.get(context, ViewfinderPrefs.KEY_GEOTAGGING)) return null
-        val granted = ContextCompat.checkSelfPermission(
-            context,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
+        // "Approximate location" grants the coarse permission only, and a coarse fix is
+        // still worth writing into the EXIF.
+        val granted = listOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ).any {
+            ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+        }
         if (!granted) return null
 
         val manager = context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager

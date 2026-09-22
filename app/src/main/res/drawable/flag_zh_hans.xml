@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Circular flag for the language picker. Simplified: it is drawn at 26dp. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <group>
+        <clip-path android:pathData="M12,0 A12,12 0 0 1 12,24 A12,12 0 0 1 12,0 Z" />
+        <path
+            android:pathData="M0,0 h24 v24 h-24 z"
+            android:fillColor="#DE2910" />
+        <path
+            android:pathData="M7.00,3.80 L7.75,5.96 L10.04,6.01 L8.22,7.40 L8.88,9.59 L7.00,8.28 L5.12,9.59 L5.78,7.40 L3.96,6.01 L6.25,5.96 Z"
+            android:fillColor="#FFDE00" />
+        <path
+            android:pathData="M11.399999999999999,3.6 a0.8,0.8 0 1,0 1.6,0 a0.8,0.8 0 1,0 -1.6,0"
+            android:fillColor="#FFDE00" />
+        <path
+            android:pathData="M13.399999999999999,6.0 a0.8,0.8 0 1,0 1.6,0 a0.8,0.8 0 1,0 -1.6,0"
+            android:fillColor="#FFDE00" />
+        <path
+            android:pathData="M13.399999999999999,9.2 a0.8,0.8 0 1,0 1.6,0 a0.8,0.8 0 1,0 -1.6,0"
+            android:fillColor="#FFDE00" />
+        <path
+            android:pathData="M11.399999999999999,11.4 a0.8,0.8 0 1,0 1.6,0 a0.8,0.8 0 1,0 -1.6,0"
+            android:fillColor="#FFDE00" />
+    </group>
+</vector>

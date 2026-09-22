@@ -86,12 +86,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_weight="1"
-            android:text="@string/perm_camera_mic"
+            android:text="@string/perm_camera"
             android:textAppearance="@style/TextAppearance.HD.ListTitle"
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tvStatusCameraMic"
+            android:id="@+id/tvStatusCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/perm_required"
@@ -99,8 +99,9 @@
             android:textColor="@color/dc_text_faint" />
     </LinearLayout>
 
-    <!-- Permission 2 -->
+    <!-- Permission 2 · storage, shown only on Android 9 and below -->
     <LinearLayout
+        android:id="@+id/rowStorage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -132,7 +133,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tvStatusPhotos"
+            android:id="@+id/tvStatusStorage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/perm_required"
@@ -160,4 +161,52 @@
         android:text="@string/not_now"
         android:textColor="@color/dc_text_muted"
         android:textSize="15sp" />
+
+    <!--
+        The two documents, each its own touch target. Nothing here gates the camera: they
+        are links, not a consent gate. The row carries the system-bar padding the root
+        applies, so it never ends up under the navigation bar.
+    -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/linkPrivacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/cd_opens_in_browser"
+            android:minHeight="@dimen/touch_target"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/dc_accent"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/legal_separator"
+            android:textColor="@color/dc_text_muted"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/linkTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/cd_opens_in_browser"
+            android:minHeight="@dimen/touch_target"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/terms_conditions"
+            android:textColor="@color/dc_accent"
+            android:textSize="13sp" />
+    </LinearLayout>
 </LinearLayout>

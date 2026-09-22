@@ -1,9 +1,13 @@
 package com.example.hd_camera.ui.camera
 
 import android.media.MediaActionSound
+import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.ImageCapture
 import androidx.camera.extensions.ExtensionMode
@@ -16,7 +20,9 @@ import com.example.hd_camera.camera.CameraEngine
 import com.example.hd_camera.camera.PhotoCapture
 import com.example.hd_camera.data.ViewfinderPrefs
 import com.example.hd_camera.databinding.FragmentPhotoBinding
+import com.example.hd_camera.databinding.ItemZoomChipBinding
 import com.example.hd_camera.media.MediaRepository
+import com.example.hd_camera.ui.OptionsPopup
 import com.example.hd_camera.ui.applySystemBarPadding
 import com.example.hd_camera.ui.gallery.GalleryFragment
 import com.example.hd_camera.ui.navigateTo
@@ -36,7 +42,8 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
     private var wideRatio = false
     private var hdrOn = false
     private var capturing = false
-    private var activeModeIndex = 3
+    private var activeModeIndex = MODE_PHOTO
+    private var selectedZoom = 1f
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentPhotoBinding.bind(view).also { this.binding = it }
@@ -53,32 +60,32 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         }
         engine.onCameraReady = {
             binding.tvCameraStatus.visibility = View.GONE
+            applyStartingMode()
             // resolutionInfo is only populated once the use case is attached to the session.
             binding.previewView.postDelayed({
                 updateResolutionBadge()
                 updateHdrChip()
+                bindZoom()
             }, RESOLUTION_SETTLE_MS)
         }
 
         engine.start(CameraEngine.Mode.PHOTO)
 
+        activeModeIndex = arguments?.getInt(ARG_MODE, MODE_PHOTO) ?: MODE_PHOTO
         bindModeStrip()
         bindTopBar()
-        bindZoom()
         bindShutterRow()
         bindTapToFocus()
     }
 
     override fun onResume() {
         super.onResume()
-        // The Settings switches and the design's showGrid / showWatermark / showZoomChips
-        // props drive the same state.
+        // The Settings switches and the design's showGrid / showZoomChips props drive the
+        // same state.
         val binding = binding ?: return
         val context = requireContext()
         binding.gridOverlay.visibility =
             visibility(ViewfinderPrefs.get(context, ViewfinderPrefs.KEY_GRID))
-        binding.tvWatermark.visibility =
-            visibility(ViewfinderPrefs.get(context, ViewfinderPrefs.KEY_WATERMARK))
         binding.zoomChips.visibility =
             visibility(ViewfinderPrefs.get(context, ViewfinderPrefs.KEY_ZOOM_CHIPS))
         loadLastShot()
@@ -98,8 +105,8 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
     private fun bindTopBar() {
         val binding = binding ?: return
 
-        binding.btnFlash.setOnClickListener { cycleFlash() }
-        binding.btnTimer.setOnClickListener { cycleTimer() }
+        binding.btnFlash.setOnClickListener { view -> showFlashOptions(view) }
+        binding.btnTimer.setOnClickListener { view -> showTimerOptions(view) }
 
         binding.btnRatio.setOnClickListener {
             wideRatio = !wideRatio
@@ -122,9 +129,20 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         updateTimerIcon()
     }
 
-    private fun cycleFlash() {
+    /** Flash has four settings, so it drops a list rather than cycling on every tap. */
+    private fun showFlashOptions(anchor: View) {
+        OptionsPopup.show(
+            anchor = anchor,
+            options = FLASH_LABELS.map(::getString),
+            selectedIndex = flashIndex
+        ) { picked ->
+            flashIndex = picked
+            applyFlash()
+        }
+    }
+
+    private fun applyFlash() {
         val engine = engine ?: return
-        flashIndex = (flashIndex + 1) % FLASH_MODES.size
         val mode = FLASH_MODES[flashIndex]
         engine.setTorch(mode == TORCH)
         if (mode != TORCH) engine.setFlashMode(mode)
@@ -142,9 +160,15 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         binding.btnFlash.contentDescription = getString(FLASH_LABELS[flashIndex])
     }
 
-    private fun cycleTimer() {
-        timerIndex = (timerIndex + 1) % TIMER_SECONDS.size
-        updateTimerIcon()
+    private fun showTimerOptions(anchor: View) {
+        OptionsPopup.show(
+            anchor = anchor,
+            options = TIMER_LABELS.map(::getString),
+            selectedIndex = timerIndex
+        ) { picked ->
+            timerIndex = picked
+            updateTimerIcon()
+        }
     }
 
     private fun updateTimerIcon() {
@@ -183,31 +207,57 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
 
     // ── Zoom, focus ────────────────────────────────────────────────────────
 
+    /**
+     * The steps come from the camera itself. The main lens bottoms out at 1x, so 0.5x only
+     * appears when there is an ultra-wide to switch to — a chip that silently did nothing
+     * was worse than no chip.
+     */
     private fun bindZoom() {
         val binding = binding ?: return
-        val chips = listOf(
-            binding.btnZoomHalf to 0.5f,
-            binding.btnZoom1x to 1f,
-            binding.btnZoom3x to 3f
-        )
-        chips.forEach { (chip, ratio) ->
+        val engine = engine ?: return
+        val row = binding.zoomChips
+        val stops = engine.zoomStops()
+        row.removeAllViews()
+
+        val inflater = LayoutInflater.from(row.context)
+        val gap = (8 * resources.displayMetrics.density).toInt()
+
+        stops.forEachIndexed { index, stop ->
+            val chip = ItemZoomChipBinding.inflate(inflater, row, false).root
+            chip.text = formatZoom(stop)
             chip.setOnClickListener {
-                engine?.setZoomRatio(ratio)
-                chips.forEach { (other, otherRatio) ->
-                    val active = otherRatio == ratio
-                    other.setBackgroundResource(
-                        if (active) R.drawable.bg_zoom_chip_active else R.drawable.bg_round_scrim_50
-                    )
-                    other.setTextColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            if (active) R.color.dc_bg else R.color.dc_text
-                        )
-                    )
-                }
+                selectedZoom = stop
+                engine.requestZoom(stop)
+                styleZoomChips()
             }
+            (chip.layoutParams as LinearLayout.LayoutParams).marginStart =
+                if (index == 0) 0 else gap
+            row.addView(chip)
+        }
+        styleZoomChips()
+    }
+
+    private fun styleZoomChips() {
+        val binding = binding ?: return
+        val engine = engine ?: return
+        val stops = engine.zoomStops()
+        for (index in 0 until binding.zoomChips.childCount) {
+            val chip = binding.zoomChips.getChildAt(index) as? TextView ?: continue
+            val active = stops.getOrNull(index) == selectedZoom
+            chip.setBackgroundResource(
+                if (active) R.drawable.bg_zoom_chip_active else R.drawable.bg_round_scrim_50
+            )
+            chip.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    if (active) R.color.dc_bg else R.color.dc_text
+                )
+            )
         }
     }
+
+    private fun formatZoom(stop: Float): String =
+        if (stop < 1f) ".5\u00d7" else stop.toInt().toString() + "\u00d7"
 
     private fun bindTapToFocus() {
         val binding = binding ?: return
@@ -250,35 +300,67 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
     private fun takePhoto() {
         val binding = binding ?: return
         val engine = engine ?: return
+        // A second tap during the countdown would otherwise start a second one.
         if (capturing) return
         capturing = true
 
         viewLifecycleOwner.lifecycleScope.launch {
-            countDown(TIMER_SECONDS[timerIndex])
-            binding.btnShutter.playShutterFeedback()
-            playShutterSound()
+            try {
+                countDown(TIMER_SECONDS[timerIndex])
+                binding.btnShutter.playShutterFeedback()
+                playShutterSound()
 
-            when (val result = PhotoCapture.capture(requireContext(), engine)) {
-                is PhotoCapture.Result.Saved -> loadLastShot()
-                is PhotoCapture.Result.Failed -> {
-                    binding.tvCameraStatus.visibility = View.VISIBLE
-                    binding.tvCameraStatus.text = getString(R.string.capture_failed)
-                    result.error.printStackTrace()
+                when (val result = PhotoCapture.capture(requireContext(), engine)) {
+                    is PhotoCapture.Result.Saved -> showLastShot(result.uri)
+                    is PhotoCapture.Result.Failed -> {
+                        binding.tvCameraStatus.visibility = View.VISIBLE
+                        binding.tvCameraStatus.text = getString(R.string.capture_failed)
+                        result.error.printStackTrace()
+                    }
                 }
+            } finally {
+                // Cancellation — the screen closing mid-countdown — must not leave the
+                // shutter dead or the countdown frozen on screen.
+                hideCountdown()
+                capturing = false
             }
-            capturing = false
         }
     }
 
-    /** The self-timer counts down in the badge that normally shows the resolution. */
+    /**
+     * The self-timer used the resolution badge, which is 12sp in the corner of the frame.
+     * It counts in the middle of the preview instead, one big digit a second.
+     */
     private suspend fun countDown(seconds: Int) {
         if (seconds <= 0) return
         val binding = binding ?: return
+        val countdown = binding.tvCountdown
+        countdown.visibility = View.VISIBLE
         for (remaining in seconds downTo 1) {
-            binding.tvResolutionBadge.text = remaining.toString()
+            countdown.text = getString(R.string.countdown_value, remaining)
+            // Purely decorative: the animation runs alongside the wait, never before it.
+            countdown.alpha = 1f
+            countdown.scaleX = 1.25f
+            countdown.scaleY = 1.25f
+            countdown.animate().cancel()
+            countdown.animate()
+                .scaleX(1f)
+                .scaleY(1f)
+                .alpha(0.85f)
+                .setDuration(COUNTDOWN_TICK_MS)
+                .start()
             delay(1_000)
         }
-        updateResolutionBadge()
+        hideCountdown()
+    }
+
+    private fun hideCountdown() {
+        val countdown = binding?.tvCountdown ?: return
+        countdown.animate().cancel()
+        countdown.visibility = View.GONE
+        countdown.alpha = 1f
+        countdown.scaleX = 1f
+        countdown.scaleY = 1f
     }
 
     private fun playShutterSound() {
@@ -299,16 +381,36 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         }
     }
 
+    /**
+     * Shows the shot that was just saved. CameraX hands back the URI directly, so the
+     * thumbnail does not have to wait for MediaStore to publish the row; [loadLastShot] is
+     * only the fallback for the paths that report no URI.
+     */
+    private fun showLastShot(uri: Uri?) {
+        val binding = binding ?: return
+        if (uri != null) {
+            binding.btnLastShot.load(uri)
+        } else {
+            loadLastShot()
+        }
+    }
+
     // ── Mode strip ─────────────────────────────────────────────────────────
 
     private fun bindModeStrip() {
         val binding = binding ?: return
         binding.modeRow.bindCaptureModes(
             modes = listOf(
-                CaptureMode(R.string.mode_night) { applyExtension(ExtensionMode.NIGHT, 0) },
-                CaptureMode(R.string.mode_portrait) { applyExtension(ExtensionMode.BOKEH, 1) },
+                CaptureMode(R.string.mode_night) {
+                    applyExtension(ExtensionMode.NIGHT, MODE_NIGHT)
+                },
+                CaptureMode(R.string.mode_portrait) {
+                    applyExtension(ExtensionMode.BOKEH, MODE_PORTRAIT)
+                },
                 CaptureMode(R.string.mode_beauty) { navigateTo(FiltersFragment()) },
-                CaptureMode(R.string.mode_photo) { applyExtension(ExtensionMode.NONE, 3) },
+                CaptureMode(R.string.mode_photo) {
+                    applyExtension(ExtensionMode.NONE, MODE_PHOTO)
+                },
                 CaptureMode(R.string.mode_video) { navigateTo(VideoFragment()) },
                 CaptureMode(R.string.mode_pro) { navigateTo(ProFragment()) }
             ),
@@ -317,6 +419,20 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
             textSizeSp = 12f,
             letterSpacing = 0.08f
         )
+    }
+
+    /** Honours the mode another screen asked for once the camera is actually open. */
+    private fun applyStartingMode() {
+        val extension = extensionForStrip(activeModeIndex) ?: return
+        if (extension == ExtensionMode.NONE) return
+        applyExtension(extension, activeModeIndex)
+    }
+
+    private fun extensionForStrip(index: Int): Int? = when (index) {
+        MODE_NIGHT -> ExtensionMode.NIGHT
+        MODE_PORTRAIT -> ExtensionMode.BOKEH
+        MODE_PHOTO -> ExtensionMode.NONE
+        else -> null
     }
 
     private fun applyExtension(mode: Int, stripIndex: Int) {
@@ -344,9 +460,22 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
 
     private fun visibility(visible: Boolean): Int = if (visible) View.VISIBLE else View.GONE
 
-    private companion object {
+    companion object {
+        /** Positions in the shared capture-mode strip. */
+        const val MODE_NIGHT = 0
+        const val MODE_PORTRAIT = 1
+        const val MODE_PHOTO = 3
+
+        private const val ARG_MODE = "initial_mode"
+
+        /** Opens the viewfinder already switched to [mode]. */
+        fun of(mode: Int): PhotoFragment = PhotoFragment().apply {
+            arguments = Bundle().apply { putInt(ARG_MODE, mode) }
+        }
+
         const val TORCH = -1
         const val RESOLUTION_SETTLE_MS = 400L
+        const val COUNTDOWN_TICK_MS = 260L
 
         val FLASH_MODES = intArrayOf(
             ImageCapture.FLASH_MODE_OFF,
@@ -354,12 +483,17 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
             ImageCapture.FLASH_MODE_ON,
             TORCH
         )
-        val FLASH_LABELS = intArrayOf(
+        val FLASH_LABELS = listOf(
             R.string.flash_off,
             R.string.flash_auto,
             R.string.flash_on,
             R.string.flash_torch
         )
         val TIMER_SECONDS = intArrayOf(0, 3, 10)
+        val TIMER_LABELS = listOf(
+            R.string.timer_off,
+            R.string.timer_3s,
+            R.string.timer_10s
+        )
     }
 }

@@ -37,7 +37,10 @@ class GalleryAdapter(
         fun bind(item: MediaItem) {
             binding.imgThumb.load(item.uri) {
                 crossfade(true)
-                if (item.isVideo) videoFrameMillis(0)
+                // The opening frame of a clip is usually still black while exposure settles,
+                // so the tile takes one from just under a second in. A shorter clip than that
+                // falls back to its closest key frame rather than coming up empty.
+                if (item.isVideo) videoFrameMillis(VIDEO_THUMB_MS)
             }
 
             binding.tvDuration.visibility = if (item.isVideo) View.VISIBLE else View.GONE
@@ -56,5 +59,9 @@ class GalleryAdapter(
                 true
             }
         }
+    }
+
+    private companion object {
+        const val VIDEO_THUMB_MS = 600L
     }
 }

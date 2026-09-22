@@ -4,11 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Matrix
-import android.graphics.Paint
-import android.graphics.Typeface
 import android.location.Location
 import android.net.Uri
 import android.os.Build
@@ -90,7 +86,7 @@ object MediaOutput {
     }
 
     /**
-     * Processed capture path: used when a filter or the timestamp has to be burnt in,
+     * Processed capture path: used when a filter or the beauty pass has to be burnt in,
      * which means the bitmap passes through the app before it is written.
      */
     fun writeJpeg(
@@ -132,26 +128,5 @@ object MediaOutput {
         if (rotation == 0) return decoded
         val matrix = Matrix().apply { postRotate(rotation.toFloat()) }
         return Bitmap.createBitmap(decoded, 0, 0, decoded.width, decoded.height, matrix, true)
-    }
-
-    /** The "21/09/2026 · 14:08 · HD CAMERA" stamp the Settings screen switches on. */
-    fun watermarkText(): String {
-        val stamp = SimpleDateFormat("dd/MM/yyyy · HH:mm", Locale.US).format(Date())
-        return stamp + " · HD CAMERA"
-    }
-
-    fun drawWatermark(bitmap: Bitmap, text: String): Bitmap {
-        val output = if (bitmap.isMutable) bitmap else bitmap.copy(Bitmap.Config.ARGB_8888, true)
-        val canvas = Canvas(output)
-        val margin = output.width * 0.04f
-        val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.WHITE
-            alpha = 210
-            textSize = output.width * 0.028f
-            typeface = Typeface.create(Typeface.MONOSPACE, Typeface.NORMAL)
-            setShadowLayer(output.width * 0.006f, 0f, 0f, Color.argb(160, 0, 0, 0))
-        }
-        canvas.drawText(text, margin, output.height - margin, paint)
-        return output
     }
 }

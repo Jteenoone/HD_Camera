@@ -3,14 +3,16 @@ package com.example.hd_camera.data
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Size
+import androidx.annotation.StringRes
 import androidx.core.content.edit
+import com.example.hd_camera.R
 
 /** Photo resolution choices behind the "Photo resolution" row of the Settings screen. */
-enum class PhotoResolution(val label: String, val target: Size?) {
+enum class PhotoResolution(@StringRes val label: Int, val target: Size?) {
     /** Let CameraX pick the sensor's largest still size. */
-    HIGHEST("Highest", null),
-    HIGH("High", Size(4000, 3000)),
-    STANDARD("Standard", Size(3264, 2448));
+    HIGHEST(R.string.highest, null),
+    HIGH(R.string.high, Size(4000, 3000)),
+    STANDARD(R.string.standard, Size(3264, 2448));
 
     companion object {
         fun of(name: String?): PhotoResolution =
@@ -19,9 +21,9 @@ enum class PhotoResolution(val label: String, val target: Size?) {
 }
 
 /** "Format" row: plain JPEG, or JPEG plus a DNG sidecar where the camera supports it. */
-enum class CaptureFormat(val label: String) {
-    JPEG("JPEG"),
-    JPEG_RAW("JPEG + RAW");
+enum class CaptureFormat(@StringRes val label: Int) {
+    JPEG(R.string.format_jpeg),
+    JPEG_RAW(R.string.format_jpeg_raw);
 
     companion object {
         fun of(name: String?): CaptureFormat = entries.firstOrNull { it.name == name } ?: JPEG_RAW
@@ -29,12 +31,12 @@ enum class CaptureFormat(val label: String) {
 }
 
 /** "Video" row: resolution and frame rate for the recorder. */
-enum class VideoProfile(val label: String, val heightPx: Int, val fps: Int) {
-    UHD_60("4K · 60fps", 2160, 60),
-    UHD_30("4K · 30fps", 2160, 30),
-    FHD_60("1080p · 60fps", 1080, 60),
-    FHD_30("1080p · 30fps", 1080, 30),
-    HD_30("720p · 30fps", 720, 30);
+enum class VideoProfile(@StringRes val label: Int, val heightPx: Int, val fps: Int) {
+    UHD_60(R.string.video_uhd_60, 2160, 60),
+    UHD_30(R.string.video_uhd_30, 2160, 30),
+    FHD_60(R.string.video_fhd_60, 1080, 60),
+    FHD_30(R.string.video_fhd_30, 1080, 30),
+    HD_30(R.string.video_hd_30, 720, 30);
 
     companion object {
         fun of(name: String?): VideoProfile = entries.firstOrNull { it.name == name } ?: UHD_60

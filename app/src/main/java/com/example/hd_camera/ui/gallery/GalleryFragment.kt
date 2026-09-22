@@ -132,7 +132,17 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
                 val matches = section.items.filter {
                     it.displayName.contains(needle, ignoreCase = true)
                 }
-                if (matches.isEmpty()) null else section.copy(items = matches)
+                if (matches.isEmpty()) {
+                    null
+                } else {
+                    // The heading carries counts, so a narrowed section needs a new one.
+                    section.copy(
+                        items = matches,
+                        title = MediaRepository.sectionTitle(
+                            requireContext(), section.label, matches
+                        )
+                    )
+                }
             }
         }
     }

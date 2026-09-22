@@ -3,12 +3,14 @@ package com.example.hd_camera.camera
 import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.camera2.CaptureRequest
+import android.util.Log
 import android.util.Range
 import androidx.annotation.OptIn
 import androidx.camera.camera2.interop.Camera2CameraControl
 import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.camera.core.Camera
+import androidx.camera.core.CameraInfo
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.FocusMeteringAction
 import androidx.camera.core.ImageAnalysis
@@ -54,6 +56,12 @@ class CameraEngine(
 
     enum class Mode { PHOTO, VIDEO }
 
+    /**
+     * Where the recorder is. The Video screen draws three different button rows from this,
+     * so "is there a Recording object" was no longer enough to tell them apart.
+     */
+    enum class RecordingState { IDLE, RECORDING, PAUSED, FINALIZING }
+
     private val mainExecutor: Executor = ContextCompat.getMainExecutor(context)
     private val analysisExecutor: ExecutorService = Executors.newSingleThreadExecutor()
 
@@ -78,6 +86,17 @@ class CameraEngine(
     private var videoCapture: VideoCapture<Recorder>? = null
     private var recording: Recording? = null
 
+    var recordingState: RecordingState = RecordingState.IDLE
+        private set
+
+    /**
+     * True when the current VIDEO session also holds a still pipeline. Not every camera can
+     * run preview, recorder and still capture at once, so such a session falls back to plain
+     * recording and the Video screen hides its snapshot button.
+     */
+    var snapshotSupported: Boolean = false
+        private set
+
     /** False when the camera refused the requested frame rate and picked its own. */
     var frameRateApplied: Boolean = true
         private set
@@ -98,6 +117,17 @@ class CameraEngine(
     var aspectRatio: Int = AspectRatio.RATIO_4_3
         private set
 
+    /**
+     * Set when the user asks for a field of view wider than the main lens can reach. The
+     * main camera bottoms out at 1x, so 0.5x means binding the ultra-wide lens instead of
+     * asking for a zoom ratio the sensor will simply clamp away.
+     */
+    var usingWideLens: Boolean = false
+        private set
+
+    /** True once a camera is actually open, as opposed to merely requested. */
+    val isReady: Boolean get() = provider != null && camera != null
+
     /** The EIS chip on the Video screen. */
     var stabilizationEnabled: Boolean = false
         private set
@@ -107,12 +137,6 @@ class CameraEngine(
      * a live histogram. Frames arrive on a background thread and must be closed by the engine.
      */
     var frameAnalyzer: ((ImageProxy) -> Unit)? = null
-
-    /** Time-lapse wants upright RGBA frames it can encode; the histogram wants raw luma. */
-    var analysisUsesRgba: Boolean = false
-
-    /** Time-lapse binds no still capture, so a RAW session would only get in the way. */
-    var allowRawCapture: Boolean = true
 
     /** The frame-rate range the recorder was actually configured with. */
     var appliedFrameRateRange: Range<Int>? = null
@@ -210,11 +234,26 @@ class CameraEngine(
         }
     }
 
-    private fun bind(withTargetFrameRate: Boolean = true) {
-        val provider = provider ?: return
+    /** True when a camera is now open. False means the session was left closed. */
+    private fun bind(withTargetFrameRate: Boolean = true, withSnapshot: Boolean = true): Boolean {
+        val provider = provider ?: return false
         provider.unbindAll()
 
-        val baseSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
+        val baseSelector = CameraSelector.Builder()
+            .requireLensFacing(lensFacing)
+            .apply {
+                if (usingWideLens) {
+                    addCameraFilter { infos ->
+                        val wide = infos.minByOrNull { intrinsicZoomOf(it) }
+                        if (wide != null && intrinsicZoomOf(wide) < WIDE_LENS_THRESHOLD) {
+                            listOf(wide)
+                        } else {
+                            infos
+                        }
+                    }
+                }
+            }
+            .build()
         // Extensions only apply to still capture; the recorder runs on a plain session.
         usingVendorExtension = mode == Mode.PHOTO && extensionMode != ExtensionMode.NONE &&
             isExtensionAvailable(extensionMode)
@@ -253,8 +292,7 @@ class CameraEngine(
                     )
                 }
                 builder.setResolutionSelector(resolution.build())
-                rawCaptureActive = allowRawCapture &&
-                    CaptureSettings.format(context) == CaptureFormat.JPEG_RAW &&
+                rawCaptureActive = CaptureSettings.format(context) == CaptureFormat.JPEG_RAW &&
                     supportsRawCapture(provider, selector)
                 if (rawCaptureActive) {
                     builder.setOutputFormat(ImageCapture.OUTPUT_FORMAT_RAW_JPEG)
@@ -265,25 +303,9 @@ class CameraEngine(
                 // Extensions take over the pipeline, so the histogram only runs on a plain session.
                 val analyzer = frameAnalyzer
                 if (analyzer != null && extensionMode == ExtensionMode.NONE) {
-                    val analysisBuilder = ImageAnalysis.Builder()
+                    val analysis = ImageAnalysis.Builder()
                         .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                    if (analysisUsesRgba) {
-                        analysisBuilder
-                            .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
-                            .setOutputImageRotationEnabled(true)
-                            // The default analysis stream is 640x480, too soft for a clip.
-                            .setResolutionSelector(
-                                ResolutionSelector.Builder()
-                                    .setResolutionStrategy(
-                                        ResolutionStrategy(
-                                            android.util.Size(1280, 720),
-                                            ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER
-                                        )
-                                    )
-                                    .build()
-                            )
-                    }
-                    val analysis = analysisBuilder.build()
+                        .build()
                     analysis.setAnalyzer(analysisExecutor) { image ->
                         try {
                             analyzer(image)
@@ -298,6 +320,30 @@ class CameraEngine(
             Mode.VIDEO -> {
                 rawCaptureActive = false
                 val profile = CaptureSettings.videoProfile(context)
+
+                // A still taken while the recorder runs has to be cheap: MAXIMIZE_QUALITY
+                // stalls the stream it shares the sensor with, so this one minimises latency.
+                imageCapture = if (withSnapshot) {
+                    ImageCapture.Builder()
+                        .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                        .setOutputFormat(ImageCapture.OUTPUT_FORMAT_JPEG)
+                        .setFlashMode(flashMode)
+                        .setResolutionSelector(
+                            ResolutionSelector.Builder()
+                                .setAspectRatioStrategy(
+                                    AspectRatioStrategy(
+                                        AspectRatio.RATIO_16_9,
+                                        AspectRatioStrategy.FALLBACK_RULE_AUTO
+                                    )
+                                )
+                                .build()
+                        )
+                        .build()
+                        .also { group.addUseCase(it) }
+                } else {
+                    null
+                }
+
                 val recorder = Recorder.Builder()
                     .setQualitySelector(
                         QualitySelector.fromOrderedList(
@@ -319,24 +365,44 @@ class CameraEngine(
                 appliedFrameRateRange = range
                 frameRateApplied = range != null
                 if (range != null) videoBuilder.setTargetFrameRate(range)
+                Log.d(
+                    TAG,
+                    "video fps: requested=" + profile.fps + " chosen=" + range +
+                        " supported=" + supportedRangesOf(provider, selector)
+                )
                 videoCapture = videoBuilder.build().also { group.addUseCase(it) }
-                imageCapture = null
             }
         }
 
-        try {
+        return try {
             camera = provider.bindToLifecycle(lifecycleOwner, selector, group.build())
                 .also {
+                    snapshotSupported = mode == Mode.VIDEO && imageCapture != null
                     applySceneFallback()
                     applyFrameRateRange()
                     onCameraReady?.invoke(it)
                 }
+            true
         } catch (error: Exception) {
-            // Not every camera can hold the requested frame rate; retry letting it choose.
-            if (mode == Mode.VIDEO && withTargetFrameRate) {
-                bind(withTargetFrameRate = false)
-            } else {
-                onCameraError?.invoke(error)
+            when {
+                // Not every camera can hold the requested frame rate; retry letting it choose.
+                mode == Mode.VIDEO && withTargetFrameRate ->
+                    bind(withTargetFrameRate = false, withSnapshot = withSnapshot)
+                // Preview + recorder + stills is beyond a LEGACY camera. Recording without
+                // the snapshot button beats refusing to open the camera at all.
+                mode == Mode.VIDEO && withSnapshot ->
+                    bind(withTargetFrameRate = true, withSnapshot = false)
+                else -> {
+                    // The use cases just built were never attached to a session. Dropping
+                    // them stops a later takePicture() going to a dead pipeline and failing
+                    // with nothing but "could not save the photo".
+                    camera = null
+                    imageCapture = null
+                    videoCapture = null
+                    snapshotSupported = false
+                    onCameraError?.invoke(error)
+                    false
+                }
             }
         }
     }
@@ -360,13 +426,22 @@ class CameraEngine(
         return supportsRawCapture(provider, selector)
     }
 
+    /**
+     * A camera that refuses to open must not be left as the current one: the session would
+     * be closed while the screen still believed it was live, and the next capture would
+     * simply never arrive. Failing the switch puts the working lens straight back.
+     */
     fun switchLens() {
+        val previous = lensFacing
         lensFacing = if (lensFacing == CameraSelector.LENS_FACING_BACK) {
             CameraSelector.LENS_FACING_FRONT
         } else {
             CameraSelector.LENS_FACING_BACK
         }
-        bind()
+        if (!bind()) {
+            lensFacing = previous
+            bind()
+        }
     }
 
     fun setAspectRatio(ratio: Int) {
@@ -401,6 +476,58 @@ class CameraEngine(
     fun setZoomRatio(ratio: Float) {
         val range = zoomRange()
         camera?.cameraControl?.setZoomRatio(ratio.coerceIn(range.start, range.endInclusive))
+    }
+
+    private fun intrinsicZoomOf(info: CameraInfo) = info.intrinsicZoomRatio
+
+    /** True when the device exposes a lens wider than the default one. */
+    fun hasWideLens(): Boolean {
+        val provider = provider ?: return false
+        return try {
+            CameraSelector.Builder().requireLensFacing(lensFacing).build()
+                .filter(provider.availableCameraInfos)
+                .any { intrinsicZoomOf(it) < WIDE_LENS_THRESHOLD }
+        } catch (error: Exception) {
+            false
+        }
+    }
+
+    /**
+     * The zoom steps worth offering: the wide lens when there is one, 1x, and a couple of
+     * stops the current lens can actually reach.
+     */
+    fun zoomStops(): List<Float> {
+        val range = zoomRange()
+        val stops = mutableListOf<Float>()
+        if (range.start < 0.95f || hasWideLens()) stops += 0.5f
+        stops += 1f
+        listOf(2f, 3f, 5f).forEach { stop ->
+            if (stop <= range.endInclusive && stops.size < 4) stops += stop
+        }
+        return stops
+    }
+
+    /**
+     * Applies a zoom step, moving to the ultra-wide lens when the request is below what the
+     * current one can do, and back again when it is not.
+     */
+    fun requestZoom(ratio: Float) {
+        val wantsWide = ratio < 0.95f && zoomRange().start >= 0.95f && hasWideLens()
+        if (wantsWide != usingWideLens) {
+            val previous = usingWideLens
+            usingWideLens = wantsWide
+            // Same reasoning as switchLens: an ultra-wide that will not bind has to be
+            // given back rather than left as the selected camera.
+            if (!bind()) {
+                usingWideLens = previous
+                bind()
+                return
+            }
+            // The new session starts at its own 1x, which is the wider field of view.
+            if (!wantsWide) setZoomRatio(ratio)
+            return
+        }
+        setZoomRatio(if (usingWideLens) ratio * 2f else ratio)
     }
 
     /** Tap to focus, metering on the point the user touched in the preview. */
@@ -470,10 +597,38 @@ class CameraEngine(
         val pending = videoCapture.output
             .prepareRecording(context, MediaOutput.videoOptions(context))
             .apply { if (withAudio) withAudioEnabled() }
-        recording = pending.start(mainExecutor) { event ->
-            if (event is VideoRecordEvent.Finalize) recording = null
+        val started = pending.start(mainExecutor) { event ->
+            // The recorder is the authority on what state it is in: a pause it refused must
+            // not leave the screen showing a Resume button.
+            when (event) {
+                is VideoRecordEvent.Start -> recordingState = RecordingState.RECORDING
+                is VideoRecordEvent.Pause -> recordingState = RecordingState.PAUSED
+                is VideoRecordEvent.Resume -> recordingState = RecordingState.RECORDING
+                is VideoRecordEvent.Finalize -> {
+                    recordingState = RecordingState.IDLE
+                    recording = null
+                }
+                else -> Unit
+            }
             listener(event)
         }
+        recording = started
+        recordingState = RecordingState.RECORDING
+        return true
+    }
+
+    /** Both are public CameraX calls on the live [Recording]; neither rebinds the session. */
+    fun pauseRecording(): Boolean {
+        val recording = recording ?: return false
+        if (recordingState != RecordingState.RECORDING) return false
+        recording.pause()
+        return true
+    }
+
+    fun resumeRecording(): Boolean {
+        val recording = recording ?: return false
+        if (recordingState != RecordingState.PAUSED) return false
+        recording.resume()
         return true
     }
 
@@ -481,6 +636,16 @@ class CameraEngine(
      * Picks the closest range the camera publishes: a fixed one at the requested rate when
      * offered, otherwise the fastest it will hold.
      */
+    private fun supportedRangesOf(
+        provider: ProcessCameraProvider,
+        selector: CameraSelector
+    ): Set<Range<Int>> = try {
+        selector.filter(provider.availableCameraInfos).firstOrNull()
+            ?.supportedFrameRateRanges.orEmpty()
+    } catch (error: Exception) {
+        emptySet()
+    }
+
     private fun supportedFrameRateRange(
         provider: ProcessCameraProvider,
         selector: CameraSelector,
@@ -490,7 +655,10 @@ class CameraEngine(
         val supported = info?.supportedFrameRateRanges.orEmpty()
         supported.firstOrNull { it.lower == desired && it.upper == desired }
             ?: supported.filter { it.upper == desired }.maxByOrNull { it.lower }
-            ?: supported.filter { it.upper <= desired }.maxByOrNull { it.upper }
+            // Among equal ceilings prefer the tightest floor: (30,30) holds a steady 30,
+            // whereas (10,30) lets auto-exposure drop the rate as the light falls.
+            ?: supported.filter { it.upper <= desired }
+                .maxWithOrNull(compareBy({ it.upper }, { it.lower }))
             ?: supported.minByOrNull { it.upper }
     } catch (error: Exception) {
         null
@@ -515,14 +683,22 @@ class CameraEngine(
     /** The resolution the recorder actually settled on, which may be below the request. */
     fun videoResolution(): android.util.Size? = videoCapture?.resolutionInfo?.resolution
 
+    /**
+     * Hands the file to the recorder to close. [recording] is cleared by the Finalize event
+     * rather than here, so a second tap cannot start a clip over the top of one that is
+     * still being written.
+     */
     fun stopRecording() {
-        recording?.stop()
-        recording = null
+        val recording = recording ?: return
+        if (recordingState == RecordingState.FINALIZING) return
+        recordingState = RecordingState.FINALIZING
+        recording.stop()
     }
 
     fun release() {
         recording?.stop()
         recording = null
+        recordingState = RecordingState.IDLE
         provider?.unbindAll()
         analysisExecutor.shutdown()
         camera = null
@@ -533,6 +709,13 @@ class CameraEngine(
         val ladder = listOf(Quality.UHD, Quality.FHD, Quality.HD, Quality.SD)
         val start = ladder.indexOf(quality).coerceAtLeast(0)
         return ladder.drop(start)
+    }
+
+    private companion object {
+        const val TAG = "CameraEngine"
+
+        /** Anything below this is a wider lens than the default one. */
+        const val WIDE_LENS_THRESHOLD = 0.95f
     }
 
     private fun VideoProfile.toQuality(): Quality = when (this) {

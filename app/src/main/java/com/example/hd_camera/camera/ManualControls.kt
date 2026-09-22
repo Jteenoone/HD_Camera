@@ -6,18 +6,20 @@ import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CaptureRequest
 import android.util.Range
 import androidx.annotation.OptIn
+import androidx.annotation.StringRes
 import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
 import androidx.camera.core.CameraSelector
+import com.example.hd_camera.R
 
 /** White-balance presets offered by the Pro screen's WB chip. */
-enum class WhiteBalance(val label: String, val awbMode: Int, val kelvin: Int) {
-    AUTO("AUTO", CaptureRequest.CONTROL_AWB_MODE_AUTO, 0),
-    INCANDESCENT("2800K", CaptureRequest.CONTROL_AWB_MODE_INCANDESCENT, 2800),
-    FLUORESCENT("4000K", CaptureRequest.CONTROL_AWB_MODE_FLUORESCENT, 4000),
-    DAYLIGHT("5600K", CaptureRequest.CONTROL_AWB_MODE_DAYLIGHT, 5600),
-    CLOUDY("6500K", CaptureRequest.CONTROL_AWB_MODE_CLOUDY_DAYLIGHT, 6500),
-    SHADE("7500K", CaptureRequest.CONTROL_AWB_MODE_SHADE, 7500)
+enum class WhiteBalance(@StringRes val label: Int, val awbMode: Int, val kelvin: Int) {
+    AUTO(R.string.wb_auto, CaptureRequest.CONTROL_AWB_MODE_AUTO, 0),
+    INCANDESCENT(R.string.wb_2800k, CaptureRequest.CONTROL_AWB_MODE_INCANDESCENT, 2800),
+    FLUORESCENT(R.string.wb_4000k, CaptureRequest.CONTROL_AWB_MODE_FLUORESCENT, 4000),
+    DAYLIGHT(R.string.wb_5600k, CaptureRequest.CONTROL_AWB_MODE_DAYLIGHT, 5600),
+    CLOUDY(R.string.wb_6500k, CaptureRequest.CONTROL_AWB_MODE_CLOUDY_DAYLIGHT, 6500),
+    SHADE(R.string.wb_7500k, CaptureRequest.CONTROL_AWB_MODE_SHADE, 7500)
 }
 
 /**

@@ -1,6 +1,7 @@
 package com.example.hd_camera.ui.camera
 
 import android.content.res.ColorStateList
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -101,6 +102,20 @@ class FiltersFragment : Fragment(R.layout.fragment_filters), ShutterKeyHandler {
         }
     }
 
+    /**
+     * A beauty shot goes through the processing path, so the file is already on disk by the
+     * time the capture returns — showing the URI it hands back puts the new frame in the
+     * thumbnail straight away rather than on the next visit to the screen.
+     */
+    private fun showLastShot(uri: Uri?) {
+        val binding = binding ?: return
+        if (uri != null) {
+            binding.btnLastShot.load(uri)
+        } else {
+            loadLastShot()
+        }
+    }
+
     override fun onDestroyView() {
         engine?.release()
         engine = null
@@ -117,7 +132,7 @@ class FiltersFragment : Fragment(R.layout.fragment_filters), ShutterKeyHandler {
 
         filters.forEachIndexed { index, filter ->
             val item = ItemFilterBinding.inflate(inflater, row, false)
-            item.filterLabel.text = filter.label
+            item.filterLabel.setText(filter.label)
             val isSelected = index == selectedFilter
 
             item.filterThumb.load(filter.preview)
@@ -199,20 +214,29 @@ class FiltersFragment : Fragment(R.layout.fragment_filters), ShutterKeyHandler {
         binding.btnShutter.playShutterFeedback()
 
         viewLifecycleOwner.lifecycleScope.launch {
-            val result = PhotoCapture.capture(
-                context = requireContext(),
-                engine = engine,
-                filter = currentFilter(),
-                strength = strength,
-                // Vendor face retouch may not exist; then the app softens the frame itself.
-                smoothing = if (engine.usingVendorExtension) 0f else BEAUTY_AMOUNT
-            )
-            if (result is PhotoCapture.Result.Failed) {
-                binding.tvCameraStatus.visibility = View.VISIBLE
-                binding.tvCameraStatus.text = getString(R.string.capture_failed)
-                result.error.printStackTrace()
+            try {
+                when (
+                    val result = PhotoCapture.capture(
+                        context = requireContext(),
+                        engine = engine,
+                        filter = currentFilter(),
+                        strength = strength,
+                        // Vendor face retouch may not exist; then the app softens the frame
+                        // itself.
+                        smoothing = if (engine.usingVendorExtension) 0f else BEAUTY_AMOUNT
+                    )
+                ) {
+                    is PhotoCapture.Result.Saved -> showLastShot(result.uri)
+                    is PhotoCapture.Result.Failed -> {
+                        binding.tvCameraStatus.visibility = View.VISIBLE
+                        binding.tvCameraStatus.text = getString(R.string.capture_failed)
+                        result.error.printStackTrace()
+                    }
+                }
+            } finally {
+                // The screen can close mid-capture; the flag must not survive it.
+                capturing = false
             }
-            capturing = false
         }
     }
 

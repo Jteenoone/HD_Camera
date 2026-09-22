@@ -5,41 +5,46 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.video.AudioStats
 import androidx.camera.video.VideoRecordEvent
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import coil.load
+import coil.request.videoFrameMillis
 import com.example.hd_camera.R
 import com.example.hd_camera.camera.CameraEngine
-import com.example.hd_camera.camera.TimeLapseRecorder
+import com.example.hd_camera.camera.PhotoCapture
 import com.example.hd_camera.data.CaptureSettings
 import com.example.hd_camera.data.VideoProfile
 import com.example.hd_camera.databinding.FragmentVideoBinding
-import com.example.hd_camera.media.SpeedRemuxer
+import com.example.hd_camera.media.MediaRepository
 import com.example.hd_camera.ui.applySystemBarPadding
-import com.example.hd_camera.ui.navigateBack
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
+import com.example.hd_camera.ui.gallery.GalleryFragment
+import com.example.hd_camera.ui.navigateTo
+import com.example.hd_camera.ui.navigateToRoot
 import kotlinx.coroutines.launch
 import java.util.Locale
+import kotlin.math.ceil
 import kotlin.math.log10
 
-/**
- * Screen 08 · Video. Three capture modes share the screen: straight recording, slow motion
- * (recorded fast, then re-timed) and time-lapse (a still a second, encoded back into a clip).
- */
+/** Screen 08 · Video recording. */
 class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
-
-    private enum class Mode { NORMAL, SLOW_MO, TIME_LAPSE }
 
     private var binding: FragmentVideoBinding? = null
     private var engine: CameraEngine? = null
-    private var mode = Mode.NORMAL
 
-    private var timeLapse: TimeLapseRecorder? = null
-    private var timeLapseJob: Job? = null
-    private var busy = false
+    /** Guards the snapshot button against a double tap landing two captures in flight. */
+    private var snapshotInFlight = false
+
+    /**
+     * Recording silently without the microphone is the sort of thing you only notice once
+     * the clip is on a computer, so the first attempt asks for the permission.
+     */
+    private val requestMic = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { startRecordingNow() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentVideoBinding.bind(view).also { this.binding = it }
@@ -58,144 +63,169 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
             binding.previewView.postDelayed({
                 updateStabilizationChip()
                 updateQualityChip()
-            }, 400L)
+                applyRecordingChrome()
+            }, CHIP_SETTLE_MS)
         }
-        timeLapse = TimeLapseRecorder(requireContext())
-        applyMode(Mode.NORMAL, restart = true)
+        engine.start(CameraEngine.Mode.VIDEO)
 
         binding.tvRecTime.text = formatDuration(0)
-        setRecordingChrome(recording = false)
+        applyRecordingChrome()
+        updateAudioMeter(amplitude = 0.0, active = false)
 
         bindModeStrip()
 
         binding.btnRecord.setOnClickListener { toggleRecording() }
-        binding.btnQuality.setOnClickListener { cycleProfile() }
-        binding.btnEis.setOnClickListener { toggleStabilization() }
-        binding.btnFlip.setOnClickListener { engine.switchLens() }
+        binding.btnQuality.setOnClickListener { ifIdle { cycleProfile() } }
+        binding.btnEis.setOnClickListener { ifIdle { toggleStabilization() } }
+        binding.btnFlip.setOnClickListener { ifIdle { engine.switchLens() } }
+        binding.btnLastShot.setOnClickListener { navigateTo(GalleryFragment()) }
+        binding.btnPauseResume.setOnClickListener { togglePause() }
+        binding.btnSnapshot.setOnClickListener { takeSnapshot() }
     }
 
-    // ── Modes ────────────────────────
-
-    private fun bindModeStrip() {
-        val binding = binding ?: return
-        binding.modeRow.bindCaptureModes(
-            modes = listOf(
-                CaptureMode(R.string.mode_photos) { navigateBack() },
-                CaptureMode(R.string.mode_video) { applyMode(Mode.NORMAL) },
-                CaptureMode(R.string.mode_slow_mo) { applyMode(Mode.SLOW_MO) },
-                CaptureMode(R.string.mode_time_lapse) { applyMode(Mode.TIME_LAPSE) }
-            ),
-            activeIndex = when (mode) {
-                Mode.NORMAL -> 1
-                Mode.SLOW_MO -> 2
-                Mode.TIME_LAPSE -> 3
-            },
-            gapDp = 22,
-            textSizeSp = 13f,
-            letterSpacing = 0.1f,
-            dot = R.drawable.bg_mode_dot_record
-        )
-    }
-
-    private fun applyMode(next: Mode, restart: Boolean = false) {
-        if (busy) return
-        if (mode == next && !restart) return
-        stopEverything()
-        mode = next
-
-        val engine = engine ?: return
-        // Only time-lapse wants frames handed to it.
-        engine.frameAnalyzer = null
-        engine.analysisUsesRgba = false
-        engine.allowRawCapture = true
-
-        when (next) {
-            Mode.NORMAL -> engine.start(CameraEngine.Mode.VIDEO)
-
-            Mode.SLOW_MO -> {
-                // Shoot as fast as the camera will hold; how far the clip can be slowed is
-                // then decided from the rate it actually managed.
-                CaptureSettings.setVideoProfile(requireContext(), VideoProfile.FHD_60)
-                engine.start(CameraEngine.Mode.VIDEO)
-            }
-
-            Mode.TIME_LAPSE -> {
-                // The clip is built from preview frames, so no still pipeline is needed.
-                engine.analysisUsesRgba = true
-                engine.allowRawCapture = false
-                engine.frameAnalyzer = { image -> timeLapse?.offer(image.toBitmap()) }
-                engine.start(CameraEngine.Mode.PHOTO)
-            }
-        }
-        binding?.tvRecTime?.text = formatDuration(0)
-        updateQualityChip()
-        bindModeStrip()
-    }
-
-    private fun stopEverything() {
-        timeLapseJob?.cancel()
-        timeLapseJob = null
-        timeLapse?.cancel()
-        engine?.stopRecording()
-        setRecordingChrome(recording = false)
+    override fun onResume() {
+        super.onResume()
+        // Only meaningful when nothing is being recorded: while it is, that slot is Pause.
+        if (engine?.recordingState == CameraEngine.RecordingState.IDLE) loadLastShot()
     }
 
     override fun onDestroyView() {
-        timeLapseJob?.cancel()
-        timeLapse?.cancel()
         engine?.release()
         engine = null
         binding = null
         super.onDestroyView()
     }
 
+    override fun onShutterKey(): Boolean {
+        toggleRecording()
+        return true
+    }
+
+    /** The same capture-mode strip the rest of the app uses, with Video marked active. */
+    private fun bindModeStrip() {
+        val binding = binding ?: return
+        binding.modeRow.bindCaptureModes(
+            modes = listOf(
+                CaptureMode(R.string.mode_night) {
+                    ifIdle { openPhotoMode(PhotoFragment.MODE_NIGHT) }
+                },
+                CaptureMode(R.string.mode_portrait) {
+                    ifIdle { openPhotoMode(PhotoFragment.MODE_PORTRAIT) }
+                },
+                CaptureMode(R.string.mode_beauty) { ifIdle { navigateTo(FiltersFragment()) } },
+                CaptureMode(R.string.mode_photo) {
+                    ifIdle { openPhotoMode(PhotoFragment.MODE_PHOTO) }
+                },
+                CaptureMode(R.string.mode_video) { /* already here */ },
+                CaptureMode(R.string.mode_pro) { ifIdle { navigateTo(ProFragment()) } }
+            ),
+            activeIndex = 4,
+            gapDp = 15,
+            textSizeSp = 12f,
+            letterSpacing = 0.08f,
+            dot = R.drawable.bg_mode_dot_record
+        )
+    }
+
+    private fun openPhotoMode(mode: Int) {
+        navigateToRoot(PhotoFragment.of(mode))
+    }
+
+    /**
+     * Anything that would rebind the camera — a new lens, quality, EIS, or leaving for
+     * another mode — would tear the recorder's surface out from under it, so it waits.
+     */
+    private inline fun ifIdle(action: () -> Unit) {
+        if (engine?.recordingState != CameraEngine.RecordingState.IDLE) {
+            showStatus(R.string.locked_while_recording)
+            return
+        }
+        action()
+    }
+
     // ── Recording ──────────────────────────────────────────────────────────
 
     private fun toggleRecording() {
-        if (busy) return
-        if (mode == Mode.TIME_LAPSE) {
-            if (timeLapseJob != null) stopTimeLapse() else startTimeLapse()
-            return
-        }
-
         val engine = engine ?: return
-        if (engine.isRecording) {
-            engine.stopRecording()
-            return
-        }
-        val started = engine.startRecording(
-            withAudio = micGranted() && mode == Mode.NORMAL
-        ) { event ->
-            onRecordEvent(event)
-        }
-        if (!started) {
-            val binding = binding ?: return
-            binding.tvCameraStatus.visibility = View.VISIBLE
-            binding.tvCameraStatus.text = getString(R.string.recording_failed)
+        when (engine.recordingState) {
+            CameraEngine.RecordingState.RECORDING,
+            CameraEngine.RecordingState.PAUSED -> {
+                engine.stopRecording()
+                applyRecordingChrome()
+            }
+            // A tap arriving while the last clip is still being written does nothing.
+            CameraEngine.RecordingState.FINALIZING -> Unit
+            CameraEngine.RecordingState.IDLE -> {
+                if (!micGranted()) {
+                    requestMic.launch(Manifest.permission.RECORD_AUDIO)
+                    return
+                }
+                startRecordingNow()
+            }
         }
     }
 
+    private fun startRecordingNow() {
+        val engine = engine ?: return
+        if (engine.recordingState != CameraEngine.RecordingState.IDLE) return
+
+        val started = engine.startRecording(withAudio = micGranted()) { event ->
+            onRecordEvent(event)
+        }
+        val binding = binding ?: return
+        if (!started) {
+            binding.tvCameraStatus.visibility = View.VISIBLE
+            binding.tvCameraStatus.text = getString(R.string.recording_failed)
+            return
+        }
+        applyRecordingChrome()
+        if (!micGranted()) {
+            // Recording carries on, but say plainly that it will be silent.
+            showStatus(R.string.recording_without_audio, AUDIO_NOTICE_MS)
+        }
+    }
+
+    private fun togglePause() {
+        val engine = engine ?: return
+        when (engine.recordingState) {
+            CameraEngine.RecordingState.RECORDING -> engine.pauseRecording()
+            CameraEngine.RecordingState.PAUSED -> engine.resumeRecording()
+            else -> Unit
+        }
+        // The Pause / Resume events settle the real state; this keeps the tap responsive.
+        applyRecordingChrome()
+    }
+
     private fun onRecordEvent(event: VideoRecordEvent) {
+        // Events keep arriving while the recorder closes the file, which can outlive the view.
         val binding = binding ?: return
         when (event) {
-            is VideoRecordEvent.Start -> setRecordingChrome(recording = true)
+            is VideoRecordEvent.Start,
+            is VideoRecordEvent.Pause,
+            is VideoRecordEvent.Resume -> applyRecordingChrome()
 
             is VideoRecordEvent.Status -> {
                 binding.tvRecTime.text =
                     formatDuration(event.recordingStats.recordedDurationNanos / 1_000_000_000L)
-                updateAudioMeter(event.recordingStats.audioStats.audioAmplitude)
+                val audio = event.recordingStats.audioStats
+                updateAudioMeter(
+                    amplitude = audio.audioAmplitude,
+                    active = audio.audioState == AudioStats.AUDIO_STATE_ACTIVE
+                )
             }
 
             is VideoRecordEvent.Finalize -> {
-                setRecordingChrome(recording = false)
+                applyRecordingChrome()
+                updateAudioMeter(amplitude = 0.0, active = false)
                 binding.tvRecTime.text = formatDuration(
                     event.recordingStats.recordedDurationNanos / 1_000_000_000L
                 )
                 if (event.hasError()) {
+                    // A half-written file is not worth putting in the thumbnail.
                     binding.tvCameraStatus.visibility = View.VISIBLE
                     binding.tvCameraStatus.text = getString(R.string.recording_failed)
-                } else if (mode == Mode.SLOW_MO) {
-                    retimeToSlowMotion(event.outputResults.outputUri)
+                } else {
+                    showLastShot(event.outputResults.outputUri, isVideo = true)
                 }
             }
 
@@ -203,111 +233,141 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
         }
     }
 
+    // ── Snapshot while recording ───────────────────────────────────────────
+
     /**
-     * Stretches the finished clip and drops the straight-speed original. How far it can be
-     * stretched depends on the rate the camera really held, which is measured from the file.
+     * Still capture runs on its own use case, bound alongside the recorder, so the clip is
+     * never interrupted. Cameras that cannot hold all three use cases leave the button off.
      */
-    private fun retimeToSlowMotion(source: Uri) {
+    private fun takeSnapshot() {
+        val engine = engine ?: return
         val binding = binding ?: return
-        busy = true
-        binding.tvCameraStatus.visibility = View.VISIBLE
-        binding.tvCameraStatus.setText(R.string.processing)
+        if (!engine.snapshotSupported) {
+            showStatus(R.string.snapshot_unsupported)
+            return
+        }
+        if (snapshotInFlight) return
+        snapshotInFlight = true
+        binding.btnSnapshot.playShutterFeedback()
 
         viewLifecycleOwner.lifecycleScope.launch {
-            val result = SpeedRemuxer.slowDown(requireContext(), source, PLAYBACK_FPS)
-            when {
-                result.uri != null && result.factor > 1f -> {
-                    SpeedRemuxer.discard(requireContext(), source)
-                    binding.tvCameraStatus.text = getString(
-                        R.string.slow_motion_saved_at,
-                        result.factor,
-                        result.sourceFps.toInt()
-                    )
+            try {
+                val result = PhotoCapture.capture(requireContext(), engine)
+                if (result is PhotoCapture.Result.Failed) {
+                    showStatus(R.string.capture_failed)
+                    result.error.printStackTrace()
                 }
-
-                result.uri != null -> binding.tvCameraStatus.text = getString(
-                    R.string.slow_motion_too_slow,
-                    result.sourceFps.toInt()
-                )
-
-                else -> binding.tvCameraStatus.setText(R.string.recording_failed)
-            }
-            busy = false
-            binding.tvCameraStatus.postDelayed({
-                binding.tvCameraStatus.visibility = View.GONE
-            }, 2_600)
-        }
-    }
-
-    // ── Time-lapse ───────────────────
-
-    private fun startTimeLapse() {
-        val recorder = timeLapse ?: return
-        recorder.start()
-        setRecordingChrome(recording = true)
-
-        timeLapseJob = viewLifecycleOwner.lifecycleScope.launch {
-            while (isActive && recorder.running) {
-                recorder.captureFrame()
-                binding?.tvRecTime?.text = getString(R.string.frames, recorder.frameCount)
-                delay(TimeLapseRecorder.DEFAULT_INTERVAL_MILLIS)
+            } finally {
+                snapshotInFlight = false
             }
         }
     }
 
-    private fun stopTimeLapse() {
-        val recorder = timeLapse ?: return
+    // ── Thumbnail ──────────────────────────────────────────────────────────
+
+    private fun loadLastShot() {
         val binding = binding ?: return
-        timeLapseJob?.cancel()
-        timeLapseJob = null
-        setRecordingChrome(recording = false)
-
-        busy = true
-        binding.tvCameraStatus.visibility = View.VISIBLE
-        binding.tvCameraStatus.setText(R.string.processing)
-
         viewLifecycleOwner.lifecycleScope.launch {
-            val uri = recorder.finish()
-            binding.tvCameraStatus.setText(
-                if (uri != null) R.string.time_lapse_saved else R.string.recording_failed
-            )
-            busy = false
-            binding.tvCameraStatus.postDelayed({
-                binding.tvCameraStatus.visibility = View.GONE
-            }, 1_800)
+            val latest = MediaRepository.latest(requireContext())
+            if (latest != null) {
+                showLastShot(latest.uri, latest.isVideo)
+            } else {
+                binding.btnLastShot.setImageDrawable(null)
+            }
         }
     }
 
-    private fun setRecordingChrome(recording: Boolean) {
+    /**
+     * Coil decodes a real frame for clips — the very first one is often still black while
+     * exposure settles, so the thumbnail comes from just under a second in.
+     */
+    private fun showLastShot(uri: Uri?, isVideo: Boolean) {
         val binding = binding ?: return
-        binding.recBadge.alpha = if (recording) 1f else 0.45f
-        binding.recIndicator.visibility = if (recording) View.VISIBLE else View.INVISIBLE
-        // Square while recording, circle when idle — the usual record button behaviour.
+        if (uri == null || uri == Uri.EMPTY) {
+            loadLastShot()
+            return
+        }
+        binding.btnLastShot.load(uri) {
+            crossfade(true)
+            if (isVideo) videoFrameMillis(VIDEO_THUMB_MS)
+        }
+    }
+
+    // ── Chrome ─────────────────────────────────────────────────────────────
+
+    /**
+     * Idle shows thumbnail · record · flip. Recording swaps the outer two for pause and a
+     * snapshot button, and turns the shutter into a stop button.
+     */
+    private fun applyRecordingChrome() {
+        val binding = binding ?: return
+        val state = engine?.recordingState ?: CameraEngine.RecordingState.IDLE
+        val idle = state == CameraEngine.RecordingState.IDLE
+        val paused = state == CameraEngine.RecordingState.PAUSED
+        val finalizing = state == CameraEngine.RecordingState.FINALIZING
+        val live = !idle && !finalizing
+
+        binding.recBadge.alpha = if (idle) 0.45f else 1f
+        binding.recIndicator.visibility = when {
+            paused -> View.INVISIBLE
+            live -> View.VISIBLE
+            else -> View.INVISIBLE
+        }
         binding.recordInner.setBackgroundResource(
-            if (recording) R.drawable.bg_record_square else R.drawable.bg_record_circle
+            if (idle) R.drawable.bg_record_circle else R.drawable.bg_record_square
         )
         val size = resources.getDimensionPixelSize(
-            if (recording) R.dimen.record_inner_recording else R.dimen.record_inner_idle
+            if (idle) R.dimen.record_inner_idle else R.dimen.record_inner_recording
         )
         binding.recordInner.layoutParams = binding.recordInner.layoutParams.apply {
             width = size
             height = size
         }
+        binding.btnRecord.contentDescription =
+            getString(if (idle) R.string.cd_record else R.string.cd_stop)
+        binding.btnRecord.isEnabled = !finalizing
+        binding.btnRecord.alpha = if (finalizing) 0.5f else 1f
+
+        binding.btnLastShot.visibility = if (idle) View.VISIBLE else View.GONE
+        binding.btnPauseResume.visibility = if (live) View.VISIBLE else View.GONE
+        binding.btnPauseResume.setImageResource(
+            if (paused) R.drawable.ic_play else R.drawable.ic_pause
+        )
+        binding.btnPauseResume.contentDescription =
+            getString(if (paused) R.string.cd_resume else R.string.cd_pause)
+
+        binding.btnFlip.visibility = if (idle) View.VISIBLE else View.GONE
+        val canSnapshot = engine?.snapshotSupported == true
+        binding.btnSnapshot.visibility = if (live) View.VISIBLE else View.GONE
+        binding.btnSnapshot.alpha = if (canSnapshot) 1f else 0.4f
+        binding.btnSnapshot.isEnabled = canSnapshot
+
+        // The chips stay on screen but read as unavailable while the recorder owns the camera.
+        val chipAlpha = if (idle) 1f else 0.4f
+        binding.btnQuality.alpha = chipAlpha
+        binding.modeRow.alpha = chipAlpha
+        updateStabilizationChip()
     }
 
-    /** Amplitude arrives as 0..1; the meter is drawn on a log scale like a real VU. */
-    private fun updateAudioMeter(amplitude: Double) {
+    /**
+     * Amplitude arrives as 0..1 and is drawn on a log scale like a real VU meter. When the
+     * recording carries no audio the whole meter is dimmed rather than left showing a frozen
+     * pattern.
+     */
+    private fun updateAudioMeter(amplitude: Double, active: Boolean) {
         val binding = binding ?: return
         val meter = binding.audioMeter
-        val level = if (amplitude <= 0.0) {
-            0f
-        } else {
-            ((20.0 * log10(amplitude) + 60.0) / 60.0).coerceIn(0.0, 1.0).toFloat()
+        binding.micIcon.alpha = if (active) 1f else 0.35f
+
+        val level = when {
+            !active -> 0f
+            amplitude <= 0.0 -> 0f
+            else -> ((20.0 * log10(amplitude) + 60.0) / 60.0).coerceIn(0.0, 1.0).toFloat()
         }
-        val lit = (level * meter.childCount).toInt()
+        // Round up so any sound at all lights the first bar.
+        val lit = ceil(level * meter.childCount).toInt()
         for (index in 0 until meter.childCount) {
-            val bar = meter.getChildAt(index)
-            bar.setBackgroundResource(
+            meter.getChildAt(index).setBackgroundResource(
                 if (index < lit) R.drawable.bg_audio_bar_on else R.drawable.bg_audio_bar_off
             )
         }
@@ -318,14 +378,13 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
         Manifest.permission.RECORD_AUDIO
     ) == PackageManager.PERMISSION_GRANTED
 
-    // ── Quality, stabilization, slow motion ────────────────────────────────
-
     private fun cycleProfile() {
-        if (mode != Mode.NORMAL) return
         val profiles = VideoProfile.entries
         val current = CaptureSettings.videoProfile(requireContext())
-        val next = profiles[(current.ordinal + 1) % profiles.size]
-        CaptureSettings.setVideoProfile(requireContext(), next)
+        CaptureSettings.setVideoProfile(
+            requireContext(),
+            profiles[(current.ordinal + 1) % profiles.size]
+        )
         engine?.start(CameraEngine.Mode.VIDEO)
         updateQualityChip()
     }
@@ -333,21 +392,21 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
     /** Shows what the recorder actually resolved, not just what was asked for. */
     private fun updateQualityChip() {
         val binding = binding ?: return
-        if (mode == Mode.TIME_LAPSE) {
-            binding.btnQuality.setText(R.string.time_lapse_rate)
-            return
-        }
         val profile = CaptureSettings.videoProfile(requireContext())
         val resolution = engine?.videoResolution()
         val range = engine?.appliedFrameRateRange
-        val label = when {
-            resolution == null -> profile.label
-            range != null -> shortName(resolution.height) + " · " + range.upper + "fps"
+        binding.btnQuality.text = when {
+            resolution == null -> getString(profile.label)
+            range != null -> getString(
+                R.string.video_quality_chip,
+                shortName(resolution.height),
+                range.upper
+            )
             else -> shortName(resolution.height)
         }
-        binding.btnQuality.text = if (mode == Mode.SLOW_MO) label + " · ½×" else label
     }
 
+    /** Resolution shorthand; these are technical names and stay the same in every locale. */
     private fun shortName(height: Int): String = when {
         height >= 2160 -> "4K"
         height >= 1080 -> "1080p"
@@ -357,13 +416,8 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
 
     private fun toggleStabilization() {
         val engine = engine ?: return
-        val binding = binding ?: return
         if (!engine.isStabilizationSupported()) {
-            binding.tvCameraStatus.visibility = View.VISIBLE
-            binding.tvCameraStatus.text = getString(R.string.eis_unsupported)
-            binding.tvCameraStatus.postDelayed({
-                binding.tvCameraStatus.visibility = View.GONE
-            }, 1_800)
+            showStatus(R.string.eis_unsupported)
             return
         }
         engine.setStabilizationEnabled(!engine.stabilizationEnabled)
@@ -373,26 +427,38 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
     private fun updateStabilizationChip() {
         val binding = binding ?: return
         val engine = engine ?: return
-        val on = engine.stabilizationEnabled
         binding.btnEis.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
-                if (on) R.color.dc_accent else R.color.dc_text_faint
+                if (engine.stabilizationEnabled) R.color.dc_accent else R.color.dc_text_80
             )
         )
-        binding.btnEis.alpha = if (engine.isStabilizationSupported()) 1f else 0.4f
+        val available = engine.isStabilizationSupported() &&
+            engine.recordingState == CameraEngine.RecordingState.IDLE
+        binding.btnEis.alpha = if (available) 1f else 0.4f
     }
 
-    override fun onShutterKey(): Boolean {
-        toggleRecording()
-        return true
+    /** One place for the transient line over the preview, so none of them can stick. */
+    private fun showStatus(messageId: Int, durationMs: Long = STATUS_MS) {
+        val binding = binding ?: return
+        val status = binding.tvCameraStatus
+        status.visibility = View.VISIBLE
+        status.setText(messageId)
+        status.removeCallbacks(hideStatus)
+        status.postDelayed(hideStatus, durationMs)
     }
+
+    private val hideStatus = Runnable { binding?.tvCameraStatus?.visibility = View.GONE }
 
     private fun formatDuration(seconds: Long): String =
         String.format(Locale.US, "%02d:%02d", seconds / 60, seconds % 60)
 
     private companion object {
-        /** Slow-motion clips are retimed to play at this rate. */
-        const val PLAYBACK_FPS = 30f
+        const val CHIP_SETTLE_MS = 400L
+        const val STATUS_MS = 1_800L
+        const val AUDIO_NOTICE_MS = 2_200L
+
+        /** Far enough in that auto-exposure has settled, near enough to be the same shot. */
+        const val VIDEO_THUMB_MS = 600L
     }
 }

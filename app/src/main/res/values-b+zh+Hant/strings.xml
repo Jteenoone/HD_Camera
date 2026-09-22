@@ -1,0 +1,179 @@
+<resources>
+    <string name="app_name">HD Camera</string>
+
+    <string name="skip">略過</string>
+    <string name="next">下一步</string>
+    <string name="get_started">開始使用</string>
+    <string name="intro1_eyebrow">HD CAMERA</string>
+    <string name="intro1_title">每一張\n都是完整解析度</string>
+    <string name="intro1_body">4800 萬畫素相片、4K 影片，觀景窗完整呈現整個畫面——不裁切，不壓縮。</string>
+    <string name="intro2_eyebrow">專業模式</string>
+    <string name="intro2_title">需要時\n才動手動控制</string>
+    <string name="intro2_body">ISO、快門、白平衡與對焦集中在同一個轉盤上。可以拍 RAW，也可以全部交給自動。</string>
+    <string name="intro3_eyebrow">濾鏡與美顏</string>
+    <string name="intro3_title">拍攝前\n先看到效果</string>
+    <string name="intro3_body">濾鏡與美顏在觀景窗中即時生效，強度隨時可以調低。</string>
+    <string name="intro_visual_1">導覽圖 1</string>
+    <string name="intro_visual_2">導覽圖 2</string>
+    <string name="intro_visual_3">導覽圖 3</string>
+
+    <string name="language">語言</string>
+    <string name="language_body">選擇 HD Camera 使用的語言。之後可以在設定中變更。</string>
+    <string name="continue_action">繼續</string>
+
+    <string name="onboarding_image">導覽頁圖片</string>
+    <string name="permissions_title">在觀景窗裡\n直接拍高畫質</string>
+    <string name="permissions_body">HD Camera 需要存取你的相機來拍攝相片和影片。</string>
+    <string name="perm_camera">相機</string>
+    <string name="perm_photos_video">相片與影片</string>
+    <string name="perm_required">必要</string>
+    <string name="perm_granted">已授予</string>
+    <string name="allow_and_continue">允許並繼續</string>
+    <string name="not_now">暫時不要</string>
+
+    <string name="viewfinder_placeholder">觀景窗——拖入一張相片</string>
+    <string name="flash_off">閃光燈關閉</string>
+    <string name="flash_auto">閃光燈自動</string>
+    <string name="flash_on">閃光燈開啟</string>
+    <string name="flash_torch">手電筒</string>
+    <string name="timer_off">計時器關閉</string>
+    <string name="timer_3s">3 秒</string>
+    <string name="timer_10s">10 秒</string>
+    <string name="camera_unavailable">相機無法使用——請檢查權限</string>
+    <string name="capture_failed">相片儲存失敗</string>
+    <string name="mode_unavailable">此裝置沒有該模式</string>
+    <string name="mode_night">夜景</string>
+    <string name="mode_portrait">人像</string>
+    <string name="mode_beauty">美顏</string>
+    <string name="mode_photo">相片</string>
+    <string name="mode_video">影片</string>
+    <string name="mode_pro">專業</string>
+
+    <string name="pro_viewfinder">專業觀景窗</string>
+    <string name="manual_unsupported">此相機不支援手動曝光</string>
+    <string name="raw_unsupported">此相機無法拍攝 RAW</string>
+    <string name="histogram">直方圖</string>
+    <string name="shutter">快門</string>
+    <string name="focus">對焦</string>
+
+    <string name="filtered_preview">濾鏡預覽</string>
+    <string name="live_filters">即時濾鏡</string>
+    <string name="compare">比較</string>
+    <string name="strength">強度</string>
+    <string name="filter_none">無</string>
+    <string name="filter_vivid">鮮豔</string>
+    <string name="filter_fade">褪色</string>
+    <string name="filter_warm">暖調</string>
+
+    <string name="recording">錄影中</string>
+    <string name="recording_failed">錄影失敗</string>
+    <string name="recording_without_audio">正在無聲錄影——麥克風權限遭拒</string>
+    <string name="eis_unsupported">此相機沒有防手震</string>
+    <string name="snapshot_unsupported">此相機無法在錄影時拍照</string>
+    <string name="locked_while_recording">錄影時無法使用</string>
+    <string name="filter_preview_unsupported">即時濾鏡預覽需要 Android 12</string>
+
+    <string name="gallery">相簿</string>
+    <string name="select">選取</string>
+    <string name="filter_all">全部</string>
+    <string name="filter_photos">相片</string>
+    <string name="filter_video">影片</string>
+    <string name="gallery_section_today">今天</string>
+    <string name="gallery_section_yesterday">昨天</string>
+    <plurals name="photo_count">
+        <item quantity="other">%1$d 張相片</item>
+    </plurals>
+    <plurals name="video_count">
+        <item quantity="other">%1$d 段影片</item>
+    </plurals>
+    <string name="settings">設定</string>
+    <string name="gallery_empty">DCIM/HDCamera 還是空的——先拍一張吧。</string>
+    <string name="search_hint">依名稱或日期搜尋</string>
+    <string name="no_matches">沒有符合的結果。</string>
+    <string name="done">完成</string>
+    <string name="delete_selected">刪除 %1$d 項</string>
+
+    <string name="section_quality">畫質</string>
+    <string name="photo_resolution">相片解析度</string>
+    <string name="resolution_sub_sensor">感光元件最大值</string>
+    <string name="highest">最高</string>
+    <string name="high">高</string>
+    <string name="standard">標準</string>
+    <string name="format">格式</string>
+    <string name="video">影片</string>
+    <string name="section_viewfinder">觀景窗</string>
+    <string name="grid_overlay">格線</string>
+    <string name="shutter_sound">快門聲</string>
+    <string name="volume_key_shutter">音量鍵快門</string>
+    <string name="section_general">一般</string>
+    <string name="section_storage">儲存空間</string>
+    <string name="save_folder">儲存資料夾</string>
+    <string name="geotagging">地理位置標記</string>
+
+    <string name="cancel">取消</string>
+    <string name="edit">編輯</string>
+    <string name="save">儲存</string>
+    <string name="photo_being_edited">正在編輯的相片</string>
+    <string name="before_after">之前 · 之後</string>
+    <string name="exposure">曝光</string>
+    <string name="tool_light">光線</string>
+    <string name="tool_crop">裁切</string>
+    <string name="tool_color">色彩</string>
+    <string name="tool_beauty">美顏</string>
+    <string name="tool_markup">標註</string>
+    <string name="adj_exposure">曝光</string>
+    <string name="adj_contrast">對比</string>
+    <string name="adj_highlights">亮部</string>
+    <string name="adj_shadows">暗部</string>
+    <string name="adj_contrast_label">對比</string>
+    <string name="adj_highlights_label">亮部</string>
+    <string name="adj_shadows_label">暗部</string>
+    <string name="adj_saturation">飽和度</string>
+    <string name="adj_saturation_label">飽和度</string>
+    <string name="adj_warmth">色溫</string>
+    <string name="adj_warmth_label">色溫</string>
+    <string name="adj_smooth">柔膚</string>
+    <string name="adj_smooth_label">柔膚</string>
+    <string name="action_rotate_left">向左旋轉</string>
+    <string name="action_rotate_right">向右旋轉</string>
+    <string name="action_flip">翻轉</string>
+    <string name="crop_free">自由</string>
+    <string name="action_reset">重設</string>
+    <string name="action_undo">復原</string>
+    <string name="action_clear">清除</string>
+    <string name="markup_label">標註</string>
+    <string name="crop_label">裁切</string>
+    <string name="stroke_label">筆觸</string>
+    <string name="saving">正在儲存…</string>
+    <string name="saved">已儲存至 DCIM/HDCamera</string>
+    <string name="save_failed">無法儲存這次編輯</string>
+    <string name="edit_load_failed">無法開啟那張相片</string>
+
+    <string name="cd_flash">閃光燈</string>
+    <string name="cd_timer">自拍計時器</string>
+    <string name="cd_settings">設定</string>
+    <string name="cd_switch_camera">切換相機</string>
+    <string name="cd_shutter">快門</string>
+    <string name="cd_record">錄影</string>
+    <string name="cd_last_shot">最近一張</string>
+    <string name="cd_back">返回</string>
+    <string name="cd_search">搜尋</string>
+    <string name="cd_gallery">相簿</string>
+    <string name="cd_camera">相機</string>
+    <string name="cd_add_filter">新增濾鏡</string>
+    <string name="cd_stop">停止</string>
+    <string name="cd_mic_level">麥克風音量</string>
+    <string name="cd_pause">暫停錄影</string>
+    <string name="cd_resume">繼續錄影</string>
+    <string name="cd_snapshot">錄影時拍照</string>
+    <string name="cd_countdown">自拍計時倒數</string>
+    <string name="cd_language_flag">國旗</string>
+    <string name="cd_language_selected">已選取</string>
+
+    <!-- Legal -->
+    <string name="section_legal">法律條款</string>
+    <string name="privacy_policy">隱私權政策</string>
+    <string name="terms_conditions">服務條款</string>
+    <string name="link_open_failed">此裝置上沒有應用程式可以開啟該連結</string>
+    <string name="cd_opens_in_browser">在瀏覽器中開啟</string>
+</resources>

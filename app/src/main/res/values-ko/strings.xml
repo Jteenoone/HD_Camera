@@ -1,0 +1,179 @@
+<resources>
+    <string name="app_name">HD Camera</string>
+
+    <string name="skip">건너뛰기</string>
+    <string name="next">다음</string>
+    <string name="get_started">시작하기</string>
+    <string name="intro1_eyebrow">HD CAMERA</string>
+    <string name="intro1_title">모든 사진을\n최대 해상도로</string>
+    <string name="intro1_body">48 MP 사진, 4K 영상, 그리고 화면 전체를 그대로 보여 주는 뷰파인더. 잘리지도, 압축되지도 않습니다.</string>
+    <string name="intro2_eyebrow">프로 모드</string>
+    <string name="intro2_title">수동 제어는\n원할 때만</string>
+    <string name="intro2_body">ISO, 셔터, 화이트 밸런스, 초점을 다이얼 하나로. RAW로 찍거나 전부 자동으로 두어도 됩니다.</string>
+    <string name="intro3_eyebrow">필터와 뷰티</string>
+    <string name="intro3_title">찍기 전에\n결과를 확인</string>
+    <string name="intro3_body">필터와 뷰티 보정이 뷰파인더에 바로 적용되며, 강도는 언제든 낮출 수 있습니다.</string>
+    <string name="intro_visual_1">인트로 이미지 1</string>
+    <string name="intro_visual_2">인트로 이미지 2</string>
+    <string name="intro_visual_3">인트로 이미지 3</string>
+
+    <string name="language">언어</string>
+    <string name="language_body">HD Camera가 사용할 언어를 고르세요. 나중에 설정에서 바꿀 수 있습니다.</string>
+    <string name="continue_action">계속</string>
+
+    <string name="onboarding_image">온보딩 이미지</string>
+    <string name="permissions_title">뷰파인더에서 바로\nHD로 촬영하세요</string>
+    <string name="permissions_body">사진과 동영상을 촬영하려면 HD Camera에 카메라 접근 권한이 필요합니다.</string>
+    <string name="perm_camera">카메라</string>
+    <string name="perm_photos_video">사진 및 동영상</string>
+    <string name="perm_required">필수</string>
+    <string name="perm_granted">허용됨</string>
+    <string name="allow_and_continue">허용하고 계속</string>
+    <string name="not_now">나중에</string>
+
+    <string name="viewfinder_placeholder">뷰파인더 — 사진을 놓으세요</string>
+    <string name="flash_off">플래시 끔</string>
+    <string name="flash_auto">플래시 자동</string>
+    <string name="flash_on">플래시 켬</string>
+    <string name="flash_torch">손전등</string>
+    <string name="timer_off">타이머 끔</string>
+    <string name="timer_3s">3초</string>
+    <string name="timer_10s">10초</string>
+    <string name="camera_unavailable">카메라를 사용할 수 없습니다 — 권한을 확인하세요</string>
+    <string name="capture_failed">사진을 저장하지 못했습니다</string>
+    <string name="mode_unavailable">이 기기에는 해당 모드가 없습니다</string>
+    <string name="mode_night">야간</string>
+    <string name="mode_portrait">인물</string>
+    <string name="mode_beauty">뷰티</string>
+    <string name="mode_photo">사진</string>
+    <string name="mode_video">동영상</string>
+    <string name="mode_pro">프로</string>
+
+    <string name="pro_viewfinder">프로 뷰파인더</string>
+    <string name="manual_unsupported">이 카메라는 수동 노출을 지원하지 않습니다</string>
+    <string name="raw_unsupported">이 카메라는 RAW 촬영을 지원하지 않습니다</string>
+    <string name="histogram">히스토그램</string>
+    <string name="shutter">셔터</string>
+    <string name="focus">초점</string>
+
+    <string name="filtered_preview">필터 미리보기</string>
+    <string name="live_filters">실시간 필터</string>
+    <string name="compare">비교</string>
+    <string name="strength">강도</string>
+    <string name="filter_none">없음</string>
+    <string name="filter_vivid">비비드</string>
+    <string name="filter_fade">페이드</string>
+    <string name="filter_warm">웜</string>
+
+    <string name="recording">녹화 중</string>
+    <string name="recording_failed">녹화에 실패했습니다</string>
+    <string name="recording_without_audio">소리 없이 녹화 중 — 마이크 권한이 거부되었습니다</string>
+    <string name="eis_unsupported">이 카메라에는 손떨림 보정이 없습니다</string>
+    <string name="snapshot_unsupported">이 카메라는 녹화 중에 사진을 찍을 수 없습니다</string>
+    <string name="locked_while_recording">녹화 중에는 사용할 수 없습니다</string>
+    <string name="filter_preview_unsupported">실시간 필터 미리보기는 Android 12가 필요합니다</string>
+
+    <string name="gallery">갤러리</string>
+    <string name="select">선택</string>
+    <string name="filter_all">전체</string>
+    <string name="filter_photos">사진</string>
+    <string name="filter_video">동영상</string>
+    <string name="gallery_section_today">오늘</string>
+    <string name="gallery_section_yesterday">어제</string>
+    <plurals name="photo_count">
+        <item quantity="other">사진 %1$d장</item>
+    </plurals>
+    <plurals name="video_count">
+        <item quantity="other">동영상 %1$d개</item>
+    </plurals>
+    <string name="settings">설정</string>
+    <string name="gallery_empty">DCIM/HDCamera가 아직 비어 있습니다 — 한 장 찍어 보세요.</string>
+    <string name="search_hint">이름이나 날짜로 검색</string>
+    <string name="no_matches">검색 결과가 없습니다.</string>
+    <string name="done">완료</string>
+    <string name="delete_selected">%1$d개 삭제</string>
+
+    <string name="section_quality">품질</string>
+    <string name="photo_resolution">사진 해상도</string>
+    <string name="resolution_sub_sensor">센서 최대</string>
+    <string name="highest">최고</string>
+    <string name="high">높음</string>
+    <string name="standard">표준</string>
+    <string name="format">형식</string>
+    <string name="video">동영상</string>
+    <string name="section_viewfinder">뷰파인더</string>
+    <string name="grid_overlay">격자 표시</string>
+    <string name="shutter_sound">셔터음</string>
+    <string name="volume_key_shutter">음량 키로 촬영</string>
+    <string name="section_general">일반</string>
+    <string name="section_storage">저장</string>
+    <string name="save_folder">저장 폴더</string>
+    <string name="geotagging">위치 정보 기록</string>
+
+    <string name="cancel">취소</string>
+    <string name="edit">편집</string>
+    <string name="save">저장</string>
+    <string name="photo_being_edited">편집 중인 사진</string>
+    <string name="before_after">전 · 후</string>
+    <string name="exposure">노출</string>
+    <string name="tool_light">밝기</string>
+    <string name="tool_crop">자르기</string>
+    <string name="tool_color">색상</string>
+    <string name="tool_beauty">뷰티</string>
+    <string name="tool_markup">마크업</string>
+    <string name="adj_exposure">노출</string>
+    <string name="adj_contrast">대비</string>
+    <string name="adj_highlights">하이라이트</string>
+    <string name="adj_shadows">그림자</string>
+    <string name="adj_contrast_label">대비</string>
+    <string name="adj_highlights_label">하이라이트</string>
+    <string name="adj_shadows_label">그림자</string>
+    <string name="adj_saturation">채도</string>
+    <string name="adj_saturation_label">채도</string>
+    <string name="adj_warmth">색온도</string>
+    <string name="adj_warmth_label">색온도</string>
+    <string name="adj_smooth">부드럽게</string>
+    <string name="adj_smooth_label">부드럽게</string>
+    <string name="action_rotate_left">왼쪽으로 회전</string>
+    <string name="action_rotate_right">오른쪽으로 회전</string>
+    <string name="action_flip">뒤집기</string>
+    <string name="crop_free">자유</string>
+    <string name="action_reset">초기화</string>
+    <string name="action_undo">실행 취소</string>
+    <string name="action_clear">지우기</string>
+    <string name="markup_label">마크업</string>
+    <string name="crop_label">자르기</string>
+    <string name="stroke_label">선 굵기</string>
+    <string name="saving">저장 중…</string>
+    <string name="saved">DCIM/HDCamera에 저장됨</string>
+    <string name="save_failed">편집 내용을 저장하지 못했습니다</string>
+    <string name="edit_load_failed">그 사진을 열지 못했습니다</string>
+
+    <string name="cd_flash">플래시</string>
+    <string name="cd_timer">셀프 타이머</string>
+    <string name="cd_settings">설정</string>
+    <string name="cd_switch_camera">카메라 전환</string>
+    <string name="cd_shutter">셔터</string>
+    <string name="cd_record">녹화</string>
+    <string name="cd_last_shot">마지막 촬영</string>
+    <string name="cd_back">뒤로</string>
+    <string name="cd_search">검색</string>
+    <string name="cd_gallery">갤러리</string>
+    <string name="cd_camera">카메라</string>
+    <string name="cd_add_filter">필터 추가</string>
+    <string name="cd_stop">중지</string>
+    <string name="cd_mic_level">마이크 레벨</string>
+    <string name="cd_pause">녹화 일시정지</string>
+    <string name="cd_resume">녹화 재개</string>
+    <string name="cd_snapshot">녹화 중 사진 촬영</string>
+    <string name="cd_countdown">셀프 타이머 카운트다운</string>
+    <string name="cd_language_flag">국기</string>
+    <string name="cd_language_selected">선택됨</string>
+
+    <!-- Legal -->
+    <string name="section_legal">법적 고지</string>
+    <string name="privacy_policy">개인정보처리방침</string>
+    <string name="terms_conditions">이용약관</string>
+    <string name="link_open_failed">이 기기에서 해당 링크를 열 수 있는 앱이 없습니다</string>
+    <string name="cd_opens_in_browser">브라우저에서 열립니다</string>
+</resources>

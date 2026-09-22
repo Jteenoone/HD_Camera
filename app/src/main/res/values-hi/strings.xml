@@ -1,0 +1,181 @@
+<resources>
+    <string name="app_name">HD Camera</string>
+
+    <string name="skip">छोड़ें</string>
+    <string name="next">आगे</string>
+    <string name="get_started">शुरू करें</string>
+    <string name="intro1_eyebrow">एचडी कैमरा</string>
+    <string name="intro1_title">हर तस्वीर\nपूरे रिज़ॉल्यूशन में</string>
+    <string name="intro1_body">48 MP तस्वीरें, 4K वीडियो और एक ऐसा व्यूफ़ाइंडर जो पूरा फ़्रेम दिखाता है — न कुछ काटा गया, न कुछ दबाया गया।</string>
+    <string name="intro2_eyebrow">प्रो मोड</string>
+    <string name="intro2_title">मैनुअल नियंत्रण,\nसिर्फ़ जब आप चाहें</string>
+    <string name="intro2_body">ISO, शटर, व्हाइट बैलेंस और फ़ोकस एक ही डायल पर। RAW में शूट करें, या सब कुछ ऑटो पर छोड़ दें।</string>
+    <string name="intro3_eyebrow">फ़िल्टर और ब्यूटी</string>
+    <string name="intro3_title">शूट करने से पहले\nलुक देखें</string>
+    <string name="intro3_body">फ़िल्टर और ब्यूटी रीटच व्यूफ़ाइंडर में लाइव लगते हैं, और उनकी तीव्रता कभी भी घटाई जा सकती है।</string>
+    <string name="intro_visual_1">इंट्रो चित्र 1</string>
+    <string name="intro_visual_2">इंट्रो चित्र 2</string>
+    <string name="intro_visual_3">इंट्रो चित्र 3</string>
+
+    <string name="language">भाषा</string>
+    <string name="language_body">वह भाषा चुनें जिसमें HD Camera आपसे बात करे। इसे बाद में सेटिंग्स में बदला जा सकता है।</string>
+    <string name="continue_action">जारी रखें</string>
+
+    <string name="onboarding_image">ऑनबोर्डिंग चित्र</string>
+    <string name="permissions_title">एचडी में शूट करें,\nसीधे व्यूफ़ाइंडर में</string>
+    <string name="permissions_body">फ़ोटो और वीडियो लेने के लिए HD Camera को आपके कैमरा तक पहुँच चाहिए।</string>
+    <string name="perm_camera">कैमरा</string>
+    <string name="perm_photos_video">फ़ोटो और वीडियो</string>
+    <string name="perm_required">आवश्यक</string>
+    <string name="perm_granted">मिल गई</string>
+    <string name="allow_and_continue">अनुमति दें और जारी रखें</string>
+    <string name="not_now">अभी नहीं</string>
+
+    <string name="viewfinder_placeholder">व्यूफ़ाइंडर — एक फ़ोटो डालें</string>
+    <string name="flash_off">फ़्लैश बंद</string>
+    <string name="flash_auto">फ़्लैश ऑटो</string>
+    <string name="flash_on">फ़्लैश चालू</string>
+    <string name="flash_torch">टॉर्च</string>
+    <string name="timer_off">टाइमर बंद</string>
+    <string name="timer_3s">3 सेकंड</string>
+    <string name="timer_10s">10 सेकंड</string>
+    <string name="camera_unavailable">कैमरा उपलब्ध नहीं — अनुमतियाँ जाँचें</string>
+    <string name="capture_failed">फ़ोटो सहेजी नहीं जा सकी</string>
+    <string name="mode_unavailable">इस डिवाइस में यह मोड नहीं है</string>
+    <string name="mode_night">नाइट</string>
+    <string name="mode_portrait">पोर्ट्रेट</string>
+    <string name="mode_beauty">ब्यूटी</string>
+    <string name="mode_photo">फ़ोटो</string>
+    <string name="mode_video">वीडियो</string>
+    <string name="mode_pro">प्रो</string>
+
+    <string name="pro_viewfinder">प्रो व्यूफ़ाइंडर</string>
+    <string name="manual_unsupported">इस कैमरे में मैनुअल एक्सपोज़र नहीं है</string>
+    <string name="raw_unsupported">यह कैमरा RAW शूट नहीं कर सकता</string>
+    <string name="histogram">हिस्टोग्राम</string>
+    <string name="shutter">शटर</string>
+    <string name="focus">फ़ोकस</string>
+
+    <string name="filtered_preview">फ़िल्टर किया पूर्वावलोकन</string>
+    <string name="live_filters">लाइव फ़िल्टर</string>
+    <string name="compare">तुलना</string>
+    <string name="strength">तीव्रता</string>
+    <string name="filter_none">कोई नहीं</string>
+    <string name="filter_vivid">विविड</string>
+    <string name="filter_fade">फ़ेड</string>
+    <string name="filter_warm">वॉर्म</string>
+
+    <string name="recording">रिकॉर्डिंग</string>
+    <string name="recording_failed">रिकॉर्डिंग विफल</string>
+    <string name="recording_without_audio">बिना आवाज़ रिकॉर्डिंग — माइक्रोफ़ोन की अनुमति नहीं मिली</string>
+    <string name="eis_unsupported">इस कैमरे में स्टेबिलाइज़ेशन नहीं है</string>
+    <string name="snapshot_unsupported">यह कैमरा रिकॉर्डिंग के दौरान फ़ोटो नहीं ले सकता</string>
+    <string name="locked_while_recording">रिकॉर्डिंग के दौरान उपलब्ध नहीं</string>
+    <string name="filter_preview_unsupported">लाइव फ़िल्टर पूर्वावलोकन के लिए Android 12 चाहिए</string>
+
+    <string name="gallery">गैलरी</string>
+    <string name="select">चुनें</string>
+    <string name="filter_all">सभी</string>
+    <string name="filter_photos">फ़ोटो</string>
+    <string name="filter_video">वीडियो</string>
+    <string name="gallery_section_today">आज</string>
+    <string name="gallery_section_yesterday">कल</string>
+    <plurals name="photo_count">
+        <item quantity="one">%1$d फ़ोटो</item>
+        <item quantity="other">%1$d फ़ोटो</item>
+    </plurals>
+    <plurals name="video_count">
+        <item quantity="one">%1$d वीडियो</item>
+        <item quantity="other">%1$d वीडियो</item>
+    </plurals>
+    <string name="settings">सेटिंग्स</string>
+    <string name="gallery_empty">DCIM/HDCamera में अभी कुछ नहीं है — एक तस्वीर लें।</string>
+    <string name="search_hint">नाम या तारीख़ से खोजें</string>
+    <string name="no_matches">इस खोज से कुछ नहीं मिला।</string>
+    <string name="done">हो गया</string>
+    <string name="delete_selected">%1$d हटाएँ</string>
+
+    <string name="section_quality">गुणवत्ता</string>
+    <string name="photo_resolution">फ़ोटो रिज़ॉल्यूशन</string>
+    <string name="resolution_sub_sensor">सेंसर अधिकतम</string>
+    <string name="highest">उच्चतम</string>
+    <string name="high">उच्च</string>
+    <string name="standard">मानक</string>
+    <string name="format">फ़ॉर्मैट</string>
+    <string name="video">वीडियो</string>
+    <string name="section_viewfinder">व्यूफ़ाइंडर</string>
+    <string name="grid_overlay">ग्रिड ओवरले</string>
+    <string name="shutter_sound">शटर ध्वनि</string>
+    <string name="volume_key_shutter">वॉल्यूम बटन से शटर</string>
+    <string name="section_general">सामान्य</string>
+    <string name="section_storage">स्टोरेज</string>
+    <string name="save_folder">सहेजने का फ़ोल्डर</string>
+    <string name="geotagging">जियोटैगिंग</string>
+
+    <string name="cancel">रद्द करें</string>
+    <string name="edit">संपादन</string>
+    <string name="save">सहेजें</string>
+    <string name="photo_being_edited">संपादित की जा रही फ़ोटो</string>
+    <string name="before_after">पहले · बाद में</string>
+    <string name="exposure">एक्सपोज़र</string>
+    <string name="tool_light">प्रकाश</string>
+    <string name="tool_crop">क्रॉप</string>
+    <string name="tool_color">रंग</string>
+    <string name="tool_beauty">ब्यूटी</string>
+    <string name="tool_markup">मार्कअप</string>
+    <string name="adj_exposure">एक्सपोज़र</string>
+    <string name="adj_contrast">कंट्रास्ट</string>
+    <string name="adj_highlights">हाइलाइट्स</string>
+    <string name="adj_shadows">शैडो</string>
+    <string name="adj_contrast_label">कंट्रास्ट</string>
+    <string name="adj_highlights_label">हाइलाइट्स</string>
+    <string name="adj_shadows_label">शैडो</string>
+    <string name="adj_saturation">सैचुरेशन</string>
+    <string name="adj_saturation_label">सैचुरेशन</string>
+    <string name="adj_warmth">गर्माहट</string>
+    <string name="adj_warmth_label">गर्माहट</string>
+    <string name="adj_smooth">स्मूद</string>
+    <string name="adj_smooth_label">स्मूदिंग</string>
+    <string name="action_rotate_left">बाएँ घुमाएँ</string>
+    <string name="action_rotate_right">दाएँ घुमाएँ</string>
+    <string name="action_flip">पलटें</string>
+    <string name="crop_free">फ़्री</string>
+    <string name="action_reset">रीसेट</string>
+    <string name="action_undo">पूर्ववत करें</string>
+    <string name="action_clear">साफ़ करें</string>
+    <string name="markup_label">मार्कअप</string>
+    <string name="crop_label">क्रॉप</string>
+    <string name="stroke_label">स्ट्रोक</string>
+    <string name="saving">सहेजा जा रहा है…</string>
+    <string name="saved">DCIM/HDCamera में सहेजा गया</string>
+    <string name="save_failed">संपादन सहेजा नहीं जा सका</string>
+    <string name="edit_load_failed">वह फ़ोटो खोली नहीं जा सकी</string>
+
+    <string name="cd_flash">फ़्लैश</string>
+    <string name="cd_timer">सेल्फ़ टाइमर</string>
+    <string name="cd_settings">सेटिंग्स</string>
+    <string name="cd_switch_camera">कैमरा बदलें</string>
+    <string name="cd_shutter">शटर</string>
+    <string name="cd_record">रिकॉर्ड</string>
+    <string name="cd_last_shot">पिछली तस्वीर</string>
+    <string name="cd_back">वापस</string>
+    <string name="cd_search">खोजें</string>
+    <string name="cd_gallery">गैलरी</string>
+    <string name="cd_camera">कैमरा</string>
+    <string name="cd_add_filter">फ़िल्टर जोड़ें</string>
+    <string name="cd_stop">रोकें</string>
+    <string name="cd_mic_level">माइक्रोफ़ोन स्तर</string>
+    <string name="cd_pause">रिकॉर्डिंग रोकें</string>
+    <string name="cd_resume">रिकॉर्डिंग फिर शुरू करें</string>
+    <string name="cd_snapshot">रिकॉर्डिंग के दौरान फ़ोटो लें</string>
+    <string name="cd_countdown">सेल्फ़ टाइमर काउंटडाउन</string>
+    <string name="cd_language_flag">झंडा</string>
+    <string name="cd_language_selected">चयनित</string>
+
+    <!-- Legal -->
+    <string name="section_legal">कानूनी</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="terms_conditions">नियम और शर्तें</string>
+    <string name="link_open_failed">इस डिवाइस का कोई ऐप वह लिंक नहीं खोल सकता</string>
+    <string name="cd_opens_in_browser">आपके ब्राउज़र में खुलेगा</string>
+</resources>

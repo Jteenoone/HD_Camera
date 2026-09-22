@@ -110,6 +110,7 @@
             android:paddingBottom="8dp">
 
             <ImageView
+                android:id="@+id/micIcon"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:contentDescription="@string/cd_mic_level"
@@ -127,48 +128,48 @@
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="6dp"
+                    android:layout_height="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_audio_bar_on" />
+                    android:background="@drawable/bg_audio_bar_off" />
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="11dp"
+                    android:layout_height="6dp"
                     android:layout_marginStart="3dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_audio_bar_on" />
+                    android:background="@drawable/bg_audio_bar_off" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_audio_bar_off" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_audio_bar_off" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_audio_bar_off" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_audio_bar_off" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="16dp"
-                    android:layout_marginStart="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_audio_bar_on" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="9dp"
-                    android:layout_marginStart="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_audio_bar_on" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="5dp"
-                    android:layout_marginStart="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_audio_bar_off" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="4dp"
-                    android:layout_marginStart="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_audio_bar_off" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="2dp"
                     android:layout_marginStart="3dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_audio_bar_off" />
@@ -209,15 +210,34 @@
                 android:paddingStart="28dp"
                 android:paddingEnd="28dp">
 
-                <ImageView
-                    android:id="@+id/btnSnapshot"
+                <!--
+                    Idle: the last shot, which opens the Gallery. Recording: the same slot
+                    becomes Pause / Resume, so the thumb never has to travel.
+                -->
+                <FrameLayout
                     android:layout_width="@dimen/vf_side_button"
-                    android:layout_height="@dimen/vf_side_button"
-                    android:background="@drawable/bg_round_scrim_62"
-                    android:contentDescription="@string/cd_preview"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_frame_square"
-                    app:tint="@color/dc_text" />
+                    android:layout_height="@dimen/vf_side_button">
+
+                    <ImageView
+                        android:id="@+id/btnLastShot"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_thumb_border"
+                        android:contentDescription="@string/cd_last_shot"
+                        android:scaleType="centerCrop" />
+
+                    <ImageView
+                        android:id="@+id/btnPauseResume"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_round_scrim_62"
+                        android:contentDescription="@string/cd_pause"
+                        android:padding="14dp"
+                        android:src="@drawable/ic_pause"
+                        android:visibility="gone"
+                        app:tint="@color/dc_text"
+                        tools:visibility="visible" />
+                </FrameLayout>
 
                 <Space
                     android:layout_width="0dp"
@@ -244,15 +264,33 @@
                     android:layout_height="1dp"
                     android:layout_weight="1" />
 
-                <ImageView
-                    android:id="@+id/btnFlip"
+                <!-- Idle: flip the camera. Recording: take a still without stopping. -->
+                <FrameLayout
                     android:layout_width="@dimen/vf_side_button"
-                    android:layout_height="@dimen/vf_side_button"
-                    android:background="@drawable/bg_round_scrim_62"
-                    android:contentDescription="@string/cd_switch_camera"
-                    android:padding="14dp"
-                    android:src="@drawable/ic_flip_camera"
-                    app:tint="@color/dc_text" />
+                    android:layout_height="@dimen/vf_side_button">
+
+                    <ImageView
+                        android:id="@+id/btnFlip"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_round_scrim_62"
+                        android:contentDescription="@string/cd_switch_camera"
+                        android:padding="14dp"
+                        android:src="@drawable/ic_flip_camera"
+                        app:tint="@color/dc_text" />
+
+                    <ImageView
+                        android:id="@+id/btnSnapshot"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_round_scrim_62"
+                        android:contentDescription="@string/cd_snapshot"
+                        android:padding="13dp"
+                        android:src="@drawable/ic_camera"
+                        android:visibility="gone"
+                        app:tint="@color/dc_text"
+                        tools:visibility="visible" />
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

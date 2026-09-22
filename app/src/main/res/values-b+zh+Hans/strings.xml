@@ -1,0 +1,179 @@
+<resources>
+    <string name="app_name">HD Camera</string>
+
+    <string name="skip">跳过</string>
+    <string name="next">下一步</string>
+    <string name="get_started">开始使用</string>
+    <string name="intro1_eyebrow">HD CAMERA</string>
+    <string name="intro1_title">每一张\n都是完整分辨率</string>
+    <string name="intro1_body">4800 万像素照片、4K 视频，取景器完整呈现整个画面——不裁切，不压缩。</string>
+    <string name="intro2_eyebrow">专业模式</string>
+    <string name="intro2_title">需要时\n才动手动控制</string>
+    <string name="intro2_body">ISO、快门、白平衡与对焦集中在一个拨盘上。可以拍 RAW，也可以全部交给自动。</string>
+    <string name="intro3_eyebrow">滤镜与美颜</string>
+    <string name="intro3_title">拍摄前\n先看到效果</string>
+    <string name="intro3_body">滤镜和美颜在取景器中实时生效，强度随时可以调低。</string>
+    <string name="intro_visual_1">引导图 1</string>
+    <string name="intro_visual_2">引导图 2</string>
+    <string name="intro_visual_3">引导图 3</string>
+
+    <string name="language">语言</string>
+    <string name="language_body">选择 HD Camera 使用的语言。之后可以在设置中更改。</string>
+    <string name="continue_action">继续</string>
+
+    <string name="onboarding_image">引导页图片</string>
+    <string name="permissions_title">在取景器里\n直接拍高清</string>
+    <string name="permissions_body">HD Camera 需要访问你的相机来拍摄照片和视频。</string>
+    <string name="perm_camera">相机</string>
+    <string name="perm_photos_video">照片与视频</string>
+    <string name="perm_required">必需</string>
+    <string name="perm_granted">已授予</string>
+    <string name="allow_and_continue">允许并继续</string>
+    <string name="not_now">暂不</string>
+
+    <string name="viewfinder_placeholder">取景器——拖入一张照片</string>
+    <string name="flash_off">闪光灯关闭</string>
+    <string name="flash_auto">闪光灯自动</string>
+    <string name="flash_on">闪光灯开启</string>
+    <string name="flash_torch">手电筒</string>
+    <string name="timer_off">定时器关闭</string>
+    <string name="timer_3s">3 秒</string>
+    <string name="timer_10s">10 秒</string>
+    <string name="camera_unavailable">相机不可用——请检查权限</string>
+    <string name="capture_failed">照片保存失败</string>
+    <string name="mode_unavailable">此设备没有该模式</string>
+    <string name="mode_night">夜景</string>
+    <string name="mode_portrait">人像</string>
+    <string name="mode_beauty">美颜</string>
+    <string name="mode_photo">照片</string>
+    <string name="mode_video">视频</string>
+    <string name="mode_pro">专业</string>
+
+    <string name="pro_viewfinder">专业取景器</string>
+    <string name="manual_unsupported">此相机不支持手动曝光</string>
+    <string name="raw_unsupported">此相机无法拍摄 RAW</string>
+    <string name="histogram">直方图</string>
+    <string name="shutter">快门</string>
+    <string name="focus">对焦</string>
+
+    <string name="filtered_preview">滤镜预览</string>
+    <string name="live_filters">实时滤镜</string>
+    <string name="compare">对比</string>
+    <string name="strength">强度</string>
+    <string name="filter_none">无</string>
+    <string name="filter_vivid">鲜艳</string>
+    <string name="filter_fade">褪色</string>
+    <string name="filter_warm">暖调</string>
+
+    <string name="recording">录制中</string>
+    <string name="recording_failed">录制失败</string>
+    <string name="recording_without_audio">正在无声录制——麦克风权限被拒绝</string>
+    <string name="eis_unsupported">此相机没有防抖</string>
+    <string name="snapshot_unsupported">此相机无法在录制时拍照</string>
+    <string name="locked_while_recording">录制时不可用</string>
+    <string name="filter_preview_unsupported">实时滤镜预览需要 Android 12</string>
+
+    <string name="gallery">相册</string>
+    <string name="select">选择</string>
+    <string name="filter_all">全部</string>
+    <string name="filter_photos">照片</string>
+    <string name="filter_video">视频</string>
+    <string name="gallery_section_today">今天</string>
+    <string name="gallery_section_yesterday">昨天</string>
+    <plurals name="photo_count">
+        <item quantity="other">%1$d 张照片</item>
+    </plurals>
+    <plurals name="video_count">
+        <item quantity="other">%1$d 段视频</item>
+    </plurals>
+    <string name="settings">设置</string>
+    <string name="gallery_empty">DCIM/HDCamera 还是空的——先拍一张吧。</string>
+    <string name="search_hint">按名称或日期搜索</string>
+    <string name="no_matches">没有匹配的结果。</string>
+    <string name="done">完成</string>
+    <string name="delete_selected">删除 %1$d 项</string>
+
+    <string name="section_quality">画质</string>
+    <string name="photo_resolution">照片分辨率</string>
+    <string name="resolution_sub_sensor">传感器最大值</string>
+    <string name="highest">最高</string>
+    <string name="high">高</string>
+    <string name="standard">标准</string>
+    <string name="format">格式</string>
+    <string name="video">视频</string>
+    <string name="section_viewfinder">取景器</string>
+    <string name="grid_overlay">网格线</string>
+    <string name="shutter_sound">快门声</string>
+    <string name="volume_key_shutter">音量键快门</string>
+    <string name="section_general">通用</string>
+    <string name="section_storage">存储</string>
+    <string name="save_folder">保存文件夹</string>
+    <string name="geotagging">地理位置标记</string>
+
+    <string name="cancel">取消</string>
+    <string name="edit">编辑</string>
+    <string name="save">保存</string>
+    <string name="photo_being_edited">正在编辑的照片</string>
+    <string name="before_after">之前 · 之后</string>
+    <string name="exposure">曝光</string>
+    <string name="tool_light">光效</string>
+    <string name="tool_crop">裁剪</string>
+    <string name="tool_color">色彩</string>
+    <string name="tool_beauty">美颜</string>
+    <string name="tool_markup">标注</string>
+    <string name="adj_exposure">曝光</string>
+    <string name="adj_contrast">对比度</string>
+    <string name="adj_highlights">高光</string>
+    <string name="adj_shadows">阴影</string>
+    <string name="adj_contrast_label">对比度</string>
+    <string name="adj_highlights_label">高光</string>
+    <string name="adj_shadows_label">阴影</string>
+    <string name="adj_saturation">饱和度</string>
+    <string name="adj_saturation_label">饱和度</string>
+    <string name="adj_warmth">色温</string>
+    <string name="adj_warmth_label">色温</string>
+    <string name="adj_smooth">磨皮</string>
+    <string name="adj_smooth_label">磨皮</string>
+    <string name="action_rotate_left">向左旋转</string>
+    <string name="action_rotate_right">向右旋转</string>
+    <string name="action_flip">翻转</string>
+    <string name="crop_free">自由</string>
+    <string name="action_reset">重置</string>
+    <string name="action_undo">撤销</string>
+    <string name="action_clear">清除</string>
+    <string name="markup_label">标注</string>
+    <string name="crop_label">裁剪</string>
+    <string name="stroke_label">笔触</string>
+    <string name="saving">正在保存…</string>
+    <string name="saved">已保存到 DCIM/HDCamera</string>
+    <string name="save_failed">无法保存所做的编辑</string>
+    <string name="edit_load_failed">无法打开那张照片</string>
+
+    <string name="cd_flash">闪光灯</string>
+    <string name="cd_timer">自拍定时器</string>
+    <string name="cd_settings">设置</string>
+    <string name="cd_switch_camera">切换相机</string>
+    <string name="cd_shutter">快门</string>
+    <string name="cd_record">录制</string>
+    <string name="cd_last_shot">最近一张</string>
+    <string name="cd_back">返回</string>
+    <string name="cd_search">搜索</string>
+    <string name="cd_gallery">相册</string>
+    <string name="cd_camera">相机</string>
+    <string name="cd_add_filter">添加滤镜</string>
+    <string name="cd_stop">停止</string>
+    <string name="cd_mic_level">麦克风音量</string>
+    <string name="cd_pause">暂停录制</string>
+    <string name="cd_resume">继续录制</string>
+    <string name="cd_snapshot">录制时拍照</string>
+    <string name="cd_countdown">自拍定时倒数</string>
+    <string name="cd_language_flag">国旗</string>
+    <string name="cd_language_selected">已选择</string>
+
+    <!-- Legal -->
+    <string name="section_legal">法律条款</string>
+    <string name="privacy_policy">隐私政策</string>
+    <string name="terms_conditions">服务条款</string>
+    <string name="link_open_failed">此设备上没有应用可以打开该链接</string>
+    <string name="cd_opens_in_browser">在浏览器中打开</string>
+</resources>

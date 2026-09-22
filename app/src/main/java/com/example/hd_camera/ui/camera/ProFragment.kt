@@ -170,13 +170,18 @@ class ProFragment : Fragment(R.layout.fragment_pro), ShutterKeyHandler {
     }
 
     private fun displayValue(parameter: Parameter): String = when (parameter) {
-        Parameter.ISO -> controls.iso?.toString() ?: AUTO
-        Parameter.SHUTTER -> controls.exposureTimeNanos?.let(::formatShutter) ?: AUTO
-        Parameter.WB -> controls.whiteBalance.label
+        Parameter.ISO -> controls.iso?.toString() ?: getString(R.string.wb_auto)
+        Parameter.SHUTTER ->
+            controls.exposureTimeNanos?.let(::formatShutter) ?: getString(R.string.wb_auto)
+        Parameter.WB -> getString(controls.whiteBalance.label)
         Parameter.EV -> formatEv()
         Parameter.FOCUS -> controls.manualFocusDistance?.let { distance ->
-            if (distance <= 0f) "INF" else String.format("%.2fm", 1f / distance)
-        } ?: "AF"
+            if (distance <= 0f) {
+                getString(R.string.focus_infinity)
+            } else {
+                getString(R.string.focus_distance_meters, 1f / distance)
+            }
+        } ?: getString(R.string.focus_value)
     }
 
     // ── The dial ───────────────────────────────────────────────────────────
@@ -220,9 +225,9 @@ class ProFragment : Fragment(R.layout.fragment_pro), ShutterKeyHandler {
     private fun bindIsoLegend() {
         val binding = binding ?: return
         val range = capabilities?.isoRange ?: return
-        binding.tvIsoMin.text = range.lower.toString()
-        binding.tvIsoMid.text = isoAt(0.5f).toString()
-        binding.tvIsoMax.text = range.upper.toString()
+        binding.tvIsoMin.text = getString(R.string.iso_tick, range.lower)
+        binding.tvIsoMid.text = getString(R.string.iso_tick, isoAt(0.5f))
+        binding.tvIsoMax.text = getString(R.string.iso_tick, range.upper)
         if (capabilities?.supportsManualExposure == false) {
             binding.tvCameraStatus.visibility = View.VISIBLE
             binding.tvCameraStatus.text = getString(R.string.manual_unsupported)
@@ -249,16 +254,16 @@ class ProFragment : Fragment(R.layout.fragment_pro), ShutterKeyHandler {
     private fun formatShutter(nanos: Long): String {
         val seconds = nanos / 1_000_000_000.0
         return if (seconds >= 1.0) {
-            String.format("%.1fs", seconds)
+            getString(R.string.shutter_seconds, seconds)
         } else {
-            "1/" + (1.0 / seconds).roundToInt()
+            getString(R.string.shutter_fraction, (1.0 / seconds).roundToInt())
         }
     }
 
     private fun formatEv(): String {
         val step = engine?.exposureCompensationStep() ?: 0.0
         val value = evIndex * step
-        return String.format("%+.1f", value)
+        return getString(R.string.ev_signed, value)
     }
 
     // ── RAW ────────────────────────────────────────────────────────────────
@@ -266,7 +271,9 @@ class ProFragment : Fragment(R.layout.fragment_pro), ShutterKeyHandler {
     private fun toggleRaw() {
         val engine = engine ?: return
         val binding = binding ?: return
-        if (!engine.rawSupported()) {
+        // Before the session is up the capability query answers "no"; that is not the same
+        // as the camera refusing RAW, and it used to make the button look dead on entry.
+        if (engine.isReady && !engine.rawSupported()) {
             binding.tvCameraStatus.visibility = View.VISIBLE
             binding.tvCameraStatus.text = getString(R.string.raw_unsupported)
             binding.tvCameraStatus.postDelayed({
@@ -287,7 +294,7 @@ class ProFragment : Fragment(R.layout.fragment_pro), ShutterKeyHandler {
     private fun updateRawBadge() {
         val binding = binding ?: return
         // The badge must show what this camera can really do, not just what is configured.
-        val supported = engine?.rawSupported() == true
+        val supported = engine?.let { !it.isReady || it.rawSupported() } ?: true
         val rawOn = supported && CaptureSettings.format(requireContext()) == CaptureFormat.JPEG_RAW
         binding.btnRaw.alpha = if (supported) 1f else 0.4f
         binding.btnRaw.setBackgroundResource(
@@ -357,7 +364,6 @@ class ProFragment : Fragment(R.layout.fragment_pro), ShutterKeyHandler {
     }
 
     private companion object {
-        const val AUTO = "AUTO"
         const val DEFAULT_ISO = 400
         const val HISTOGRAM_BINS = 32
         const val SAMPLE_STEP = 8

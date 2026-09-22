@@ -1,19 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Asked for at the moment recording starts, never during onboarding. -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!--
+        The geotagging switch in Settings reads the last fix, and nothing else. Android 12
+        makes the two location permissions a pair: asking for the precise one alone lets the
+        user grant "approximate" and leaves the app holding neither.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!--
+        Only Android 9 and below need a permission to reach DCIM/HDCamera. From Android 10
+        scoped storage lets the app write there and read back what it wrote, so no media
+        permission is declared: the Gallery never looks outside its own folder.
+    -->
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-<!--    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />-->
-<!--    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />-->
+        android:maxSdkVersion="28" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
 
     <uses-feature
         android:name="android.hardware.camera.any"
         android:required="false" />
 
+    <!-- Package visibility for the browser the legal links open in. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
+    <!--
+        UnusedTranslation is suppressed for one case only: Indonesian ships in values-in,
+        the resource qualifier Android has always used, while the locale config names it by
+        its BCP-47 tag "id". Lint compares the two strings and sees a mismatch; the platform
+        folds one onto the other and resolves it correctly.
+    -->
     <application
         android:name=".HdCameraApp"
         android:allowBackup="true"
@@ -21,9 +52,11 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:localeConfig="@xml/locales_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HD_Camera">
+        android:theme="@style/Theme.HD_Camera"
+        tools:ignore="UnusedTranslation">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -36,6 +69,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--
+            Below Android 13 AppCompat keeps the per-app locale itself; this is the holder
+            it looks for to know it may. The service is never started.
+        -->
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
     </application>
 
 </manifest>

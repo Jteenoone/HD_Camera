@@ -40,15 +40,18 @@ fun LinearLayout.bindCaptureModes(
         item.modeLabel.letterSpacing = letterSpacing
         item.modeDot.setBackgroundResource(dot)
 
+        // The unselected labels used to be faint grey in a regular weight, which the scrim
+        // swallowed on a bright scene. Medium at 80% white still reads as "not the current
+        // mode" next to the white semibold one, but stays legible.
         val isActive = index == activeIndex
         item.modeLabel.typeface = ResourcesCompat.getFont(
             context,
-            if (isActive) R.font.ibm_plex_sans_semibold else R.font.ibm_plex_sans_regular
+            if (isActive) R.font.ibm_plex_sans_semibold else R.font.ibm_plex_sans_medium
         )
         item.modeLabel.setTextColor(
             ContextCompat.getColor(
                 context,
-                if (isActive) R.color.dc_text else R.color.dc_text_faint
+                if (isActive) R.color.dc_text else R.color.dc_text_80
             )
         )
         item.modeDot.visibility = if (isActive) View.VISIBLE else View.INVISIBLE

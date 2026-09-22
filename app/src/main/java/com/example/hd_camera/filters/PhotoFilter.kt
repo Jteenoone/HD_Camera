@@ -9,26 +9,27 @@ import android.graphics.RenderEffect
 import android.os.Build
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
 import com.example.hd_camera.R
 
 /**
  * The five live filters of screen 07. Each one is a colour matrix, so the same definition
  * drives the preview (through a RenderEffect) and the saved file (through a Paint filter).
  */
-enum class PhotoFilter(val label: String, @DrawableRes val preview: Int) {
+enum class PhotoFilter(@StringRes val label: Int, @DrawableRes val preview: Int) {
 
-    NONE("None", R.drawable.original) {
+    NONE(R.string.filter_none, R.drawable.original) {
         override fun matrix(): ColorMatrix = ColorMatrix()
     },
 
-    VIVID("Vivid", R.drawable.vivid) {
+    VIVID(R.string.filter_vivid, R.drawable.vivid) {
         override fun matrix(): ColorMatrix = ColorMatrix().apply {
             setSaturation(1.55f)
             postConcat(contrast(1.12f))
         }
     },
 
-    FADE("Fade", R.drawable.fade) {
+    FADE(R.string.filter_fade, R.drawable.fade) {
         override fun matrix(): ColorMatrix = ColorMatrix().apply {
             setSaturation(0.78f)
             // Lift the blacks the way a faded film stock does.
@@ -41,14 +42,14 @@ enum class PhotoFilter(val label: String, @DrawableRes val preview: Int) {
         }
     },
 
-    BW("B&W", R.drawable.bw) {
+    BW(R.string.filter_bw, R.drawable.bw) {
         override fun matrix(): ColorMatrix = ColorMatrix().apply {
             setSaturation(0f)
             postConcat(contrast(1.08f))
         }
     },
 
-    WARM("Warm", R.drawable.warm) {
+    WARM(R.string.filter_warm, R.drawable.warm) {
         override fun matrix(): ColorMatrix = ColorMatrix(floatArrayOf(
             1.10f, 0f, 0f, 0f, 6f,
             0f, 1.02f, 0f, 0f, 2f,

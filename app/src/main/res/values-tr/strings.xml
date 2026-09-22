@@ -1,0 +1,181 @@
+<resources>
+    <string name="app_name">HD Camera</string>
+
+    <string name="skip">Atla</string>
+    <string name="next">İleri</string>
+    <string name="get_started">Başla</string>
+    <string name="intro1_eyebrow">HD CAMERA</string>
+    <string name="intro1_title">Her kare\ntam çözünürlükte</string>
+    <string name="intro1_body">48 MP fotoğraf, 4K video ve kadrajın tamamını gösteren bir vizör — hiçbir şey kırpılmaz, hiçbir şey sıkıştırılmaz.</string>
+    <string name="intro2_eyebrow">PRO MODU</string>
+    <string name="intro2_title">Manuel kontrol,\nsadece istediğinde</string>
+    <string name="intro2_body">ISO, enstantane, beyaz dengesi ve odak tek bir kadranda. RAW çek ya da her şeyi otomatikte bırak.</string>
+    <string name="intro3_eyebrow">FİLTRELER VE GÜZELLİK</string>
+    <string name="intro3_title">Çekmeden önce\ngörünümü gör</string>
+    <string name="intro3_body">Filtreler ve güzellik rötuşu vizörde canlı uygulanır; şiddetini istediğin an azaltabilirsin.</string>
+    <string name="intro_visual_1">Tanıtım görseli 1</string>
+    <string name="intro_visual_2">Tanıtım görseli 2</string>
+    <string name="intro_visual_3">Tanıtım görseli 3</string>
+
+    <string name="language">Dil</string>
+    <string name="language_body">HD Camera\'nın konuştuğu dili seç. Daha sonra Ayarlar\'dan değiştirebilirsin.</string>
+    <string name="continue_action">Devam</string>
+
+    <string name="onboarding_image">Karşılama görseli</string>
+    <string name="permissions_title">HD çek,\ndoğrudan vizörde</string>
+    <string name="permissions_body">HD Camera\'nın fotoğraf ve video çekmek için kameraya erişmesi gerekiyor.</string>
+    <string name="perm_camera">Kamera</string>
+    <string name="perm_photos_video">Fotoğraf ve video</string>
+    <string name="perm_required">Gerekli</string>
+    <string name="perm_granted">Verildi</string>
+    <string name="allow_and_continue">İzin ver ve devam et</string>
+    <string name="not_now">Şimdi değil</string>
+
+    <string name="viewfinder_placeholder">Vizör — bir fotoğraf bırak</string>
+    <string name="flash_off">Flaş kapalı</string>
+    <string name="flash_auto">Flaş otomatik</string>
+    <string name="flash_on">Flaş açık</string>
+    <string name="flash_torch">Fener</string>
+    <string name="timer_off">Zamanlayıcı kapalı</string>
+    <string name="timer_3s">3 saniye</string>
+    <string name="timer_10s">10 saniye</string>
+    <string name="camera_unavailable">Kamera kullanılamıyor — izinleri kontrol et</string>
+    <string name="capture_failed">Fotoğraf kaydedilemedi</string>
+    <string name="mode_unavailable">Bu cihazda böyle bir mod yok</string>
+    <string name="mode_night">Gece</string>
+    <string name="mode_portrait">Portre</string>
+    <string name="mode_beauty">Güzellik</string>
+    <string name="mode_photo">Fotoğraf</string>
+    <string name="mode_video">Video</string>
+    <string name="mode_pro">Pro</string>
+
+    <string name="pro_viewfinder">Pro vizör</string>
+    <string name="manual_unsupported">Bu kamerada manuel pozlama yok</string>
+    <string name="raw_unsupported">Bu kamera RAW çekemiyor</string>
+    <string name="histogram">HİSTOGRAM</string>
+    <string name="shutter">ENSTANTANE</string>
+    <string name="focus">ODAK</string>
+
+    <string name="filtered_preview">Filtreli önizleme</string>
+    <string name="live_filters">Canlı filtreler</string>
+    <string name="compare">Karşılaştır</string>
+    <string name="strength">ŞİDDET</string>
+    <string name="filter_none">Yok</string>
+    <string name="filter_vivid">Canlı</string>
+    <string name="filter_fade">Soluk</string>
+    <string name="filter_warm">Sıcak</string>
+
+    <string name="recording">Kaydediliyor</string>
+    <string name="recording_failed">Kayıt başarısız</string>
+    <string name="recording_without_audio">Sessiz kaydediliyor — mikrofon izni reddedildi</string>
+    <string name="eis_unsupported">Bu kamerada sabitleme yok</string>
+    <string name="snapshot_unsupported">Bu kamera kayıt sırasında fotoğraf çekemiyor</string>
+    <string name="locked_while_recording">Kayıt sırasında kullanılamaz</string>
+    <string name="filter_preview_unsupported">Canlı filtre önizlemesi Android 12 gerektirir</string>
+
+    <string name="gallery">Galeri</string>
+    <string name="select">Seç</string>
+    <string name="filter_all">Tümü</string>
+    <string name="filter_photos">Fotoğraflar</string>
+    <string name="filter_video">Video</string>
+    <string name="gallery_section_today">BUGÜN</string>
+    <string name="gallery_section_yesterday">DÜN</string>
+    <plurals name="photo_count">
+        <item quantity="one">%1$d FOTOĞRAF</item>
+        <item quantity="other">%1$d FOTOĞRAF</item>
+    </plurals>
+    <plurals name="video_count">
+        <item quantity="one">%1$d VİDEO</item>
+        <item quantity="other">%1$d VİDEO</item>
+    </plurals>
+    <string name="settings">Ayarlar</string>
+    <string name="gallery_empty">DCIM/HDCamera henüz boş — bir kare çek.</string>
+    <string name="search_hint">Ada veya tarihe göre ara</string>
+    <string name="no_matches">Bu aramayla eşleşen bir şey yok.</string>
+    <string name="done">Bitti</string>
+    <string name="delete_selected">%1$d öğeyi sil</string>
+
+    <string name="section_quality">KALİTE</string>
+    <string name="photo_resolution">Fotoğraf çözünürlüğü</string>
+    <string name="resolution_sub_sensor">Sensör azamisi</string>
+    <string name="highest">En yüksek</string>
+    <string name="high">Yüksek</string>
+    <string name="standard">Standart</string>
+    <string name="format">Biçim</string>
+    <string name="video">Video</string>
+    <string name="section_viewfinder">VİZÖR</string>
+    <string name="grid_overlay">Izgara</string>
+    <string name="shutter_sound">Deklanşör sesi</string>
+    <string name="volume_key_shutter">Ses tuşuyla çekim</string>
+    <string name="section_general">GENEL</string>
+    <string name="section_storage">DEPOLAMA</string>
+    <string name="save_folder">Kayıt klasörü</string>
+    <string name="geotagging">Konum etiketi</string>
+
+    <string name="cancel">İptal</string>
+    <string name="edit">DÜZENLE</string>
+    <string name="save">Kaydet</string>
+    <string name="photo_being_edited">Düzenlenen fotoğraf</string>
+    <string name="before_after">ÖNCE · SONRA</string>
+    <string name="exposure">POZLAMA</string>
+    <string name="tool_light">Işık</string>
+    <string name="tool_crop">Kırp</string>
+    <string name="tool_color">Renk</string>
+    <string name="tool_beauty">Güzellik</string>
+    <string name="tool_markup">İşaretle</string>
+    <string name="adj_exposure">Pozlama</string>
+    <string name="adj_contrast">Kontrast</string>
+    <string name="adj_highlights">Açık tonlar</string>
+    <string name="adj_shadows">Gölgeler</string>
+    <string name="adj_contrast_label">KONTRAST</string>
+    <string name="adj_highlights_label">AÇIK TONLAR</string>
+    <string name="adj_shadows_label">GÖLGELER</string>
+    <string name="adj_saturation">Doygunluk</string>
+    <string name="adj_saturation_label">DOYGUNLUK</string>
+    <string name="adj_warmth">Sıcaklık</string>
+    <string name="adj_warmth_label">SICAKLIK</string>
+    <string name="adj_smooth">Yumuşat</string>
+    <string name="adj_smooth_label">YUMUŞATMA</string>
+    <string name="action_rotate_left">Sola döndür</string>
+    <string name="action_rotate_right">Sağa döndür</string>
+    <string name="action_flip">Çevir</string>
+    <string name="crop_free">Serbest</string>
+    <string name="action_reset">Sıfırla</string>
+    <string name="action_undo">Geri al</string>
+    <string name="action_clear">Temizle</string>
+    <string name="markup_label">İŞARETLEME</string>
+    <string name="crop_label">KIRPMA</string>
+    <string name="stroke_label">ÇİZGİ</string>
+    <string name="saving">Kaydediliyor…</string>
+    <string name="saved">DCIM/HDCamera klasörüne kaydedildi</string>
+    <string name="save_failed">Düzenleme kaydedilemedi</string>
+    <string name="edit_load_failed">Bu fotoğraf açılamadı</string>
+
+    <string name="cd_flash">Flaş</string>
+    <string name="cd_timer">Zamanlayıcı</string>
+    <string name="cd_settings">Ayarlar</string>
+    <string name="cd_switch_camera">Kamerayı değiştir</string>
+    <string name="cd_shutter">Deklanşör</string>
+    <string name="cd_record">Kaydet</string>
+    <string name="cd_last_shot">Son çekim</string>
+    <string name="cd_back">Geri</string>
+    <string name="cd_search">Ara</string>
+    <string name="cd_gallery">Galeri</string>
+    <string name="cd_camera">Kamera</string>
+    <string name="cd_add_filter">Filtre ekle</string>
+    <string name="cd_stop">Durdur</string>
+    <string name="cd_mic_level">Mikrofon seviyesi</string>
+    <string name="cd_pause">Kaydı duraklat</string>
+    <string name="cd_resume">Kaydı sürdür</string>
+    <string name="cd_snapshot">Kayıt sırasında fotoğraf çek</string>
+    <string name="cd_countdown">Zamanlayıcı geri sayımı</string>
+    <string name="cd_language_flag">Bayrak</string>
+    <string name="cd_language_selected">Seçili</string>
+
+    <!-- Legal -->
+    <string name="section_legal">YASAL</string>
+    <string name="privacy_policy">Gizlilik Politikası</string>
+    <string name="terms_conditions">Şartlar ve Koşullar</string>
+    <string name="link_open_failed">Bu cihazda o bağlantıyı açabilecek bir uygulama yok</string>
+    <string name="cd_opens_in_browser">Tarayıcınızda açılır</string>
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One row of the language picker: flag, name, radio. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/languageRow"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/language_row_height"
+    android:background="@drawable/bg_language_row"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="14dp"
+    android:paddingEnd="14dp">
+
+    <ImageView
+        android:id="@+id/languageFlag"
+        android:layout_width="@dimen/language_flag"
+        android:layout_height="@dimen/language_flag"
+        android:contentDescription="@string/cd_language_flag"
+        tools:src="@drawable/flag_en" />
+
+    <TextView
+        android:id="@+id/languageName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.HD.ListTitle"
+        android:textDirection="locale"
+        tools:text="English" />
+
+    <View
+        android:id="@+id/languageRadio"
+        android:layout_width="@dimen/language_radio"
+        android:layout_height="@dimen/language_radio"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/bg_radio_off" />
+</LinearLayout>

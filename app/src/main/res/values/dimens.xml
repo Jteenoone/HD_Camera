@@ -13,8 +13,17 @@
     <dimen name="record_inner_recording">32dp</dimen>
     <dimen name="zoom_chip">44dp</dimen>
     <dimen name="zoom_chip_active">48dp</dimen>
+    <!-- Sits below the resolution badge rather than over the middle of the frame. -->
+    <dimen name="countdown_size">140dp</dimen>
+    <dimen name="countdown_top_margin">56dp</dimen>
+
+    <!-- Language picker -->
+    <dimen name="language_row_height">54dp</dimen>
+    <dimen name="language_flag">26dp</dimen>
+    <dimen name="language_radio">20dp</dimen>
 
     <!-- Common controls -->
+    <dimen name="touch_target">48dp</dimen>
     <dimen name="pill_button_height">52dp</dimen>
     <dimen name="chip_height">34dp</dimen>
     <dimen name="filter_thumb">58dp</dimen>

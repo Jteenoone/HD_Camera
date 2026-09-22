@@ -1,0 +1,181 @@
+<resources>
+    <string name="app_name">HD Camera</string>
+
+    <string name="skip">Überspringen</string>
+    <string name="next">Weiter</string>
+    <string name="get_started">Loslegen</string>
+    <string name="intro1_eyebrow">HD CAMERA</string>
+    <string name="intro1_title">Jede Aufnahme in\nvoller Auflösung</string>
+    <string name="intro1_body">48-MP-Fotos, 4K-Video und ein Sucher, der das ganze Bild zeigt — nichts beschnitten, nichts komprimiert.</string>
+    <string name="intro2_eyebrow">PRO-MODUS</string>
+    <string name="intro2_title">Manuelle Kontrolle,\nnur wenn du sie willst</string>
+    <string name="intro2_body">ISO, Belichtungszeit, Weißabgleich und Fokus auf einem Rad. Fotografiere in RAW oder lass alles auf Automatik.</string>
+    <string name="intro3_eyebrow">FILTER &amp; BEAUTY</string>
+    <string name="intro3_title">Sieh den Look,\nbevor du auslöst</string>
+    <string name="intro3_body">Filter und Beauty-Retusche wirken live im Sucher, mit einer Stärke, die sich jederzeit zurücknehmen lässt.</string>
+    <string name="intro_visual_1">Intro-Bild 1</string>
+    <string name="intro_visual_2">Intro-Bild 2</string>
+    <string name="intro_visual_3">Intro-Bild 3</string>
+
+    <string name="language">Sprache</string>
+    <string name="language_body">Wähle die Sprache von HD Camera. Du kannst sie später in den Einstellungen ändern.</string>
+    <string name="continue_action">Weiter</string>
+
+    <string name="onboarding_image">Begrüßungsbild</string>
+    <string name="permissions_title">In HD aufnehmen,\ndirekt im Sucher</string>
+    <string name="permissions_body">HD Camera benötigt Zugriff auf deine Kamera, um Fotos und Videos aufzunehmen.</string>
+    <string name="perm_camera">Kamera</string>
+    <string name="perm_photos_video">Fotos &amp; Video</string>
+    <string name="perm_required">Erforderlich</string>
+    <string name="perm_granted">Erteilt</string>
+    <string name="allow_and_continue">Erlauben und fortfahren</string>
+    <string name="not_now">Jetzt nicht</string>
+
+    <string name="viewfinder_placeholder">Sucher — Foto hier ablegen</string>
+    <string name="flash_off">Blitz aus</string>
+    <string name="flash_auto">Blitz automatisch</string>
+    <string name="flash_on">Blitz an</string>
+    <string name="flash_torch">Taschenlampe</string>
+    <string name="timer_off">Timer aus</string>
+    <string name="timer_3s">3 Sekunden</string>
+    <string name="timer_10s">10 Sekunden</string>
+    <string name="camera_unavailable">Kamera nicht verfügbar — Berechtigungen prüfen</string>
+    <string name="capture_failed">Foto konnte nicht gespeichert werden</string>
+    <string name="mode_unavailable">Dieses Gerät hat diesen Modus nicht</string>
+    <string name="mode_night">Nacht</string>
+    <string name="mode_portrait">Porträt</string>
+    <string name="mode_beauty">Beauty</string>
+    <string name="mode_photo">Foto</string>
+    <string name="mode_video">Video</string>
+    <string name="mode_pro">Pro</string>
+
+    <string name="pro_viewfinder">Pro-Sucher</string>
+    <string name="manual_unsupported">Diese Kamera hat keine manuelle Belichtung</string>
+    <string name="raw_unsupported">Diese Kamera kann kein RAW aufnehmen</string>
+    <string name="histogram">HISTOGRAMM</string>
+    <string name="shutter">ZEIT</string>
+    <string name="focus">FOKUS</string>
+
+    <string name="filtered_preview">Gefilterte Vorschau</string>
+    <string name="live_filters">Live-Filter</string>
+    <string name="compare">Vergleichen</string>
+    <string name="strength">STÄRKE</string>
+    <string name="filter_none">Keiner</string>
+    <string name="filter_vivid">Kräftig</string>
+    <string name="filter_fade">Verblasst</string>
+    <string name="filter_warm">Warm</string>
+
+    <string name="recording">Aufnahme</string>
+    <string name="recording_failed">Aufnahme fehlgeschlagen</string>
+    <string name="recording_without_audio">Aufnahme ohne Ton — Mikrofonberechtigung verweigert</string>
+    <string name="eis_unsupported">Diese Kamera hat keine Stabilisierung</string>
+    <string name="snapshot_unsupported">Diese Kamera kann während der Aufnahme keine Fotos machen</string>
+    <string name="locked_while_recording">Während der Aufnahme nicht verfügbar</string>
+    <string name="filter_preview_unsupported">Die Live-Filtervorschau braucht Android 12</string>
+
+    <string name="gallery">Galerie</string>
+    <string name="select">Auswählen</string>
+    <string name="filter_all">Alle</string>
+    <string name="filter_photos">Fotos</string>
+    <string name="filter_video">Video</string>
+    <string name="gallery_section_today">HEUTE</string>
+    <string name="gallery_section_yesterday">GESTERN</string>
+    <plurals name="photo_count">
+        <item quantity="one">%1$d FOTO</item>
+        <item quantity="other">%1$d FOTOS</item>
+    </plurals>
+    <plurals name="video_count">
+        <item quantity="one">%1$d VIDEO</item>
+        <item quantity="other">%1$d VIDEOS</item>
+    </plurals>
+    <string name="settings">Einstellungen</string>
+    <string name="gallery_empty">In DCIM/HDCamera ist noch nichts — mach eine Aufnahme.</string>
+    <string name="search_hint">Nach Name oder Datum suchen</string>
+    <string name="no_matches">Keine Treffer für diese Suche.</string>
+    <string name="done">Fertig</string>
+    <string name="delete_selected">%1$d löschen</string>
+
+    <string name="section_quality">QUALITÄT</string>
+    <string name="photo_resolution">Fotoauflösung</string>
+    <string name="resolution_sub_sensor">Sensormaximum</string>
+    <string name="highest">Höchste</string>
+    <string name="high">Hoch</string>
+    <string name="standard">Standard</string>
+    <string name="format">Format</string>
+    <string name="video">Video</string>
+    <string name="section_viewfinder">SUCHER</string>
+    <string name="grid_overlay">Gitternetz</string>
+    <string name="shutter_sound">Auslöseton</string>
+    <string name="volume_key_shutter">Auslösen mit Lautstärketaste</string>
+    <string name="section_general">ALLGEMEIN</string>
+    <string name="section_storage">SPEICHER</string>
+    <string name="save_folder">Speicherordner</string>
+    <string name="geotagging">Geotagging</string>
+
+    <string name="cancel">Abbrechen</string>
+    <string name="edit">BEARBEITEN</string>
+    <string name="save">Speichern</string>
+    <string name="photo_being_edited">Foto in Bearbeitung</string>
+    <string name="before_after">VORHER · NACHHER</string>
+    <string name="exposure">BELICHTUNG</string>
+    <string name="tool_light">Licht</string>
+    <string name="tool_crop">Zuschneiden</string>
+    <string name="tool_color">Farbe</string>
+    <string name="tool_beauty">Beauty</string>
+    <string name="tool_markup">Markierung</string>
+    <string name="adj_exposure">Belichtung</string>
+    <string name="adj_contrast">Kontrast</string>
+    <string name="adj_highlights">Lichter</string>
+    <string name="adj_shadows">Schatten</string>
+    <string name="adj_contrast_label">KONTRAST</string>
+    <string name="adj_highlights_label">LICHTER</string>
+    <string name="adj_shadows_label">SCHATTEN</string>
+    <string name="adj_saturation">Sättigung</string>
+    <string name="adj_saturation_label">SÄTTIGUNG</string>
+    <string name="adj_warmth">Wärme</string>
+    <string name="adj_warmth_label">WÄRME</string>
+    <string name="adj_smooth">Glätten</string>
+    <string name="adj_smooth_label">GLÄTTUNG</string>
+    <string name="action_rotate_left">Nach links drehen</string>
+    <string name="action_rotate_right">Nach rechts drehen</string>
+    <string name="action_flip">Spiegeln</string>
+    <string name="crop_free">Frei</string>
+    <string name="action_reset">Zurücksetzen</string>
+    <string name="action_undo">Rückgängig</string>
+    <string name="action_clear">Löschen</string>
+    <string name="markup_label">MARKIERUNG</string>
+    <string name="crop_label">ZUSCHNITT</string>
+    <string name="stroke_label">STRICHSTÄRKE</string>
+    <string name="saving">Wird gespeichert…</string>
+    <string name="saved">In DCIM/HDCamera gespeichert</string>
+    <string name="save_failed">Bearbeitung konnte nicht gespeichert werden</string>
+    <string name="edit_load_failed">Dieses Foto konnte nicht geöffnet werden</string>
+
+    <string name="cd_flash">Blitz</string>
+    <string name="cd_timer">Selbstauslöser</string>
+    <string name="cd_settings">Einstellungen</string>
+    <string name="cd_switch_camera">Kamera wechseln</string>
+    <string name="cd_shutter">Auslöser</string>
+    <string name="cd_record">Aufnehmen</string>
+    <string name="cd_last_shot">Letzte Aufnahme</string>
+    <string name="cd_back">Zurück</string>
+    <string name="cd_search">Suchen</string>
+    <string name="cd_gallery">Galerie</string>
+    <string name="cd_camera">Kamera</string>
+    <string name="cd_add_filter">Filter hinzufügen</string>
+    <string name="cd_stop">Stopp</string>
+    <string name="cd_mic_level">Mikrofonpegel</string>
+    <string name="cd_pause">Aufnahme pausieren</string>
+    <string name="cd_resume">Aufnahme fortsetzen</string>
+    <string name="cd_snapshot">Foto während der Aufnahme machen</string>
+    <string name="cd_countdown">Countdown des Selbstauslösers</string>
+    <string name="cd_language_flag">Flagge</string>
+    <string name="cd_language_selected">Ausgewählt</string>
+
+    <!-- Legal -->
+    <string name="section_legal">RECHTLICHES</string>
+    <string name="privacy_policy">Datenschutzerklärung</string>
+    <string name="terms_conditions">Nutzungsbedingungen</string>
+    <string name="link_open_failed">Keine App auf diesem Gerät kann diesen Link öffnen</string>
+    <string name="cd_opens_in_browser">Wird im Browser geöffnet</string>
+</resources>

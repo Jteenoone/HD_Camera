@@ -1,0 +1,185 @@
+<resources>
+    <string name="app_name">HD Camera</string>
+
+    <string name="skip">Пропустить</string>
+    <string name="next">Далее</string>
+    <string name="get_started">Начать</string>
+    <string name="intro1_eyebrow">HD CAMERA</string>
+    <string name="intro1_title">Каждый снимок —\nв полном разрешении</string>
+    <string name="intro1_body">Фото 48 Мп, видео 4K и видоискатель, показывающий весь кадр: ничего не обрезано и не сжато.</string>
+    <string name="intro2_eyebrow">РЕЖИМ PRO</string>
+    <string name="intro2_title">Ручное управление —\nтолько когда нужно</string>
+    <string name="intro2_body">ISO, выдержка, баланс белого и фокус на одном диске. Снимайте в RAW или оставьте всё на автомате.</string>
+    <string name="intro3_eyebrow">ФИЛЬТРЫ И РЕТУШЬ</string>
+    <string name="intro3_title">Смотрите результат\nдо съёмки</string>
+    <string name="intro3_body">Фильтры и бьюти-ретушь применяются прямо в видоискателе, а их силу можно убавить в любой момент.</string>
+    <string name="intro_visual_1">Вступительная иллюстрация 1</string>
+    <string name="intro_visual_2">Вступительная иллюстрация 2</string>
+    <string name="intro_visual_3">Вступительная иллюстрация 3</string>
+
+    <string name="language">Язык</string>
+    <string name="language_body">Выберите язык, на котором говорит HD Camera. Его можно сменить позже в настройках.</string>
+    <string name="continue_action">Продолжить</string>
+
+    <string name="onboarding_image">Приветственная иллюстрация</string>
+    <string name="permissions_title">Снимайте в HD\nпрямо в видоискателе</string>
+    <string name="permissions_body">HD Camera нужен доступ к камере, чтобы снимать фото и видео.</string>
+    <string name="perm_camera">Камера</string>
+    <string name="perm_photos_video">Фото и видео</string>
+    <string name="perm_required">Требуется</string>
+    <string name="perm_granted">Предоставлено</string>
+    <string name="allow_and_continue">Разрешить и продолжить</string>
+    <string name="not_now">Не сейчас</string>
+
+    <string name="viewfinder_placeholder">Видоискатель — перетащите фото</string>
+    <string name="flash_off">Вспышка выключена</string>
+    <string name="flash_auto">Вспышка авто</string>
+    <string name="flash_on">Вспышка включена</string>
+    <string name="flash_torch">Фонарик</string>
+    <string name="timer_off">Таймер выключен</string>
+    <string name="timer_3s">3 секунды</string>
+    <string name="timer_10s">10 секунд</string>
+    <string name="camera_unavailable">Камера недоступна — проверьте разрешения</string>
+    <string name="capture_failed">Не удалось сохранить фото</string>
+    <string name="mode_unavailable">На этом устройстве такого режима нет</string>
+    <string name="mode_night">Ночь</string>
+    <string name="mode_portrait">Портрет</string>
+    <string name="mode_beauty">Ретушь</string>
+    <string name="mode_photo">Фото</string>
+    <string name="mode_video">Видео</string>
+    <string name="mode_pro">Pro</string>
+
+    <string name="pro_viewfinder">Видоискатель Pro</string>
+    <string name="manual_unsupported">У этой камеры нет ручной экспозиции</string>
+    <string name="raw_unsupported">Эта камера не снимает в RAW</string>
+    <string name="histogram">ГИСТОГРАММА</string>
+    <string name="shutter">ВЫДЕРЖКА</string>
+    <string name="focus">ФОКУС</string>
+
+    <string name="filtered_preview">Просмотр с фильтром</string>
+    <string name="live_filters">Живые фильтры</string>
+    <string name="compare">Сравнить</string>
+    <string name="strength">СИЛА</string>
+    <string name="filter_none">Без фильтра</string>
+    <string name="filter_vivid">Сочный</string>
+    <string name="filter_fade">Выцветший</string>
+    <string name="filter_warm">Тёплый</string>
+
+    <string name="recording">Запись</string>
+    <string name="recording_failed">Не удалось записать</string>
+    <string name="recording_without_audio">Запись без звука — доступ к микрофону отклонён</string>
+    <string name="eis_unsupported">У этой камеры нет стабилизации</string>
+    <string name="snapshot_unsupported">Эта камера не снимает фото во время записи</string>
+    <string name="locked_while_recording">Недоступно во время записи</string>
+    <string name="filter_preview_unsupported">Для живых фильтров нужен Android 12</string>
+
+    <string name="gallery">Галерея</string>
+    <string name="select">Выбрать</string>
+    <string name="filter_all">Все</string>
+    <string name="filter_photos">Фото</string>
+    <string name="filter_video">Видео</string>
+    <string name="gallery_section_today">СЕГОДНЯ</string>
+    <string name="gallery_section_yesterday">ВЧЕРА</string>
+    <plurals name="photo_count">
+        <item quantity="one">%1$d ФОТО</item>
+        <item quantity="few">%1$d ФОТО</item>
+        <item quantity="many">%1$d ФОТО</item>
+        <item quantity="other">%1$d ФОТО</item>
+    </plurals>
+    <plurals name="video_count">
+        <item quantity="one">%1$d ВИДЕО</item>
+        <item quantity="few">%1$d ВИДЕО</item>
+        <item quantity="many">%1$d ВИДЕО</item>
+        <item quantity="other">%1$d ВИДЕО</item>
+    </plurals>
+    <string name="settings">Настройки</string>
+    <string name="gallery_empty">В DCIM/HDCamera пока пусто — сделайте снимок.</string>
+    <string name="search_hint">Поиск по имени или дате</string>
+    <string name="no_matches">По этому запросу ничего нет.</string>
+    <string name="done">Готово</string>
+    <string name="delete_selected">Удалить %1$d</string>
+
+    <string name="section_quality">КАЧЕСТВО</string>
+    <string name="photo_resolution">Разрешение фото</string>
+    <string name="resolution_sub_sensor">Максимум сенсора</string>
+    <string name="highest">Максимальное</string>
+    <string name="high">Высокое</string>
+    <string name="standard">Стандартное</string>
+    <string name="format">Формат</string>
+    <string name="video">Видео</string>
+    <string name="section_viewfinder">ВИДОИСКАТЕЛЬ</string>
+    <string name="grid_overlay">Сетка кадра</string>
+    <string name="shutter_sound">Звук затвора</string>
+    <string name="volume_key_shutter">Съёмка кнопкой громкости</string>
+    <string name="section_general">ОБЩЕЕ</string>
+    <string name="section_storage">ХРАНИЛИЩЕ</string>
+    <string name="save_folder">Папка сохранения</string>
+    <string name="geotagging">Геометки</string>
+
+    <string name="cancel">Отмена</string>
+    <string name="edit">РЕДАКТОР</string>
+    <string name="save">Сохранить</string>
+    <string name="photo_being_edited">Редактируемое фото</string>
+    <string name="before_after">ДО · ПОСЛЕ</string>
+    <string name="exposure">ЭКСПОЗИЦИЯ</string>
+    <string name="tool_light">Свет</string>
+    <string name="tool_crop">Кадрирование</string>
+    <string name="tool_color">Цвет</string>
+    <string name="tool_beauty">Ретушь</string>
+    <string name="tool_markup">Разметка</string>
+    <string name="adj_exposure">Экспозиция</string>
+    <string name="adj_contrast">Контраст</string>
+    <string name="adj_highlights">Света</string>
+    <string name="adj_shadows">Тени</string>
+    <string name="adj_contrast_label">КОНТРАСТ</string>
+    <string name="adj_highlights_label">СВЕТА</string>
+    <string name="adj_shadows_label">ТЕНИ</string>
+    <string name="adj_saturation">Насыщенность</string>
+    <string name="adj_saturation_label">НАСЫЩЕННОСТЬ</string>
+    <string name="adj_warmth">Теплота</string>
+    <string name="adj_warmth_label">ТЕПЛОТА</string>
+    <string name="adj_smooth">Сглаживание</string>
+    <string name="adj_smooth_label">СГЛАЖИВАНИЕ</string>
+    <string name="action_rotate_left">Повернуть влево</string>
+    <string name="action_rotate_right">Повернуть вправо</string>
+    <string name="action_flip">Отразить</string>
+    <string name="crop_free">Свободно</string>
+    <string name="action_reset">Сбросить</string>
+    <string name="action_undo">Отменить</string>
+    <string name="action_clear">Очистить</string>
+    <string name="markup_label">РАЗМЕТКА</string>
+    <string name="crop_label">КАДРИРОВАНИЕ</string>
+    <string name="stroke_label">ТОЛЩИНА</string>
+    <string name="saving">Сохранение…</string>
+    <string name="saved">Сохранено в DCIM/HDCamera</string>
+    <string name="save_failed">Не удалось сохранить правку</string>
+    <string name="edit_load_failed">Не удалось открыть это фото</string>
+
+    <string name="cd_flash">Вспышка</string>
+    <string name="cd_timer">Таймер</string>
+    <string name="cd_settings">Настройки</string>
+    <string name="cd_switch_camera">Сменить камеру</string>
+    <string name="cd_shutter">Затвор</string>
+    <string name="cd_record">Запись</string>
+    <string name="cd_last_shot">Последний снимок</string>
+    <string name="cd_back">Назад</string>
+    <string name="cd_search">Поиск</string>
+    <string name="cd_gallery">Галерея</string>
+    <string name="cd_camera">Камера</string>
+    <string name="cd_add_filter">Добавить фильтр</string>
+    <string name="cd_stop">Стоп</string>
+    <string name="cd_mic_level">Уровень микрофона</string>
+    <string name="cd_pause">Приостановить запись</string>
+    <string name="cd_resume">Возобновить запись</string>
+    <string name="cd_snapshot">Снять фото во время записи</string>
+    <string name="cd_countdown">Обратный отсчёт таймера</string>
+    <string name="cd_language_flag">Флаг</string>
+    <string name="cd_language_selected">Выбрано</string>
+
+    <!-- Legal -->
+    <string name="section_legal">ПРАВОВАЯ ИНФОРМАЦИЯ</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="terms_conditions">Условия использования</string>
+    <string name="link_open_failed">На этом устройстве нет приложения, способного открыть эту ссылку</string>
+    <string name="cd_opens_in_browser">Откроется в браузере</string>
+</resources>

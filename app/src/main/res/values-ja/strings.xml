@@ -1,0 +1,179 @@
+<resources>
+    <string name="app_name">HD Camera</string>
+
+    <string name="skip">スキップ</string>
+    <string name="next">次へ</string>
+    <string name="get_started">はじめる</string>
+    <string name="intro1_eyebrow">HD CAMERA</string>
+    <string name="intro1_title">すべての一枚を\nフル解像度で</string>
+    <string name="intro1_body">48 MP の静止画、4K 動画、そして画面いっぱいの画角を映すファインダー。切り取りも圧縮もありません。</string>
+    <string name="intro2_eyebrow">プロモード</string>
+    <string name="intro2_title">マニュアル操作は\n必要なときだけ</string>
+    <string name="intro2_body">ISO、シャッター、ホワイトバランス、フォーカスをひとつのダイヤルで。RAW で撮っても、すべてオートのままでも構いません。</string>
+    <string name="intro3_eyebrow">フィルターとビューティー</string>
+    <string name="intro3_title">撮る前に\n仕上がりを確認</string>
+    <string name="intro3_body">フィルターとビューティー補正はファインダーにそのまま反映され、強さはいつでも下げられます。</string>
+    <string name="intro_visual_1">イントロ画像 1</string>
+    <string name="intro_visual_2">イントロ画像 2</string>
+    <string name="intro_visual_3">イントロ画像 3</string>
+
+    <string name="language">言語</string>
+    <string name="language_body">HD Camera の表示言語を選んでください。あとから設定で変更できます。</string>
+    <string name="continue_action">続ける</string>
+
+    <string name="onboarding_image">オンボーディング画像</string>
+    <string name="permissions_title">ファインダーから\nそのまま HD 撮影</string>
+    <string name="permissions_body">写真と動画を撮影するため、HD Camera はカメラへのアクセスを必要とします。</string>
+    <string name="perm_camera">カメラ</string>
+    <string name="perm_photos_video">写真と動画</string>
+    <string name="perm_required">必須</string>
+    <string name="perm_granted">許可済み</string>
+    <string name="allow_and_continue">許可して続ける</string>
+    <string name="not_now">今はしない</string>
+
+    <string name="viewfinder_placeholder">ファインダー — 写真をドロップ</string>
+    <string name="flash_off">フラッシュ オフ</string>
+    <string name="flash_auto">フラッシュ 自動</string>
+    <string name="flash_on">フラッシュ オン</string>
+    <string name="flash_torch">ライト</string>
+    <string name="timer_off">タイマー オフ</string>
+    <string name="timer_3s">3 秒</string>
+    <string name="timer_10s">10 秒</string>
+    <string name="camera_unavailable">カメラを利用できません — 権限を確認してください</string>
+    <string name="capture_failed">写真を保存できませんでした</string>
+    <string name="mode_unavailable">この端末にそのモードはありません</string>
+    <string name="mode_night">ナイト</string>
+    <string name="mode_portrait">ポートレート</string>
+    <string name="mode_beauty">ビューティー</string>
+    <string name="mode_photo">写真</string>
+    <string name="mode_video">ビデオ</string>
+    <string name="mode_pro">プロ</string>
+
+    <string name="pro_viewfinder">プロ ファインダー</string>
+    <string name="manual_unsupported">このカメラはマニュアル露出に対応していません</string>
+    <string name="raw_unsupported">このカメラは RAW 撮影に対応していません</string>
+    <string name="histogram">ヒストグラム</string>
+    <string name="shutter">シャッター</string>
+    <string name="focus">フォーカス</string>
+
+    <string name="filtered_preview">フィルター適用プレビュー</string>
+    <string name="live_filters">ライブフィルター</string>
+    <string name="compare">比較</string>
+    <string name="strength">強さ</string>
+    <string name="filter_none">なし</string>
+    <string name="filter_vivid">ビビッド</string>
+    <string name="filter_fade">フェード</string>
+    <string name="filter_warm">ウォーム</string>
+
+    <string name="recording">録画中</string>
+    <string name="recording_failed">録画に失敗しました</string>
+    <string name="recording_without_audio">音声なしで録画中 — マイクの権限が拒否されました</string>
+    <string name="eis_unsupported">このカメラに手ぶれ補正はありません</string>
+    <string name="snapshot_unsupported">このカメラは録画中に写真を撮れません</string>
+    <string name="locked_while_recording">録画中は使用できません</string>
+    <string name="filter_preview_unsupported">ライブフィルターのプレビューには Android 12 が必要です</string>
+
+    <string name="gallery">ギャラリー</string>
+    <string name="select">選択</string>
+    <string name="filter_all">すべて</string>
+    <string name="filter_photos">写真</string>
+    <string name="filter_video">ビデオ</string>
+    <string name="gallery_section_today">今日</string>
+    <string name="gallery_section_yesterday">昨日</string>
+    <plurals name="photo_count">
+        <item quantity="other">写真 %1$d 枚</item>
+    </plurals>
+    <plurals name="video_count">
+        <item quantity="other">動画 %1$d 本</item>
+    </plurals>
+    <string name="settings">設定</string>
+    <string name="gallery_empty">DCIM/HDCamera にはまだ何もありません — 一枚撮ってみましょう。</string>
+    <string name="search_hint">名前または日付で検索</string>
+    <string name="no_matches">一致するものはありません。</string>
+    <string name="done">完了</string>
+    <string name="delete_selected">%1$d 件を削除</string>
+
+    <string name="section_quality">画質</string>
+    <string name="photo_resolution">写真の解像度</string>
+    <string name="resolution_sub_sensor">センサー最大</string>
+    <string name="highest">最高</string>
+    <string name="high">高</string>
+    <string name="standard">標準</string>
+    <string name="format">フォーマット</string>
+    <string name="video">ビデオ</string>
+    <string name="section_viewfinder">ファインダー</string>
+    <string name="grid_overlay">グリッド表示</string>
+    <string name="shutter_sound">シャッター音</string>
+    <string name="volume_key_shutter">音量キーでシャッター</string>
+    <string name="section_general">一般</string>
+    <string name="section_storage">保存先</string>
+    <string name="save_folder">保存フォルダ</string>
+    <string name="geotagging">位置情報の付加</string>
+
+    <string name="cancel">キャンセル</string>
+    <string name="edit">編集</string>
+    <string name="save">保存</string>
+    <string name="photo_being_edited">編集中の写真</string>
+    <string name="before_after">編集前 · 編集後</string>
+    <string name="exposure">露出</string>
+    <string name="tool_light">ライト</string>
+    <string name="tool_crop">切り抜き</string>
+    <string name="tool_color">カラー</string>
+    <string name="tool_beauty">ビューティー</string>
+    <string name="tool_markup">マークアップ</string>
+    <string name="adj_exposure">露出</string>
+    <string name="adj_contrast">コントラスト</string>
+    <string name="adj_highlights">ハイライト</string>
+    <string name="adj_shadows">シャドウ</string>
+    <string name="adj_contrast_label">コントラスト</string>
+    <string name="adj_highlights_label">ハイライト</string>
+    <string name="adj_shadows_label">シャドウ</string>
+    <string name="adj_saturation">彩度</string>
+    <string name="adj_saturation_label">彩度</string>
+    <string name="adj_warmth">色温度</string>
+    <string name="adj_warmth_label">色温度</string>
+    <string name="adj_smooth">スムージング</string>
+    <string name="adj_smooth_label">スムージング</string>
+    <string name="action_rotate_left">左に回転</string>
+    <string name="action_rotate_right">右に回転</string>
+    <string name="action_flip">反転</string>
+    <string name="crop_free">フリー</string>
+    <string name="action_reset">リセット</string>
+    <string name="action_undo">元に戻す</string>
+    <string name="action_clear">消去</string>
+    <string name="markup_label">マークアップ</string>
+    <string name="crop_label">切り抜き</string>
+    <string name="stroke_label">線の太さ</string>
+    <string name="saving">保存中…</string>
+    <string name="saved">DCIM/HDCamera に保存しました</string>
+    <string name="save_failed">編集を保存できませんでした</string>
+    <string name="edit_load_failed">その写真を開けませんでした</string>
+
+    <string name="cd_flash">フラッシュ</string>
+    <string name="cd_timer">セルフタイマー</string>
+    <string name="cd_settings">設定</string>
+    <string name="cd_switch_camera">カメラを切り替え</string>
+    <string name="cd_shutter">シャッター</string>
+    <string name="cd_record">録画</string>
+    <string name="cd_last_shot">最後の撮影</string>
+    <string name="cd_back">戻る</string>
+    <string name="cd_search">検索</string>
+    <string name="cd_gallery">ギャラリー</string>
+    <string name="cd_camera">カメラ</string>
+    <string name="cd_add_filter">フィルターを追加</string>
+    <string name="cd_stop">停止</string>
+    <string name="cd_mic_level">マイクレベル</string>
+    <string name="cd_pause">録画を一時停止</string>
+    <string name="cd_resume">録画を再開</string>
+    <string name="cd_snapshot">録画中に写真を撮る</string>
+    <string name="cd_countdown">セルフタイマーのカウントダウン</string>
+    <string name="cd_language_flag">国旗</string>
+    <string name="cd_language_selected">選択中</string>
+
+    <!-- Legal -->
+    <string name="section_legal">法的情報</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="terms_conditions">利用規約</string>
+    <string name="link_open_failed">この端末にはそのリンクを開けるアプリがありません</string>
+    <string name="cd_opens_in_browser">ブラウザで開きます</string>
+</resources>

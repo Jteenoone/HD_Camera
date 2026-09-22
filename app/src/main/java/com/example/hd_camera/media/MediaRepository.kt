@@ -4,7 +4,8 @@ import android.content.Context
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import androidx.core.net.toUri
+import androidx.core.os.ConfigurationCompat
+import com.example.hd_camera.R
 import com.example.hd_camera.data.CaptureSettings
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -24,22 +25,12 @@ data class MediaItem(
     val isRaw: Boolean get() = mimeType.endsWith("dng", ignoreCase = true)
 }
 
-data class MediaSection(val label: String, val items: List<MediaItem>) {
-
-    /** e.g. "TODAY · 8 PHOTOS · 2 VIDEOS" */
-    val title: String
-        get() {
-            val photos = items.count { !it.isVideo }
-            val videos = items.size - photos
-            val counts = buildList {
-                if (photos > 0) add(photos.toString() + " PHOTO" + plural(photos))
-                if (videos > 0) add(videos.toString() + " VIDEO" + plural(videos))
-            }
-            return if (counts.isEmpty()) label else label + " · " + counts.joinToString(" · ")
-        }
-
-    private fun plural(count: Int): String = if (count == 1) "" else "S"
-}
+/**
+ * One day's worth of the grid. [label] is the heading on its own — the Gallery search
+ * matches against it — and [title] is the heading with its counts, both already in the
+ * user's language.
+ */
+data class MediaSection(val label: String, val title: String, val items: List<MediaItem>)
 
 /** The chips across the top of the Gallery screen. */
 enum class MediaFilter { ALL, PHOTOS, VIDEO, RAW }
@@ -57,7 +48,7 @@ object MediaRepository {
     )
 
     suspend fun load(context: Context, filter: MediaFilter): List<MediaSection> =
-        withContext(Dispatchers.IO) { groupByDay(query(context, filter)) }
+        withContext(Dispatchers.IO) { groupByDay(context, query(context, filter)) }
 
     suspend fun latest(context: Context): MediaItem? =
         withContext(Dispatchers.IO) { query(context, MediaFilter.ALL).firstOrNull() }
@@ -138,9 +129,12 @@ object MediaRepository {
     }
 
     /** "TODAY · 8 PHOTOS" and friends, exactly as the design groups the grid. */
-    private fun groupByDay(items: List<MediaItem>): List<MediaSection> {
+    private fun groupByDay(context: Context, items: List<MediaItem>): List<MediaSection> {
         if (items.isEmpty()) return emptyList()
-        val dayFormat = SimpleDateFormat("MMM d, yyyy", Locale.US)
+        // The heading follows the device language, so the date format follows it too.
+        val locale = ConfigurationCompat.getLocales(context.resources.configuration)
+            .get(0) ?: Locale.getDefault()
+        val dayFormat = SimpleDateFormat("MMM d, yyyy", locale)
         val today = startOfDay(System.currentTimeMillis())
         val yesterday = today - DAY_MILLIS
 
@@ -149,12 +143,33 @@ object MediaRepository {
             .toSortedMap(compareByDescending { it })
             .map { (day, dayItems) ->
                 val label = when (day) {
-                    today -> "TODAY"
-                    yesterday -> "YESTERDAY"
-                    else -> dayFormat.format(Date(day)).uppercase(Locale.US)
+                    today -> context.getString(R.string.gallery_section_today)
+                    yesterday -> context.getString(R.string.gallery_section_yesterday)
+                    else -> dayFormat.format(Date(day)).uppercase(locale)
                 }
-                MediaSection(label, dayItems)
+                MediaSection(label, sectionTitle(context, label, dayItems), dayItems)
             }
+    }
+
+    /** e.g. "TODAY · 8 PHOTOS · 2 VIDEOS", with the counts pluralised by the locale. */
+    fun sectionTitle(context: Context, label: String, items: List<MediaItem>): String {
+        val photos = items.count { !it.isVideo }
+        val videos = items.size - photos
+        val counts = buildList {
+            if (photos > 0) {
+                add(context.resources.getQuantityString(R.plurals.photo_count, photos, photos))
+            }
+            if (videos > 0) {
+                add(context.resources.getQuantityString(R.plurals.video_count, videos, videos))
+            }
+        }
+        if (counts.isEmpty()) return label
+        val separator = context.getString(R.string.gallery_section_separator)
+        return context.getString(
+            R.string.gallery_section_title,
+            label,
+            counts.joinToString(separator)
+        )
     }
 
     private fun startOfDay(millis: Long): Long = Calendar.getInstance().apply {

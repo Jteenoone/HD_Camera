@@ -1,0 +1,179 @@
+<resources>
+    <string name="app_name">HD Camera</string>
+
+    <string name="skip">Lewati</string>
+    <string name="next">Lanjut</string>
+    <string name="get_started">Mulai</string>
+    <string name="intro1_eyebrow">HD CAMERA</string>
+    <string name="intro1_title">Setiap bidikan\ndalam resolusi penuh</string>
+    <string name="intro1_body">Foto 48 MP, video 4K, dan jendela bidik yang menampilkan seluruh bingkai — tidak ada yang dipangkas atau dikompresi.</string>
+    <string name="intro2_eyebrow">MODE PRO</string>
+    <string name="intro2_title">Kendali manual,\nhanya saat kamu mau</string>
+    <string name="intro2_body">ISO, rana, white balance, dan fokus dalam satu dial. Potret dalam RAW, atau biarkan semuanya otomatis.</string>
+    <string name="intro3_eyebrow">FILTER &amp; BEAUTY</string>
+    <string name="intro3_title">Lihat hasilnya\nsebelum memotret</string>
+    <string name="intro3_body">Filter dan retusan beauty tampil langsung di jendela bidik, dengan kekuatan yang bisa kamu turunkan kapan saja.</string>
+    <string name="intro_visual_1">Gambar intro 1</string>
+    <string name="intro_visual_2">Gambar intro 2</string>
+    <string name="intro_visual_3">Gambar intro 3</string>
+
+    <string name="language">Bahasa</string>
+    <string name="language_body">Pilih bahasa yang dipakai HD Camera. Kamu bisa menggantinya nanti di Setelan.</string>
+    <string name="continue_action">Lanjutkan</string>
+
+    <string name="onboarding_image">Gambar sambutan</string>
+    <string name="permissions_title">Rekam dalam HD,\nlangsung di jendela bidik</string>
+    <string name="permissions_body">HD Camera perlu akses ke kamera untuk memotret dan merekam video.</string>
+    <string name="perm_camera">Kamera</string>
+    <string name="perm_photos_video">Foto &amp; video</string>
+    <string name="perm_required">Diperlukan</string>
+    <string name="perm_granted">Diberikan</string>
+    <string name="allow_and_continue">Izinkan dan lanjutkan</string>
+    <string name="not_now">Nanti saja</string>
+
+    <string name="viewfinder_placeholder">Jendela bidik — lepaskan sebuah foto</string>
+    <string name="flash_off">Lampu kilat mati</string>
+    <string name="flash_auto">Lampu kilat otomatis</string>
+    <string name="flash_on">Lampu kilat nyala</string>
+    <string name="flash_torch">Senter</string>
+    <string name="timer_off">Timer mati</string>
+    <string name="timer_3s">3 detik</string>
+    <string name="timer_10s">10 detik</string>
+    <string name="camera_unavailable">Kamera tidak tersedia — periksa izinnya</string>
+    <string name="capture_failed">Foto tidak dapat disimpan</string>
+    <string name="mode_unavailable">Perangkat ini tidak punya mode itu</string>
+    <string name="mode_night">Malam</string>
+    <string name="mode_portrait">Potret</string>
+    <string name="mode_beauty">Beauty</string>
+    <string name="mode_photo">Foto</string>
+    <string name="mode_video">Video</string>
+    <string name="mode_pro">Pro</string>
+
+    <string name="pro_viewfinder">Jendela bidik Pro</string>
+    <string name="manual_unsupported">Kamera ini tidak punya pencahayaan manual</string>
+    <string name="raw_unsupported">Kamera ini tidak bisa memotret RAW</string>
+    <string name="histogram">HISTOGRAM</string>
+    <string name="shutter">RANA</string>
+    <string name="focus">FOKUS</string>
+
+    <string name="filtered_preview">Pratinjau berfilter</string>
+    <string name="live_filters">Filter langsung</string>
+    <string name="compare">Bandingkan</string>
+    <string name="strength">KEKUATAN</string>
+    <string name="filter_none">Tanpa filter</string>
+    <string name="filter_vivid">Tajam</string>
+    <string name="filter_fade">Pudar</string>
+    <string name="filter_warm">Hangat</string>
+
+    <string name="recording">Merekam</string>
+    <string name="recording_failed">Perekaman gagal</string>
+    <string name="recording_without_audio">Merekam tanpa suara — izin mikrofon ditolak</string>
+    <string name="eis_unsupported">Kamera ini tidak punya stabilisasi</string>
+    <string name="snapshot_unsupported">Kamera ini tidak bisa memotret sambil merekam</string>
+    <string name="locked_while_recording">Tidak tersedia saat merekam</string>
+    <string name="filter_preview_unsupported">Pratinjau filter langsung butuh Android 12</string>
+
+    <string name="gallery">Galeri</string>
+    <string name="select">Pilih</string>
+    <string name="filter_all">Semua</string>
+    <string name="filter_photos">Foto</string>
+    <string name="filter_video">Video</string>
+    <string name="gallery_section_today">HARI INI</string>
+    <string name="gallery_section_yesterday">KEMARIN</string>
+    <plurals name="photo_count">
+        <item quantity="other">%1$d FOTO</item>
+    </plurals>
+    <plurals name="video_count">
+        <item quantity="other">%1$d VIDEO</item>
+    </plurals>
+    <string name="settings">Setelan</string>
+    <string name="gallery_empty">Belum ada apa pun di DCIM/HDCamera — ambil satu foto.</string>
+    <string name="search_hint">Cari berdasarkan nama atau tanggal</string>
+    <string name="no_matches">Tidak ada yang cocok dengan pencarian itu.</string>
+    <string name="done">Selesai</string>
+    <string name="delete_selected">Hapus %1$d</string>
+
+    <string name="section_quality">KUALITAS</string>
+    <string name="photo_resolution">Resolusi foto</string>
+    <string name="resolution_sub_sensor">Maksimum sensor</string>
+    <string name="highest">Tertinggi</string>
+    <string name="high">Tinggi</string>
+    <string name="standard">Standar</string>
+    <string name="format">Format</string>
+    <string name="video">Video</string>
+    <string name="section_viewfinder">JENDELA BIDIK</string>
+    <string name="grid_overlay">Garis bantu</string>
+    <string name="shutter_sound">Suara rana</string>
+    <string name="volume_key_shutter">Tombol volume sebagai rana</string>
+    <string name="section_general">UMUM</string>
+    <string name="section_storage">PENYIMPANAN</string>
+    <string name="save_folder">Folder penyimpanan</string>
+    <string name="geotagging">Penandaan lokasi</string>
+
+    <string name="cancel">Batal</string>
+    <string name="edit">EDIT</string>
+    <string name="save">Simpan</string>
+    <string name="photo_being_edited">Foto yang sedang diedit</string>
+    <string name="before_after">SEBELUM · SESUDAH</string>
+    <string name="exposure">PENCAHAYAAN</string>
+    <string name="tool_light">Cahaya</string>
+    <string name="tool_crop">Pangkas</string>
+    <string name="tool_color">Warna</string>
+    <string name="tool_beauty">Beauty</string>
+    <string name="tool_markup">Markah</string>
+    <string name="adj_exposure">Pencahayaan</string>
+    <string name="adj_contrast">Kontras</string>
+    <string name="adj_highlights">Sorotan</string>
+    <string name="adj_shadows">Bayangan</string>
+    <string name="adj_contrast_label">KONTRAS</string>
+    <string name="adj_highlights_label">SOROTAN</string>
+    <string name="adj_shadows_label">BAYANGAN</string>
+    <string name="adj_saturation">Saturasi</string>
+    <string name="adj_saturation_label">SATURASI</string>
+    <string name="adj_warmth">Kehangatan</string>
+    <string name="adj_warmth_label">KEHANGATAN</string>
+    <string name="adj_smooth">Haluskan</string>
+    <string name="adj_smooth_label">PENGHALUSAN</string>
+    <string name="action_rotate_left">Putar ke kiri</string>
+    <string name="action_rotate_right">Putar ke kanan</string>
+    <string name="action_flip">Balik</string>
+    <string name="crop_free">Bebas</string>
+    <string name="action_reset">Atur ulang</string>
+    <string name="action_undo">Urungkan</string>
+    <string name="action_clear">Bersihkan</string>
+    <string name="markup_label">MARKAH</string>
+    <string name="crop_label">PANGKAS</string>
+    <string name="stroke_label">KETEBALAN</string>
+    <string name="saving">Menyimpan…</string>
+    <string name="saved">Disimpan ke DCIM/HDCamera</string>
+    <string name="save_failed">Hasil edit tidak dapat disimpan</string>
+    <string name="edit_load_failed">Foto itu tidak dapat dibuka</string>
+
+    <string name="cd_flash">Lampu kilat</string>
+    <string name="cd_timer">Timer</string>
+    <string name="cd_settings">Setelan</string>
+    <string name="cd_switch_camera">Ganti kamera</string>
+    <string name="cd_shutter">Rana</string>
+    <string name="cd_record">Rekam</string>
+    <string name="cd_last_shot">Bidikan terakhir</string>
+    <string name="cd_back">Kembali</string>
+    <string name="cd_search">Cari</string>
+    <string name="cd_gallery">Galeri</string>
+    <string name="cd_camera">Kamera</string>
+    <string name="cd_add_filter">Tambah filter</string>
+    <string name="cd_stop">Berhenti</string>
+    <string name="cd_mic_level">Level mikrofon</string>
+    <string name="cd_pause">Jeda perekaman</string>
+    <string name="cd_resume">Lanjutkan perekaman</string>
+    <string name="cd_snapshot">Ambil foto sambil merekam</string>
+    <string name="cd_countdown">Hitung mundur timer</string>
+    <string name="cd_language_flag">Bendera</string>
+    <string name="cd_language_selected">Terpilih</string>
+
+    <!-- Legal -->
+    <string name="section_legal">HUKUM</string>
+    <string name="privacy_policy">Kebijakan Privasi</string>
+    <string name="terms_conditions">Syarat &amp; Ketentuan</string>
+    <string name="link_open_failed">Tidak ada aplikasi di perangkat ini yang bisa membuka tautan itu</string>
+    <string name="cd_opens_in_browser">Dibuka di peramban Anda</string>
+</resources>

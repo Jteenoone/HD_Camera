@@ -1,0 +1,183 @@
+<resources>
+    <string name="app_name">HD Camera</string>
+
+    <string name="skip">Ignorer</string>
+    <string name="next">Suivant</string>
+    <string name="get_started">Commencer</string>
+    <string name="intro1_eyebrow">HD CAMERA</string>
+    <string name="intro1_title">Chaque photo en\npleine résolution</string>
+    <string name="intro1_body">Photos 48 Mpx, vidéo 4K et un viseur qui montre tout le cadre — rien de rogné, rien de compressé.</string>
+    <string name="intro2_eyebrow">MODE PRO</string>
+    <string name="intro2_title">Le contrôle manuel,\nseulement quand vous le voulez</string>
+    <string name="intro2_body">ISO, vitesse, balance des blancs et mise au point sur une seule molette. Photographiez en RAW, ou laissez tout en automatique.</string>
+    <string name="intro3_eyebrow">FILTRES ET BEAUTÉ</string>
+    <string name="intro3_title">Voyez le rendu\navant de déclencher</string>
+    <string name="intro3_body">Les filtres et la retouche beauté s\'appliquent en direct dans le viseur, avec une intensité que vous pouvez réduire à tout moment.</string>
+    <string name="intro_visual_1">Visuel d\'introduction 1</string>
+    <string name="intro_visual_2">Visuel d\'introduction 2</string>
+    <string name="intro_visual_3">Visuel d\'introduction 3</string>
+
+    <string name="language">Langue</string>
+    <string name="language_body">Choisissez la langue de HD Camera. Vous pourrez la changer plus tard dans les Réglages.</string>
+    <string name="continue_action">Continuer</string>
+
+    <string name="onboarding_image">Image de bienvenue</string>
+    <string name="permissions_title">Filmez en HD,\ndirectement dans le viseur</string>
+    <string name="permissions_body">HD Camera a besoin d\'accéder à votre appareil photo pour prendre des photos et des vidéos.</string>
+    <string name="perm_camera">Appareil photo</string>
+    <string name="perm_photos_video">Photos et vidéos</string>
+    <string name="perm_required">Requis</string>
+    <string name="perm_granted">Accordé</string>
+    <string name="allow_and_continue">Autoriser et continuer</string>
+    <string name="not_now">Pas maintenant</string>
+
+    <string name="viewfinder_placeholder">Viseur — déposez une photo</string>
+    <string name="flash_off">Flash désactivé</string>
+    <string name="flash_auto">Flash automatique</string>
+    <string name="flash_on">Flash activé</string>
+    <string name="flash_torch">Lampe</string>
+    <string name="timer_off">Retardateur désactivé</string>
+    <string name="timer_3s">3 secondes</string>
+    <string name="timer_10s">10 secondes</string>
+    <string name="camera_unavailable">Appareil photo indisponible — vérifiez les autorisations</string>
+    <string name="capture_failed">Impossible d\'enregistrer la photo</string>
+    <string name="mode_unavailable">Cet appareil n\'a pas ce mode</string>
+    <string name="mode_night">Nuit</string>
+    <string name="mode_portrait">Portrait</string>
+    <string name="mode_beauty">Beauté</string>
+    <string name="mode_photo">Photo</string>
+    <string name="mode_video">Vidéo</string>
+    <string name="mode_pro">Pro</string>
+
+    <string name="pro_viewfinder">Viseur Pro</string>
+    <string name="manual_unsupported">Cet appareil n\'a pas d\'exposition manuelle</string>
+    <string name="raw_unsupported">Cet appareil ne photographie pas en RAW</string>
+    <string name="histogram">HISTOGRAMME</string>
+    <string name="shutter">VITESSE</string>
+    <string name="focus">MISE AU POINT</string>
+
+    <string name="filtered_preview">Aperçu filtré</string>
+    <string name="live_filters">Filtres en direct</string>
+    <string name="compare">Comparer</string>
+    <string name="strength">INTENSITÉ</string>
+    <string name="filter_none">Aucun</string>
+    <string name="filter_vivid">Éclatant</string>
+    <string name="filter_fade">Délavé</string>
+    <string name="filter_warm">Chaud</string>
+
+    <string name="recording">Enregistrement</string>
+    <string name="recording_failed">Échec de l\'enregistrement</string>
+    <string name="recording_without_audio">Enregistrement sans son — autorisation du micro refusée</string>
+    <string name="eis_unsupported">Cet appareil n\'a pas de stabilisation</string>
+    <string name="snapshot_unsupported">Cet appareil ne peut pas photographier pendant l\'enregistrement</string>
+    <string name="locked_while_recording">Indisponible pendant l\'enregistrement</string>
+    <string name="filter_preview_unsupported">L\'aperçu des filtres nécessite Android 12</string>
+
+    <string name="gallery">Galerie</string>
+    <string name="select">Sélectionner</string>
+    <string name="filter_all">Tout</string>
+    <string name="filter_photos">Photos</string>
+    <string name="filter_video">Vidéo</string>
+    <string name="gallery_section_today">AUJOURD\'HUI</string>
+    <string name="gallery_section_yesterday">HIER</string>
+    <plurals name="photo_count">
+        <item quantity="many">%1$d PHOTOS</item>
+        <item quantity="one">%1$d PHOTO</item>
+        <item quantity="other">%1$d PHOTOS</item>
+    </plurals>
+    <plurals name="video_count">
+        <item quantity="many">%1$d VIDÉOS</item>
+        <item quantity="one">%1$d VIDÉO</item>
+        <item quantity="other">%1$d VIDÉOS</item>
+    </plurals>
+    <string name="settings">Réglages</string>
+    <string name="gallery_empty">Rien dans DCIM/HDCamera pour l\'instant — prenez une photo.</string>
+    <string name="search_hint">Rechercher par nom ou date</string>
+    <string name="no_matches">Aucun résultat pour cette recherche.</string>
+    <string name="done">Terminé</string>
+    <string name="delete_selected">Supprimer %1$d</string>
+
+    <string name="section_quality">QUALITÉ</string>
+    <string name="photo_resolution">Résolution photo</string>
+    <string name="resolution_sub_sensor">Maximum du capteur</string>
+    <string name="highest">Maximale</string>
+    <string name="high">Élevée</string>
+    <string name="standard">Standard</string>
+    <string name="format">Format</string>
+    <string name="video">Vidéo</string>
+    <string name="section_viewfinder">VISEUR</string>
+    <string name="grid_overlay">Grille</string>
+    <string name="shutter_sound">Son du déclencheur</string>
+    <string name="volume_key_shutter">Déclencher avec le volume</string>
+    <string name="section_general">GÉNÉRAL</string>
+    <string name="section_storage">STOCKAGE</string>
+    <string name="save_folder">Dossier d\'enregistrement</string>
+    <string name="geotagging">Géolocalisation</string>
+
+    <string name="cancel">Annuler</string>
+    <string name="edit">MODIFIER</string>
+    <string name="save">Enregistrer</string>
+    <string name="photo_being_edited">Photo en cours de modification</string>
+    <string name="before_after">AVANT · APRÈS</string>
+    <string name="exposure">EXPOSITION</string>
+    <string name="tool_light">Lumière</string>
+    <string name="tool_crop">Recadrer</string>
+    <string name="tool_color">Couleur</string>
+    <string name="tool_beauty">Beauté</string>
+    <string name="tool_markup">Annotation</string>
+    <string name="adj_exposure">Exposition</string>
+    <string name="adj_contrast">Contraste</string>
+    <string name="adj_highlights">Hautes lumières</string>
+    <string name="adj_shadows">Ombres</string>
+    <string name="adj_contrast_label">CONTRASTE</string>
+    <string name="adj_highlights_label">HAUTES LUMIÈRES</string>
+    <string name="adj_shadows_label">OMBRES</string>
+    <string name="adj_saturation">Saturation</string>
+    <string name="adj_saturation_label">SATURATION</string>
+    <string name="adj_warmth">Température</string>
+    <string name="adj_warmth_label">TEMPÉRATURE</string>
+    <string name="adj_smooth">Lissage</string>
+    <string name="adj_smooth_label">LISSAGE</string>
+    <string name="action_rotate_left">Pivoter à gauche</string>
+    <string name="action_rotate_right">Pivoter à droite</string>
+    <string name="action_flip">Retourner</string>
+    <string name="crop_free">Libre</string>
+    <string name="action_reset">Réinitialiser</string>
+    <string name="action_undo">Annuler</string>
+    <string name="action_clear">Effacer</string>
+    <string name="markup_label">ANNOTATION</string>
+    <string name="crop_label">RECADRAGE</string>
+    <string name="stroke_label">TRAIT</string>
+    <string name="saving">Enregistrement…</string>
+    <string name="saved">Enregistré dans DCIM/HDCamera</string>
+    <string name="save_failed">Impossible d\'enregistrer la modification</string>
+    <string name="edit_load_failed">Impossible d\'ouvrir cette photo</string>
+
+    <string name="cd_flash">Flash</string>
+    <string name="cd_timer">Retardateur</string>
+    <string name="cd_settings">Réglages</string>
+    <string name="cd_switch_camera">Changer d\'appareil photo</string>
+    <string name="cd_shutter">Déclencheur</string>
+    <string name="cd_record">Enregistrer</string>
+    <string name="cd_last_shot">Dernière photo</string>
+    <string name="cd_back">Retour</string>
+    <string name="cd_search">Rechercher</string>
+    <string name="cd_gallery">Galerie</string>
+    <string name="cd_camera">Appareil photo</string>
+    <string name="cd_add_filter">Ajouter un filtre</string>
+    <string name="cd_stop">Arrêter</string>
+    <string name="cd_mic_level">Niveau du micro</string>
+    <string name="cd_pause">Mettre l\'enregistrement en pause</string>
+    <string name="cd_resume">Reprendre l\'enregistrement</string>
+    <string name="cd_snapshot">Photographier pendant l\'enregistrement</string>
+    <string name="cd_countdown">Compte à rebours du retardateur</string>
+    <string name="cd_language_flag">Drapeau</string>
+    <string name="cd_language_selected">Sélectionné</string>
+
+    <!-- Legal -->
+    <string name="section_legal">MENTIONS LÉGALES</string>
+    <string name="privacy_policy">Politique de confidentialité</string>
+    <string name="terms_conditions">Conditions d\'utilisation</string>
+    <string name="link_open_failed">Aucune application de cet appareil ne peut ouvrir ce lien</string>
+    <string name="cd_opens_in_browser">S\'ouvre dans votre navigateur</string>
+</resources>

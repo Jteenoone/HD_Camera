@@ -200,10 +200,15 @@
                     android:paddingBottom="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:maxLines="1"
                         android:text="@string/iso"
                         android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
+                        app:autoSizeMaxTextSize="10sp"
+                        app:autoSizeMinTextSize="7sp"
+                        app:autoSizeTextType="uniform"
                         android:textColor="@color/dc_on_accent" />
 
                     <TextView
@@ -231,10 +236,15 @@
                     android:paddingBottom="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:maxLines="1"
                         android:text="@string/shutter"
-                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny" />
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
+                        app:autoSizeMaxTextSize="10sp"
+                        app:autoSizeMinTextSize="7sp"
+                        app:autoSizeTextType="uniform" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -260,10 +270,15 @@
                     android:paddingBottom="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:maxLines="1"
                         android:text="@string/wb"
-                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny" />
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
+                        app:autoSizeMaxTextSize="10sp"
+                        app:autoSizeMinTextSize="7sp"
+                        app:autoSizeTextType="uniform" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -289,10 +304,15 @@
                     android:paddingBottom="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:maxLines="1"
                         android:text="@string/ev"
-                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny" />
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
+                        app:autoSizeMaxTextSize="10sp"
+                        app:autoSizeMinTextSize="7sp"
+                        app:autoSizeTextType="uniform" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -318,10 +338,15 @@
                     android:paddingBottom="10dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:maxLines="1"
                         android:text="@string/focus"
-                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny" />
+                        android:textAppearance="@style/TextAppearance.HD.Mono.Tiny"
+                        app:autoSizeMaxTextSize="10sp"
+                        app:autoSizeMinTextSize="7sp"
+                        app:autoSizeTextType="uniform" />
 
                     <TextView
                         android:layout_width="wrap_content"

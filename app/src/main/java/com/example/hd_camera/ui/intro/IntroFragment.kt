@@ -7,8 +7,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.hd_camera.R
 import com.example.hd_camera.databinding.FragmentIntroBinding
+import com.example.hd_camera.ui.language.LanguageFragment
 import com.example.hd_camera.ui.navigateTo
-import com.example.hd_camera.ui.permissions.PermissionsFragment
 
 /** Screens 01–03 · the three-page intro carousel. */
 class IntroFragment : Fragment(R.layout.fragment_intro) {
@@ -19,7 +19,9 @@ class IntroFragment : Fragment(R.layout.fragment_intro) {
             onNext = {
                 binding.introPager.currentItem = binding.introPager.currentItem + 1
             },
-            onFinish = { navigateTo(PermissionsFragment()) }
+            // Skip and "Get started" both land on the language picker, which hands over
+            // to the permission screen.
+            onFinish = { navigateTo(LanguageFragment.onboarding()) }
         )
         binding.introPager.adapter = adapter
 
