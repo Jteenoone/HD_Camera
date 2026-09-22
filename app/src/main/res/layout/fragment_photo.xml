@@ -173,6 +173,23 @@
             android:paddingTop="14dp"
             android:paddingBottom="22dp">
 
+            <!-- The ratio a pinch is landing on; gone again once the fingers leave. -->
+            <TextView
+                android:id="@+id/tvZoomRatio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/bg_vf_chip_9"
+                android:paddingStart="12dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="5dp"
+                android:textAppearance="@style/TextAppearance.HD.Mono.Chip"
+                android:visibility="gone"
+                tools:text="2.4×"
+                tools:visibility="visible" />
+
             <LinearLayout
                 android:id="@+id/zoomChips"
                 android:layout_width="wrap_content"

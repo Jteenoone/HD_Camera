@@ -4,7 +4,10 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.video.AudioStats
 import androidx.camera.video.VideoRecordEvent
@@ -16,9 +19,12 @@ import coil.request.videoFrameMillis
 import com.example.hd_camera.R
 import com.example.hd_camera.camera.CameraEngine
 import com.example.hd_camera.camera.PhotoCapture
+import com.example.hd_camera.camera.ZoomMath
 import com.example.hd_camera.data.CaptureSettings
 import com.example.hd_camera.data.VideoProfile
+import com.example.hd_camera.data.ViewfinderPrefs
 import com.example.hd_camera.databinding.FragmentVideoBinding
+import com.example.hd_camera.databinding.ItemZoomChipBinding
 import com.example.hd_camera.media.MediaRepository
 import com.example.hd_camera.ui.applySystemBarPadding
 import com.example.hd_camera.ui.gallery.GalleryFragment
@@ -37,6 +43,10 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
 
     /** Guards the snapshot button against a double tap landing two captures in flight. */
     private var snapshotInFlight = false
+
+    /** The zoom as the user asked for it: 0.5x means the ultra-wide, not a sensor ratio. */
+    private var zoomRatio = 1f
+    private var zoomStops: List<Float> = emptyList()
 
     /**
      * Recording silently without the microphone is the sort of thing you only notice once
@@ -63,6 +73,7 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
             binding.previewView.postDelayed({
                 updateStabilizationChip()
                 updateQualityChip()
+                bindZoom()
                 applyRecordingChrome()
             }, CHIP_SETTLE_MS)
         }
@@ -81,10 +92,12 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
         binding.btnLastShot.setOnClickListener { navigateTo(GalleryFragment()) }
         binding.btnPauseResume.setOnClickListener { togglePause() }
         binding.btnSnapshot.setOnClickListener { takeSnapshot() }
+        bindViewfinderGestures()
     }
 
     override fun onResume() {
         super.onResume()
+        applyZoomChipVisibility()
         // Only meaningful when nothing is being recorded: while it is, that slot is Pause.
         if (engine?.recordingState == CameraEngine.RecordingState.IDLE) loadLastShot()
     }
@@ -263,6 +276,120 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
         }
     }
 
+    // ── Zoom ───────────────────────────────────────────────────────────────
+
+    /**
+     * The same quick-zoom row the Photo screen has, built from what this camera can reach.
+     * Zooming is one of the few things that does not rebind the session, so unlike the
+     * quality and EIS chips these keep working while a clip is being recorded.
+     */
+    private fun bindZoom() {
+        val binding = binding ?: return
+        val engine = engine ?: return
+        val row = binding.zoomChips
+        val stops = engine.zoomStops().also { zoomStops = it }
+        row.removeAllViews()
+
+        val inflater = LayoutInflater.from(row.context)
+        val gap = (8 * resources.displayMetrics.density).toInt()
+
+        stops.forEachIndexed { index, stop ->
+            val chip = ItemZoomChipBinding.inflate(inflater, row, false).root
+            chip.text = ZoomMath.label(stop)
+            chip.setOnClickListener { applyZoom(engine.requestZoom(stop)) }
+            (chip.layoutParams as LinearLayout.LayoutParams).marginStart =
+                if (index == 0) 0 else gap
+            row.addView(chip)
+        }
+        applyZoomChipVisibility()
+        styleZoomChips()
+    }
+
+    /**
+     * The row answers to the Settings switch and to the camera both: a single step is not a
+     * choice, so a camera that cannot zoom at all gets no chips rather than a dead 1× one.
+     */
+    private fun applyZoomChipVisibility() {
+        val binding = binding ?: return
+        val wanted = ViewfinderPrefs.get(requireContext(), ViewfinderPrefs.KEY_ZOOM_CHIPS)
+        binding.zoomChips.visibility =
+            if (wanted && zoomStops.size > 1) View.VISIBLE else View.GONE
+    }
+
+    /**
+     * A step that would need the ultra-wide is out of reach while the recorder holds the
+     * session, so it reads as unavailable rather than doing nothing when tapped.
+     */
+    private fun styleZoomChips() {
+        val binding = binding ?: return
+        val engine = engine ?: return
+        val range = engine.availableZoomRange()
+        for (index in 0 until binding.zoomChips.childCount) {
+            val chip = binding.zoomChips.getChildAt(index) as? TextView ?: continue
+            val stop = zoomStops.getOrNull(index) ?: continue
+            val active = ZoomMath.matches(zoomRatio, stop)
+            val reachable = ZoomMath.reachable(stop, range)
+            chip.setBackgroundResource(
+                if (active) R.drawable.bg_zoom_chip_active else R.drawable.bg_round_scrim_50
+            )
+            chip.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    if (active) R.color.dc_bg else R.color.dc_text
+                )
+            )
+            chip.isEnabled = reachable
+            chip.alpha = if (reachable) 1f else DISABLED_ALPHA
+        }
+    }
+
+    /** Puts the ratio the camera settled on into the readout and onto the chips. */
+    private fun applyZoom(ratio: Float) {
+        zoomRatio = ratio
+        showZoomReadout(ratio)
+        fadeZoomReadout()
+        styleZoomChips()
+    }
+
+    private fun pinchZoom(factor: Float) {
+        val engine = engine ?: return
+        val target = ZoomMath.pinch(zoomRatio, factor, engine.availableZoomRange())
+        zoomRatio = engine.requestZoom(target)
+        showZoomReadout(zoomRatio)
+        styleZoomChips()
+    }
+
+    private fun showZoomReadout(ratio: Float) {
+        val readout = binding?.tvZoomRatio ?: return
+        readout.removeCallbacks(hideZoomReadout)
+        readout.text = ZoomMath.label(ratio)
+        readout.visibility = View.VISIBLE
+    }
+
+    /** Leaves the last value up just long enough to read, then takes it away again. */
+    private fun fadeZoomReadout() {
+        val readout = binding?.tvZoomRatio ?: return
+        readout.removeCallbacks(hideZoomReadout)
+        readout.postDelayed(hideZoomReadout, ZOOM_READOUT_MS)
+    }
+
+    private val hideZoomReadout = Runnable { binding?.tvZoomRatio?.visibility = View.GONE }
+
+    /**
+     * Pinch only. Tap on this screen is left alone: focus and exposure gestures are the
+     * next piece of work, and a half-wired tap would be worse than none.
+     */
+    private fun bindViewfinderGestures() {
+        val binding = binding ?: return
+        ViewfinderGestures(
+            view = binding.previewView,
+            // The camera is the authority on where the zoom actually is by now.
+            onZoomBegin = { zoomRatio = engine?.currentZoomRatio() ?: zoomRatio },
+            onZoom = { factor -> pinchZoom(factor) },
+            onZoomEnd = { fadeZoomReadout() }
+        )
+    }
+
     // ── Thumbnail ──────────────────────────────────────────────────────────
 
     private fun loadLastShot() {
@@ -339,14 +466,16 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
         binding.btnFlip.visibility = if (idle) View.VISIBLE else View.GONE
         val canSnapshot = engine?.snapshotSupported == true
         binding.btnSnapshot.visibility = if (live) View.VISIBLE else View.GONE
-        binding.btnSnapshot.alpha = if (canSnapshot) 1f else 0.4f
+        binding.btnSnapshot.alpha = if (canSnapshot) 1f else DISABLED_ALPHA
         binding.btnSnapshot.isEnabled = canSnapshot
 
         // The chips stay on screen but read as unavailable while the recorder owns the camera.
-        val chipAlpha = if (idle) 1f else 0.4f
+        val chipAlpha = if (idle) 1f else DISABLED_ALPHA
         binding.btnQuality.alpha = chipAlpha
         binding.modeRow.alpha = chipAlpha
         updateStabilizationChip()
+        // A lens change is off the table while the recorder owns the session.
+        styleZoomChips()
     }
 
     /**
@@ -435,7 +564,7 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
         )
         val available = engine.isStabilizationSupported() &&
             engine.recordingState == CameraEngine.RecordingState.IDLE
-        binding.btnEis.alpha = if (available) 1f else 0.4f
+        binding.btnEis.alpha = if (available) 1f else DISABLED_ALPHA
     }
 
     /** One place for the transient line over the preview, so none of them can stick. */
@@ -457,6 +586,12 @@ class VideoFragment : Fragment(R.layout.fragment_video), ShutterKeyHandler {
         const val CHIP_SETTLE_MS = 400L
         const val STATUS_MS = 1_800L
         const val AUDIO_NOTICE_MS = 2_200L
+
+        /** How long the pinch readout stays up once the fingers have left. */
+        const val ZOOM_READOUT_MS = 900L
+
+        /** What a control that the camera cannot honour right now looks like. */
+        const val DISABLED_ALPHA = 0.4f
 
         /** Far enough in that auto-exposure has settled, near enough to be the same shot. */
         const val VIDEO_THUMB_MS = 600L

@@ -125,6 +125,13 @@ class CameraEngine(
     var usingWideLens: Boolean = false
         private set
 
+    /**
+     * The main lens's zoom ceiling, remembered while it is bound. Once the ultra-wide is
+     * the open camera there is no asking the closed one how far it reaches, and a pinch has
+     * to know it can climb back out.
+     */
+    private var defaultLensMaxZoom: Float = 1f
+
     /** True once a camera is actually open, as opposed to merely requested. */
     val isReady: Boolean get() = provider != null && camera != null
 
@@ -378,6 +385,10 @@ class CameraEngine(
             camera = provider.bindToLifecycle(lifecycleOwner, selector, group.build())
                 .also {
                     snapshotSupported = mode == Mode.VIDEO && imageCapture != null
+                    if (!usingWideLens) {
+                        defaultLensMaxZoom =
+                            it.cameraInfo.zoomState.value?.maxZoomRatio ?: defaultLensMaxZoom
+                    }
                     applySceneFallback()
                     applyFrameRateRange()
                     onCameraReady?.invoke(it)
@@ -468,6 +479,7 @@ class CameraEngine(
         camera?.cameraControl?.enableTorch(enabled)
     }
 
+    /** What the lens that is bound can do, in its own sensor ratios. */
     fun zoomRange(): ClosedFloatingPointRange<Float> {
         val state = camera?.cameraInfo?.zoomState?.value ?: return 1f..1f
         return state.minZoomRatio..state.maxZoomRatio
@@ -477,6 +489,63 @@ class CameraEngine(
         val range = zoomRange()
         camera?.cameraControl?.setZoomRatio(ratio.coerceIn(range.start, range.endInclusive))
     }
+
+    /**
+     * How a ratio the user asks for maps onto the lens that is bound. The ultra-wide covers
+     * roughly twice the field of view of the main lens, so its own 1x is the user's 0.5x.
+     * The sensor publishes the real figure; the fallback is only for cameras that do not.
+     */
+    private fun lensScale(): Float {
+        if (!usingWideLens) return 1f
+        val intrinsic = camera?.cameraInfo?.let { intrinsicZoomOf(it) } ?: 0f
+        return if (intrinsic > 0f && intrinsic < WIDE_LENS_THRESHOLD) {
+            1f / intrinsic
+        } else {
+            WIDE_LENS_FALLBACK_SCALE
+        }
+    }
+
+    /** The zoom as the user reads it, which is not what the ultra-wide reports. */
+    fun currentZoomRatio(): Float {
+        val ratio = camera?.cameraInfo?.zoomState?.value?.zoomRatio ?: 1f
+        return ratio / lensScale()
+    }
+
+    /** The widest field of view this device can reach, on the main lens's scale. */
+    private fun wideLensZoom(): Float {
+        val provider = provider ?: return 1f
+        return try {
+            CameraSelector.Builder().requireLensFacing(lensFacing).build()
+                .filter(provider.availableCameraInfos)
+                .minOfOrNull { intrinsicZoomOf(it) } ?: 1f
+        } catch (error: Exception) {
+            1f
+        }
+    }
+
+    /**
+     * The whole range the user can pinch through, which spans both lenses: crossing 1x is
+     * a lens change rather than a zoom. [allowLensSwitch] is false once a clip is running,
+     * because rebinding the session would tear the recorder's surface out from under it.
+     */
+    private fun zoomRangeFor(allowLensSwitch: Boolean): ClosedFloatingPointRange<Float> {
+        val range = zoomRange()
+        val scale = lensScale()
+        val min = range.start / scale
+        val max = range.endInclusive / scale
+        if (!allowLensSwitch) return min..max
+        return when {
+            // On the main lens the ultra-wide extends the bottom of the range...
+            !usingWideLens && hasWideLens() -> minOf(min, wideLensZoom())..max
+            // ...and on the ultra-wide the main lens extends the top of it.
+            usingWideLens -> min..maxOf(max, defaultLensMaxZoom)
+            else -> min..max
+        }
+    }
+
+    /** What a pinch can reach right now. */
+    fun availableZoomRange(): ClosedFloatingPointRange<Float> =
+        zoomRangeFor(allowLensSwitch = !isRecording)
 
     private fun intrinsicZoomOf(info: CameraInfo) = info.intrinsicZoomRatio
 
@@ -493,27 +562,27 @@ class CameraEngine(
     }
 
     /**
-     * The zoom steps worth offering: the wide lens when there is one, 1x, and a couple of
-     * stops the current lens can actually reach.
+     * The zoom steps worth offering, across both lenses so the row does not change shape
+     * the moment a clip starts. A step the device cannot reach is left out rather than
+     * shown as a chip that does nothing.
      */
-    fun zoomStops(): List<Float> {
-        val range = zoomRange()
-        val stops = mutableListOf<Float>()
-        if (range.start < 0.95f || hasWideLens()) stops += 0.5f
-        stops += 1f
-        listOf(2f, 3f, 5f).forEach { stop ->
-            if (stop <= range.endInclusive && stops.size < 4) stops += stop
-        }
-        return stops
-    }
+    fun zoomStops(): List<Float> = ZoomMath.stops(zoomRangeFor(allowLensSwitch = true))
 
     /**
-     * Applies a zoom step, moving to the ultra-wide lens when the request is below what the
-     * current one can do, and back again when it is not.
+     * Applies a zoom the user asked for, moving to the ultra-wide lens when the request is
+     * below what the current one can do and back again when it is not. Returns the ratio
+     * that was really applied: the request clamped to what the camera can reach.
      */
-    fun requestZoom(ratio: Float) {
-        val wantsWide = ratio < 0.95f && zoomRange().start >= 0.95f && hasWideLens()
-        if (wantsWide != usingWideLens) {
+    fun requestZoom(ratio: Float): Float {
+        val target = ZoomMath.clamp(ratio, availableZoomRange())
+        // A lens that already covers the whole range zooms on its own; only a camera that
+        // bottoms out at 1x has to be swapped for the wider one.
+        val wantsWide = target < ZoomMath.WIDE_THRESHOLD &&
+            zoomRange().start >= ZoomMath.WIDE_THRESHOLD &&
+            hasWideLens()
+        // Rebinding would tear the recorder's surface away, so a live clip stays on its
+        // lens; availableZoomRange has already clamped the request to what that lens does.
+        if (wantsWide != usingWideLens && !isRecording) {
             val previous = usingWideLens
             usingWideLens = wantsWide
             // Same reasoning as switchLens: an ultra-wide that will not bind has to be
@@ -521,13 +590,11 @@ class CameraEngine(
             if (!bind()) {
                 usingWideLens = previous
                 bind()
-                return
+                return currentZoomRatio()
             }
-            // The new session starts at its own 1x, which is the wider field of view.
-            if (!wantsWide) setZoomRatio(ratio)
-            return
         }
-        setZoomRatio(if (usingWideLens) ratio * 2f else ratio)
+        setZoomRatio(target * lensScale())
+        return target
     }
 
     /** Tap to focus, metering on the point the user touched in the preview. */
@@ -715,7 +782,10 @@ class CameraEngine(
         const val TAG = "CameraEngine"
 
         /** Anything below this is a wider lens than the default one. */
-        const val WIDE_LENS_THRESHOLD = 0.95f
+        const val WIDE_LENS_THRESHOLD = ZoomMath.WIDE_THRESHOLD
+
+        /** Used only when a camera does not publish an intrinsic zoom ratio of its own. */
+        const val WIDE_LENS_FALLBACK_SCALE = 2f
     }
 
     private fun VideoProfile.toQuality(): Quality = when (this) {
