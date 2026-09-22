@@ -28,6 +28,11 @@
     <dimen name="language_flag">26dp</dimen>
     <dimen name="language_radio">20dp</dimen>
 
+    <!-- Home dashboard -->
+    <dimen name="home_card_radius">24dp</dimen>
+    <dimen name="home_gap">14dp</dimen>
+    <dimen name="home_icon_tile">46dp</dimen>
+
     <!-- Common controls -->
     <dimen name="touch_target">48dp</dimen>
     <dimen name="pill_button_height">52dp</dimen>

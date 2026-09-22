@@ -40,6 +40,12 @@ name: The language picker changes the app language and survives a restart
     id: "btnNotNow"
     optional: true
 
+# Home is the root now, so the camera is one tap further in. Optional, so the flow still
+# runs if it is started from somewhere that is already in a viewfinder.
+- tapOn:
+    id: "btnOpenCamera"
+    optional: true
+
 # The viewfinder is French too, not just the picker. Opening the camera can take a moment
 # on a loaded emulator, so this waits instead of asserting on the first frame.
 - extendedWaitUntil:

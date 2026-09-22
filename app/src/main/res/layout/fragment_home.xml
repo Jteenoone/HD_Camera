@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Home · the dashboard the app opens on once onboarding is behind the user.
+
+    The header stays put and everything else scrolls, so a large font size or a short
+    screen pushes the cards rather than clipping them. Nothing here touches CameraX: this
+    screen only decides where to go, and the camera permission is asked for at the moment a
+    camera is actually opened.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dc_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/screen_h_padding"
+        android:paddingTop="16dp"
+        android:paddingEnd="@dimen/screen_h_padding"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextAppearance.HD.TitleLarge" />
+
+        <ImageView
+            android:id="@+id/btnSettings"
+            android:layout_width="@dimen/touch_target"
+            android:layout_height="@dimen/touch_target"
+            android:background="@drawable/bg_surface_icon"
+            android:contentDescription="@string/cd_settings"
+            android:padding="13dp"
+            android:src="@drawable/ic_settings"
+            app:tint="@color/dc_text" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/screen_h_padding"
+        android:paddingEnd="@dimen/screen_h_padding"
+        android:paddingBottom="24dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Hero: the one thing this app is for. -->
+            <LinearLayout
+                android:id="@+id/cardHero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_home_hero"
+                android:orientation="vertical"
+                android:paddingStart="20dp"
+                android:paddingTop="22dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="20dp">
+
+                <!-- Decorative: the heading beside it already says what this is. -->
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_hero_camera" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/home_hero_title"
+                    android:textAppearance="@style/TextAppearance.HD.Title" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/home_hero_body"
+                    android:textAppearance="@style/TextAppearance.HD.Body"
+                    android:textColor="@color/dc_text_muted" />
+
+                <!-- Near-black on the accent, which a white label would not have cleared. -->
+                <TextView
+                    android:id="@+id/btnOpenCamera"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/pill_button_height"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/bg_button_primary"
+                    android:gravity="center"
+                    android:text="@string/open_camera"
+                    android:textAppearance="@style/TextAppearance.HD.Action"
+                    android:textColor="@color/dc_on_accent" />
+            </LinearLayout>
+
+            <include
+                android:id="@+id/actionPro"
+                layout="@layout/item_home_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_gap" />
+
+            <include
+                android:id="@+id/actionVideo"
+                layout="@layout/item_home_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_gap" />
+
+            <include
+                android:id="@+id/actionEdit"
+                layout="@layout/item_home_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_gap" />
+
+            <include
+                android:id="@+id/actionCollage"
+                layout="@layout/item_home_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_gap" />
+
+            <!-- Gallery gets a card of its own: it is where the work ends up. -->
+            <LinearLayout
+                android:id="@+id/cardGallery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_gap"
+                android:background="@drawable/bg_home_card"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/touch_target"
+                android:orientation="horizontal"
+                android:paddingStart="18dp"
+                android:paddingTop="18dp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="18dp">
+
+                <ImageView
+                    android:id="@+id/galleryThumb"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:background="@drawable/bg_home_icon"
+                    android:contentDescription="@null"
+                    android:padding="14dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_gallery"
+                    app:tint="@color/dc_accent" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/my_gallery"
+                        android:textAppearance="@style/TextAppearance.HD.Title" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/my_gallery_body"
+                        android:textAppearance="@style/TextAppearance.HD.ListSub" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="10dp"
+                    android:importantForAccessibility="no"
+                    android:rotation="180"
+                    android:src="@drawable/ic_chevron_left"
+                    app:tint="@color/dc_text_dim_2" />
+            </LinearLayout>
+
+            <!-- Why a camera screen could not open, and the way to put it right. -->
+            <TextView
+                android:id="@+id/tvPermissionNotice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_gap"
+                android:background="@drawable/bg_home_card"
+                android:minHeight="@dimen/touch_target"
+                android:paddingStart="18dp"
+                android:paddingTop="14dp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="14dp"
+                android:textAppearance="@style/TextAppearance.HD.ListSub"
+                android:visibility="gone"
+                tools:text="Camera access is needed to shoot. Open settings"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

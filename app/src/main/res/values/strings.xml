@@ -313,4 +313,18 @@
     <string name="portrait_unsupported">Portrait mode is not supported on this device</string>
     <string name="hdr_unsupported">HDR is not supported on this device</string>
     <string name="raw_unavailable_in_mode">RAW is off in this mode</string>
+
+    <!-- Home dashboard -->
+    <string name="home_hero_title">Capture every detail</string>
+    <string name="home_hero_body">Stills, 4K video and full manual control, all in one viewfinder.</string>
+    <string name="open_camera">Open Camera</string>
+    <string name="action_pro_camera">Pro Camera</string>
+    <string name="action_record_video">Record Video</string>
+    <string name="action_edit_photo">Edit Photo</string>
+    <string name="action_collage">Collage</string>
+    <string name="coming_soon">Coming soon</string>
+    <string name="my_gallery">My Gallery</string>
+    <string name="my_gallery_body">Everything you have shot, in one place</string>
+    <string name="camera_permission_needed">Camera access is needed to shoot</string>
+    <string name="camera_permission_in_settings">Camera access is off. Tap to open settings</string>
 </resources>

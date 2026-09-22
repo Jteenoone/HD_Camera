@@ -1,0 +1,109 @@
+appId: com.example.hd_camera
+name: Home is the root, and every card leads somewhere and comes back
+---
+- stopApp
+- launchApp
+- tapOn:
+    id: "btnSkip"
+    optional: true
+- tapOn:
+    id: "btnContinue"
+    optional: true
+- tapOn:
+    id: "btnNotNow"
+    optional: true
+
+# Onboarding hands over to the dashboard, not to a viewfinder.
+- extendedWaitUntil:
+    visible:
+      id: "btnOpenCamera"
+    timeout: 15000
+- assertVisible: "Pro Cam 4K"
+- assertVisible: "Capture every detail"
+- assertVisible: "Pro Camera"
+- assertVisible: "Record Video"
+- assertVisible: "Edit Photo"
+- assertVisible: "My Gallery"
+
+# Collage has no screen yet, so it says so. Tapping it must do nothing at all rather
+# than open an empty screen or take the app down.
+- assertVisible: "Collage"
+- assertVisible: "Coming soon"
+- tapOn: "Collage"
+- assertVisible:
+    id: "btnOpenCamera"
+
+# The hero opens the Photo viewfinder, and Back returns to Home rather than leaving.
+- tapOn:
+    id: "btnOpenCamera"
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
+- back
+- assertVisible:
+    id: "btnOpenCamera"
+
+# Pro.
+- tapOn: "Pro Camera"
+- extendedWaitUntil:
+    visible:
+      id: "isoDial"
+    timeout: 15000
+- back
+- assertVisible:
+    id: "btnOpenCamera"
+
+# Video.
+- tapOn: "Record Video"
+- extendedWaitUntil:
+    visible:
+      id: "btnRecord"
+    timeout: 15000
+- back
+- assertVisible:
+    id: "btnOpenCamera"
+
+# Gallery.
+- tapOn: "My Gallery"
+- extendedWaitUntil:
+    visible: "Gallery"
+    timeout: 10000
+- back
+- assertVisible:
+    id: "btnOpenCamera"
+
+# Settings, from the header.
+- tapOn:
+    id: "btnSettings"
+- extendedWaitUntil:
+    visible: "Settings"
+    timeout: 10000
+- back
+- assertVisible:
+    id: "btnOpenCamera"
+
+# Leaving Video by its mode strip must not throw Home away with the stack: Back from the
+# Photo screen it lands on still has to come home.
+- tapOn: "Record Video"
+- extendedWaitUntil:
+    visible:
+      id: "btnRecord"
+    timeout: 15000
+- tapOn: "PHOTO"
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
+- back
+- assertVisible:
+    id: "btnOpenCamera"
+
+# A cold start now opens on Home, not on a viewfinder.
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible:
+      id: "btnOpenCamera"
+    timeout: 15000
+- assertVisible: "My Gallery"

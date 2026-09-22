@@ -201,4 +201,18 @@
     <string name="portrait_unsupported">此裝置不支援人像模式</string>
     <string name="hdr_unsupported">此裝置不支援 HDR</string>
     <string name="raw_unavailable_in_mode">此模式下 RAW 已關閉</string>
+
+    <!-- Home dashboard -->
+    <string name="home_hero_title">捕捉每一處細節</string>
+    <string name="home_hero_body">相片、4K 影片與完整手動控制，都在同一個取景器裡。</string>
+    <string name="open_camera">開啟相機</string>
+    <string name="action_pro_camera">專業模式</string>
+    <string name="action_record_video">錄影</string>
+    <string name="action_edit_photo">編輯相片</string>
+    <string name="action_collage">拼貼</string>
+    <string name="coming_soon">即將推出</string>
+    <string name="my_gallery">我的圖庫</string>
+    <string name="my_gallery_body">你拍下的一切，都在這裡</string>
+    <string name="camera_permission_needed">拍攝需要相機權限</string>
+    <string name="camera_permission_in_settings">相機權限已關閉。輕觸以開啟設定</string>
 </resources>

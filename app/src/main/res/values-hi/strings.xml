@@ -203,4 +203,18 @@
     <string name="portrait_unsupported">इस डिवाइस में पोर्ट्रेट मोड काम नहीं करता</string>
     <string name="hdr_unsupported">इस डिवाइस में HDR काम नहीं करता</string>
     <string name="raw_unavailable_in_mode">इस मोड में RAW बंद है</string>
+
+    <!-- Home dashboard -->
+    <string name="home_hero_title">हर बारीकी कैद करें</string>
+    <string name="home_hero_body">तस्वीरें, 4K वीडियो और पूरा मैनुअल कंट्रोल — सब एक ही व्यूफ़ाइंडर में।</string>
+    <string name="open_camera">कैमरा खोलें</string>
+    <string name="action_pro_camera">प्रो कैमरा</string>
+    <string name="action_record_video">वीडियो रिकॉर्ड करें</string>
+    <string name="action_edit_photo">फ़ोटो एडिट करें</string>
+    <string name="action_collage">कोलाज</string>
+    <string name="coming_soon">जल्द आ रहा है</string>
+    <string name="my_gallery">मेरी गैलरी</string>
+    <string name="my_gallery_body">आपका खींचा हुआ सब कुछ, एक जगह</string>
+    <string name="camera_permission_needed">शूट करने के लिए कैमरा अनुमति चाहिए</string>
+    <string name="camera_permission_in_settings">कैमरा अनुमति बंद है। सेटिंग्स खोलने के लिए टैप करें</string>
 </resources>

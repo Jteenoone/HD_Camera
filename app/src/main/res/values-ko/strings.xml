@@ -201,4 +201,18 @@
     <string name="portrait_unsupported">이 기기는 인물 모드를 지원하지 않습니다</string>
     <string name="hdr_unsupported">이 기기는 HDR을 지원하지 않습니다</string>
     <string name="raw_unavailable_in_mode">이 모드에서는 RAW가 꺼집니다</string>
+
+    <!-- Home dashboard -->
+    <string name="home_hero_title">모든 디테일을 담다</string>
+    <string name="home_hero_body">사진, 4K 동영상, 완전 수동 제어를 하나의 뷰파인더에서.</string>
+    <string name="open_camera">카메라 열기</string>
+    <string name="action_pro_camera">프로 카메라</string>
+    <string name="action_record_video">동영상 촬영</string>
+    <string name="action_edit_photo">사진 편집</string>
+    <string name="action_collage">콜라주</string>
+    <string name="coming_soon">출시 예정</string>
+    <string name="my_gallery">내 갤러리</string>
+    <string name="my_gallery_body">찍은 모든 것이 한곳에</string>
+    <string name="camera_permission_needed">촬영하려면 카메라 권한이 필요합니다</string>
+    <string name="camera_permission_in_settings">카메라 권한이 꺼져 있습니다. 눌러서 설정 열기</string>
 </resources>

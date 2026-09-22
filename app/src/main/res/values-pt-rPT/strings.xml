@@ -205,4 +205,18 @@
     <string name="portrait_unsupported">Este dispositivo não tem modo Retrato</string>
     <string name="hdr_unsupported">Este dispositivo não tem HDR</string>
     <string name="raw_unavailable_in_mode">O RAW fica desligado neste modo</string>
+
+    <!-- Home dashboard -->
+    <string name="home_hero_title">Capte cada detalhe</string>
+    <string name="home_hero_body">Fotografias, vídeo 4K e controlo manual completo, num só visor.</string>
+    <string name="open_camera">Abrir câmara</string>
+    <string name="action_pro_camera">Câmara Pro</string>
+    <string name="action_record_video">Gravar vídeo</string>
+    <string name="action_edit_photo">Editar fotografia</string>
+    <string name="action_collage">Colagem</string>
+    <string name="coming_soon">Em breve</string>
+    <string name="my_gallery">A minha galeria</string>
+    <string name="my_gallery_body">Tudo o que fotografou, num só lugar</string>
+    <string name="camera_permission_needed">É preciso acesso à câmara para fotografar</string>
+    <string name="camera_permission_in_settings">O acesso à câmara está desligado. Toque para abrir as definições</string>
 </resources>

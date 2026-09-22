@@ -201,4 +201,18 @@
     <string name="portrait_unsupported">この端末はポートレートモードに対応していません</string>
     <string name="hdr_unsupported">この端末は HDR に対応していません</string>
     <string name="raw_unavailable_in_mode">このモードでは RAW は切になります</string>
+
+    <!-- Home dashboard -->
+    <string name="home_hero_title">細部まで写し取る</string>
+    <string name="home_hero_body">写真、4K 動画、フルマニュアル操作を、ひとつのファインダーで。</string>
+    <string name="open_camera">カメラを開く</string>
+    <string name="action_pro_camera">プロカメラ</string>
+    <string name="action_record_video">動画を撮影</string>
+    <string name="action_edit_photo">写真を編集</string>
+    <string name="action_collage">コラージュ</string>
+    <string name="coming_soon">近日公開</string>
+    <string name="my_gallery">マイギャラリー</string>
+    <string name="my_gallery_body">撮ったものすべてが、ここに</string>
+    <string name="camera_permission_needed">撮影にはカメラへのアクセスが必要です</string>
+    <string name="camera_permission_in_settings">カメラへのアクセスがオフです。タップして設定を開きます</string>
 </resources>

@@ -14,6 +14,12 @@ name: An unsupported capture mode never costs the preview
     id: "btnNotNow"
     optional: true
 
+# Home is the root now, so the camera is one tap further in. Optional, so the flow still
+# runs if it is started from somewhere that is already in a viewfinder.
+- tapOn:
+    id: "btnOpenCamera"
+    optional: true
+
 - extendedWaitUntil:
     visible:
       id: "btnShutter"

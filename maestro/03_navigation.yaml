@@ -12,6 +12,12 @@ name: Every screen of the design opens
     id: "btnNotNow"
     optional: true
 
+# Home is the root now, so the camera is one tap further in. Optional, so the flow still
+# runs if it is started from somewhere that is already in a viewfinder.
+- tapOn:
+    id: "btnOpenCamera"
+    optional: true
+
 - tapOn: "Pro"
 - assertVisible:
     id: "isoDial"
