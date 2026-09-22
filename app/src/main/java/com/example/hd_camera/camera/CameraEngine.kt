@@ -86,6 +86,17 @@ class CameraEngine(
     var usingVendorExtension: Boolean = false
         private set
 
+    /**
+     * How the open session is delivering [extensionMode]. UNSUPPORTED means the camera is
+     * open and working but the mode asked for is not on it, which is a different thing
+     * from the camera having failed and must read differently on screen.
+     */
+    var modeDelivery: ModeDelivery = ModeDelivery.PLAIN
+        private set
+
+    /** Set while a failed mode change still has a mode to fall back to. */
+    private var rollingBackMode = false
+
     var imageCapture: ImageCapture? = null
         private set
     private var videoCapture: VideoCapture<Recorder>? = null
@@ -212,11 +223,34 @@ class CameraEngine(
         }, mainExecutor)
     }
 
-    /** Switches the capture mode chip (HDR) or the mode strip entry (Night / Portrait). */
-    fun setExtensionMode(mode: Int) {
-        if (extensionMode == mode) return
+    /**
+     * Switches the capture mode chip (HDR) or the mode strip entry (Night / Portrait).
+     *
+     * Returns true when the open session really is delivering [mode], by vendor extension
+     * or by scene mode. False means the camera is still open and usable on the mode it had
+     * — the request simply could not be met.
+     */
+    fun setExtensionMode(mode: Int): Boolean {
+        if (extensionMode == mode) return modeDelivery != ModeDelivery.UNSUPPORTED
+        val previous = extensionMode
         extensionMode = mode
+
+        // A failure here is not final: the mode it was on is about to be tried again, so
+        // the screen must not be told the camera is gone while there is still a way back.
+        rollingBackMode = true
+        val opened = try {
+            bind()
+        } finally {
+            rollingBackMode = false
+        }
+        if (opened) return modeDelivery != ModeDelivery.UNSUPPORTED
+
+        // Not even the plain session would open on this mode. Put back the one that was
+        // working rather than leaving the screen looking at an unbound preview; if that
+        // will not open either, the camera really is gone and bind() says so.
+        extensionMode = previous
         bind()
+        return false
     }
 
     /**
@@ -232,7 +266,8 @@ class CameraEngine(
         else -> null
     }
 
-    private fun sceneModeAvailable(mode: Int): Boolean {
+    /** True when Camera2 will take this mode as a scene mode. */
+    fun sceneModeAvailable(mode: Int): Boolean {
         val scene = sceneModeFor(mode) ?: return false
         return sensorCapabilities().sceneModes.contains(scene)
     }
@@ -275,7 +310,11 @@ class CameraEngine(
 
     /** True when a camera is now open. False means the session was left closed. */
     @OptIn(ExperimentalCamera2Interop::class)
-    private fun bind(withTargetFrameRate: Boolean = true, withSnapshot: Boolean = true): Boolean {
+    private fun bind(
+        withTargetFrameRate: Boolean = true,
+        withSnapshot: Boolean = true,
+        withExtension: Boolean = true
+    ): Boolean {
         val provider = provider ?: return false
         provider.unbindAll()
 
@@ -295,8 +334,8 @@ class CameraEngine(
             }
             .build()
         // Extensions only apply to still capture; the recorder runs on a plain session.
-        usingVendorExtension = mode == Mode.PHOTO && extensionMode != ExtensionMode.NONE &&
-            isExtensionAvailable(extensionMode)
+        usingVendorExtension = withExtension && mode == Mode.PHOTO &&
+            extensionMode != ExtensionMode.NONE && isExtensionAvailable(extensionMode)
         val selector = if (usingVendorExtension) {
             extensionsManager?.getExtensionEnabledCameraSelector(baseSelector, extensionMode)
                 ?: baseSelector
@@ -334,7 +373,11 @@ class CameraEngine(
                     )
                 }
                 builder.setResolutionSelector(resolution.build())
+                // An extension session refuses a RAW output format outright — asking
+                // for one is what took Night down with an IllegalArgumentException, since
+                // the capability query answers for the plain camera behind the extension.
                 rawCaptureActive = CaptureSettings.format(context) == CaptureFormat.JPEG_RAW &&
+                    !usingVendorExtension &&
                     supportsRawCapture(provider, selector)
                 if (rawCaptureActive) {
                     builder.setOutputFormat(ImageCapture.OUTPUT_FORMAT_RAW_JPEG)
@@ -420,6 +463,12 @@ class CameraEngine(
             camera = provider.bindToLifecycle(lifecycleOwner, selector, group.build())
                 .also {
                     snapshotSupported = mode == Mode.VIDEO && imageCapture != null
+                    modeDelivery = when {
+                        extensionMode == ExtensionMode.NONE -> ModeDelivery.PLAIN
+                        usingVendorExtension -> ModeDelivery.VENDOR_EXTENSION
+                        sceneModeAvailable(extensionMode) -> ModeDelivery.SCENE_MODE
+                        else -> ModeDelivery.UNSUPPORTED
+                    }
                     if (!usingWideLens) {
                         defaultLensMaxZoom =
                             it.cameraInfo.zoomState.value?.maxZoomRatio ?: defaultLensMaxZoom
@@ -431,6 +480,12 @@ class CameraEngine(
             true
         } catch (error: Exception) {
             when {
+                // The vendor pipeline refused this configuration. The camera itself is
+                // fine: drop to a plain session, where the scene-mode fallback can still
+                // deliver Night or Portrait, rather than leaving the preview unbound.
+                mode == Mode.PHOTO && withExtension && usingVendorExtension ->
+                    bind(withExtension = false)
+
                 // Not every camera can hold the requested frame rate; retry letting it choose.
                 mode == Mode.VIDEO && withTargetFrameRate ->
                     bind(withTargetFrameRate = false, withSnapshot = withSnapshot)
@@ -439,6 +494,7 @@ class CameraEngine(
                 mode == Mode.VIDEO && withSnapshot ->
                     bind(withTargetFrameRate = true, withSnapshot = false)
                 else -> {
+                    Log.w(TAG, "could not open the camera: ext=" + extensionMode, error)
                     // The use cases just built were never attached to a session. Dropping
                     // them stops a later takePicture() going to a dead pipeline and failing
                     // with nothing but "could not save the photo".
@@ -446,7 +502,8 @@ class CameraEngine(
                     imageCapture = null
                     videoCapture = null
                     snapshotSupported = false
-                    onCameraError?.invoke(error)
+                    modeDelivery = ModeDelivery.UNSUPPORTED
+                    if (!rollingBackMode) onCameraError?.invoke(error)
                     false
                 }
             }

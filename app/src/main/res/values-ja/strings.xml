@@ -195,4 +195,10 @@
     <string name="manual_focus_unsupported">このカメラにマニュアルフォーカスはありません</string>
     <string name="wb_presets_unsupported">このカメラはオートホワイトバランスのみです</string>
     <string name="ae_lock_unsupported">このカメラは露出をロックできません</string>
+
+    <!-- Capture modes the device may not have -->
+    <string name="night_unsupported">この端末は夜景モードに対応していません</string>
+    <string name="portrait_unsupported">この端末はポートレートモードに対応していません</string>
+    <string name="hdr_unsupported">この端末は HDR に対応していません</string>
+    <string name="raw_unavailable_in_mode">このモードでは RAW は切になります</string>
 </resources>

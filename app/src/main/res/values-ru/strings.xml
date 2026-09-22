@@ -201,4 +201,10 @@
     <string name="manual_focus_unsupported">У этой камеры нет ручной фокусировки</string>
     <string name="wb_presets_unsupported">У этой камеры только автоматический баланс белого</string>
     <string name="ae_lock_unsupported">Эта камера не может зафиксировать экспозицию</string>
+
+    <!-- Capture modes the device may not have -->
+    <string name="night_unsupported">Это устройство не поддерживает ночной режим</string>
+    <string name="portrait_unsupported">Это устройство не поддерживает портретный режим</string>
+    <string name="hdr_unsupported">Это устройство не поддерживает HDR</string>
+    <string name="raw_unavailable_in_mode">В этом режиме RAW отключён</string>
 </resources>

@@ -205,4 +205,10 @@
     <string name="manual_focus_unsupported">لا تدعم هذه الكاميرا التركيز اليدوي</string>
     <string name="wb_presets_unsupported">لا تدعم هذه الكاميرا سوى توازن اللون الأبيض التلقائي</string>
     <string name="ae_lock_unsupported">لا تستطيع هذه الكاميرا تثبيت الإضاءة</string>
+
+    <!-- Capture modes the device may not have -->
+    <string name="night_unsupported">وضع الليل غير مدعوم على هذا الجهاز</string>
+    <string name="portrait_unsupported">وضع البورتريه غير مدعوم على هذا الجهاز</string>
+    <string name="hdr_unsupported">HDR غير مدعوم على هذا الجهاز</string>
+    <string name="raw_unavailable_in_mode">RAW متوقف في هذا الوضع</string>
 </resources>

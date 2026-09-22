@@ -195,4 +195,10 @@
     <string name="manual_focus_unsupported">Kamera ini tidak punya fokus manual</string>
     <string name="wb_presets_unsupported">Kamera ini hanya punya white balance otomatis</string>
     <string name="ae_lock_unsupported">Kamera ini tidak bisa mengunci eksposur</string>
+
+    <!-- Capture modes the device may not have -->
+    <string name="night_unsupported">Perangkat ini tidak mendukung mode Malam</string>
+    <string name="portrait_unsupported">Perangkat ini tidak mendukung mode Potret</string>
+    <string name="hdr_unsupported">Perangkat ini tidak mendukung HDR</string>
+    <string name="raw_unavailable_in_mode">RAW mati di mode ini</string>
 </resources>

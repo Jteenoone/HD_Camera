@@ -199,4 +199,10 @@
     <string name="manual_focus_unsupported">Cet appareil n\'a pas de mise au point manuelle</string>
     <string name="wb_presets_unsupported">Cet appareil n\'a que la balance des blancs automatique</string>
     <string name="ae_lock_unsupported">Cet appareil ne peut pas verrouiller l\'exposition</string>
+
+    <!-- Capture modes the device may not have -->
+    <string name="night_unsupported">Le mode Nuit n\'est pas pris en charge sur cet appareil</string>
+    <string name="portrait_unsupported">Le mode Portrait n\'est pas pris en charge sur cet appareil</string>
+    <string name="hdr_unsupported">Le HDR n\'est pas pris en charge sur cet appareil</string>
+    <string name="raw_unavailable_in_mode">Le RAW est désactivé dans ce mode</string>
 </resources>

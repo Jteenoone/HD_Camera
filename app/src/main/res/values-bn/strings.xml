@@ -197,4 +197,10 @@
     <string name="manual_focus_unsupported">এই ক্যামেরায় ম্যানুয়াল ফোকাস নেই</string>
     <string name="wb_presets_unsupported">এই ক্যামেরায় শুধু অটোমেটিক হোয়াইট ব্যালান্স আছে</string>
     <string name="ae_lock_unsupported">এই ক্যামেরা এক্সপোজার লক করতে পারে না</string>
+
+    <!-- Capture modes the device may not have -->
+    <string name="night_unsupported">এই ডিভাইসে নাইট মোড সমর্থিত নয়</string>
+    <string name="portrait_unsupported">এই ডিভাইসে পোর্ট্রেট মোড সমর্থিত নয়</string>
+    <string name="hdr_unsupported">এই ডিভাইসে HDR সমর্থিত নয়</string>
+    <string name="raw_unavailable_in_mode">এই মোডে RAW বন্ধ</string>
 </resources>

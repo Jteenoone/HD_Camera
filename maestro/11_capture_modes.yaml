@@ -1,0 +1,95 @@
+appId: com.example.hd_camera
+name: An unsupported capture mode never costs the preview
+---
+# No clearState: meant for a real phone, so the modes offered are this camera's own.
+- stopApp
+- launchApp
+- tapOn:
+    id: "btnSkip"
+    optional: true
+- tapOn:
+    id: "btnContinue"
+    optional: true
+- tapOn:
+    id: "btnNotNow"
+    optional: true
+
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
+
+# Photo → Night → Portrait → Photo. Whether this camera can deliver Night or Portrait or
+# neither, the viewfinder has to survive all four, because a mode is never worth the
+# preview. The shutter and the mode strip standing after each tap is the proof.
+- tapOn: "NIGHT"
+- assertVisible:
+    id: "btnShutter"
+- assertVisible:
+    id: "modeRow"
+
+- tapOn: "PORTRAIT"
+- assertVisible:
+    id: "btnShutter"
+- assertVisible:
+    id: "modeRow"
+
+- tapOn: "PHOTO"
+- assertVisible:
+    id: "btnShutter"
+- assertVisible:
+    id: "modeRow"
+
+# Straight back into a mode and out again, which is what used to leave a black preview.
+- tapOn: "NIGHT"
+- tapOn: "PHOTO"
+- assertVisible:
+    id: "btnShutter"
+
+# The camera still takes a picture after all of that.
+- tapOn:
+    id: "btnShutter"
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 20000
+- assertVisible:
+    id: "btnLastShot"
+
+# The gestures the modes must not have cost us.
+- runFlow:
+    when:
+      visible:
+        id: "zoomChips"
+    commands:
+      - tapOn: "1×"
+      - assertVisible:
+          id: "btnShutter"
+
+# Switching lens re-reads the modes for the new camera without losing the session.
+- tapOn:
+    id: "btnFlip"
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 10000
+- tapOn: "NIGHT"
+- assertVisible:
+    id: "btnShutter"
+- tapOn: "PHOTO"
+- assertVisible:
+    id: "btnShutter"
+
+# Video and back, which rebinds the whole session on a different mode.
+- tapOn: "VIDEO"
+- extendedWaitUntil:
+    visible:
+      id: "btnRecord"
+    timeout: 15000
+- tapOn: "PHOTO"
+- extendedWaitUntil:
+    visible:
+      id: "btnShutter"
+    timeout: 15000
+- assertVisible:
+    id: "modeRow"

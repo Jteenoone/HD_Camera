@@ -197,4 +197,10 @@
     <string name="manual_focus_unsupported">Diese Kamera hat keinen manuellen Fokus</string>
     <string name="wb_presets_unsupported">Diese Kamera hat nur automatischen Weißabgleich</string>
     <string name="ae_lock_unsupported">Diese Kamera kann die Belichtung nicht sperren</string>
+
+    <!-- Capture modes the device may not have -->
+    <string name="night_unsupported">Nachtmodus wird auf diesem Gerät nicht unterstützt</string>
+    <string name="portrait_unsupported">Porträtmodus wird auf diesem Gerät nicht unterstützt</string>
+    <string name="hdr_unsupported">HDR wird auf diesem Gerät nicht unterstützt</string>
+    <string name="raw_unavailable_in_mode">RAW ist in diesem Modus aus</string>
 </resources>

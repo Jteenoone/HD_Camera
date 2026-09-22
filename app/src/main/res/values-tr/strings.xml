@@ -197,4 +197,10 @@
     <string name="manual_focus_unsupported">Bu kamerada manuel odak yok</string>
     <string name="wb_presets_unsupported">Bu kamerada yalnızca otomatik beyaz dengesi var</string>
     <string name="ae_lock_unsupported">Bu kamera pozlamayı kilitleyemez</string>
+
+    <!-- Capture modes the device may not have -->
+    <string name="night_unsupported">Bu cihaz Gece modunu desteklemiyor</string>
+    <string name="portrait_unsupported">Bu cihaz Portre modunu desteklemiyor</string>
+    <string name="hdr_unsupported">Bu cihaz HDR desteklemiyor</string>
+    <string name="raw_unavailable_in_mode">Bu modda RAW kapalı</string>
 </resources>
