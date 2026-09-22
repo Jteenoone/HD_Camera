@@ -195,4 +195,10 @@
     <string name="manual_focus_unsupported">此相机没有手动对焦</string>
     <string name="wb_presets_unsupported">此相机只有自动白平衡</string>
     <string name="ae_lock_unsupported">此相机无法锁定曝光</string>
+
+    <!-- Capture modes the device may not have -->
+    <string name="night_unsupported">此设备不支持夜景模式</string>
+    <string name="portrait_unsupported">此设备不支持人像模式</string>
+    <string name="hdr_unsupported">此设备不支持 HDR</string>
+    <string name="raw_unavailable_in_mode">此模式下 RAW 已关闭</string>
 </resources>

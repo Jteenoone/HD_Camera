@@ -199,4 +199,10 @@
     <string name="manual_focus_unsupported">Esta cámara no tiene enfoque manual</string>
     <string name="wb_presets_unsupported">Esta cámara solo tiene balance de blancos automático</string>
     <string name="ae_lock_unsupported">Esta cámara no puede bloquear la exposición</string>
+
+    <!-- Capture modes the device may not have -->
+    <string name="night_unsupported">Este dispositivo no admite el modo Noche</string>
+    <string name="portrait_unsupported">Este dispositivo no admite el modo Retrato</string>
+    <string name="hdr_unsupported">Este dispositivo no admite HDR</string>
+    <string name="raw_unavailable_in_mode">RAW está desactivado en este modo</string>
 </resources>

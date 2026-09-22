@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.ImageCapture
 import androidx.camera.extensions.ExtensionMode
@@ -16,8 +17,13 @@ import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.hd_camera.R
 import com.example.hd_camera.camera.CameraEngine
+import com.example.hd_camera.camera.CaptureModeResolver
+import com.example.hd_camera.camera.CaptureModeSession
+import com.example.hd_camera.camera.ModeDelivery
 import com.example.hd_camera.camera.PhotoCapture
 import com.example.hd_camera.camera.ZoomMath
+import com.example.hd_camera.data.CaptureFormat
+import com.example.hd_camera.data.CaptureSettings
 import com.example.hd_camera.data.ViewfinderPrefs
 import com.example.hd_camera.databinding.FragmentPhotoBinding
 import com.example.hd_camera.databinding.ItemZoomChipBinding
@@ -45,6 +51,16 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
     private var capturing = false
     private var activeModeIndex = MODE_PHOTO
 
+    /** Which mode the camera really has, and which request is in flight. */
+    private val modeSession = CaptureModeSession(ExtensionMode.NONE)
+
+    /**
+     * The mode another screen asked for is honoured once, on the first session. Doing it on
+     * every ready callback made a successful bind ask for the previous mode all over again
+     * and tear the new session straight back down.
+     */
+    private var startingModeApplied = false
+
     /** The zoom as the user asked for it: 0.5x means the ultra-wide, not a sensor ratio. */
     private var zoomRatio = 1f
     private var zoomStops: List<Float> = emptyList()
@@ -64,7 +80,10 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         }
         engine.onCameraReady = {
             binding.tvCameraStatus.visibility = View.GONE
-            applyStartingMode()
+            if (!startingModeApplied) {
+                startingModeApplied = true
+                applyStartingMode()
+            }
             // resolutionInfo is only populated once the use case is attached to the session.
             binding.previewView.postDelayed({
                 updateResolutionBadge()
@@ -114,10 +133,11 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         binding.btnRatio.setOnClickListener { view -> showAspectRatioOptions(view) }
 
         binding.btnHdr.setOnClickListener {
-            val engine = engine ?: return@setOnClickListener
-            hdrOn = !hdrOn
-            engine.setExtensionMode(if (hdrOn) ExtensionMode.HDR else ExtensionMode.NONE)
-            updateHdrChip()
+            // HDR is an extension like the others, so it takes the same guarded path.
+            applyExtension(
+                if (hdrOn) ExtensionMode.NONE else ExtensionMode.HDR,
+                activeModeIndex
+            )
         }
 
         binding.btnSettings.setOnClickListener { navigateTo(SettingsFragment()) }
@@ -552,23 +572,73 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         else -> null
     }
 
+    /**
+     * Asks the camera for a mode and only marks it active once the session is really on it.
+     * A mode this device cannot deliver leaves the strip, and the camera, exactly where
+     * they were — the preview is the one thing that must never be the price of a mode.
+     */
     private fun applyExtension(mode: Int, stripIndex: Int) {
         val engine = engine ?: return
-        val binding = binding ?: return
-        if (!engine.isModeSupported(mode)) {
-            binding.tvCameraStatus.visibility = View.VISIBLE
-            binding.tvCameraStatus.text = getString(R.string.mode_unavailable)
-            binding.tvCameraStatus.postDelayed({
-                binding.tvCameraStatus.visibility = View.GONE
-            }, 1_800)
+
+        // Ask before binding: a mode nothing can deliver never gets to unbind anything.
+        val delivery = CaptureModeResolver.deliveryFor(
+            requested = mode,
+            extensionAvailable = engine.isExtensionAvailable(mode),
+            sceneAvailable = engine.sceneModeAvailable(mode)
+        )
+        if (delivery == ModeDelivery.UNSUPPORTED) {
+            showStatus(unsupportedMessage(mode))
             return
         }
+
+        val token = modeSession.request(mode)
+        val delivered = engine.setExtensionMode(mode)
+        if (!delivered) {
+            modeSession.failed(token)
+            showStatus(unsupportedMessage(mode))
+            // The engine has put a working session back; the strip never moved.
+            updateHdrChip()
+            return
+        }
+        // A newer request overtook this one while it was binding; that one owns the screen.
+        if (!modeSession.succeeded(token)) return
+
         hdrOn = mode == ExtensionMode.HDR
-        engine.setExtensionMode(mode)
         activeModeIndex = stripIndex
         bindModeStrip()
         updateHdrChip()
+        warnIfRawDropped()
     }
+
+    /**
+     * A vendor pipeline cannot write a DNG, so RAW quietly stops applying in Night or
+     * Portrait. Saying so beats letting the user find out on the computer.
+     */
+    private fun warnIfRawDropped() {
+        val engine = engine ?: return
+        if (engine.modeDelivery != ModeDelivery.VENDOR_EXTENSION) return
+        if (CaptureSettings.format(requireContext()) != CaptureFormat.JPEG_RAW) return
+        showStatus(R.string.raw_unavailable_in_mode)
+    }
+
+    @StringRes
+    private fun unsupportedMessage(mode: Int): Int = when (mode) {
+        ExtensionMode.NIGHT -> R.string.night_unsupported
+        ExtensionMode.BOKEH -> R.string.portrait_unsupported
+        ExtensionMode.HDR -> R.string.hdr_unsupported
+        else -> R.string.mode_unavailable
+    }
+
+    /** One place for the transient line over the preview, so none of them can stick. */
+    private fun showStatus(@StringRes messageId: Int) {
+        val status = binding?.tvCameraStatus ?: return
+        status.visibility = View.VISIBLE
+        status.setText(messageId)
+        status.removeCallbacks(hideStatus)
+        status.postDelayed(hideStatus, STATUS_MS)
+    }
+
+    private val hideStatus = Runnable { binding?.tvCameraStatus?.visibility = View.GONE }
 
     override fun onShutterKey(): Boolean {
         takePhoto()
@@ -598,6 +668,9 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
 
         const val RESOLUTION_SETTLE_MS = 400L
         const val COUNTDOWN_TICK_MS = 260L
+
+        /** How long a transient line stays over the preview. */
+        const val STATUS_MS = 1_800L
 
         /** How long the pinch readout stays up once the fingers have left. */
         const val ZOOM_READOUT_MS = 900L

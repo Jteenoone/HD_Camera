@@ -195,4 +195,10 @@
     <string name="manual_focus_unsupported">이 카메라에는 수동 초점이 없습니다</string>
     <string name="wb_presets_unsupported">이 카메라에는 자동 화이트 밸런스만 있습니다</string>
     <string name="ae_lock_unsupported">이 카메라는 노출을 잠글 수 없습니다</string>
+
+    <!-- Capture modes the device may not have -->
+    <string name="night_unsupported">이 기기는 야간 모드를 지원하지 않습니다</string>
+    <string name="portrait_unsupported">이 기기는 인물 모드를 지원하지 않습니다</string>
+    <string name="hdr_unsupported">이 기기는 HDR을 지원하지 않습니다</string>
+    <string name="raw_unavailable_in_mode">이 모드에서는 RAW가 꺼집니다</string>
 </resources>
