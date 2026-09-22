@@ -15,6 +15,12 @@ name: Shutter survives a RAW + JPEG capture (keeps existing app data)
 - tapOn:
     id: "btnNotNow"
     optional: true
+
+# Home is the root now, so the camera is one tap further in. Optional, so the flow still
+# runs if it is started from somewhere that is already in a viewfinder.
+- tapOn:
+    id: "btnOpenCamera"
+    optional: true
 - assertVisible:
     id: "btnShutter"
 

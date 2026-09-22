@@ -28,8 +28,8 @@ import com.example.hd_camera.databinding.ItemZoomChipBinding
 import com.example.hd_camera.media.MediaRepository
 import com.example.hd_camera.ui.applySystemBarPadding
 import com.example.hd_camera.ui.gallery.GalleryFragment
+import com.example.hd_camera.ui.navigateSibling
 import com.example.hd_camera.ui.navigateTo
-import com.example.hd_camera.ui.navigateToRoot
 import com.example.hd_camera.ui.options.CameraOption
 import com.example.hd_camera.ui.options.CameraOptionBottomSheet
 import com.example.hd_camera.ui.options.CaptureOptions
@@ -147,7 +147,9 @@ class VideoFragment :
     }
 
     private fun openPhotoMode(mode: Int) {
-        navigateToRoot(PhotoFragment.of(mode))
+        // A sibling hop, not a new root: replacing the whole stack used to throw away
+        // Home along with it, and Back from the viewfinder then left the app.
+        navigateSibling(PhotoFragment.of(mode))
     }
 
     /**

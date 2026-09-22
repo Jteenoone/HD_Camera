@@ -6,13 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.commit
 import com.example.hd_camera.data.ViewfinderPrefs
-import com.example.hd_camera.ui.camera.PhotoFragment
 import com.example.hd_camera.ui.camera.ShutterKeyHandler
+import com.example.hd_camera.ui.home.HomeFragment
 import com.example.hd_camera.ui.intro.IntroFragment
 
 /**
- * Single-activity host for the eleven screens of "HD Camera App.dc.html".
- * Every screen is a fragment swapped into R.id.nav_host.
+ * Single-activity host. Every screen is a fragment swapped into R.id.nav_host: the eleven
+ * from "HD Camera App.dc.html", and the Home dashboard the app now opens on, which is the
+ * one screen with no design of its own behind it.
  */
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             val onboarded = ViewfinderPrefs.get(this, KEY_ONBOARDED)
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                replace(R.id.nav_host, if (onboarded) PhotoFragment() else IntroFragment())
+                replace(R.id.nav_host, if (onboarded) HomeFragment() else IntroFragment())
             }
         }
     }

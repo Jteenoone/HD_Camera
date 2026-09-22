@@ -23,6 +23,20 @@ fun Fragment.navigateToRoot(destination: Fragment) {
     }
 }
 
+/**
+ * Swaps one screen for another at the same level: the one being left is dropped first, so
+ * hopping between the viewfinders does not pile them up. Whatever is underneath — Home —
+ * stays put, and Back still returns there.
+ */
+fun Fragment.navigateSibling(destination: Fragment) {
+    parentFragmentManager.popBackStack()
+    parentFragmentManager.commit {
+        setReorderingAllowed(true)
+        replace(R.id.nav_host, destination)
+        addToBackStack(null)
+    }
+}
+
 fun Fragment.navigateBack() {
     if (!parentFragmentManager.popBackStackImmediate()) {
         requireActivity().finish()

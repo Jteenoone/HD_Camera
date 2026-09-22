@@ -203,4 +203,18 @@
     <string name="portrait_unsupported">Porträtmodus wird auf diesem Gerät nicht unterstützt</string>
     <string name="hdr_unsupported">HDR wird auf diesem Gerät nicht unterstützt</string>
     <string name="raw_unavailable_in_mode">RAW ist in diesem Modus aus</string>
+
+    <!-- Home dashboard -->
+    <string name="home_hero_title">Jedes Detail festhalten</string>
+    <string name="home_hero_body">Fotos, 4K-Video und volle manuelle Kontrolle, in einem Sucher.</string>
+    <string name="open_camera">Kamera öffnen</string>
+    <string name="action_pro_camera">Pro-Kamera</string>
+    <string name="action_record_video">Video aufnehmen</string>
+    <string name="action_edit_photo">Foto bearbeiten</string>
+    <string name="action_collage">Collage</string>
+    <string name="coming_soon">Demnächst</string>
+    <string name="my_gallery">Meine Galerie</string>
+    <string name="my_gallery_body">Alles, was du aufgenommen hast, an einem Ort</string>
+    <string name="camera_permission_needed">Zum Aufnehmen wird Kamerazugriff benötigt</string>
+    <string name="camera_permission_in_settings">Kamerazugriff ist aus. Tippen, um die Einstellungen zu öffnen</string>
 </resources>

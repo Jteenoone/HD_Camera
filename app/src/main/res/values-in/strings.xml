@@ -201,4 +201,18 @@
     <string name="portrait_unsupported">Perangkat ini tidak mendukung mode Potret</string>
     <string name="hdr_unsupported">Perangkat ini tidak mendukung HDR</string>
     <string name="raw_unavailable_in_mode">RAW mati di mode ini</string>
+
+    <!-- Home dashboard -->
+    <string name="home_hero_title">Tangkap setiap detail</string>
+    <string name="home_hero_body">Foto, video 4K, dan kendali manual penuh, dalam satu jendela bidik.</string>
+    <string name="open_camera">Buka Kamera</string>
+    <string name="action_pro_camera">Kamera Pro</string>
+    <string name="action_record_video">Rekam Video</string>
+    <string name="action_edit_photo">Edit Foto</string>
+    <string name="action_collage">Kolase</string>
+    <string name="coming_soon">Segera hadir</string>
+    <string name="my_gallery">Galeri Saya</string>
+    <string name="my_gallery_body">Semua hasil jepretanmu, di satu tempat</string>
+    <string name="camera_permission_needed">Akses kamera diperlukan untuk memotret</string>
+    <string name="camera_permission_in_settings">Akses kamera mati. Ketuk untuk membuka setelan</string>
 </resources>

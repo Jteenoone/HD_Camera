@@ -201,4 +201,18 @@
     <string name="portrait_unsupported">此设备不支持人像模式</string>
     <string name="hdr_unsupported">此设备不支持 HDR</string>
     <string name="raw_unavailable_in_mode">此模式下 RAW 已关闭</string>
+
+    <!-- Home dashboard -->
+    <string name="home_hero_title">捕捉每一处细节</string>
+    <string name="home_hero_body">照片、4K 视频与完整手动控制，都在同一个取景器里。</string>
+    <string name="open_camera">打开相机</string>
+    <string name="action_pro_camera">专业模式</string>
+    <string name="action_record_video">录制视频</string>
+    <string name="action_edit_photo">编辑照片</string>
+    <string name="action_collage">拼图</string>
+    <string name="coming_soon">即将推出</string>
+    <string name="my_gallery">我的图库</string>
+    <string name="my_gallery_body">你拍下的一切，都在这里</string>
+    <string name="camera_permission_needed">拍摄需要相机权限</string>
+    <string name="camera_permission_in_settings">相机权限已关闭。点按以打开设置</string>
 </resources>

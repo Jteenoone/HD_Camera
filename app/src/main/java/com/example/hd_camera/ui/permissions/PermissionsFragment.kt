@@ -14,7 +14,7 @@ import com.example.hd_camera.R
 import com.example.hd_camera.data.ViewfinderPrefs
 import com.example.hd_camera.databinding.FragmentPermissionsBinding
 import com.example.hd_camera.ui.applySystemBarPadding
-import com.example.hd_camera.ui.camera.PhotoFragment
+import com.example.hd_camera.ui.home.HomeFragment
 import com.example.hd_camera.ui.navigateToRoot
 import com.example.hd_camera.ui.openExternalUrl
 
@@ -36,7 +36,7 @@ class PermissionsFragment : Fragment(R.layout.fragment_permissions) {
         refreshStatuses()
         // Whatever the answer, the user gets to the viewfinder; it shows its own message
         // when the camera cannot be opened.
-        openCamera()
+        finishOnboarding()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,9 +47,9 @@ class PermissionsFragment : Fragment(R.layout.fragment_permissions) {
         binding.rowStorage.visibility = if (legacyStorage()) View.VISIBLE else View.GONE
 
         binding.btnAllow.setOnClickListener {
-            if (allGranted()) openCamera() else requestPermissions.launch(required())
+            if (allGranted()) finishOnboarding() else requestPermissions.launch(required())
         }
-        binding.btnNotNow.setOnClickListener { openCamera() }
+        binding.btnNotNow.setOnClickListener { finishOnboarding() }
 
         binding.linkPrivacy.setOnClickListener { openExternalUrl(R.string.url_privacy_policy) }
         binding.linkTerms.setOnClickListener { openExternalUrl(R.string.url_terms_conditions) }
@@ -83,9 +83,14 @@ class PermissionsFragment : Fragment(R.layout.fragment_permissions) {
         )
     }
 
-    private fun openCamera() {
+    /**
+     * Onboarding ends on the dashboard, not in a viewfinder. Someone who chose "Not now"
+     * here is not dropped straight into a camera that cannot open; Home asks again at the
+     * moment a camera is actually wanted.
+     */
+    private fun finishOnboarding() {
         ViewfinderPrefs.set(requireContext(), MainActivity.KEY_ONBOARDED, true)
-        navigateToRoot(PhotoFragment())
+        navigateToRoot(HomeFragment())
     }
 
     /** Android 9 and below cannot write to DCIM without the storage permissions. */

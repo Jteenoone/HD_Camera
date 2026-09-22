@@ -20,6 +20,12 @@ name: Shutter completes without crashing
     id: "btnContinue"
 - tapOn:
     id: "btnNotNow"
+
+# Home is the root now, so the camera is one tap further in. Optional, so the flow still
+# runs if it is started from somewhere that is already in a viewfinder.
+- tapOn:
+    id: "btnOpenCamera"
+    optional: true
 - extendedWaitUntil:
     visible:
       id: "btnShutter"
