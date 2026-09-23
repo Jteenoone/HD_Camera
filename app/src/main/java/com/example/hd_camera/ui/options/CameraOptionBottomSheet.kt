@@ -8,6 +8,8 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.example.hd_camera.R
 import com.example.hd_camera.databinding.SheetCameraOptionsBinding
+import com.example.hd_camera.ui.AlwaysDark
+import com.example.hd_camera.ui.darkInflater
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 /**
@@ -20,6 +22,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
  * nothing has to be made Parcelable to get there.
  */
 class CameraOptionBottomSheet : BottomSheetDialogFragment() {
+
+    /** Dark over a viewfinder, like everything else there; over Settings it follows the theme. */
+    override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater {
+        val inflater = super.onGetLayoutInflater(savedInstanceState)
+        return if (parentFragment is AlwaysDark) darkInflater(inflater) else inflater
+    }
 
     /** Implemented by the fragment that shows the sheet. */
     interface Host {

@@ -205,18 +205,23 @@
     <string name="raw_unavailable_in_mode">Bu modda RAW kapalı</string>
 
     <!-- Home dashboard -->
-    <string name="home_hero_title">Her ayrıntıyı yakala</string>
-    <string name="home_hero_body">Fotoğraf, 4K video ve tam manuel kontrol, tek bir vizörde.</string>
     <string name="open_camera">Kamerayı aç</string>
-    <string name="action_pro_camera">Pro Kamera</string>
-    <string name="action_record_video">Video Çek</string>
     <string name="action_edit_photo">Fotoğraf Düzenle</string>
-    <string name="action_collage">Kolaj</string>
     <string name="coming_soon">Yakında</string>
     <string name="my_gallery">Galerim</string>
-    <string name="my_gallery_body">Çektiğin her şey, tek bir yerde</string>
     <string name="camera_permission_needed">Çekim yapmak için kamera izni gerekiyor</string>
     <string name="camera_permission_in_settings">Kamera izni kapalı. Ayarları açmak için dokun</string>
     <!-- Zoom wheel -->
     <string name="cd_zoom_value">%1$s kat yakınlaştırma</string>
+
+    <!-- Home dashboard, bottom bar and theme -->
+    <string name="home_take_photo">Fotoğraf çek</string>
+    <string name="home_take_photo_body">Telefonunu süper zoom kameraya dönüştür</string>
+    <string name="home_collage_maker">Kolaj Yapıcı</string>
+    <string name="home_gallery_body">Fotoğraflarına, videolarına ve daha fazlasına göz at</string>
+    <string name="nav_discover">Keşfet</string>
+    <string name="nav_my_creative">Eserlerim</string>
+    <string name="cd_close">Kapat ve ana sayfaya dön</string>
+    <string name="section_appearance">GÖRÜNÜM</string>
+    <string name="dark_mode">Karanlık mod</string>
 </resources>

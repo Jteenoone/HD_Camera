@@ -24,7 +24,9 @@ import com.example.hd_camera.filters.PhotoFilter
 import com.example.hd_camera.filters.asRenderEffect
 import com.example.hd_camera.filters.supportsLivePreviewFilter
 import com.example.hd_camera.media.MediaRepository
+import com.example.hd_camera.ui.AlwaysDark
 import com.example.hd_camera.ui.applySystemBarPadding
+import com.example.hd_camera.ui.darkInflater
 import com.example.hd_camera.ui.gallery.GalleryFragment
 import com.example.hd_camera.ui.navigateBack
 import com.example.hd_camera.ui.navigateTo
@@ -34,7 +36,10 @@ import kotlinx.coroutines.launch
  * Screen 07 · Live filters. The colour matrix runs on the preview through a RenderEffect and
  * on the captured frame through the same definition, so what you see is what gets saved.
  */
-class FiltersFragment : Fragment(R.layout.fragment_filters), ShutterKeyHandler {
+class FiltersFragment : Fragment(R.layout.fragment_filters), ShutterKeyHandler, AlwaysDark {
+
+    override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater =
+        darkInflater(super.onGetLayoutInflater(savedInstanceState))
 
     private var binding: FragmentFiltersBinding? = null
     private var engine: CameraEngine? = null

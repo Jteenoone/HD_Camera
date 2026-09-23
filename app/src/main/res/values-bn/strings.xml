@@ -205,18 +205,23 @@
     <string name="raw_unavailable_in_mode">এই মোডে RAW বন্ধ</string>
 
     <!-- Home dashboard -->
-    <string name="home_hero_title">প্রতিটি খুঁটিনাটি ধরুন</string>
-    <string name="home_hero_body">ছবি, 4K ভিডিও আর পূর্ণ ম্যানুয়াল নিয়ন্ত্রণ — সবই এক ভিউফাইন্ডারে।</string>
     <string name="open_camera">ক্যামেরা খুলুন</string>
-    <string name="action_pro_camera">প্রো ক্যামেরা</string>
-    <string name="action_record_video">ভিডিও রেকর্ড</string>
     <string name="action_edit_photo">ছবি সম্পাদনা</string>
-    <string name="action_collage">কোলাজ</string>
     <string name="coming_soon">শীঘ্রই আসছে</string>
     <string name="my_gallery">আমার গ্যালারি</string>
-    <string name="my_gallery_body">আপনার তোলা সব কিছু এক জায়গায়</string>
     <string name="camera_permission_needed">ছবি তুলতে ক্যামেরার অনুমতি দরকার</string>
     <string name="camera_permission_in_settings">ক্যামেরার অনুমতি বন্ধ। সেটিংস খুলতে ট্যাপ করুন</string>
     <!-- Zoom wheel -->
     <string name="cd_zoom_value">%1$s গুণ জুম</string>
+
+    <!-- Home dashboard, bottom bar and theme -->
+    <string name="home_take_photo">ছবি তুলুন</string>
+    <string name="home_take_photo_body">আপনার ফোনকে সুপার জুম ক্যামেরায় পরিণত করুন</string>
+    <string name="home_collage_maker">কোলাজ মেকার</string>
+    <string name="home_gallery_body">আপনার ছবি, ভিডিও এবং আরও অনেক কিছু দেখুন</string>
+    <string name="nav_discover">আবিষ্কার</string>
+    <string name="nav_my_creative">আমার সৃষ্টি</string>
+    <string name="cd_close">বন্ধ করে হোমে যান</string>
+    <string name="section_appearance">চেহারা</string>
+    <string name="dark_mode">ডার্ক মোড</string>
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The Take Photo card's artwork: an app-icon tile holding a lens, with a sparkle. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#2B0E5E"
+        android:pathData="M34,16 h52 a26,26 0 0 1 26,26 v52 a26,26 0 0 1 -26,26 h-52 a26,26 0 0 1 -26,-26 v-52 a26,26 0 0 1 26,-26 z"
+        android:strokeColor="#7446C8"
+        android:strokeWidth="2" />
+    <path
+        android:fillColor="#ECE8F7"
+        android:pathData="M58,68 m-31,0 a31,31 0 1,0 62,0 a31,31 0 1,0 -62,0" />
+    <path
+        android:fillColor="#1C2031"
+        android:pathData="M58,68 m-23,0 a23,23 0 1,0 46,0 a23,23 0 1,0 -46,0" />
+    <path
+        android:fillColor="#35568A"
+        android:pathData="M58,68 m-14,0 a14,14 0 1,0 28,0 a14,14 0 1,0 -28,0" />
+    <path
+        android:fillColor="#9CC3F0"
+        android:fillAlpha="0.8"
+        android:pathData="M52,62 m-5,0 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0" />
+    <path
+        android:fillColor="#7FD8FF"
+        android:pathData="M96,2 C97.6,13 100,15.4 111,17 C100,18.6 97.6,21 96,32 C94.4,21 92,18.6 81,17 C92,15.4 94.4,13 96,2 Z" />
+</vector>

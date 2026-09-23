@@ -203,18 +203,23 @@
     <string name="raw_unavailable_in_mode">이 모드에서는 RAW가 꺼집니다</string>
 
     <!-- Home dashboard -->
-    <string name="home_hero_title">모든 디테일을 담다</string>
-    <string name="home_hero_body">사진, 4K 동영상, 완전 수동 제어를 하나의 뷰파인더에서.</string>
     <string name="open_camera">카메라 열기</string>
-    <string name="action_pro_camera">프로 카메라</string>
-    <string name="action_record_video">동영상 촬영</string>
     <string name="action_edit_photo">사진 편집</string>
-    <string name="action_collage">콜라주</string>
     <string name="coming_soon">출시 예정</string>
     <string name="my_gallery">내 갤러리</string>
-    <string name="my_gallery_body">찍은 모든 것이 한곳에</string>
     <string name="camera_permission_needed">촬영하려면 카메라 권한이 필요합니다</string>
     <string name="camera_permission_in_settings">카메라 권한이 꺼져 있습니다. 눌러서 설정 열기</string>
     <!-- Zoom wheel -->
     <string name="cd_zoom_value">%1$s배 줌</string>
+
+    <!-- Home dashboard, bottom bar and theme -->
+    <string name="home_take_photo">사진 찍기</string>
+    <string name="home_take_photo_body">휴대폰을 슈퍼 줌 카메라로 바꿔 보세요</string>
+    <string name="home_collage_maker">콜라주 메이커</string>
+    <string name="home_gallery_body">사진, 동영상 등을 미리 보기</string>
+    <string name="nav_discover">둘러보기</string>
+    <string name="nav_my_creative">내 작품</string>
+    <string name="cd_close">닫고 홈으로</string>
+    <string name="section_appearance">화면 스타일</string>
+    <string name="dark_mode">다크 모드</string>
 </resources>

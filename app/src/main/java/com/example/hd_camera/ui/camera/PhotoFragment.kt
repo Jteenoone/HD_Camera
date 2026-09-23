@@ -28,17 +28,24 @@ import com.example.hd_camera.data.ViewfinderPrefs
 import com.example.hd_camera.databinding.FragmentPhotoBinding
 import com.example.hd_camera.databinding.ItemZoomChipBinding
 import com.example.hd_camera.media.MediaRepository
+import com.example.hd_camera.ui.AlwaysDark
 import com.example.hd_camera.ui.applySystemBarPadding
+import com.example.hd_camera.ui.darkInflater
 import com.example.hd_camera.ui.gallery.GalleryFragment
+import com.example.hd_camera.ui.navigateHome
 import com.example.hd_camera.ui.navigateTo
 import com.example.hd_camera.ui.options.CameraOption
 import com.example.hd_camera.ui.options.CameraOptionPopup
 import com.example.hd_camera.ui.settings.SettingsFragment
+import com.example.hd_camera.ui.themedContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /** Screen 05 · the Photo viewfinder, running a live CameraX session. */
-class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
+class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler, AlwaysDark {
+
+    override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater =
+        darkInflater(super.onGetLayoutInflater(savedInstanceState))
 
     private var binding: FragmentPhotoBinding? = null
     private var engine: CameraEngine? = null
@@ -141,6 +148,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         }
 
         binding.btnSettings.setOnClickListener { navigateTo(SettingsFragment()) }
+        binding.btnClose.setOnClickListener { navigateHome() }
         updateFlashIcon()
         updateTimerIcon()
     }
@@ -232,7 +240,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
             ImageCapture.FLASH_MODE_AUTO -> R.color.dc_text
             else -> R.color.dc_amber
         }
-        binding.btnFlash.setColorFilter(ContextCompat.getColor(requireContext(), tint))
+        binding.btnFlash.setColorFilter(ContextCompat.getColor(themedContext, tint))
         binding.btnFlash.contentDescription = getString(FLASH_LABELS[flashIndex])
     }
 
@@ -258,7 +266,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         val seconds = TIMER_SECONDS[timerIndex]
         binding.btnTimer.setColorFilter(
             ContextCompat.getColor(
-                requireContext(),
+                themedContext,
                 if (seconds == 0) R.color.dc_text else R.color.dc_accent
             )
         )
@@ -273,7 +281,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
         )
         binding.btnHdr.setTextColor(
             ContextCompat.getColor(
-                requireContext(),
+                themedContext,
                 if (hdrOn && available) R.color.dc_on_accent else R.color.dc_text
             )
         )
@@ -408,7 +416,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler {
             )
             chip.setTextColor(
                 ContextCompat.getColor(
-                    requireContext(),
+                    themedContext,
                     if (active) R.color.dc_bg else R.color.dc_text
                 )
             )

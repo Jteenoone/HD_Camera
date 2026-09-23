@@ -213,18 +213,23 @@
     <string name="raw_unavailable_in_mode">RAW متوقف في هذا الوضع</string>
 
     <!-- Home dashboard -->
-    <string name="home_hero_title">التقط كل التفاصيل</string>
-    <string name="home_hero_body">صور ثابتة وفيديو 4K وتحكم يدوي كامل، في معاين واحد.</string>
     <string name="open_camera">افتح الكاميرا</string>
-    <string name="action_pro_camera">الوضع الاحترافي</string>
-    <string name="action_record_video">تسجيل فيديو</string>
     <string name="action_edit_photo">تحرير صورة</string>
-    <string name="action_collage">مجمّع الصور</string>
     <string name="coming_soon">قريبًا</string>
     <string name="my_gallery">معرض الصور</string>
-    <string name="my_gallery_body">كل ما صوّرته في مكان واحد</string>
     <string name="camera_permission_needed">يلزم الوصول إلى الكاميرا للتصوير</string>
     <string name="camera_permission_in_settings">الوصول إلى الكاميرا موقوف. اضغط لفتح الإعدادات</string>
     <!-- Zoom wheel -->
     <string name="cd_zoom_value">تكبير %1$s أضعاف</string>
+
+    <!-- Home dashboard, bottom bar and theme -->
+    <string name="home_take_photo">التقاط صورة</string>
+    <string name="home_take_photo_body">حوّل هاتفك إلى كاميرا بتقريب فائق</string>
+    <string name="home_collage_maker">صانع الصور المجمّعة</string>
+    <string name="home_gallery_body">استعرض صورك ومقاطع الفيديو والمزيد</string>
+    <string name="nav_discover">استكشاف</string>
+    <string name="nav_my_creative">إبداعاتي</string>
+    <string name="cd_close">إغلاق والعودة إلى الرئيسية</string>
+    <string name="section_appearance">المظهر</string>
+    <string name="dark_mode">الوضع الداكن</string>
 </resources>

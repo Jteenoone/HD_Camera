@@ -140,8 +140,15 @@
                 android:paddingBottom="16dp">
 
                 <ImageView
+                    android:id="@+id/btnClose"
+                    style="@style/Widget.HD.ViewfinderIcon"
+                    android:contentDescription="@string/cd_close"
+                    android:src="@drawable/ic_close" />
+
+                <ImageView
                     android:id="@+id/btnFlash"
                     style="@style/Widget.HD.ViewfinderIcon"
+                    android:layout_marginStart="8dp"
                     android:contentDescription="@string/cd_flash"
                     android:src="@drawable/ic_bolt"
                     app:tint="@color/dc_amber" />

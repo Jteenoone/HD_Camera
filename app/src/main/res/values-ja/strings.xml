@@ -203,18 +203,23 @@
     <string name="raw_unavailable_in_mode">このモードでは RAW は切になります</string>
 
     <!-- Home dashboard -->
-    <string name="home_hero_title">細部まで写し取る</string>
-    <string name="home_hero_body">写真、4K 動画、フルマニュアル操作を、ひとつのファインダーで。</string>
     <string name="open_camera">カメラを開く</string>
-    <string name="action_pro_camera">プロカメラ</string>
-    <string name="action_record_video">動画を撮影</string>
     <string name="action_edit_photo">写真を編集</string>
-    <string name="action_collage">コラージュ</string>
     <string name="coming_soon">近日公開</string>
     <string name="my_gallery">マイギャラリー</string>
-    <string name="my_gallery_body">撮ったものすべてが、ここに</string>
     <string name="camera_permission_needed">撮影にはカメラへのアクセスが必要です</string>
     <string name="camera_permission_in_settings">カメラへのアクセスがオフです。タップして設定を開きます</string>
     <!-- Zoom wheel -->
     <string name="cd_zoom_value">ズーム %1$s 倍</string>
+
+    <!-- Home dashboard, bottom bar and theme -->
+    <string name="home_take_photo">写真を撮る</string>
+    <string name="home_take_photo_body">スマホを超ズームカメラに</string>
+    <string name="home_collage_maker">コラージュメーカー</string>
+    <string name="home_gallery_body">写真や動画などをプレビュー</string>
+    <string name="nav_discover">見つける</string>
+    <string name="nav_my_creative">マイクリエイティブ</string>
+    <string name="cd_close">閉じてホームへ</string>
+    <string name="section_appearance">外観</string>
+    <string name="dark_mode">ダークモード</string>
 </resources>

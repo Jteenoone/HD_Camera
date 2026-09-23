@@ -33,7 +33,11 @@
     <!-- Home dashboard -->
     <dimen name="home_card_radius">24dp</dimen>
     <dimen name="home_gap">14dp</dimen>
-    <dimen name="home_icon_tile">46dp</dimen>
+    <dimen name="home_tool_icon">64dp</dimen>
+    <dimen name="home_nav_hump">20dp</dimen>
+    <dimen name="home_nav_fab">64dp</dimen>
+    <!-- Room under the last card of a scrolling list, over and above the nav bar inset. -->
+    <dimen name="list_bottom_padding">32dp</dimen>
 
     <!-- Common controls -->
     <dimen name="touch_target">48dp</dimen>

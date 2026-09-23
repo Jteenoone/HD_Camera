@@ -207,18 +207,23 @@
     <string name="raw_unavailable_in_mode">RAW está desactivado en este modo</string>
 
     <!-- Home dashboard -->
-    <string name="home_hero_title">Captura cada detalle</string>
-    <string name="home_hero_body">Fotos, vídeo 4K y control manual completo, en un solo visor.</string>
     <string name="open_camera">Abrir cámara</string>
-    <string name="action_pro_camera">Cámara Pro</string>
-    <string name="action_record_video">Grabar vídeo</string>
     <string name="action_edit_photo">Editar foto</string>
-    <string name="action_collage">Collage</string>
     <string name="coming_soon">Muy pronto</string>
     <string name="my_gallery">Mi galería</string>
-    <string name="my_gallery_body">Todo lo que has hecho, en un solo sitio</string>
     <string name="camera_permission_needed">Se necesita acceso a la cámara para disparar</string>
     <string name="camera_permission_in_settings">El acceso a la cámara está desactivado. Toca para abrir ajustes</string>
     <!-- Zoom wheel -->
     <string name="cd_zoom_value">Zoom %1$s aumentos</string>
+
+    <!-- Home dashboard, bottom bar and theme -->
+    <string name="home_take_photo">Hacer foto</string>
+    <string name="home_take_photo_body">Convierte tu móvil en una cámara con súper zoom</string>
+    <string name="home_collage_maker">Creador de collages</string>
+    <string name="home_gallery_body">Mira tus fotos, vídeos y más</string>
+    <string name="nav_discover">Descubrir</string>
+    <string name="nav_my_creative">Mis creaciones</string>
+    <string name="cd_close">Cerrar e ir al inicio</string>
+    <string name="section_appearance">APARIENCIA</string>
+    <string name="dark_mode">Modo oscuro</string>
 </resources>

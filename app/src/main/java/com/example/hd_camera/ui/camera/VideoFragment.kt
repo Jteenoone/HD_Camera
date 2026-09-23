@@ -27,23 +27,30 @@ import com.example.hd_camera.data.ViewfinderPrefs
 import com.example.hd_camera.databinding.FragmentVideoBinding
 import com.example.hd_camera.databinding.ItemZoomChipBinding
 import com.example.hd_camera.media.MediaRepository
+import com.example.hd_camera.ui.AlwaysDark
 import com.example.hd_camera.ui.applySystemBarPadding
+import com.example.hd_camera.ui.darkInflater
 import com.example.hd_camera.ui.gallery.GalleryFragment
+import com.example.hd_camera.ui.navigateHome
 import com.example.hd_camera.ui.navigateSibling
 import com.example.hd_camera.ui.navigateTo
 import com.example.hd_camera.ui.options.CameraOption
 import com.example.hd_camera.ui.options.CameraOptionBottomSheet
 import com.example.hd_camera.ui.options.CaptureOptions
-import kotlinx.coroutines.launch
+import com.example.hd_camera.ui.themedContext
 import java.util.Locale
 import kotlin.math.ceil
 import kotlin.math.log10
+import kotlinx.coroutines.launch
 
 /** Screen 08 · Video recording. */
 class VideoFragment :
     Fragment(R.layout.fragment_video),
     ShutterKeyHandler,
-    CameraOptionBottomSheet.Host {
+    CameraOptionBottomSheet.Host, AlwaysDark {
+
+    override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater =
+        darkInflater(super.onGetLayoutInflater(savedInstanceState))
 
     private var binding: FragmentVideoBinding? = null
     private var engine: CameraEngine? = null
@@ -95,6 +102,7 @@ class VideoFragment :
         binding.btnRecord.setOnClickListener { toggleRecording() }
         binding.btnQuality.setOnClickListener { ifIdle { showQualityOptions() } }
         binding.btnEis.setOnClickListener { ifIdle { toggleStabilization() } }
+        binding.btnClose.setOnClickListener { ifIdle { navigateHome() } }
         binding.btnFlip.setOnClickListener { ifIdle { engine.switchLens() } }
         binding.btnLastShot.setOnClickListener { navigateTo(GalleryFragment()) }
         binding.btnPauseResume.setOnClickListener { togglePause() }
@@ -420,7 +428,7 @@ class VideoFragment :
             )
             chip.setTextColor(
                 ContextCompat.getColor(
-                    requireContext(),
+                    themedContext,
                     if (active) R.color.dc_bg else R.color.dc_text
                 )
             )
@@ -673,7 +681,7 @@ class VideoFragment :
         val engine = engine ?: return
         binding.btnEis.setTextColor(
             ContextCompat.getColor(
-                requireContext(),
+                themedContext,
                 if (engine.stabilizationEnabled) R.color.dc_accent else R.color.dc_text_80
             )
         )

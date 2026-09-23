@@ -53,6 +53,13 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
+            <ImageView
+                android:id="@+id/btnClose"
+                style="@style/Widget.HD.ViewfinderIcon"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/cd_close"
+                android:src="@drawable/ic_close" />
+
             <LinearLayout
                 android:id="@+id/recBadge"
                 android:layout_width="wrap_content"

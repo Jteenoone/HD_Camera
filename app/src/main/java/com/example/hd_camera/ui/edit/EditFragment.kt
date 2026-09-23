@@ -23,12 +23,17 @@ import com.example.hd_camera.edit.Adjustments
 import com.example.hd_camera.edit.Geometry
 import com.example.hd_camera.edit.ImageEditor
 import com.example.hd_camera.media.MediaOutput
+import com.example.hd_camera.ui.AlwaysDark
 import com.example.hd_camera.ui.applySystemBarPadding
+import com.example.hd_camera.ui.darkInflater
 import com.example.hd_camera.ui.navigateBack
 import kotlinx.coroutines.launch
 
 /** Screen 11 · Edit. Loads the picked photo and writes a new file on save. */
-class EditFragment : Fragment(R.layout.fragment_edit) {
+class EditFragment : Fragment(R.layout.fragment_edit), AlwaysDark {
+
+    override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater =
+        darkInflater(super.onGetLayoutInflater(savedInstanceState))
 
     private enum class Tool(@StringRes val label: Int, @DrawableRes val icon: Int) {
         LIGHT(R.string.tool_light, R.drawable.ic_light),

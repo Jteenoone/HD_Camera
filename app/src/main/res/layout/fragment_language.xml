@@ -56,7 +56,7 @@
         android:clipToPadding="false"
         android:paddingStart="@dimen/screen_h_padding"
         android:paddingEnd="@dimen/screen_h_padding"
-        android:paddingBottom="8dp"
+        android:paddingBottom="@dimen/list_bottom_padding"
         android:scrollbars="none">
 
         <LinearLayout
