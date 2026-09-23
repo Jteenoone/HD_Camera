@@ -3,11 +3,13 @@ package com.example.hd_camera.camera
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.util.Locale
+import kotlin.math.abs
 
 /**
- * The zoom wheel's arithmetic, including the cases a phone makes awkward to reach: a camera
- * that cannot zoom at all, a thumb dragged off the end of the arc, and a ratio that arrives
- * as NaN because a camera was closing while the wheel was still being drawn.
+ * The zoom dial's arithmetic, including the cases a phone makes awkward to reach: a camera
+ * that cannot zoom at all, a turn past the end of the range, and a ratio that arrives as
+ * NaN because a camera was closing while the dial was still being drawn.
  */
 class ZoomArcMathTest {
 
@@ -102,41 +104,91 @@ class ZoomArcMathTest {
         )
     }
 
-    // ── Touch angle to progress ────────────────────────────────────────────
+    // ── Dial offset ────────────────────────────────────────────────────────
 
     @Test
-    fun `the start of the sweep is the start of the arc`() {
-        assertEquals(0f, ZoomArcMath.angleToProgress(180f, 180f, 180f), TOLERANCE)
+    fun `the ratio the dial is turned to sits under the pointer`() {
+        assertEquals(0f, ZoomArcMath.dialOffset(1.2f, 1.2f, DEGREES_PER_LN), TOLERANCE)
     }
 
     @Test
-    fun `the top of a half circle is its middle`() {
-        assertEquals(0.5f, ZoomArcMath.angleToProgress(270f, 180f, 180f), TOLERANCE)
+    fun `wider ratios sit left of the pointer and longer ones right of it`() {
+        assertTrue(ZoomArcMath.dialOffset(0.5f, 1f, DEGREES_PER_LN) < 0f)
+        assertTrue(ZoomArcMath.dialOffset(3f, 1f, DEGREES_PER_LN) > 0f)
     }
 
     @Test
-    fun `the end of the sweep is the end of the arc`() {
-        assertEquals(1f, ZoomArcMath.angleToProgress(360f, 180f, 180f), TOLERANCE)
-        // The same point, named the other way round.
-        assertEquals(1f, ZoomArcMath.angleToProgress(0f, 180f, 180f), TOLERANCE)
+    fun `every doubling takes the same turn of the dial`() {
+        val oneToTwo = ZoomArcMath.dialOffset(2f, 1f, DEGREES_PER_LN)
+        val fourToEight = ZoomArcMath.dialOffset(8f, 4f, DEGREES_PER_LN)
+        assertEquals(oneToTwo, fourToEight, TOLERANCE)
     }
 
     @Test
-    fun `a finger below the arc is held at whichever end it is nearer`() {
-        // Just past the long end, in the dead half of the circle.
-        assertEquals(1f, ZoomArcMath.angleToProgress(20f, 180f, 180f), TOLERANCE)
-        // Just short of the wide end, on the other side of the same dead half.
-        assertEquals(0f, ZoomArcMath.angleToProgress(160f, 180f, 180f), TOLERANCE)
+    fun `an offset from a broken ratio is zero rather than NaN`() {
+        assertEquals(0f, ZoomArcMath.dialOffset(Float.NaN, 1f, DEGREES_PER_LN), TOLERANCE)
+        assertEquals(0f, ZoomArcMath.dialOffset(2f, 0f, DEGREES_PER_LN), TOLERANCE)
+    }
+
+    // ── Turning the dial ───────────────────────────────────────────────────
+
+    @Test
+    fun `turning by an offset lands on the ratio that was there`() {
+        val offset = ZoomArcMath.dialOffset(3f, 1f, DEGREES_PER_LN)
+        // The finger drags the scale the other way round to bring 3x up to the pointer.
+        assertEquals(
+            3f,
+            ZoomArcMath.zoomAfterTurn(1f, -offset, DEGREES_PER_LN, WIDE),
+            TOLERANCE
+        )
     }
 
     @Test
-    fun `a sweep with no width does not divide by zero`() {
-        assertEquals(0f, ZoomArcMath.angleToProgress(270f, 180f, 0f), TOLERANCE)
+    fun `a turn past either end is held at that end`() {
+        assertEquals(10f, ZoomArcMath.zoomAfterTurn(1f, -720f, DEGREES_PER_LN, WIDE), TOLERANCE)
+        assertEquals(0.5f, ZoomArcMath.zoomAfterTurn(1f, 720f, DEGREES_PER_LN, WIDE), TOLERANCE)
     }
 
     @Test
-    fun `an angle that is not a number is absorbed`() {
-        assertEquals(0f, ZoomArcMath.angleToProgress(Float.NaN, 180f, 180f), TOLERANCE)
+    fun `a turn that is not a number leaves the zoom where it was`() {
+        assertEquals(
+            2f,
+            ZoomArcMath.zoomAfterTurn(2f, Float.NaN, DEGREES_PER_LN, WIDE),
+            TOLERANCE
+        )
+    }
+
+    // ── Ticks ──────────────────────────────────────────────────────────────
+
+    @Test
+    fun `ticks start and end on the range`() {
+        val ticks = ZoomArcMath.ticks(WIDE)
+        assertEquals(0.5f, ticks.first(), TOLERANCE)
+        assertEquals(10f, ticks.last(), TOLERANCE)
+    }
+
+    @Test
+    fun `ticks are tenths below 3x and coarser above`() {
+        val ticks = ZoomArcMath.ticks(WIDE)
+        assertTrue(ticks.any { abs(it - 1.2f) < TOLERANCE })
+        assertTrue(ticks.none { abs(it - 3.1f) < TOLERANCE })
+        assertTrue(ticks.any { abs(it - 3.25f) < TOLERANCE })
+    }
+
+    @Test
+    fun `a camera that cannot zoom gets no ticks`() {
+        assertTrue(ZoomArcMath.ticks(1f..1f).isEmpty())
+        assertTrue(ZoomArcMath.ticks(Float.NaN..Float.NaN).isEmpty())
+    }
+
+    // ── Dial labels ────────────────────────────────────────────────────────
+
+    @Test
+    fun `dial labels follow the reader's decimal separator`() {
+        assertEquals("0,5", ZoomArcMath.dialLabel(0.5f, Locale.forLanguageTag("vi")))
+        assertEquals("0.5", ZoomArcMath.dialLabel(0.5f, Locale.US))
+        assertEquals("1,2", ZoomArcMath.dialLabel(1.24f, Locale.forLanguageTag("vi")))
+        assertEquals("3", ZoomArcMath.dialLabel(3f, Locale.US))
     }
 
     // ── Spoken value ───────────────────────────────────────────────────────
@@ -154,5 +206,6 @@ class ZoomArcMathTest {
         /** An ultra-wide to a long tele: the range a flagship reports. */
         val WIDE = 0.5f..10f
         const val TOLERANCE = 0.001f
+        const val DEGREES_PER_LN = 25f
     }
 }

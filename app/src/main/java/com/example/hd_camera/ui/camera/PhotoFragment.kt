@@ -349,6 +349,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), ShutterKeyHandler, Alwa
         arc.range = engine.fullZoomRange()
         arc.reachable = engine.availableZoomRange()
         arc.stops = zoomStops
+        arc.baseFocalLengthMm = engine.mainLensEquivalentFocalMm()
         arc.zoom = zoomRatio
     }
 

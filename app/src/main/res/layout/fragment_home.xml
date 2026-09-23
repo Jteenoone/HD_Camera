@@ -273,7 +273,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Discover · camera · My Creative. The bar's hump is drawn, not laid out. -->
+    <!-- Home · camera · My Creative. The bar's hump is drawn, not laid out. -->
     <FrameLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
@@ -293,7 +293,7 @@
             android:paddingBottom="10dp">
 
             <LinearLayout
-                android:id="@+id/navDiscover"
+                android:id="@+id/navHome"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -308,7 +308,7 @@
                     android:background="@drawable/bg_nav_active"
                     android:importantForAccessibility="no"
                     android:padding="7dp"
-                    android:src="@drawable/ic_discover"
+                    android:src="@drawable/ic_home"
                     app:tint="@color/home_nav_active" />
 
                 <TextView
@@ -316,7 +316,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:fontFamily="@font/ibm_plex_sans_medium"
-                    android:text="@string/nav_discover"
+                    android:text="@string/nav_home"
                     android:textColor="@color/home_nav_active"
                     android:textSize="12sp" />
             </LinearLayout>

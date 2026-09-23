@@ -219,7 +219,7 @@
     <string name="home_take_photo_body">Telefonunu süper zoom kameraya dönüştür</string>
     <string name="home_collage_maker">Kolaj Yapıcı</string>
     <string name="home_gallery_body">Fotoğraflarına, videolarına ve daha fazlasına göz at</string>
-    <string name="nav_discover">Keşfet</string>
+    <string name="nav_home">Ana Sayfa</string>
     <string name="nav_my_creative">Eserlerim</string>
     <string name="cd_close">Kapat ve ana sayfaya dön</string>
     <string name="section_appearance">GÖRÜNÜM</string>
