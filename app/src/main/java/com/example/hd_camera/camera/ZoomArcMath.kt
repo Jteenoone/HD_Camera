@@ -1,13 +1,16 @@
 package com.example.hd_camera.camera
 
+import java.text.NumberFormat
 import java.util.Locale
 import kotlin.math.abs
+import kotlin.math.ceil
+import kotlin.math.exp
 import kotlin.math.ln
 import kotlin.math.pow
 
 /**
- * The arithmetic behind the zoom wheel: where a finger on the arc lands on the zoom scale,
- * and where a zoom ratio sits on the arc.
+ * The arithmetic behind the zoom dial: where a zoom ratio sits on the scale, how far a turn
+ * of the dial moves the zoom, and where its ticks fall.
  *
  * The mapping is logarithmic, which is the whole point of having a wheel. Spread linearly,
  * a 0.5x–10x range gives the stretch from 1x to 2x about five percent of the travel — the
@@ -16,12 +19,18 @@ import kotlin.math.pow
  * is as easy to land on as 4x to 8x.
  *
  * Kept free of Android types so the cases a phone makes awkward — a camera that cannot
- * zoom, a finger past the end of the arc, a ratio that arrives as NaN — can be tested.
+ * zoom, a turn past the end of the range, a ratio that arrives as NaN — can be tested.
  */
 object ZoomArcMath {
 
     /** A camera with no zoom at all: both ends the same. */
     private const val FLAT_RANGE_EPSILON = 1e-4f
+
+    /** Slack for tick values that land a hair off a tenth. */
+    private const val TICK_EPSILON = 1e-3f
+
+    /** A guard, not a design limit: a sane range produces a few dozen. */
+    private const val MAX_TICKS = 400
 
     /**
      * The zoom [progress] stands for, 0 at the wide end of the arc and 1 at the long end.
@@ -47,26 +56,76 @@ object ZoomArcMath {
     }
 
     /**
-     * Where a touch at [angle] falls along an arc that starts at [startAngle] and runs
-     * [sweepAngle] degrees. All three are in the canvas's own degrees: zero at three
-     * o'clock, growing clockwise.
-     *
-     * A finger that leaves the arc — dragged out past either end, or down into the dead
-     * half of the circle — is held at whichever end it is nearer, so the wheel does not
-     * jump from one extreme to the other as the thumb slips off it.
+     * How far round from the pointer [ratio] sits on a dial turned to [current], in degrees,
+     * clockwise positive. Equal zoom factors take equal turns — the same log scale as the
+     * progress mapping above — so the wide end reads on the left and the tele on the right.
      */
-    fun angleToProgress(angle: Float, startAngle: Float, sweepAngle: Float): Float {
-        if (!angle.isFinite() || !sweepAngle.isFinite() || abs(sweepAngle) < FLAT_RANGE_EPSILON) {
-            return 0f
-        }
-        var delta = (angle - startAngle) % 360f
-        if (delta < 0f) delta += 360f
-        if (delta <= sweepAngle) return (delta / sweepAngle).coerceIn(0f, 1f)
+    fun dialOffset(ratio: Float, current: Float, degreesPerLn: Float): Float {
+        if (!ratio.isFinite() || !current.isFinite() || !degreesPerLn.isFinite()) return 0f
+        if (ratio <= 0f || current <= 0f) return 0f
+        return ln(ratio / current) * degreesPerLn
+    }
 
-        // Past the far end: the gap beyond it against the gap back round to the start.
-        val pastEnd = delta - sweepAngle
-        val beforeStart = 360f - delta
-        return if (pastEnd <= beforeStart) 1f else 0f
+    /**
+     * The zoom a turn of [deltaDegrees] leaves the dial on, from [start]. Turning clockwise
+     * brings the wide end up to the pointer, so the zoom falls; the result is held inside
+     * [range] however far the finger travels.
+     */
+    fun zoomAfterTurn(
+        start: Float,
+        deltaDegrees: Float,
+        degreesPerLn: Float,
+        range: ClosedFloatingPointRange<Float>
+    ): Float {
+        val min = range.start
+        val max = range.endInclusive
+        if (!min.isFinite() || !max.isFinite() || min <= 0f) return 1f
+        val safeStart = if (start.isFinite() && start > 0f) start.coerceIn(min, max) else min
+        if (!deltaDegrees.isFinite() || !degreesPerLn.isFinite() || abs(degreesPerLn) < 1e-3f) {
+            return safeStart
+        }
+        return (safeStart * exp(-deltaDegrees / degreesPerLn)).coerceIn(min, max)
+    }
+
+    /**
+     * Where the dial's minor ticks fall across [range]. Tenths up to 3×, then coarser steps
+     * as the zoom climbs: on a log dial even tenths crowd together at the long end, and a
+     * wall of lines there says nothing a thinner set would not.
+     */
+    fun ticks(range: ClosedFloatingPointRange<Float>): List<Float> {
+        val min = range.start
+        val max = range.endInclusive
+        if (!min.isFinite() || !max.isFinite() || min <= 0f || max - min < FLAT_RANGE_EPSILON) {
+            return emptyList()
+        }
+        val ticks = mutableListOf<Float>()
+        var value = ceil(min * 10f - TICK_EPSILON) / 10f
+        while (value <= max + TICK_EPSILON && ticks.size < MAX_TICKS) {
+            ticks += value
+            value = Math.round((value + tickStepAt(value)) * 100f) / 100f
+        }
+        return ticks
+    }
+
+    private fun tickStepAt(value: Float): Float = when {
+        value < 3f - TICK_EPSILON -> 0.1f
+        value < 6f - TICK_EPSILON -> 0.25f
+        value < 10f - TICK_EPSILON -> 0.5f
+        value < 20f - TICK_EPSILON -> 1f
+        else -> 5f
+    }
+
+    /**
+     * A dial label in the reader's own number format: "0,5" in Vietnamese, "0.5" in English,
+     * one decimal at most and none on a whole number.
+     */
+    fun dialLabel(ratio: Float, locale: Locale): String {
+        val safe = if (ratio.isFinite()) ratio else 1f
+        val rounded = Math.round(safe * 10f) / 10f
+        return NumberFormat.getNumberInstance(locale).apply {
+            minimumFractionDigits = 0
+            maximumFractionDigits = 1
+        }.format(rounded)
     }
 
     /**

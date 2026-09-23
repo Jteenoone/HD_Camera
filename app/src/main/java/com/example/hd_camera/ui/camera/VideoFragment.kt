@@ -347,6 +347,7 @@ class VideoFragment :
         arc.range = engine.fullZoomRange()
         arc.reachable = engine.availableZoomRange()
         arc.stops = zoomStops
+        arc.baseFocalLengthMm = engine.mainLensEquivalentFocalMm()
         arc.zoom = zoomRatio
     }
 

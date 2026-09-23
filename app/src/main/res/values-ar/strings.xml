@@ -227,7 +227,7 @@
     <string name="home_take_photo_body">حوّل هاتفك إلى كاميرا بتقريب فائق</string>
     <string name="home_collage_maker">صانع الصور المجمّعة</string>
     <string name="home_gallery_body">استعرض صورك ومقاطع الفيديو والمزيد</string>
-    <string name="nav_discover">استكشاف</string>
+    <string name="nav_home">الرئيسية</string>
     <string name="nav_my_creative">إبداعاتي</string>
     <string name="cd_close">إغلاق والعودة إلى الرئيسية</string>
     <string name="section_appearance">المظهر</string>

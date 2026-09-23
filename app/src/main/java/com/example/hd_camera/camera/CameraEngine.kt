@@ -3,6 +3,7 @@ package com.example.hd_camera.camera
 import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.camera2.CameraCaptureSession
+import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CaptureRequest
 import android.hardware.camera2.CaptureResult
 import android.hardware.camera2.TotalCaptureResult
@@ -10,6 +11,7 @@ import android.util.Log
 import android.util.Range
 import androidx.annotation.OptIn
 import androidx.camera.camera2.interop.Camera2CameraControl
+import androidx.camera.camera2.interop.Camera2CameraInfo
 import androidx.camera.camera2.interop.Camera2Interop
 import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
@@ -48,6 +50,8 @@ import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import kotlin.math.abs
+import kotlin.math.hypot
 
 /**
  * Owns the CameraX session for the four viewfinder screens: preview, stills, video and the
@@ -687,6 +691,34 @@ class CameraEngine(
 
     private fun intrinsicZoomOf(info: CameraInfo) = info.intrinsicZoomRatio
 
+    /**
+     * The main lens's focal length as a 35mm-equivalent figure, the "26MM" the zoom wheel
+     * prints under 1×. It comes from the lens and sensor the camera publishes — the focal
+     * length scaled by the full-frame diagonal over the sensor's — and is null when either
+     * is missing, so the wheel leaves the line out rather than guessing.
+     */
+    @OptIn(ExperimentalCamera2Interop::class)
+    fun mainLensEquivalentFocalMm(): Float? {
+        val provider = provider ?: return null
+        return try {
+            val main = CameraSelector.Builder().requireLensFacing(lensFacing).build()
+                .filter(provider.availableCameraInfos)
+                .minByOrNull { abs(intrinsicZoomOf(it) - 1f) } ?: return null
+            val info = Camera2CameraInfo.from(main)
+            val focal = info.getCameraCharacteristic(
+                CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS
+            )?.minOrNull() ?: return null
+            val sensor = info.getCameraCharacteristic(
+                CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE
+            ) ?: return null
+            val diagonal = hypot(sensor.width, sensor.height)
+            if (focal <= 0f || diagonal <= 0f) return null
+            focal * FULL_FRAME_DIAGONAL_MM / diagonal
+        } catch (error: Exception) {
+            null
+        }
+    }
+
     /** True when the device exposes a lens wider than the default one. */
     fun hasWideLens(): Boolean {
         val provider = provider ?: return false
@@ -950,6 +982,9 @@ class CameraEngine(
     }
 
     private companion object {
+        /** The diagonal of a 36 × 24 mm frame, which "equivalent" focal lengths refer to. */
+        const val FULL_FRAME_DIAGONAL_MM = 43.27f
+
         const val TAG = "CameraEngine"
 
         /** Anything below this is a wider lens than the default one. */

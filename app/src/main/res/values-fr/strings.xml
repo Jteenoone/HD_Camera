@@ -221,7 +221,7 @@
     <string name="home_take_photo_body">Transformez votre téléphone en appareil photo super zoom</string>
     <string name="home_collage_maker">Créateur de collages</string>
     <string name="home_gallery_body">Revoyez vos photos, vidéos et plus encore</string>
-    <string name="nav_discover">Découvrir</string>
+    <string name="nav_home">Accueil</string>
     <string name="nav_my_creative">Mes créations</string>
     <string name="cd_close">Fermer et revenir à l’accueil</string>
     <string name="section_appearance">APPARENCE</string>

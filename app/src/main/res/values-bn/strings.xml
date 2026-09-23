@@ -219,7 +219,7 @@
     <string name="home_take_photo_body">আপনার ফোনকে সুপার জুম ক্যামেরায় পরিণত করুন</string>
     <string name="home_collage_maker">কোলাজ মেকার</string>
     <string name="home_gallery_body">আপনার ছবি, ভিডিও এবং আরও অনেক কিছু দেখুন</string>
-    <string name="nav_discover">আবিষ্কার</string>
+    <string name="nav_home">হোম</string>
     <string name="nav_my_creative">আমার সৃষ্টি</string>
     <string name="cd_close">বন্ধ করে হোমে যান</string>
     <string name="section_appearance">চেহারা</string>

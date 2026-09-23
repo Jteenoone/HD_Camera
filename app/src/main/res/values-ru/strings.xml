@@ -223,7 +223,7 @@
     <string name="home_take_photo_body">Превратите телефон в камеру с суперзумом</string>
     <string name="home_collage_maker">Создание коллажей</string>
     <string name="home_gallery_body">Ваши фото, видео и многое другое</string>
-    <string name="nav_discover">Обзор</string>
+    <string name="nav_home">Главная</string>
     <string name="nav_my_creative">Мои работы</string>
     <string name="cd_close">Закрыть и вернуться на главную</string>
     <string name="section_appearance">ОФОРМЛЕНИЕ</string>

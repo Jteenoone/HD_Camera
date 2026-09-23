@@ -69,8 +69,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         // says so and does not respond — it still reads, so the plan is visible.
         binding.cardCollage.alpha = DISABLED_ALPHA
 
-        // Discover is this screen, so tapping it again just returns to the top.
-        binding.navDiscover.setOnClickListener {
+        // This is the Home tab, so tapping it again just returns to the top.
+        binding.navHome.setOnClickListener {
             binding.homeScroll.smoothScrollTo(0, 0)
         }
         binding.btnNavCamera.setOnClickListener { openCamera { PhotoFragment() } }
