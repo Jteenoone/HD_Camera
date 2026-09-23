@@ -26,6 +26,19 @@
         tools:visibility="visible"
         tools:text="Recording" />
 
+    <!--
+        The zoom wheel. An overlay here too, and for the same reason: this screen has no
+        black panel to put it in, and growing one would be the very thing Video avoids.
+        The fragment pushes it clear of the controls once they have been measured.
+    -->
+    <com.example.hd_camera.ui.widget.ZoomArcView
+        android:id="@+id/zoomArc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/zoom_arc_height"
+        android:layout_gravity="bottom|center_horizontal"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,6 +52,13 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/btnClose"
+                style="@style/Widget.HD.ViewfinderIcon"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/cd_close"
+                android:src="@drawable/ic_close" />
 
             <LinearLayout
                 android:id="@+id/recBadge"
@@ -202,7 +222,7 @@
                 tools:text="2.4×"
                 tools:visibility="visible" />
 
-            <LinearLayout
+            <com.example.hd_camera.ui.widget.ZoomChipRow
                 android:id="@+id/zoomChips"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

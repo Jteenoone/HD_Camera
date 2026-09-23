@@ -8,18 +8,13 @@ import android.provider.Settings
 import android.view.View
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.example.hd_camera.R
 import com.example.hd_camera.databinding.FragmentHomeBinding
-import com.example.hd_camera.databinding.ItemHomeActionBinding
 import com.example.hd_camera.ui.applySystemBarPadding
 import com.example.hd_camera.ui.camera.PhotoFragment
-import com.example.hd_camera.ui.camera.ProFragment
-import com.example.hd_camera.ui.camera.VideoFragment
 import com.example.hd_camera.ui.edit.EditFragment
 import com.example.hd_camera.ui.gallery.GalleryFragment
 import com.example.hd_camera.ui.navigateTo
@@ -62,40 +57,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentHomeBinding.bind(view).also { this.binding = it }
         binding.header.applySystemBarPadding(top = true)
-        view.applySystemBarPadding(bottom = true)
+        binding.navRow.applySystemBarPadding(bottom = true)
 
         binding.btnSettings.setOnClickListener { navigateTo(SettingsFragment()) }
         binding.cardHero.setOnClickListener { openCamera { PhotoFragment() } }
         binding.btnOpenCamera.setOnClickListener { openCamera { PhotoFragment() } }
+        binding.cardEdit.setOnClickListener { pickPhotoToEdit() }
         binding.cardGallery.setOnClickListener { navigateTo(GalleryFragment()) }
 
-        bindAction(
-            binding.actionPro,
-            R.string.action_pro_camera,
-            R.drawable.ic_tune
-        ) { openCamera { ProFragment() } }
+        // Collage has no screen behind it yet. Rather than a card that goes nowhere, it
+        // says so and does not respond — it still reads, so the plan is visible.
+        binding.cardCollage.alpha = DISABLED_ALPHA
 
-        bindAction(
-            binding.actionVideo,
-            R.string.action_record_video,
-            R.drawable.ic_video
-        ) { openCamera { VideoFragment() } }
-
-        bindAction(
-            binding.actionEdit,
-            R.string.action_edit_photo,
-            R.drawable.ic_markup
-        ) { pickPhotoToEdit() }
-
-        // Collage has no screen behind it yet. Rather than a button that goes nowhere, it
-        // says so and does not respond — the row still reads, so the plan is visible.
-        bindAction(
-            binding.actionCollage,
-            R.string.action_collage,
-            R.drawable.ic_collage,
-            note = R.string.coming_soon,
-            onClick = null
-        )
+        // Discover is this screen, so tapping it again just returns to the top.
+        binding.navDiscover.setOnClickListener {
+            binding.homeScroll.smoothScrollTo(0, 0)
+        }
+        binding.btnNavCamera.setOnClickListener { openCamera { PhotoFragment() } }
+        binding.navMyCreative.setOnClickListener { navigateTo(GalleryFragment()) }
     }
 
     override fun onResume() {
@@ -107,33 +86,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
-    }
-
-    private fun bindAction(
-        row: ItemHomeActionBinding,
-        @StringRes title: Int,
-        @DrawableRes icon: Int,
-        @StringRes note: Int? = null,
-        onClick: (() -> Unit)?
-    ) {
-        row.actionTitle.setText(title)
-        row.actionIcon.setImageResource(icon)
-        if (note != null) {
-            row.actionNote.setText(note)
-            row.actionNote.visibility = View.VISIBLE
-        } else {
-            row.actionNote.visibility = View.GONE
-        }
-
-        val enabled = onClick != null
-        row.root.isEnabled = enabled
-        row.root.isClickable = enabled
-        row.root.alpha = if (enabled) 1f else DISABLED_ALPHA
-        if (enabled) {
-            row.root.setOnClickListener { onClick?.invoke() }
-        } else {
-            row.root.setOnClickListener(null)
-        }
     }
 
     // ── Camera permission ──────────────────────────────────────────────────

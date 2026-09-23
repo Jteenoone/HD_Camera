@@ -14,6 +14,8 @@
     <!-- A round chip is its own touch target, so it holds the 48dp minimum. -->
     <dimen name="zoom_chip">48dp</dimen>
     <dimen name="zoom_chip_active">48dp</dimen>
+    <!-- Tall enough for a half circle a thumb can travel, short enough to clear the shutter. -->
+    <dimen name="zoom_arc_height">128dp</dimen>
     <!-- The Photo screen's black control panel. -->
     <dimen name="photo_panel_top_padding">18dp</dimen>
     <dimen name="photo_panel_bottom_padding">24dp</dimen>
@@ -31,7 +33,11 @@
     <!-- Home dashboard -->
     <dimen name="home_card_radius">24dp</dimen>
     <dimen name="home_gap">14dp</dimen>
-    <dimen name="home_icon_tile">46dp</dimen>
+    <dimen name="home_tool_icon">64dp</dimen>
+    <dimen name="home_nav_hump">20dp</dimen>
+    <dimen name="home_nav_fab">64dp</dimen>
+    <!-- Room under the last card of a scrolling list, over and above the nav bar inset. -->
+    <dimen name="list_bottom_padding">32dp</dimen>
 
     <!-- Common controls -->
     <dimen name="touch_target">48dp</dimen>

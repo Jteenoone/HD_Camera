@@ -1,6 +1,7 @@
 package com.example.hd_camera.ui.camera
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -21,10 +22,13 @@ import com.example.hd_camera.camera.WhiteBalance
 import com.example.hd_camera.data.CaptureFormat
 import com.example.hd_camera.data.CaptureSettings
 import com.example.hd_camera.databinding.FragmentProBinding
+import com.example.hd_camera.ui.AlwaysDark
 import com.example.hd_camera.ui.applySystemBarPadding
+import com.example.hd_camera.ui.darkInflater
 import com.example.hd_camera.ui.navigateBack
-import kotlinx.coroutines.launch
+import com.example.hd_camera.ui.themedContext
 import kotlin.math.roundToInt
+import kotlinx.coroutines.launch
 
 /**
  * Screen 06 · Pro.
@@ -35,7 +39,10 @@ import kotlin.math.roundToInt
  * comes from the camera's own characteristics. A parameter the camera does not offer is
  * shown greyed with the reason rather than left as a control that does nothing.
  */
-class ProFragment : Fragment(R.layout.fragment_pro), ShutterKeyHandler {
+class ProFragment : Fragment(R.layout.fragment_pro), ShutterKeyHandler, AlwaysDark {
+
+    override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater =
+        darkInflater(super.onGetLayoutInflater(savedInstanceState))
 
     private enum class Parameter { ISO, SHUTTER, WB, EV, FOCUS }
 
@@ -268,11 +275,11 @@ class ProFragment : Fragment(R.layout.fragment_pro), ShutterKeyHandler {
 
     private fun tintChip(chip: LinearLayout, active: Boolean) {
         val labelColour = ContextCompat.getColor(
-            requireContext(),
+            themedContext,
             if (active) R.color.dc_on_accent else R.color.dc_text_dim
         )
         val valueColour = ContextCompat.getColor(
-            requireContext(),
+            themedContext,
             if (active) R.color.dc_on_accent else R.color.dc_text
         )
         (chip.getChildAt(0) as? TextView)?.setTextColor(labelColour)
@@ -526,7 +533,7 @@ class ProFragment : Fragment(R.layout.fragment_pro), ShutterKeyHandler {
         )
         view.setTextColor(
             ContextCompat.getColor(
-                requireContext(),
+                themedContext,
                 if (active) R.color.dc_on_accent else R.color.dc_text
             )
         )
@@ -565,7 +572,7 @@ class ProFragment : Fragment(R.layout.fragment_pro), ShutterKeyHandler {
         )
         binding.btnRaw.setTextColor(
             ContextCompat.getColor(
-                requireContext(),
+                themedContext,
                 if (rawOn) R.color.dc_on_accent else R.color.dc_text
             )
         )

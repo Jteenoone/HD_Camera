@@ -11,12 +11,14 @@ import com.example.hd_camera.data.CaptureFormat
 import com.example.hd_camera.data.CaptureSettings
 import com.example.hd_camera.data.LocalePrefs
 import com.example.hd_camera.data.PhotoResolution
+import com.example.hd_camera.data.ThemePrefs
 import com.example.hd_camera.data.VideoProfile
 import com.example.hd_camera.data.ViewfinderPrefs
 import com.example.hd_camera.databinding.FragmentSettingsBinding
 import com.example.hd_camera.ui.applySystemBarPadding
 import com.example.hd_camera.ui.language.LanguageFragment
 import com.example.hd_camera.ui.navigateBack
+import com.example.hd_camera.ui.navigateHome
 import com.example.hd_camera.ui.navigateTo
 import com.example.hd_camera.ui.openExternalUrl
 import com.example.hd_camera.ui.options.CameraOption
@@ -47,13 +49,19 @@ class SettingsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentSettingsBinding.bind(view).also { this.binding = it }
         binding.header.applySystemBarPadding(top = true)
-        view.applySystemBarPadding(bottom = true)
+        binding.settingsScroll.applySystemBarPadding(bottom = true)
 
         binding.btnBack.setOnClickListener { navigateBack() }
 
         bindSwitch(binding.switchGrid, ViewfinderPrefs.KEY_GRID)
         bindSwitch(binding.switchShutterSound, ViewfinderPrefs.KEY_SHUTTER_SOUND)
         bindSwitch(binding.switchVolumeShutter, ViewfinderPrefs.KEY_VOLUME_SHUTTER)
+
+        // AppCompat recreates the activity with the new theme; this screen comes back on top.
+        binding.switchDarkMode.isChecked = ThemePrefs.isDark(requireContext())
+        binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+            ThemePrefs.setDark(requireContext(), isChecked)
+        }
 
         // Geotagging needs a location fix, so the switch asks for the permission first.
         binding.switchGeotagging.isChecked =

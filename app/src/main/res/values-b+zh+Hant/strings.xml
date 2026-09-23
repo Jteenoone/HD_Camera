@@ -203,16 +203,23 @@
     <string name="raw_unavailable_in_mode">此模式下 RAW 已關閉</string>
 
     <!-- Home dashboard -->
-    <string name="home_hero_title">捕捉每一處細節</string>
-    <string name="home_hero_body">相片、4K 影片與完整手動控制，都在同一個取景器裡。</string>
     <string name="open_camera">開啟相機</string>
-    <string name="action_pro_camera">專業模式</string>
-    <string name="action_record_video">錄影</string>
     <string name="action_edit_photo">編輯相片</string>
-    <string name="action_collage">拼貼</string>
     <string name="coming_soon">即將推出</string>
     <string name="my_gallery">我的圖庫</string>
-    <string name="my_gallery_body">你拍下的一切，都在這裡</string>
     <string name="camera_permission_needed">拍攝需要相機權限</string>
     <string name="camera_permission_in_settings">相機權限已關閉。輕觸以開啟設定</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">變焦 %1$s 倍</string>
+
+    <!-- Home dashboard, bottom bar and theme -->
+    <string name="home_take_photo">拍照</string>
+    <string name="home_take_photo_body">讓手機變身超級變焦相機</string>
+    <string name="home_collage_maker">拼貼製作</string>
+    <string name="home_gallery_body">預覽你的相片、影片等</string>
+    <string name="nav_discover">探索</string>
+    <string name="nav_my_creative">我的創作</string>
+    <string name="cd_close">關閉並返回首頁</string>
+    <string name="section_appearance">外觀</string>
+    <string name="dark_mode">深色模式</string>
 </resources>

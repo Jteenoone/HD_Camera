@@ -209,16 +209,23 @@
     <string name="raw_unavailable_in_mode">В этом режиме RAW отключён</string>
 
     <!-- Home dashboard -->
-    <string name="home_hero_title">Снимайте каждую деталь</string>
-    <string name="home_hero_body">Фото, видео 4K и полный ручной контроль — в одном видоискателе.</string>
     <string name="open_camera">Открыть камеру</string>
-    <string name="action_pro_camera">Про-камера</string>
-    <string name="action_record_video">Снять видео</string>
     <string name="action_edit_photo">Редактировать фото</string>
-    <string name="action_collage">Коллаж</string>
     <string name="coming_soon">Скоро</string>
     <string name="my_gallery">Моя галерея</string>
-    <string name="my_gallery_body">Всё, что вы сняли, в одном месте</string>
     <string name="camera_permission_needed">Для съёмки нужен доступ к камере</string>
     <string name="camera_permission_in_settings">Доступ к камере выключен. Нажмите, чтобы открыть настройки</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">Зум %1$s×</string>
+
+    <!-- Home dashboard, bottom bar and theme -->
+    <string name="home_take_photo">Сделать фото</string>
+    <string name="home_take_photo_body">Превратите телефон в камеру с суперзумом</string>
+    <string name="home_collage_maker">Создание коллажей</string>
+    <string name="home_gallery_body">Ваши фото, видео и многое другое</string>
+    <string name="nav_discover">Обзор</string>
+    <string name="nav_my_creative">Мои работы</string>
+    <string name="cd_close">Закрыть и вернуться на главную</string>
+    <string name="section_appearance">ОФОРМЛЕНИЕ</string>
+    <string name="dark_mode">Тёмная тема</string>
 </resources>

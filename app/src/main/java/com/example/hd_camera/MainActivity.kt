@@ -1,11 +1,15 @@
 package com.example.hd_camera
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import com.example.hd_camera.data.ViewfinderPrefs
+import com.example.hd_camera.ui.AlwaysDark
 import com.example.hd_camera.ui.camera.ShutterKeyHandler
 import com.example.hd_camera.ui.home.HomeFragment
 import com.example.hd_camera.ui.intro.IntroFragment
@@ -20,8 +24,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        WindowCompat.getInsetsController(window, window.decorView)
-            .isAppearanceLightStatusBars = false
+        updateSystemBarIcons(null)
+
+        // The bars are transparent, so their icons follow whichever screen is showing: dark
+        // on the light theme, light on the dark theme and always on the camera screens.
+        supportFragmentManager.registerFragmentLifecycleCallbacks(
+            object : FragmentManager.FragmentLifecycleCallbacks() {
+                override fun onFragmentResumed(fm: FragmentManager, f: Fragment) {
+                    if (f.id == R.id.nav_host) updateSystemBarIcons(f)
+                }
+            },
+            false
+        )
 
         if (savedInstanceState == null) {
             val onboarded = ViewfinderPrefs.get(this, KEY_ONBOARDED)
@@ -29,6 +43,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 setReorderingAllowed(true)
                 replace(R.id.nav_host, if (onboarded) HomeFragment() else IntroFragment())
             }
+        }
+    }
+
+    private fun updateSystemBarIcons(screen: Fragment?) {
+        val night = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+            Configuration.UI_MODE_NIGHT_YES
+        val lightIcons = night || screen is AlwaysDark
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            isAppearanceLightStatusBars = !lightIcons
+            isAppearanceLightNavigationBars = !lightIcons
         }
     }
 

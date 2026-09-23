@@ -5,6 +5,7 @@ import coil.ImageLoader
 import coil.ImageLoaderFactory
 import coil.decode.VideoFrameDecoder
 import com.example.hd_camera.data.LocalePrefs
+import com.example.hd_camera.data.ThemePrefs
 
 /**
  * Coil needs the video decoder registered explicitly, otherwise the gallery tiles and the
@@ -17,6 +18,7 @@ class HdCameraApp : Application(), ImageLoaderFactory {
         // AppCompat normally restores the chosen locale itself; this covers the case where
         // its own storage has been cleared but the app's preference survived.
         LocalePrefs.restore(this)
+        ThemePrefs.restore(this)
     }
 
     override fun newImageLoader(): ImageLoader = ImageLoader.Builder(this)

@@ -42,3 +42,12 @@ fun Fragment.navigateBack() {
         requireActivity().finish()
     }
 }
+
+/**
+ * The X on every screen off Home. Home is always the root of the stack — the activity puts
+ * it there on launch and onboarding hands over with [navigateToRoot] — so unwinding the whole
+ * back stack lands on it however deep the user has gone.
+ */
+fun Fragment.navigateHome() {
+    parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+}

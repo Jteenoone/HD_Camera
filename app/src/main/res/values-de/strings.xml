@@ -205,16 +205,23 @@
     <string name="raw_unavailable_in_mode">RAW ist in diesem Modus aus</string>
 
     <!-- Home dashboard -->
-    <string name="home_hero_title">Jedes Detail festhalten</string>
-    <string name="home_hero_body">Fotos, 4K-Video und volle manuelle Kontrolle, in einem Sucher.</string>
     <string name="open_camera">Kamera öffnen</string>
-    <string name="action_pro_camera">Pro-Kamera</string>
-    <string name="action_record_video">Video aufnehmen</string>
     <string name="action_edit_photo">Foto bearbeiten</string>
-    <string name="action_collage">Collage</string>
     <string name="coming_soon">Demnächst</string>
     <string name="my_gallery">Meine Galerie</string>
-    <string name="my_gallery_body">Alles, was du aufgenommen hast, an einem Ort</string>
     <string name="camera_permission_needed">Zum Aufnehmen wird Kamerazugriff benötigt</string>
     <string name="camera_permission_in_settings">Kamerazugriff ist aus. Tippen, um die Einstellungen zu öffnen</string>
+    <!-- Zoom wheel -->
+    <string name="cd_zoom_value">%1$s-facher Zoom</string>
+
+    <!-- Home dashboard, bottom bar and theme -->
+    <string name="home_take_photo">Foto aufnehmen</string>
+    <string name="home_take_photo_body">Mach dein Handy zur Super-Zoom-Kamera</string>
+    <string name="home_collage_maker">Collage-Ersteller</string>
+    <string name="home_gallery_body">Deine Fotos, Videos und mehr ansehen</string>
+    <string name="nav_discover">Entdecken</string>
+    <string name="nav_my_creative">Meine Werke</string>
+    <string name="cd_close">Schließen und zur Startseite</string>
+    <string name="section_appearance">DARSTELLUNG</string>
+    <string name="dark_mode">Dunkler Modus</string>
 </resources>

@@ -9,13 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import androidx.core.content.getSystemService
-import androidx.core.widget.doAfterTextChanged
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.hd_camera.R
 import com.example.hd_camera.databinding.FragmentGalleryBinding
@@ -27,9 +28,9 @@ import com.example.hd_camera.media.MediaSection
 import com.example.hd_camera.ui.applySystemBarPadding
 import com.example.hd_camera.ui.edit.EditFragment
 import com.example.hd_camera.ui.navigateBack
+import com.example.hd_camera.ui.navigateHome
 import com.example.hd_camera.ui.navigateTo
 import com.example.hd_camera.ui.settings.SettingsFragment
-import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
 /** Screen 09 · Gallery, listing what the app has written to DCIM/HDCamera. */
@@ -58,6 +59,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
         binding.btnCamera.setOnClickListener { navigateBack() }
         binding.navSettings.setOnClickListener { navigateTo(SettingsFragment()) }
+        binding.btnBack.setOnClickListener { navigateBack() }
         binding.btnSelect.setOnClickListener { toggleSelectionMode() }
         binding.btnSearch.setOnClickListener { toggleSearch() }
         binding.searchInput.doAfterTextChanged { text ->
