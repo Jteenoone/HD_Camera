@@ -65,6 +65,7 @@
     <string name="recording">Enregistrement</string>
     <string name="recording_failed">Échec de l\'enregistrement</string>
     <string name="recording_without_audio">Enregistrement sans son — autorisation du micro refusée</string>
+    <string name="recording_no_microphone">Enregistrement sans son — cet appareil n\'a pas de micro</string>
     <string name="eis_unsupported">Cet appareil n\'a pas de stabilisation</string>
     <string name="snapshot_unsupported">Cet appareil ne peut pas photographier pendant l\'enregistrement</string>
     <string name="locked_while_recording">Indisponible pendant l\'enregistrement</string>

@@ -212,6 +212,13 @@ class CameraEngine(
             try {
                 val cameraProvider = future.get()
                 provider = cameraProvider
+                // The manifest does not require a back camera, so a device with only a
+                // front one (some tablets and Chromebooks) has to open on that instead.
+                if (!cameraProvider.has(CameraSelector.DEFAULT_BACK_CAMERA) &&
+                    cameraProvider.has(CameraSelector.DEFAULT_FRONT_CAMERA)
+                ) {
+                    lensFacing = CameraSelector.LENS_FACING_FRONT
+                }
                 val extensions = ExtensionsManager.getInstanceAsync(context, cameraProvider)
                 extensions.addListener({
                     extensionsManager = try {
@@ -512,6 +519,13 @@ class CameraEngine(
                 }
             }
         }
+    }
+
+    /** hasCamera throws when the camera service cannot answer; count that as no camera. */
+    private fun ProcessCameraProvider.has(selector: CameraSelector): Boolean = try {
+        hasCamera(selector)
+    } catch (error: Exception) {
+        false
     }
 
     private fun supportsRawCapture(

@@ -65,6 +65,7 @@
     <string name="recording">录制中</string>
     <string name="recording_failed">录制失败</string>
     <string name="recording_without_audio">正在无声录制——麦克风权限被拒绝</string>
+    <string name="recording_no_microphone">正在无声录制——此设备没有麦克风</string>
     <string name="eis_unsupported">此相机没有防抖</string>
     <string name="snapshot_unsupported">此相机无法在录制时拍照</string>
     <string name="locked_while_recording">录制时不可用</string>

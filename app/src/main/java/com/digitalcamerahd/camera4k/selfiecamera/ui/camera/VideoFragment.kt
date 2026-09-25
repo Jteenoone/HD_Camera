@@ -186,7 +186,8 @@ class VideoFragment :
             // A tap arriving while the last clip is still being written does nothing.
             CameraEngine.RecordingState.FINALIZING -> Unit
             CameraEngine.RecordingState.IDLE -> {
-                if (!micGranted()) {
+                // With no microphone to grant, asking would only be a dead-end dialog.
+                if (hasMicrophone() && !micGranted()) {
                     requestMic.launch(Manifest.permission.RECORD_AUDIO)
                     return
                 }
@@ -199,7 +200,8 @@ class VideoFragment :
         val engine = engine ?: return
         if (engine.recordingState != CameraEngine.RecordingState.IDLE) return
 
-        val started = engine.startRecording(withAudio = micGranted()) { event ->
+        val withAudio = hasMicrophone() && micGranted()
+        val started = engine.startRecording(withAudio = withAudio) { event ->
             onRecordEvent(event)
         }
         val binding = binding ?: return
@@ -209,9 +211,14 @@ class VideoFragment :
             return
         }
         applyRecordingChrome()
-        if (!micGranted()) {
-            // Recording carries on, but say plainly that it will be silent.
-            showStatus(R.string.recording_without_audio, AUDIO_NOTICE_MS)
+        if (!withAudio) {
+            // Recording carries on, but say plainly that it will be silent, and why.
+            val notice = if (hasMicrophone()) {
+                R.string.recording_without_audio
+            } else {
+                R.string.recording_no_microphone
+            }
+            showStatus(notice, AUDIO_NOTICE_MS)
         }
     }
 
@@ -607,6 +614,10 @@ class VideoFragment :
             )
         }
     }
+
+    /** The manifest does not require a microphone, so a device without one records silent. */
+    private fun hasMicrophone(): Boolean =
+        requireContext().packageManager.hasSystemFeature(PackageManager.FEATURE_MICROPHONE)
 
     private fun micGranted(): Boolean = ContextCompat.checkSelfPermission(
         requireContext(),

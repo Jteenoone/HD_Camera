@@ -65,6 +65,7 @@
     <string name="recording">Grabando</string>
     <string name="recording_failed">Fallo al grabar</string>
     <string name="recording_without_audio">Grabando sin sonido: permiso de micrófono denegado</string>
+    <string name="recording_no_microphone">Grabando sin sonido: este dispositivo no tiene micrófono</string>
     <string name="eis_unsupported">Esta cámara no tiene estabilización</string>
     <string name="snapshot_unsupported">Esta cámara no puede hacer fotos mientras graba</string>
     <string name="locked_while_recording">No disponible mientras se graba</string>

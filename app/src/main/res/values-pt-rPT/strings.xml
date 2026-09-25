@@ -65,6 +65,7 @@
     <string name="recording">A gravar</string>
     <string name="recording_failed">Falha na gravação</string>
     <string name="recording_without_audio">A gravar sem som — permissão do microfone negada</string>
+    <string name="recording_no_microphone">A gravar sem som — este dispositivo não tem microfone</string>
     <string name="eis_unsupported">Esta câmara não tem estabilização</string>
     <string name="snapshot_unsupported">Esta câmara não tira fotografias durante a gravação</string>
     <string name="locked_while_recording">Indisponível durante a gravação</string>

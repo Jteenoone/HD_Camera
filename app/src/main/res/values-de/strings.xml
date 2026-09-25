@@ -65,6 +65,7 @@
     <string name="recording">Aufnahme</string>
     <string name="recording_failed">Aufnahme fehlgeschlagen</string>
     <string name="recording_without_audio">Aufnahme ohne Ton — Mikrofonberechtigung verweigert</string>
+    <string name="recording_no_microphone">Aufnahme ohne Ton — dieses Gerät hat kein Mikrofon</string>
     <string name="eis_unsupported">Diese Kamera hat keine Stabilisierung</string>
     <string name="snapshot_unsupported">Diese Kamera kann während der Aufnahme keine Fotos machen</string>
     <string name="locked_while_recording">Während der Aufnahme nicht verfügbar</string>

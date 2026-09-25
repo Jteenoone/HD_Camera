@@ -143,6 +143,7 @@
     <string name="eis" translatable="false">EIS</string>
     <string name="recording_failed">Recording failed</string>
     <string name="recording_without_audio">Recording without sound — microphone permission denied</string>
+    <string name="recording_no_microphone">Recording without sound — this device has no microphone</string>
     <string name="eis_unsupported">This camera has no stabilization</string>
     <string name="snapshot_unsupported">This camera cannot take photos while recording</string>
     <string name="locked_while_recording">Not available while recording</string>

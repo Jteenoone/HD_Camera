@@ -27,8 +27,24 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
+    <!--
+        No hardware is a hard requirement, so Play does not hide the app from a device that
+        lacks some of it. The permissions above would otherwise imply a back camera, a
+        microphone and location hardware. Without a back camera the viewfinder opens on the
+        front one, without a microphone video records silent, and without a location fix a
+        photo simply carries no geotag.
+    -->
     <uses-feature
         android:name="android.hardware.camera.any"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location"
         android:required="false" />
 
     <!-- Package visibility for the browser the legal links open in, and the mail app. -->

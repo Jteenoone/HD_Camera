@@ -65,6 +65,7 @@
     <string name="recording">Kaydediliyor</string>
     <string name="recording_failed">Kayıt başarısız</string>
     <string name="recording_without_audio">Sessiz kaydediliyor — mikrofon izni reddedildi</string>
+    <string name="recording_no_microphone">Sessiz kaydediliyor — bu cihazda mikrofon yok</string>
     <string name="eis_unsupported">Bu kamerada sabitleme yok</string>
     <string name="snapshot_unsupported">Bu kamera kayıt sırasında fotoğraf çekemiyor</string>
     <string name="locked_while_recording">Kayıt sırasında kullanılamaz</string>

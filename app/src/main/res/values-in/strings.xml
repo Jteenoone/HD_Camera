@@ -65,6 +65,7 @@
     <string name="recording">Merekam</string>
     <string name="recording_failed">Perekaman gagal</string>
     <string name="recording_without_audio">Merekam tanpa suara — izin mikrofon ditolak</string>
+    <string name="recording_no_microphone">Merekam tanpa suara — perangkat ini tidak punya mikrofon</string>
     <string name="eis_unsupported">Kamera ini tidak punya stabilisasi</string>
     <string name="snapshot_unsupported">Kamera ini tidak bisa memotret sambil merekam</string>
     <string name="locked_while_recording">Tidak tersedia saat merekam</string>
