@@ -1,4 +1,4 @@
-appId: com.example.hd_camera
+appId: com.digitalcamerahd.camera4k.selfiecamera
 name: Home is the root, and every card leads somewhere and comes back
 ---
 - stopApp

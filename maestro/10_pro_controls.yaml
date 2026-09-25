@@ -1,4 +1,4 @@
-appId: com.example.hd_camera
+appId: com.digitalcamerahd.camera4k.selfiecamera
 name: The Pro screen offers every manual control and can put them all back
 ---
 # No clearState: meant for a real phone, so the limits on screen are this camera's own.

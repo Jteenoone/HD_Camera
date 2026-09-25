@@ -1,4 +1,4 @@
-appId: com.example.hd_camera
+appId: com.digitalcamerahd.camera4k.selfiecamera
 name: The legal documents are reachable from onboarding and from Settings
 ---
 # A previous flow may still be tearing its process down; clearing state under it makes the
