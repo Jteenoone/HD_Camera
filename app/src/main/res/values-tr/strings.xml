@@ -65,6 +65,7 @@
     <string name="recording">Kaydediliyor</string>
     <string name="recording_failed">Kayıt başarısız</string>
     <string name="recording_without_audio">Sessiz kaydediliyor — mikrofon izni reddedildi</string>
+    <string name="recording_no_microphone">Sessiz kaydediliyor — bu cihazda mikrofon yok</string>
     <string name="eis_unsupported">Bu kamerada sabitleme yok</string>
     <string name="snapshot_unsupported">Bu kamera kayıt sırasında fotoğraf çekemiyor</string>
     <string name="locked_while_recording">Kayıt sırasında kullanılamaz</string>
@@ -86,7 +87,7 @@
         <item quantity="other">%1$d VİDEO</item>
     </plurals>
     <string name="settings">Ayarlar</string>
-    <string name="gallery_empty">DCIM/HDCamera henüz boş — bir kare çek.</string>
+    <string name="gallery_empty">DCIM/ProCam4K henüz boş — bir kare çek.</string>
     <string name="search_hint">Ada veya tarihe göre ara</string>
     <string name="no_matches">Bu aramayla eşleşen bir şey yok.</string>
     <string name="done">Bitti</string>
@@ -144,7 +145,7 @@
     <string name="crop_label">KIRPMA</string>
     <string name="stroke_label">ÇİZGİ</string>
     <string name="saving">Kaydediliyor…</string>
-    <string name="saved">DCIM/HDCamera klasörüne kaydedildi</string>
+    <string name="saved">DCIM/ProCam4K klasörüne kaydedildi</string>
     <string name="save_failed">Düzenleme kaydedilemedi</string>
     <string name="edit_load_failed">Bu fotoğraf açılamadı</string>
 
@@ -179,6 +180,9 @@
     <!-- About -->
     <string name="section_about">HAKKINDA</string>
     <string name="about_version">Sürüm %1$s</string>
+    <string name="contact_us">Bize ulaşın</string>
+    <string name="cd_opens_email_app">E-posta uygulamanızda açılır</string>
+    <string name="email_app_missing">Bu cihazda e-posta gönderebilecek bir uygulama yok</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">En boy oranı</string>

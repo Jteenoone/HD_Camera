@@ -1,4 +1,4 @@
-appId: com.example.hd_camera
+appId: com.digitalcamerahd.camera4k.selfiecamera
 name: An unsupported capture mode never costs the preview
 ---
 # No clearState: meant for a real phone, so the modes offered are this camera's own.

@@ -16,7 +16,7 @@
         app:scaleType="fillCenter" />
 
     <!-- Focus peaking and zebra stripes, drawn straight over the picture. -->
-    <com.example.hd_camera.ui.widget.FocusAidOverlayView
+    <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.FocusAidOverlayView
         android:id="@+id/focusAids"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -85,7 +85,7 @@
                     android:text="@string/histogram"
                     android:textAppearance="@style/TextAppearance.HD.Mono.Tiny" />
 
-                <com.example.hd_camera.ui.widget.HistogramView
+                <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.HistogramView
                     android:id="@+id/histogram"
                     android:layout_width="88dp"
                     android:layout_height="40dp" />
@@ -172,7 +172,7 @@
                         android:textAppearance="@style/TextAppearance.HD.Mono.Value" />
                 </LinearLayout>
 
-                <com.example.hd_camera.ui.widget.TickRulerView
+                <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.TickRulerView
                     android:id="@+id/isoDial"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"

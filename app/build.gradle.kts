@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.hd_camera"
+    namespace = "com.digitalcamerahd.camera4k.selfiecamera"
     compileSdk {
         version = release(37) {
             minorApiLevel = 1
@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.hd_camera"
+        applicationId = "com.digitalcamerahd.camera4k.selfiecamera"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

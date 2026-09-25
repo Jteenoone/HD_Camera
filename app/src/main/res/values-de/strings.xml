@@ -65,6 +65,7 @@
     <string name="recording">Aufnahme</string>
     <string name="recording_failed">Aufnahme fehlgeschlagen</string>
     <string name="recording_without_audio">Aufnahme ohne Ton — Mikrofonberechtigung verweigert</string>
+    <string name="recording_no_microphone">Aufnahme ohne Ton — dieses Gerät hat kein Mikrofon</string>
     <string name="eis_unsupported">Diese Kamera hat keine Stabilisierung</string>
     <string name="snapshot_unsupported">Diese Kamera kann während der Aufnahme keine Fotos machen</string>
     <string name="locked_while_recording">Während der Aufnahme nicht verfügbar</string>
@@ -86,7 +87,7 @@
         <item quantity="other">%1$d VIDEOS</item>
     </plurals>
     <string name="settings">Einstellungen</string>
-    <string name="gallery_empty">In DCIM/HDCamera ist noch nichts — mach eine Aufnahme.</string>
+    <string name="gallery_empty">In DCIM/ProCam4K ist noch nichts — mach eine Aufnahme.</string>
     <string name="search_hint">Nach Name oder Datum suchen</string>
     <string name="no_matches">Keine Treffer für diese Suche.</string>
     <string name="done">Fertig</string>
@@ -144,7 +145,7 @@
     <string name="crop_label">ZUSCHNITT</string>
     <string name="stroke_label">STRICHSTÄRKE</string>
     <string name="saving">Wird gespeichert…</string>
-    <string name="saved">In DCIM/HDCamera gespeichert</string>
+    <string name="saved">In DCIM/ProCam4K gespeichert</string>
     <string name="save_failed">Bearbeitung konnte nicht gespeichert werden</string>
     <string name="edit_load_failed">Dieses Foto konnte nicht geöffnet werden</string>
 
@@ -179,6 +180,9 @@
     <!-- About -->
     <string name="section_about">ÜBER</string>
     <string name="about_version">Version %1$s</string>
+    <string name="contact_us">Kontakt</string>
+    <string name="cd_opens_email_app">Wird in der E-Mail-App geöffnet</string>
+    <string name="email_app_missing">Keine App auf diesem Gerät kann E-Mails senden</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">Seitenverhältnis</string>

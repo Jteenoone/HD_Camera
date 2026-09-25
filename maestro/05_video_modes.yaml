@@ -1,4 +1,4 @@
-appId: com.example.hd_camera
+appId: com.digitalcamerahd.camera4k.selfiecamera
 name: Video screen keeps the shared mode strip and swaps its side buttons
 ---
 - stopApp

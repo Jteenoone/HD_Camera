@@ -65,6 +65,7 @@
     <string name="recording">녹화 중</string>
     <string name="recording_failed">녹화에 실패했습니다</string>
     <string name="recording_without_audio">소리 없이 녹화 중 — 마이크 권한이 거부되었습니다</string>
+    <string name="recording_no_microphone">소리 없이 녹화 중 — 이 기기에는 마이크가 없습니다</string>
     <string name="eis_unsupported">이 카메라에는 손떨림 보정이 없습니다</string>
     <string name="snapshot_unsupported">이 카메라는 녹화 중에 사진을 찍을 수 없습니다</string>
     <string name="locked_while_recording">녹화 중에는 사용할 수 없습니다</string>
@@ -84,7 +85,7 @@
         <item quantity="other">동영상 %1$d개</item>
     </plurals>
     <string name="settings">설정</string>
-    <string name="gallery_empty">DCIM/HDCamera가 아직 비어 있습니다 — 한 장 찍어 보세요.</string>
+    <string name="gallery_empty">DCIM/ProCam4K가 아직 비어 있습니다 — 한 장 찍어 보세요.</string>
     <string name="search_hint">이름이나 날짜로 검색</string>
     <string name="no_matches">검색 결과가 없습니다.</string>
     <string name="done">완료</string>
@@ -142,7 +143,7 @@
     <string name="crop_label">자르기</string>
     <string name="stroke_label">선 굵기</string>
     <string name="saving">저장 중…</string>
-    <string name="saved">DCIM/HDCamera에 저장됨</string>
+    <string name="saved">DCIM/ProCam4K에 저장됨</string>
     <string name="save_failed">편집 내용을 저장하지 못했습니다</string>
     <string name="edit_load_failed">그 사진을 열지 못했습니다</string>
 
@@ -177,6 +178,9 @@
     <!-- About -->
     <string name="section_about">앱 정보</string>
     <string name="about_version">버전 %1$s</string>
+    <string name="contact_us">문의하기</string>
+    <string name="cd_opens_email_app">이메일 앱에서 열립니다</string>
+    <string name="email_app_missing">이 기기에서 이메일을 보낼 수 있는 앱이 없습니다</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">화면 비율</string>

@@ -1,4 +1,4 @@
-appId: com.example.hd_camera
+appId: com.digitalcamerahd.camera4k.selfiecamera
 name: Both viewfinders carry the quick-zoom row and report the ratio
 ---
 # No clearState: this flow is meant for a real phone, so the zoom steps on screen are the

@@ -1,4 +1,4 @@
-appId: com.example.hd_camera
+appId: com.digitalcamerahd.camera4k.selfiecamera
 name: Every setting shows its whole list instead of advancing on each tap
 ---
 - stopApp

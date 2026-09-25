@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.example.hd_camera.ui.widget.SquareImageView
+    <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.SquareImageView
         android:id="@+id/imgThumb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

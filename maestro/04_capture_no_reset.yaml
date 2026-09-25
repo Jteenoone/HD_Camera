@@ -1,4 +1,4 @@
-appId: com.example.hd_camera
+appId: com.digitalcamerahd.camera4k.selfiecamera
 name: Shutter survives a RAW + JPEG capture (keeps existing app data)
 ---
 # No clearState here: this flow is meant for a real phone, so the user's

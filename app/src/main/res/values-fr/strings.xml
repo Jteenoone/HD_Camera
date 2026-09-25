@@ -65,6 +65,7 @@
     <string name="recording">Enregistrement</string>
     <string name="recording_failed">Échec de l\'enregistrement</string>
     <string name="recording_without_audio">Enregistrement sans son — autorisation du micro refusée</string>
+    <string name="recording_no_microphone">Enregistrement sans son — cet appareil n\'a pas de micro</string>
     <string name="eis_unsupported">Cet appareil n\'a pas de stabilisation</string>
     <string name="snapshot_unsupported">Cet appareil ne peut pas photographier pendant l\'enregistrement</string>
     <string name="locked_while_recording">Indisponible pendant l\'enregistrement</string>
@@ -88,7 +89,7 @@
         <item quantity="other">%1$d VIDÉOS</item>
     </plurals>
     <string name="settings">Réglages</string>
-    <string name="gallery_empty">Rien dans DCIM/HDCamera pour l\'instant — prenez une photo.</string>
+    <string name="gallery_empty">Rien dans DCIM/ProCam4K pour l\'instant — prenez une photo.</string>
     <string name="search_hint">Rechercher par nom ou date</string>
     <string name="no_matches">Aucun résultat pour cette recherche.</string>
     <string name="done">Terminé</string>
@@ -146,7 +147,7 @@
     <string name="crop_label">RECADRAGE</string>
     <string name="stroke_label">TRAIT</string>
     <string name="saving">Enregistrement…</string>
-    <string name="saved">Enregistré dans DCIM/HDCamera</string>
+    <string name="saved">Enregistré dans DCIM/ProCam4K</string>
     <string name="save_failed">Impossible d\'enregistrer la modification</string>
     <string name="edit_load_failed">Impossible d\'ouvrir cette photo</string>
 
@@ -181,6 +182,9 @@
     <!-- About -->
     <string name="section_about">À PROPOS</string>
     <string name="about_version">Version %1$s</string>
+    <string name="contact_us">Nous contacter</string>
+    <string name="cd_opens_email_app">S\'ouvre dans votre application de messagerie</string>
+    <string name="email_app_missing">Aucune application de cet appareil ne peut envoyer d\'e-mail</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">Format d\'image</string>

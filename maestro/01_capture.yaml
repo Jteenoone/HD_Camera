@@ -1,4 +1,4 @@
-appId: com.example.hd_camera
+appId: com.digitalcamerahd.camera4k.selfiecamera
 name: Shutter completes without crashing
 ---
 # Clearing state under a process that is still shutting down makes the first screen

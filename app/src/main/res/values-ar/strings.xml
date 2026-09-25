@@ -65,6 +65,7 @@
     <string name="recording">جارٍ التسجيل</string>
     <string name="recording_failed">فشل التسجيل</string>
     <string name="recording_without_audio">التسجيل بلا صوت — رُفض إذن الميكروفون</string>
+    <string name="recording_no_microphone">التسجيل بلا صوت — لا يوجد ميكروفون في هذا الجهاز</string>
     <string name="eis_unsupported">لا تدعم هذه الكاميرا التثبيت</string>
     <string name="snapshot_unsupported">لا تستطيع هذه الكاميرا التقاط صور أثناء التسجيل</string>
     <string name="locked_while_recording">غير متاح أثناء التسجيل</string>
@@ -94,7 +95,7 @@
         <item quantity="other">%1$d فيديو</item>
     </plurals>
     <string name="settings">الإعدادات</string>
-    <string name="gallery_empty">لا يوجد شيء في DCIM/HDCamera بعد — التقط صورة.</string>
+    <string name="gallery_empty">لا يوجد شيء في DCIM/ProCam4K بعد — التقط صورة.</string>
     <string name="search_hint">ابحث بالاسم أو التاريخ</string>
     <string name="no_matches">لا نتائج مطابقة لهذا البحث.</string>
     <string name="done">تم</string>
@@ -152,7 +153,7 @@
     <string name="crop_label">القصّ</string>
     <string name="stroke_label">سُمك الخط</string>
     <string name="saving">جارٍ الحفظ…</string>
-    <string name="saved">تم الحفظ في DCIM/HDCamera</string>
+    <string name="saved">تم الحفظ في DCIM/ProCam4K</string>
     <string name="save_failed">تعذّر حفظ التعديل</string>
     <string name="edit_load_failed">تعذّر فتح تلك الصورة</string>
 
@@ -187,6 +188,9 @@
     <!-- About -->
     <string name="section_about">حول التطبيق</string>
     <string name="about_version">الإصدار %1$s</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="cd_opens_email_app">يُفتح في تطبيق البريد الإلكتروني</string>
+    <string name="email_app_missing">لا يوجد تطبيق على هذا الجهاز يمكنه إرسال بريد إلكتروني</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">نسبة الأبعاد</string>

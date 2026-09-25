@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!--
-        Only Android 9 and below need a permission to reach DCIM/HDCamera. From Android 10
+        Only Android 9 and below need a permission to reach DCIM/ProCam4K. From Android 10
         scoped storage lets the app write there and read back what it wrote, so no media
         permission is declared: the Gallery never looks outside its own folder.
     -->
@@ -27,15 +27,35 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
+    <!--
+        No hardware is a hard requirement, so Play does not hide the app from a device that
+        lacks some of it. The permissions above would otherwise imply a back camera, a
+        microphone and location hardware. Without a back camera the viewfinder opens on the
+        front one, without a microphone video records silent, and without a location fix a
+        photo simply carries no geotag.
+    -->
     <uses-feature
         android:name="android.hardware.camera.any"
         android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
 
-    <!-- Package visibility for the browser the legal links open in. -->
+    <!-- Package visibility for the browser the legal links open in, and the mail app. -->
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
         </intent>
     </queries>
 

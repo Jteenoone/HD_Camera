@@ -65,6 +65,7 @@
     <string name="recording">Gravando</string>
     <string name="recording_failed">Falha na gravação</string>
     <string name="recording_without_audio">Gravando sem som — permissão do microfone negada</string>
+    <string name="recording_no_microphone">Gravando sem som — este aparelho não tem microfone</string>
     <string name="eis_unsupported">Esta câmera não tem estabilização</string>
     <string name="snapshot_unsupported">Esta câmera não tira fotos durante a gravação</string>
     <string name="locked_while_recording">Indisponível durante a gravação</string>
@@ -88,7 +89,7 @@
         <item quantity="other">%1$d VÍDEOS</item>
     </plurals>
     <string name="settings">Configurações</string>
-    <string name="gallery_empty">Ainda não há nada em DCIM/HDCamera — tire uma foto.</string>
+    <string name="gallery_empty">Ainda não há nada em DCIM/ProCam4K — tire uma foto.</string>
     <string name="search_hint">Buscar por nome ou data</string>
     <string name="no_matches">Nada corresponde a essa busca.</string>
     <string name="done">Concluído</string>
@@ -146,7 +147,7 @@
     <string name="crop_label">CORTE</string>
     <string name="stroke_label">TRAÇO</string>
     <string name="saving">Salvando…</string>
-    <string name="saved">Salvo em DCIM/HDCamera</string>
+    <string name="saved">Salvo em DCIM/ProCam4K</string>
     <string name="save_failed">Não foi possível salvar a edição</string>
     <string name="edit_load_failed">Não foi possível abrir essa foto</string>
 
@@ -181,6 +182,9 @@
     <!-- About -->
     <string name="section_about">SOBRE</string>
     <string name="about_version">Versão %1$s</string>
+    <string name="contact_us">Fale conosco</string>
+    <string name="cd_opens_email_app">Abre no seu app de e-mail</string>
+    <string name="email_app_missing">Nenhum app deste aparelho consegue enviar e-mail</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">Proporção</string>

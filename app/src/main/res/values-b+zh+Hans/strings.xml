@@ -65,6 +65,7 @@
     <string name="recording">录制中</string>
     <string name="recording_failed">录制失败</string>
     <string name="recording_without_audio">正在无声录制——麦克风权限被拒绝</string>
+    <string name="recording_no_microphone">正在无声录制——此设备没有麦克风</string>
     <string name="eis_unsupported">此相机没有防抖</string>
     <string name="snapshot_unsupported">此相机无法在录制时拍照</string>
     <string name="locked_while_recording">录制时不可用</string>
@@ -84,7 +85,7 @@
         <item quantity="other">%1$d 段视频</item>
     </plurals>
     <string name="settings">设置</string>
-    <string name="gallery_empty">DCIM/HDCamera 还是空的——先拍一张吧。</string>
+    <string name="gallery_empty">DCIM/ProCam4K 还是空的——先拍一张吧。</string>
     <string name="search_hint">按名称或日期搜索</string>
     <string name="no_matches">没有匹配的结果。</string>
     <string name="done">完成</string>
@@ -142,7 +143,7 @@
     <string name="crop_label">裁剪</string>
     <string name="stroke_label">笔触</string>
     <string name="saving">正在保存…</string>
-    <string name="saved">已保存到 DCIM/HDCamera</string>
+    <string name="saved">已保存到 DCIM/ProCam4K</string>
     <string name="save_failed">无法保存所做的编辑</string>
     <string name="edit_load_failed">无法打开那张照片</string>
 
@@ -177,6 +178,9 @@
     <!-- About -->
     <string name="section_about">关于</string>
     <string name="about_version">版本 %1$s</string>
+    <string name="contact_us">联系我们</string>
+    <string name="cd_opens_email_app">在电子邮件应用中打开</string>
+    <string name="email_app_missing">此设备上没有可以发送电子邮件的应用</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">画幅比例</string>

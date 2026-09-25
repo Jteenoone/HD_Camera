@@ -65,6 +65,7 @@
     <string name="recording">रिकॉर्डिंग</string>
     <string name="recording_failed">रिकॉर्डिंग विफल</string>
     <string name="recording_without_audio">बिना आवाज़ रिकॉर्डिंग — माइक्रोफ़ोन की अनुमति नहीं मिली</string>
+    <string name="recording_no_microphone">बिना आवाज़ रिकॉर्डिंग — इस डिवाइस में माइक्रोफ़ोन नहीं है</string>
     <string name="eis_unsupported">इस कैमरे में स्टेबिलाइज़ेशन नहीं है</string>
     <string name="snapshot_unsupported">यह कैमरा रिकॉर्डिंग के दौरान फ़ोटो नहीं ले सकता</string>
     <string name="locked_while_recording">रिकॉर्डिंग के दौरान उपलब्ध नहीं</string>
@@ -86,7 +87,7 @@
         <item quantity="other">%1$d वीडियो</item>
     </plurals>
     <string name="settings">सेटिंग्स</string>
-    <string name="gallery_empty">DCIM/HDCamera में अभी कुछ नहीं है — एक तस्वीर लें।</string>
+    <string name="gallery_empty">DCIM/ProCam4K में अभी कुछ नहीं है — एक तस्वीर लें।</string>
     <string name="search_hint">नाम या तारीख़ से खोजें</string>
     <string name="no_matches">इस खोज से कुछ नहीं मिला।</string>
     <string name="done">हो गया</string>
@@ -144,7 +145,7 @@
     <string name="crop_label">क्रॉप</string>
     <string name="stroke_label">स्ट्रोक</string>
     <string name="saving">सहेजा जा रहा है…</string>
-    <string name="saved">DCIM/HDCamera में सहेजा गया</string>
+    <string name="saved">DCIM/ProCam4K में सहेजा गया</string>
     <string name="save_failed">संपादन सहेजा नहीं जा सका</string>
     <string name="edit_load_failed">वह फ़ोटो खोली नहीं जा सकी</string>
 
@@ -179,6 +180,9 @@
     <!-- About -->
     <string name="section_about">ऐप के बारे में</string>
     <string name="about_version">संस्करण %1$s</string>
+    <string name="contact_us">संपर्क करें</string>
+    <string name="cd_opens_email_app">आपके ईमेल ऐप में खुलेगा</string>
+    <string name="email_app_missing">इस डिवाइस का कोई ऐप ईमेल नहीं भेज सकता</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">आस्पेक्ट रेशियो</string>

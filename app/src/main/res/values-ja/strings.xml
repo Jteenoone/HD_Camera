@@ -65,6 +65,7 @@
     <string name="recording">録画中</string>
     <string name="recording_failed">録画に失敗しました</string>
     <string name="recording_without_audio">音声なしで録画中 — マイクの権限が拒否されました</string>
+    <string name="recording_no_microphone">音声なしで録画中 — この端末にはマイクがありません</string>
     <string name="eis_unsupported">このカメラに手ぶれ補正はありません</string>
     <string name="snapshot_unsupported">このカメラは録画中に写真を撮れません</string>
     <string name="locked_while_recording">録画中は使用できません</string>
@@ -84,7 +85,7 @@
         <item quantity="other">動画 %1$d 本</item>
     </plurals>
     <string name="settings">設定</string>
-    <string name="gallery_empty">DCIM/HDCamera にはまだ何もありません — 一枚撮ってみましょう。</string>
+    <string name="gallery_empty">DCIM/ProCam4K にはまだ何もありません — 一枚撮ってみましょう。</string>
     <string name="search_hint">名前または日付で検索</string>
     <string name="no_matches">一致するものはありません。</string>
     <string name="done">完了</string>
@@ -142,7 +143,7 @@
     <string name="crop_label">切り抜き</string>
     <string name="stroke_label">線の太さ</string>
     <string name="saving">保存中…</string>
-    <string name="saved">DCIM/HDCamera に保存しました</string>
+    <string name="saved">DCIM/ProCam4K に保存しました</string>
     <string name="save_failed">編集を保存できませんでした</string>
     <string name="edit_load_failed">その写真を開けませんでした</string>
 
@@ -177,6 +178,9 @@
     <!-- About -->
     <string name="section_about">アプリについて</string>
     <string name="about_version">バージョン %1$s</string>
+    <string name="contact_us">お問い合わせ</string>
+    <string name="cd_opens_email_app">メールアプリで開きます</string>
+    <string name="email_app_missing">この端末にはメールを送信できるアプリがありません</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">画面比率</string>

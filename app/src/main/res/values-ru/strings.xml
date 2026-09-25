@@ -65,6 +65,7 @@
     <string name="recording">Запись</string>
     <string name="recording_failed">Не удалось записать</string>
     <string name="recording_without_audio">Запись без звука — доступ к микрофону отклонён</string>
+    <string name="recording_no_microphone">Запись без звука — на этом устройстве нет микрофона</string>
     <string name="eis_unsupported">У этой камеры нет стабилизации</string>
     <string name="snapshot_unsupported">Эта камера не снимает фото во время записи</string>
     <string name="locked_while_recording">Недоступно во время записи</string>
@@ -90,7 +91,7 @@
         <item quantity="other">%1$d ВИДЕО</item>
     </plurals>
     <string name="settings">Настройки</string>
-    <string name="gallery_empty">В DCIM/HDCamera пока пусто — сделайте снимок.</string>
+    <string name="gallery_empty">В DCIM/ProCam4K пока пусто — сделайте снимок.</string>
     <string name="search_hint">Поиск по имени или дате</string>
     <string name="no_matches">По этому запросу ничего нет.</string>
     <string name="done">Готово</string>
@@ -148,7 +149,7 @@
     <string name="crop_label">КАДРИРОВАНИЕ</string>
     <string name="stroke_label">ТОЛЩИНА</string>
     <string name="saving">Сохранение…</string>
-    <string name="saved">Сохранено в DCIM/HDCamera</string>
+    <string name="saved">Сохранено в DCIM/ProCam4K</string>
     <string name="save_failed">Не удалось сохранить правку</string>
     <string name="edit_load_failed">Не удалось открыть это фото</string>
 
@@ -183,6 +184,9 @@
     <!-- About -->
     <string name="section_about">О ПРИЛОЖЕНИИ</string>
     <string name="about_version">Версия %1$s</string>
+    <string name="contact_us">Связаться с нами</string>
+    <string name="cd_opens_email_app">Откроется в почтовом приложении</string>
+    <string name="email_app_missing">На этом устройстве нет приложения для отправки почты</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">Соотношение сторон</string>

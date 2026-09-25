@@ -63,13 +63,13 @@
             android:contentDescription="@null"
             android:scaleType="fitCenter" />
 
-        <com.example.hd_camera.ui.widget.CropOverlayView
+        <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.CropOverlayView
             android:id="@+id/cropOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone" />
 
-        <com.example.hd_camera.ui.widget.MarkupOverlayView
+        <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.MarkupOverlayView
             android:id="@+id/markupOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

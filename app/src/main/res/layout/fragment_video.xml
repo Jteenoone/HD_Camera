@@ -31,7 +31,7 @@
         black panel to put it in, and growing one would be the very thing Video avoids.
         The fragment pushes it clear of the controls once they have been measured.
     -->
-    <com.example.hd_camera.ui.widget.ZoomArcView
+    <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.ZoomArcView
         android:id="@+id/zoomArc"
         android:layout_width="match_parent"
         android:layout_height="@dimen/zoom_arc_height"
@@ -222,7 +222,7 @@
                 tools:text="2.4×"
                 tools:visibility="visible" />
 
-            <com.example.hd_camera.ui.widget.ZoomChipRow
+            <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.ZoomChipRow
                 android:id="@+id/zoomChips"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
