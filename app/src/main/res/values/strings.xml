@@ -1,6 +1,6 @@
 <resources>
     <!-- The product name is a brand: it stays in Latin script in every locale. -->
-    <string name="app_name" translatable="false">Pro Cam 4K</string>
+    <string name="app_name" translatable="false">Digital Camera HD: Pro Cam 4K</string>
 
     <!-- 01–03 · Intro -->
     <string name="skip">Skip</string>
@@ -273,8 +273,8 @@
     <string name="cd_language_selected">Selected</string>
 
     <!-- Legal -->
-    <string name="url_privacy_policy" translatable="false">https://sites.google.com/mingyanindustrial.com/mingyan-cam/home</string>
-    <string name="url_terms_conditions" translatable="false">https://sites.google.com/mingyanindustrial.com/mingyan-cam/terms-and-conditions</string>
+    <string name="url_privacy_policy" translatable="false">https://sites.google.com/unitradehublimited.com/procam4k/privacy-policy</string>
+    <string name="url_terms_conditions" translatable="false">https://sites.google.com/unitradehublimited.com/procam4k/terms-and-conditions</string>
     <string name="legal_separator" translatable="false">" · "</string>
     <string name="section_legal">LEGAL</string>
     <string name="privacy_policy">Privacy Policy</string>

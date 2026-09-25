@@ -41,7 +41,7 @@
             app:implementationMode="performance"
             app:scaleType="fillCenter" />
 
-        <com.example.hd_camera.ui.widget.GridOverlayView
+        <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.GridOverlayView
             android:id="@+id/gridOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -110,7 +110,7 @@
             the preview every time it opened, and a viewfinder that jumps as you reach for
             the zoom is worse than no wheel.
         -->
-        <com.example.hd_camera.ui.widget.ZoomArcView
+        <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.ZoomArcView
             android:id="@+id/zoomArc"
             android:layout_width="match_parent"
             android:layout_height="@dimen/zoom_arc_height"
@@ -248,7 +248,7 @@
         android:paddingTop="@dimen/photo_panel_top_padding"
         android:paddingBottom="@dimen/photo_panel_bottom_padding">
 
-        <com.example.hd_camera.ui.widget.ZoomChipRow
+        <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.ZoomChipRow
             android:id="@+id/zoomChips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

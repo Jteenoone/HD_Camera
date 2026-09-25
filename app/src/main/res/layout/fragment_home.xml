@@ -279,7 +279,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.hd_camera.ui.widget.CurvedNavBarView
+        <com.digitalcamerahd.camera4k.selfiecamera.ui.widget.CurvedNavBarView
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
