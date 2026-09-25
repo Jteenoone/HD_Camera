@@ -94,7 +94,7 @@
         <item quantity="other">%1$d فيديو</item>
     </plurals>
     <string name="settings">الإعدادات</string>
-    <string name="gallery_empty">لا يوجد شيء في DCIM/HDCamera بعد — التقط صورة.</string>
+    <string name="gallery_empty">لا يوجد شيء في DCIM/ProCam4K بعد — التقط صورة.</string>
     <string name="search_hint">ابحث بالاسم أو التاريخ</string>
     <string name="no_matches">لا نتائج مطابقة لهذا البحث.</string>
     <string name="done">تم</string>
@@ -152,7 +152,7 @@
     <string name="crop_label">القصّ</string>
     <string name="stroke_label">سُمك الخط</string>
     <string name="saving">جارٍ الحفظ…</string>
-    <string name="saved">تم الحفظ في DCIM/HDCamera</string>
+    <string name="saved">تم الحفظ في DCIM/ProCam4K</string>
     <string name="save_failed">تعذّر حفظ التعديل</string>
     <string name="edit_load_failed">تعذّر فتح تلك الصورة</string>
 

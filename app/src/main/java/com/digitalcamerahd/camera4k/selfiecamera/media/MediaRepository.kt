@@ -35,7 +35,7 @@ data class MediaSection(val label: String, val title: String, val items: List<Me
 /** The chips across the top of the Gallery screen. */
 enum class MediaFilter { ALL, PHOTOS, VIDEO, RAW }
 
-/** Reads what the app has written into DCIM/HDCamera. */
+/** Reads what the app has written into DCIM/ProCam4K. */
 object MediaRepository {
 
     private val projection = arrayOf(

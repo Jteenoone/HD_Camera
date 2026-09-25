@@ -84,7 +84,7 @@
         <item quantity="other">%1$d 段视频</item>
     </plurals>
     <string name="settings">设置</string>
-    <string name="gallery_empty">DCIM/HDCamera 还是空的——先拍一张吧。</string>
+    <string name="gallery_empty">DCIM/ProCam4K 还是空的——先拍一张吧。</string>
     <string name="search_hint">按名称或日期搜索</string>
     <string name="no_matches">没有匹配的结果。</string>
     <string name="done">完成</string>
@@ -142,7 +142,7 @@
     <string name="crop_label">裁剪</string>
     <string name="stroke_label">笔触</string>
     <string name="saving">正在保存…</string>
-    <string name="saved">已保存到 DCIM/HDCamera</string>
+    <string name="saved">已保存到 DCIM/ProCam4K</string>
     <string name="save_failed">无法保存所做的编辑</string>
     <string name="edit_load_failed">无法打开那张照片</string>
 

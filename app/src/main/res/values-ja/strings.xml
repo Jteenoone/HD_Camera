@@ -84,7 +84,7 @@
         <item quantity="other">動画 %1$d 本</item>
     </plurals>
     <string name="settings">設定</string>
-    <string name="gallery_empty">DCIM/HDCamera にはまだ何もありません — 一枚撮ってみましょう。</string>
+    <string name="gallery_empty">DCIM/ProCam4K にはまだ何もありません — 一枚撮ってみましょう。</string>
     <string name="search_hint">名前または日付で検索</string>
     <string name="no_matches">一致するものはありません。</string>
     <string name="done">完了</string>
@@ -142,7 +142,7 @@
     <string name="crop_label">切り抜き</string>
     <string name="stroke_label">線の太さ</string>
     <string name="saving">保存中…</string>
-    <string name="saved">DCIM/HDCamera に保存しました</string>
+    <string name="saved">DCIM/ProCam4K に保存しました</string>
     <string name="save_failed">編集を保存できませんでした</string>
     <string name="edit_load_failed">その写真を開けませんでした</string>
 

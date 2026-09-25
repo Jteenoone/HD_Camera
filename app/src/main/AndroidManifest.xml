@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!--
-        Only Android 9 and below need a permission to reach DCIM/HDCamera. From Android 10
+        Only Android 9 and below need a permission to reach DCIM/ProCam4K. From Android 10
         scoped storage lets the app write there and read back what it wrote, so no media
         permission is declared: the Gallery never looks outside its own folder.
     -->

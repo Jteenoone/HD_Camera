@@ -170,7 +170,7 @@
         <item quantity="other">%1$d VIDEOS</item>
     </plurals>
     <string name="settings">Settings</string>
-    <string name="gallery_empty">Nothing in DCIM/HDCamera yet — take a shot.</string>
+    <string name="gallery_empty">Nothing in DCIM/ProCam4K yet — take a shot.</string>
     <string name="search_hint">Search by name or date</string>
     <string name="no_matches">Nothing matches that search.</string>
     <string name="done">Done</string>
@@ -203,7 +203,7 @@
     <string name="section_general">GENERAL</string>
     <string name="section_storage">STORAGE</string>
     <string name="save_folder">Save folder</string>
-    <string name="save_folder_value" translatable="false">DCIM/HDCamera</string>
+    <string name="save_folder_value" translatable="false">DCIM/ProCam4K</string>
     <string name="geotagging">Geotagging</string>
 
     <!-- 11 · Edit -->
@@ -246,7 +246,7 @@
     <string name="crop_label">CROP</string>
     <string name="stroke_label">STROKE</string>
     <string name="saving">Saving…</string>
-    <string name="saved">Saved to DCIM/HDCamera</string>
+    <string name="saved">Saved to DCIM/ProCam4K</string>
     <string name="save_failed">Could not save the edit</string>
     <string name="edit_load_failed">Could not open that photo</string>
 

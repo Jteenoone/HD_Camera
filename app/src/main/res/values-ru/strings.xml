@@ -90,7 +90,7 @@
         <item quantity="other">%1$d ВИДЕО</item>
     </plurals>
     <string name="settings">Настройки</string>
-    <string name="gallery_empty">В DCIM/HDCamera пока пусто — сделайте снимок.</string>
+    <string name="gallery_empty">В DCIM/ProCam4K пока пусто — сделайте снимок.</string>
     <string name="search_hint">Поиск по имени или дате</string>
     <string name="no_matches">По этому запросу ничего нет.</string>
     <string name="done">Готово</string>
@@ -148,7 +148,7 @@
     <string name="crop_label">КАДРИРОВАНИЕ</string>
     <string name="stroke_label">ТОЛЩИНА</string>
     <string name="saving">Сохранение…</string>
-    <string name="saved">Сохранено в DCIM/HDCamera</string>
+    <string name="saved">Сохранено в DCIM/ProCam4K</string>
     <string name="save_failed">Не удалось сохранить правку</string>
     <string name="edit_load_failed">Не удалось открыть это фото</string>
 

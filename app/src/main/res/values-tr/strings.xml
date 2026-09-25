@@ -86,7 +86,7 @@
         <item quantity="other">%1$d VİDEO</item>
     </plurals>
     <string name="settings">Ayarlar</string>
-    <string name="gallery_empty">DCIM/HDCamera henüz boş — bir kare çek.</string>
+    <string name="gallery_empty">DCIM/ProCam4K henüz boş — bir kare çek.</string>
     <string name="search_hint">Ada veya tarihe göre ara</string>
     <string name="no_matches">Bu aramayla eşleşen bir şey yok.</string>
     <string name="done">Bitti</string>
@@ -144,7 +144,7 @@
     <string name="crop_label">KIRPMA</string>
     <string name="stroke_label">ÇİZGİ</string>
     <string name="saving">Kaydediliyor…</string>
-    <string name="saved">DCIM/HDCamera klasörüne kaydedildi</string>
+    <string name="saved">DCIM/ProCam4K klasörüne kaydedildi</string>
     <string name="save_failed">Düzenleme kaydedilemedi</string>
     <string name="edit_load_failed">Bu fotoğraf açılamadı</string>
 

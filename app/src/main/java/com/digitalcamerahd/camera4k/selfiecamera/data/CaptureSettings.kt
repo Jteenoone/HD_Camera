@@ -63,7 +63,7 @@ object CaptureSettings {
      * both while the old one still has anything in it, and offer to move what is there —
      * and is left for a later phase.
      */
-    const val RELATIVE_PATH = "DCIM/HDCamera"
+    const val RELATIVE_PATH = "DCIM/ProCam4K"
 
     private fun prefs(context: Context): SharedPreferences =
         context.applicationContext.getSharedPreferences(FILE, Context.MODE_PRIVATE)

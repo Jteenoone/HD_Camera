@@ -88,7 +88,7 @@
         <item quantity="other">%1$d VIDÉOS</item>
     </plurals>
     <string name="settings">Réglages</string>
-    <string name="gallery_empty">Rien dans DCIM/HDCamera pour l\'instant — prenez une photo.</string>
+    <string name="gallery_empty">Rien dans DCIM/ProCam4K pour l\'instant — prenez une photo.</string>
     <string name="search_hint">Rechercher par nom ou date</string>
     <string name="no_matches">Aucun résultat pour cette recherche.</string>
     <string name="done">Terminé</string>
@@ -146,7 +146,7 @@
     <string name="crop_label">RECADRAGE</string>
     <string name="stroke_label">TRAIT</string>
     <string name="saving">Enregistrement…</string>
-    <string name="saved">Enregistré dans DCIM/HDCamera</string>
+    <string name="saved">Enregistré dans DCIM/ProCam4K</string>
     <string name="save_failed">Impossible d\'enregistrer la modification</string>
     <string name="edit_load_failed">Impossible d\'ouvrir cette photo</string>
 

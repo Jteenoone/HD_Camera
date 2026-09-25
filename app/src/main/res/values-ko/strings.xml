@@ -84,7 +84,7 @@
         <item quantity="other">동영상 %1$d개</item>
     </plurals>
     <string name="settings">설정</string>
-    <string name="gallery_empty">DCIM/HDCamera가 아직 비어 있습니다 — 한 장 찍어 보세요.</string>
+    <string name="gallery_empty">DCIM/ProCam4K가 아직 비어 있습니다 — 한 장 찍어 보세요.</string>
     <string name="search_hint">이름이나 날짜로 검색</string>
     <string name="no_matches">검색 결과가 없습니다.</string>
     <string name="done">완료</string>
@@ -142,7 +142,7 @@
     <string name="crop_label">자르기</string>
     <string name="stroke_label">선 굵기</string>
     <string name="saving">저장 중…</string>
-    <string name="saved">DCIM/HDCamera에 저장됨</string>
+    <string name="saved">DCIM/ProCam4K에 저장됨</string>
     <string name="save_failed">편집 내용을 저장하지 못했습니다</string>
     <string name="edit_load_failed">그 사진을 열지 못했습니다</string>
 

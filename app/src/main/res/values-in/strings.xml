@@ -84,7 +84,7 @@
         <item quantity="other">%1$d VIDEO</item>
     </plurals>
     <string name="settings">Setelan</string>
-    <string name="gallery_empty">Belum ada apa pun di DCIM/HDCamera — ambil satu foto.</string>
+    <string name="gallery_empty">Belum ada apa pun di DCIM/ProCam4K — ambil satu foto.</string>
     <string name="search_hint">Cari berdasarkan nama atau tanggal</string>
     <string name="no_matches">Tidak ada yang cocok dengan pencarian itu.</string>
     <string name="done">Selesai</string>
@@ -142,7 +142,7 @@
     <string name="crop_label">PANGKAS</string>
     <string name="stroke_label">KETEBALAN</string>
     <string name="saving">Menyimpan…</string>
-    <string name="saved">Disimpan ke DCIM/HDCamera</string>
+    <string name="saved">Disimpan ke DCIM/ProCam4K</string>
     <string name="save_failed">Hasil edit tidak dapat disimpan</string>
     <string name="edit_load_failed">Foto itu tidak dapat dibuka</string>
 

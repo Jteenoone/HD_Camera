@@ -86,7 +86,7 @@
         <item quantity="other">%1$d VIDEOS</item>
     </plurals>
     <string name="settings">Einstellungen</string>
-    <string name="gallery_empty">In DCIM/HDCamera ist noch nichts — mach eine Aufnahme.</string>
+    <string name="gallery_empty">In DCIM/ProCam4K ist noch nichts — mach eine Aufnahme.</string>
     <string name="search_hint">Nach Name oder Datum suchen</string>
     <string name="no_matches">Keine Treffer für diese Suche.</string>
     <string name="done">Fertig</string>
@@ -144,7 +144,7 @@
     <string name="crop_label">ZUSCHNITT</string>
     <string name="stroke_label">STRICHSTÄRKE</string>
     <string name="saving">Wird gespeichert…</string>
-    <string name="saved">In DCIM/HDCamera gespeichert</string>
+    <string name="saved">In DCIM/ProCam4K gespeichert</string>
     <string name="save_failed">Bearbeitung konnte nicht gespeichert werden</string>
     <string name="edit_load_failed">Dieses Foto konnte nicht geöffnet werden</string>
 

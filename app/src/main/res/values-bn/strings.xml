@@ -86,7 +86,7 @@
         <item quantity="other">%1$d ভিডিও</item>
     </plurals>
     <string name="settings">সেটিংস</string>
-    <string name="gallery_empty">DCIM/HDCamera-তে এখনো কিছু নেই — একটি ছবি তুলুন।</string>
+    <string name="gallery_empty">DCIM/ProCam4K-তে এখনো কিছু নেই — একটি ছবি তুলুন।</string>
     <string name="search_hint">নাম বা তারিখ দিয়ে খুঁজুন</string>
     <string name="no_matches">এই খোঁজে কিছু মেলেনি।</string>
     <string name="done">সম্পন্ন</string>
@@ -144,7 +144,7 @@
     <string name="crop_label">ক্রপ</string>
     <string name="stroke_label">স্ট্রোক</string>
     <string name="saving">সংরক্ষণ হচ্ছে…</string>
-    <string name="saved">DCIM/HDCamera-তে সংরক্ষিত</string>
+    <string name="saved">DCIM/ProCam4K-তে সংরক্ষিত</string>
     <string name="save_failed">সম্পাদনাটি সংরক্ষণ করা গেল না</string>
     <string name="edit_load_failed">ছবিটি খোলা গেল না</string>
 

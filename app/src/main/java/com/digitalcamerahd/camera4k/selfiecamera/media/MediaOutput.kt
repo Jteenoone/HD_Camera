@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-/** Everything the app writes lands in DCIM/HDCamera through MediaStore. */
+/** Everything the app writes lands in DCIM/ProCam4K through MediaStore. */
 object MediaOutput {
 
     private const val NAME_PATTERN = "yyyyMMdd_HHmmss"

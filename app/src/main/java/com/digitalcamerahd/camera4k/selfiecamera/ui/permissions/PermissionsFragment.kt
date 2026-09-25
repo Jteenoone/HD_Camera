@@ -23,7 +23,7 @@ import com.digitalcamerahd.camera4k.selfiecamera.ui.openExternalUrl
  *
  * Onboarding asks for the camera and nothing else. The microphone is a recording-time
  * decision, so the Video screen asks for it when it is actually needed; and from Android 10
- * the app reaches DCIM/HDCamera through scoped storage, which needs no permission at all
+ * the app reaches DCIM/ProCam4K through scoped storage, which needs no permission at all
  * for the files it wrote itself.
  */
 class PermissionsFragment : Fragment(R.layout.fragment_permissions) {

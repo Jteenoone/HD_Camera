@@ -33,7 +33,7 @@ import com.digitalcamerahd.camera4k.selfiecamera.ui.navigateTo
 import com.digitalcamerahd.camera4k.selfiecamera.ui.settings.SettingsFragment
 import kotlinx.coroutines.launch
 
-/** Screen 09 · Gallery, listing what the app has written to DCIM/HDCamera. */
+/** Screen 09 · Gallery, listing what the app has written to DCIM/ProCam4K. */
 class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
     private var binding: FragmentGalleryBinding? = null
