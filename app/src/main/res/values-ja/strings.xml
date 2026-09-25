@@ -177,6 +177,9 @@
     <!-- About -->
     <string name="section_about">アプリについて</string>
     <string name="about_version">バージョン %1$s</string>
+    <string name="contact_us">お問い合わせ</string>
+    <string name="cd_opens_email_app">メールアプリで開きます</string>
+    <string name="email_app_missing">この端末にはメールを送信できるアプリがありません</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">画面比率</string>

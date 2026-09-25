@@ -179,6 +179,9 @@
     <!-- About -->
     <string name="section_about">ऐप के बारे में</string>
     <string name="about_version">संस्करण %1$s</string>
+    <string name="contact_us">संपर्क करें</string>
+    <string name="cd_opens_email_app">आपके ईमेल ऐप में खुलेगा</string>
+    <string name="email_app_missing">इस डिवाइस का कोई ऐप ईमेल नहीं भेज सकता</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">आस्पेक्ट रेशियो</string>

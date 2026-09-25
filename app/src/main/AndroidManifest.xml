@@ -31,11 +31,15 @@
         android:name="android.hardware.camera.any"
         android:required="false" />
 
-    <!-- Package visibility for the browser the legal links open in. -->
+    <!-- Package visibility for the browser the legal links open in, and the mail app. -->
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
         </intent>
     </queries>
 

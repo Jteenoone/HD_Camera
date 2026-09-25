@@ -275,6 +275,7 @@
     <!-- Legal -->
     <string name="url_privacy_policy" translatable="false">https://sites.google.com/unitradehublimited.com/procam4k/privacy-policy</string>
     <string name="url_terms_conditions" translatable="false">https://sites.google.com/unitradehublimited.com/procam4k/terms-and-conditions</string>
+    <string name="support_email" translatable="false">business@unitradehublimited.com</string>
     <string name="legal_separator" translatable="false">" · "</string>
     <string name="section_legal">LEGAL</string>
     <string name="privacy_policy">Privacy Policy</string>
@@ -285,6 +286,9 @@
     <!-- About -->
     <string name="section_about">ABOUT</string>
     <string name="about_version">Version %1$s</string>
+    <string name="contact_us">Contact us</string>
+    <string name="cd_opens_email_app">Opens in your email app</string>
+    <string name="email_app_missing">No app on this device can send email</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">Aspect ratio</string>

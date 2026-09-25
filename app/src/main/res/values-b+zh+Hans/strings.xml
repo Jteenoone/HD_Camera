@@ -177,6 +177,9 @@
     <!-- About -->
     <string name="section_about">关于</string>
     <string name="about_version">版本 %1$s</string>
+    <string name="contact_us">联系我们</string>
+    <string name="cd_opens_email_app">在电子邮件应用中打开</string>
+    <string name="email_app_missing">此设备上没有可以发送电子邮件的应用</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">画幅比例</string>

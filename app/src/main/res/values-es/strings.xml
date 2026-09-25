@@ -181,6 +181,9 @@
     <!-- About -->
     <string name="section_about">ACERCA DE</string>
     <string name="about_version">Versión %1$s</string>
+    <string name="contact_us">Contacto</string>
+    <string name="cd_opens_email_app">Se abre en tu app de correo</string>
+    <string name="email_app_missing">Ninguna app de este dispositivo puede enviar correos</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">Relación de aspecto</string>

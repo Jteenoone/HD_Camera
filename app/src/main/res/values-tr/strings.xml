@@ -179,6 +179,9 @@
     <!-- About -->
     <string name="section_about">HAKKINDA</string>
     <string name="about_version">Sürüm %1$s</string>
+    <string name="contact_us">Bize ulaşın</string>
+    <string name="cd_opens_email_app">E-posta uygulamanızda açılır</string>
+    <string name="email_app_missing">Bu cihazda e-posta gönderebilecek bir uygulama yok</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">En boy oranı</string>

@@ -58,3 +58,11 @@ name: The legal documents are reachable from onboarding and from Settings
     id: "rowPrivacy"
 - assertVisible:
     id: "rowTerms"
+
+# The address the policy sends people to for support sits under About, spelled out.
+- scrollUntilVisible:
+    element:
+      id: "rowContact"
+    direction: DOWN
+- assertVisible: "Contact us"
+- assertVisible: "business@unitradehublimited.com"

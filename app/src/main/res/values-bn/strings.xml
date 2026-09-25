@@ -179,6 +179,9 @@
     <!-- About -->
     <string name="section_about">অ্যাপ সম্পর্কে</string>
     <string name="about_version">সংস্করণ %1$s</string>
+    <string name="contact_us">যোগাযোগ করুন</string>
+    <string name="cd_opens_email_app">আপনার ইমেল অ্যাপে খুলবে</string>
+    <string name="email_app_missing">এই ডিভাইসের কোনো অ্যাপ ইমেল পাঠাতে পারে না</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">অ্যাসপেক্ট রেশিও</string>

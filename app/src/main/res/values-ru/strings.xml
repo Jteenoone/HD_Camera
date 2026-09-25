@@ -183,6 +183,9 @@
     <!-- About -->
     <string name="section_about">О ПРИЛОЖЕНИИ</string>
     <string name="about_version">Версия %1$s</string>
+    <string name="contact_us">Связаться с нами</string>
+    <string name="cd_opens_email_app">Откроется в почтовом приложении</string>
+    <string name="email_app_missing">На этом устройстве нет приложения для отправки почты</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">Соотношение сторон</string>

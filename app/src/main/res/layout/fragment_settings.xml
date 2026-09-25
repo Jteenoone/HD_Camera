@@ -554,6 +554,55 @@
                         android:textAppearance="@style/TextAppearance.HD.ListValue"
                         tools:text="Version 1.0" />
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/dc_border_2" />
+
+                <!-- The address is spelled out, so a device with no mail app still shows it. -->
+                <LinearLayout
+                    android:id="@+id/rowContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/touch_target"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="15dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/contact_us"
+                            android:textAppearance="@style/TextAppearance.HD.ListTitle" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/support_email"
+                            android:textAppearance="@style/TextAppearance.HD.ListSub" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="12dp"
+                        android:contentDescription="@string/cd_opens_email_app"
+                        android:rotation="180"
+                        android:src="@drawable/ic_chevron_left"
+                        app:tint="@color/dc_text_dim_2" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

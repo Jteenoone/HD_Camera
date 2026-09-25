@@ -177,6 +177,9 @@
     <!-- About -->
     <string name="section_about">TENTANG</string>
     <string name="about_version">Versi %1$s</string>
+    <string name="contact_us">Hubungi kami</string>
+    <string name="cd_opens_email_app">Dibuka di aplikasi email Anda</string>
+    <string name="email_app_missing">Tidak ada aplikasi di perangkat ini yang bisa mengirim email</string>
 
     <!-- Option pickers -->
     <string name="aspect_ratio">Rasio aspek</string>

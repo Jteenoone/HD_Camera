@@ -16,6 +16,7 @@ import com.digitalcamerahd.camera4k.selfiecamera.data.VideoProfile
 import com.digitalcamerahd.camera4k.selfiecamera.data.ViewfinderPrefs
 import com.digitalcamerahd.camera4k.selfiecamera.databinding.FragmentSettingsBinding
 import com.digitalcamerahd.camera4k.selfiecamera.ui.applySystemBarPadding
+import com.digitalcamerahd.camera4k.selfiecamera.ui.composeEmail
 import com.digitalcamerahd.camera4k.selfiecamera.ui.language.LanguageFragment
 import com.digitalcamerahd.camera4k.selfiecamera.ui.navigateBack
 import com.digitalcamerahd.camera4k.selfiecamera.ui.navigateHome
@@ -109,6 +110,15 @@ class SettingsFragment :
         // The one row that never changes while the screen is open.
         binding.tvVersionValue.text =
             getString(R.string.about_version, BuildConfig.VERSION_NAME)
+
+        // The address the privacy policy sends people to for support and data requests.
+        // The subject names the build, which is the first thing support needs to know.
+        binding.rowContact.setOnClickListener {
+            composeEmail(
+                R.string.support_email,
+                getString(R.string.app_name) + " " + BuildConfig.VERSION_NAME
+            )
+        }
 
         refreshValues()
     }
